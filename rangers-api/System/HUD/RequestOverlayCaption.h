@@ -13,7 +13,8 @@ namespace app::ui
 	class RequestOverlayCaption : public RequestOverlayBegin, public RequestOverlayTagReplace, public CaptionInfo
 	{
 	private:
-		inline static FUNCTION_PTR(void, __fastcall, ms_fpSetupCaptionInfo, 0x140753F10, RequestOverlayCaption*, const char*, const char*, float);
+		inline static void* ms_addrSetupCaptionInfo = sigScan("\x48\x89\x5C\x24\x10\x48\x89\x6C\x24\x18\x48\x89\x74\x24\x20\x57\x48\x83\xEC\x40\x48\x8B\x41\x08", "xxxxxxxxxxxxxxxxxxxxxxxx", (void*)0x140753F10);
+		inline static FUNCTION_PTR(void, __fastcall, ms_fpSetupCaptionInfo, ms_addrSetupCaptionInfo, RequestOverlayCaption*, const char*, const char*, float);
 
 	public:
 		int Unk9{};

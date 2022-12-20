@@ -82,7 +82,8 @@ namespace app
 	class ScriptSequence : public hh::fnd::Messenger, hh::game::GameStepListener
 	{
 	private:
-		inline static FUNCTION_PTR(void, __fastcall, ms_fpPlayLipAnimation, 0x14087E860, ScriptSequence*, const char*);
+		inline static void* ms_addrPlayLipAnimation = sigScan("\x40\x55\x56\x41\x55\x48\x8D\xAC\x24\x00\xFF\xFF\xFF", "xxxxxxxxxxxxx", (void*)0x14087E860);
+		inline static FUNCTION_PTR(void, __fastcall, ms_fpPlayLipAnimation, ms_addrPlayLipAnimation, ScriptSequence*, const char*);
 		
 	public:
 		ScriptSequenceManager* pManager;

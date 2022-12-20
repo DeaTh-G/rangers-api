@@ -10,7 +10,8 @@ namespace hh::fnd
 	class Messenger : public RefByHandleObject
 	{
 	private:
-		inline static FUNCTION_PTR(void, __fastcall, ms_fpSendMessageImmToPlayer, 0x1401330A0, Messenger*, app::GameDocument*, int, Message&);
+		inline static void* ms_addrSendMessageImmToPlayer = sigScan("\x48\x89\x5C\x24\x08\x48\x89\x6C\x24\x10\x48\x89\x74\x24\x18\x57\x48\x83\xEC\x30\x4C\x89\xCF\x41\x0F\xB6\xE8", "xxxxxxxxxxxxxxxxxxxxxxxxxxx", (void*)0x146993E00);
+		inline static FUNCTION_PTR(void, __fastcall, ms_fpSendMessageImmToPlayer, ms_addrSendMessageImmToPlayer, Messenger*, app::GameDocument*, int, Message&);
 
 	public:
 		void* pUnk1;
