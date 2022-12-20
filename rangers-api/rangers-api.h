@@ -1,8 +1,5 @@
 #pragma once
 
-// Detours
-#include "External/Detours/include/detours.h"
-
 #include "External/helpers.h"
 #include "External/sigscan.h"
 
