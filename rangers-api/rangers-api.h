@@ -1,7 +1,13 @@
 #pragma once
 
+// Detours
+#include "External/Detours/include/detours.h"
+
+#include "External/helpers.h"
+#include "External/sigscan.h"
+
 // Lua 5.4.1
-#include "../Lua541/include/lua.hpp"
+#include "External/Lua541/include/lua.hpp"
 
 // Common Sonicteam Library
 #include "Sonicteam/System/IAllocator.h"
