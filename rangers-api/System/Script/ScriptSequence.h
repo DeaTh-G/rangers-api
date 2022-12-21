@@ -5,7 +5,7 @@ namespace app
 	class ScriptSequence;
 }
 
-template <void (app::ScriptSequence::*callback)(lua_State*)>
+template <int (app::ScriptSequence::*callback)(lua_State*)>
 void RegisterCallback(lua_State* in_pThis)
 {
 	lua_getglobal(in_pThis, "instance");
@@ -31,7 +31,7 @@ namespace app
 				hh::fnd::ThreadSafeTlsfHeapAllocator* pAllocator{};
 
 			public:
-				template <void (app::ScriptSequence::* callback)(lua_State*)>
+				template <int (app::ScriptSequence::* callback)(lua_State*)>
 				void RegisterLuaCallback()
 				{
 					const char* rightBrace = strchr(__FUNCSIG__, '}');
@@ -54,7 +54,7 @@ namespace app
 					lua_register(pLuaState, functionName, (lua_CFunction)RegisterCallback<callback>);
 				}
 
-				template <void (app::ScriptSequence::* callback)(lua_State*)>
+				template <int (app::ScriptSequence::* callback)(lua_State*)>
 				void RegisterLuaCallback(const char* in_pFunctionName)
 				{
 					lua_register(pLuaState, in_pFunctionName, (lua_CFunction)RegisterCallback<callback>);
