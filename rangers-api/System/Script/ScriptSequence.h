@@ -6,12 +6,12 @@ namespace app
 }
 
 template <int (app::ScriptSequence::*callback)(lua_State*)>
-void RegisterCallback(lua_State* in_pThis)
+int RegisterCallback(lua_State* in_pThis)
 {
 	lua_getglobal(in_pThis, "instance");
 	auto* pSequence = reinterpret_cast<app::ScriptSequence*>(lua_touserdata(in_pThis, -1));
 	lua_settop(in_pThis, -2);
-	(pSequence->*callback)(in_pThis);
+	return (pSequence->*callback)(in_pThis);
 }
 
 namespace app
