@@ -9,6 +9,7 @@
 // Common Sonicteam Library
 #include "Sonicteam/System/IAllocator.h"
 #include "Sonicteam/Utility/collections/Array.h"
+#include "Sonicteam/Utility/collections/FixedArray.h"
 #include "Sonicteam/Utility/collections/MoveArray.h"
 #include "Sonicteam/Utility/collections/StringMap.h"
 
@@ -28,8 +29,19 @@
 // Hedgehog Game Libary
 #include "Hedgehog/Game/GameService.h"
 #include "Hedgehog/Game/GameDocument.h"
+#include "Hedgehog/Game/GOComponent.h"
+#include "Hedgehog/Game/GameObject.h"
 #include "Hedgehog/Game/GameUpdateListener.h"
 #include "Hedgehog/Game/GameStepListener.h"
+
+#include "System/Player/PlayerInformation.h"
+#include "System/Player/Blackboard.h"
+#include "System/Player/BlackboardBattle.h"
+#include "System/Player/Player.h"
+#include "System/Player/Sonic.h"
+
+// System Game Object Components
+#include "System/Player/goc/goc_PlayerBlackboard.h"
 
 #include "System/AppResourceManagerListener.h"
 
@@ -37,6 +49,7 @@
 #include "System/Save/SaveManagerListener.h"
 
 // Services
+#include "System/Services/service_LevelInfo.h"
 #include "System/Services/service_UIOverlay.h"
 
 // HUD

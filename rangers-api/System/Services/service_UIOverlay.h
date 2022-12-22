@@ -32,5 +32,4 @@ namespace app::ui
 			return ms_pServiceName;
 		}
 	};
-
 }
