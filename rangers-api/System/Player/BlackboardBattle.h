@@ -12,10 +12,12 @@ namespace app::player
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
 		INSERT_PADDING(12);
-		float PhantomRushMeter;
-		INSERT_PADDING(80);
+		float PhantomRushGauge;
+		INSERT_PADDING(8);
+		float QuickCyloopGauge;
+		INSERT_PADDING(68);
 
-		virtual size_t GetNameHash() override
+		size_t GetNameHash() override
 		{
 			return csl::ut::StringMapOperation::hash(ms_pBlackboardName);
 		}
