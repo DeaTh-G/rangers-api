@@ -31,5 +31,6 @@ namespace hh::game
 		virtual void fUnk5() = 0;
 		virtual void fUnk6() = 0;
 		virtual void fUnk7() = 0;
+		virtual void fUnk8() = 0;
 	};
 }
