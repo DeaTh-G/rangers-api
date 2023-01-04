@@ -28,11 +28,11 @@
 
 // Hedgehog Game Libary
 #include "Hedgehog/Game/GameService.h"
+#include "Hedgehog/Game/GameStepListener.h"
 #include "Hedgehog/Game/GameDocument.h"
 #include "Hedgehog/Game/GOComponent.h"
 #include "Hedgehog/Game/GameObject.h"
 #include "Hedgehog/Game/GameUpdateListener.h"
-#include "Hedgehog/Game/GameStepListener.h"
 
 #include "System/Player/PlayerInformation.h"
 #include "System/Player/Blackboard.h"

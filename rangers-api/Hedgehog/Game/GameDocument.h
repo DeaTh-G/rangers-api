@@ -10,12 +10,22 @@ namespace app
 	class GameDocument : public hh::fnd::ReferencedObject
 	{
 	private:
-		inline static GameDocument** ms_ppGameDocument = reinterpret_cast<GameDocument**>(0x143B335C8);
+		inline static void* ms_addrStaticGameDocumentUsage = sigScan("\x48\x89\x2D\xCC\xCC\xCC\xCC\x8D\x75\x20", "xxx????xxx", (void*)0x14FE91CB8);
+		inline static GameDocument** ms_ppGameDocument = reinterpret_cast<GameDocument**>(7 + (size_t)ms_addrStaticGameDocumentUsage + (*(int32_t*)(((char*)ms_addrStaticGameDocumentUsage) + 3)));
 
 		INSERT_PADDING(280);
 		csl::ut::MoveArray<hh::game::GameObject*> m_Objects{ pAllocator };
 		csl::ut::MoveArray<hh::game::GameService*> m_Services{ pAllocator };
-		INSERT_PADDING(488);
+		INSERT_PADDING(32); // csl::ut::MoveArray<>
+		INSERT_PADDING(32); // csl::ut::MoveArray<>
+		INSERT_PADDING(32); // csl::ut::MoveArray<hh::game::GameManagerListener> m_ManagerListeners{ pAllocator };
+		INSERT_PADDING(32); // csl::ut::MoveArray<hh::game::GameObjectListener> m_ObjectListeners{ pAllocator };
+		INSERT_PADDING(32); // csl::ut::MoveArray<hh::game::ComponentListener> m_ComponentListeners{ pAllocator };
+		INSERT_PADDING(32); // csl::ut::MoveArray<>
+		INSERT_PADDING(32); // csl::ut::MoveArray<>
+		csl::ut::MoveArray<hh::game::GameStepListener> m_StepListeners{ pAllocator };
+
+		INSERT_PADDING(232);
 
 	public:
 		inline static GameDocument* GetSingleton()
