@@ -4,6 +4,9 @@ namespace app::player
 {
 	class PlayerInformation : public hh::fnd::BaseObject
 	{
-		INSERT_PADDING(1304);
+	public:
+		INSERT_PADDING(726);
+		bool IsGrounded;
+		INSERT_PADDING(578);
 	};
 }
