@@ -7,9 +7,12 @@ namespace app::game
 	private:
 		inline static const char* ms_pServiceName = "PhotoModeService";
 
-		INSERT_PADDING(368);
 
 	public:
+		INSERT_PADDING(240);
+		Quaternion m_CameraPosition{};
+		INSERT_PADDING(112);
+
 		static const char* GetServiceName()
 		{
 			return ms_pServiceName;
