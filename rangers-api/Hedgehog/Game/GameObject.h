@@ -20,13 +20,33 @@ namespace hh::game
 		INSERT_PADDING(408);
 
 		template <typename T>
-		T* GetComponent()
+		T* GetGOC()
 		{
 			for (auto* pComponent : m_Components)
 				if (strcmp(pComponent->pStaticClass->pName, T::GetComponentName()) == 0)
 					return reinterpret_cast<T*>(pComponent);
 
 			return { nullptr };
+		}
+
+		hh::game::GOComponent* GetGOC(const char* in_pComponentName)
+		{
+			for (auto* pComponent : m_Components)
+				if (strcmp(pComponent->pStaticClass->pName, in_pComponentName) == 0)
+					return pComponent;
+
+			return { nullptr };
+		}
+
+		template <typename T>
+		T* GetComponent()
+		{
+			return GetGOC<T>();
+		}
+
+		hh::game::GOComponent* GetComponent(const char* in_pComponentName)
+		{
+			return GetGOC(in_pComponentName);
 		}
 	};
 }
