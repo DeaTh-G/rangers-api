@@ -1,10 +1,5 @@
 #pragma once
 
-namespace hh::game
-{
-	class GameObject;
-}
-
 namespace app
 {
 	class GameDocument : public hh::fnd::ReferencedObject
@@ -43,12 +38,30 @@ namespace app
 			return { nullptr };
 		}
 
+		hh::game::GameService* GetService(const char* in_pServiceName)
+		{
+			for (auto* pService : m_Services)
+				if (strcmp(pService->pStaticClass->pName, in_pServiceName) == 0)
+					return pService;
+
+			return { nullptr };
+		}
+
 		template <typename T>
 		T* GetGameObject()
 		{
 			for (auto* pObject : m_Objects)
 				if (strcmp(pObject->pObjectName, T::GetObjectName()) == 0)
 					return reinterpret_cast<T*>(pObject);
+
+			return { nullptr };
+		}
+
+		hh::game::GameObject* GetGameObject(const char* in_pObjectName)
+		{
+			for (auto* pObject : m_Objects)
+				if (strcmp(pObject->pObjectName, in_pObjectName) == 0)
+					return pObject;
 
 			return { nullptr };
 		}

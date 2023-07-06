@@ -29,9 +29,9 @@
 // Hedgehog Game Library
 #include "Hedgehog/Game/GameService.h"
 #include "Hedgehog/Game/GameStepListener.h"
-#include "Hedgehog/Game/GameDocument.h"
 #include "Hedgehog/Game/GOComponent.h"
 #include "Hedgehog/Game/GameObject.h"
+#include "Hedgehog/Game/GameDocument.h"
 #include "Hedgehog/Game/GameUpdateListener.h"
 
 // Hedgehog Input Components
