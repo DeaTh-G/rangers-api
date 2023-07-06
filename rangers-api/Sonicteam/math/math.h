@@ -158,6 +158,11 @@ namespace csl::math
 		{
 			return !lhs.isApprox(rhs);
 		}
+
+		Vector3 GetForward()
+		{
+			return toRotationMatrix().col(2);
+		}
 	};
 
 	class alignas(16) Matrix44 : public Eigen::Matrix4f
