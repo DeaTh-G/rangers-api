@@ -46,6 +46,7 @@
 
 // System Game Object Components
 #include "System/Player/goc/goc_PlayerBlackboard.h"
+#include "System/Player/goc/goc_PlayerKinematicParams.h"
 
 #include "System/AppResourceManagerListener.h"
 
