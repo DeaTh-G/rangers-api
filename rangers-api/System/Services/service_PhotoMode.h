@@ -11,7 +11,7 @@ namespace app::game
 		INSERT_PADDING(240);
 
 	public:
-		Vector3 StartPosition{};
+		csl::math::Vector3 StartPosition{};
 
 	private:
 		INSERT_PADDING(112);
