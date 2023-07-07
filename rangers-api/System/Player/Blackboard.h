@@ -23,8 +23,27 @@ namespace app::player
 		T* GetBlackboardContent()
 		{
 			for (auto* pBlackboard : m_Blackboards)
+			{
+				if (pBlackboard == nullptr)
+					continue;
+
 				if (pBlackboard->GetNameHash() == csl::ut::StringMapOperation::hash(T::GetBlackboardName()))
 					return reinterpret_cast<T*>(pBlackboard);
+			}
+
+			return { nullptr };
+		}
+
+		app::player::BlackboardContent* GetBlackboardContent(const char* in_pBlackboardName = "")
+		{
+			for (auto* pBlackboard : m_Blackboards)
+			{
+				if (pBlackboard == nullptr)
+					continue;
+
+				if (pBlackboard->GetNameHash() == csl::ut::StringMapOperation::hash(in_pBlackboardName))
+					return pBlackboard;
+			}
 
 			return { nullptr };
 		}

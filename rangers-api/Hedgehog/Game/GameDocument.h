@@ -32,8 +32,13 @@ namespace app
 		T* GetService()
 		{
 			for (auto* pService : m_Services)
+			{
+				if (pService == nullptr)
+					continue;
+
 				if (strcmp(pService->pStaticClass->pName, T::GetServiceName()) == 0)
 					return reinterpret_cast<T*>(pService);
+			}
 		
 			return { nullptr };
 		}
@@ -41,8 +46,13 @@ namespace app
 		hh::game::GameService* GetService(const char* in_pServiceName)
 		{
 			for (auto* pService : m_Services)
+			{
+				if (pService == nullptr)
+					continue;
+
 				if (strcmp(pService->pStaticClass->pName, in_pServiceName) == 0)
 					return pService;
+			}
 
 			return { nullptr };
 		}
@@ -51,8 +61,13 @@ namespace app
 		T* GetGameObject()
 		{
 			for (auto* pObject : m_Objects)
+			{
+				if (pObject == nullptr)
+					continue;
+
 				if (strcmp(pObject->pObjectName, T::GetObjectName()) == 0)
 					return reinterpret_cast<T*>(pObject);
+			}
 
 			return { nullptr };
 		}
@@ -60,8 +75,13 @@ namespace app
 		hh::game::GameObject* GetGameObject(const char* in_pObjectName)
 		{
 			for (auto* pObject : m_Objects)
+			{
+				if (pObject == nullptr)
+					continue;
+
 				if (strcmp(pObject->pObjectName, in_pObjectName) == 0)
 					return pObject;
+			}
 
 			return { nullptr };
 		}

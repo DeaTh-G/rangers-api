@@ -23,8 +23,13 @@ namespace hh::game
 		T* GetGOC()
 		{
 			for (auto* pComponent : m_Components)
+			{
+				if (pComponent == nullptr)
+					continue;
+
 				if (strcmp(pComponent->pStaticClass->pName, T::GetComponentName()) == 0)
 					return reinterpret_cast<T*>(pComponent);
+			}
 
 			return { nullptr };
 		}
@@ -32,8 +37,13 @@ namespace hh::game
 		hh::game::GOComponent* GetGOC(const char* in_pComponentName)
 		{
 			for (auto* pComponent : m_Components)
+			{
+				if (pComponent == nullptr)
+					continue;
+
 				if (strcmp(pComponent->pStaticClass->pName, in_pComponentName) == 0)
 					return pComponent;
+			}
 
 			return { nullptr };
 		}
