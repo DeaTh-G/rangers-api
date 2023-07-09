@@ -163,6 +163,34 @@ namespace csl::math
 		{
 			return toRotationMatrix().col(2);
 		}
+
+		static Quaternion LookRotation(csl::math::Vector3 forward, csl::math::Vector3 upward)
+		{
+			csl::math::Vector3 zAxis = forward.normalized();
+			csl::math::Vector3 xAxis = upward.cross(zAxis).normalized();
+			csl::math::Vector3 yAxis = zAxis.cross(xAxis);
+
+			Eigen::Matrix4f rotationMatrix;
+			{
+				rotationMatrix << xAxis.x(), yAxis.x(), zAxis.x(), 0.0f,
+								  xAxis.y(), yAxis.y(), zAxis.y(), 0.0f,
+								  xAxis.z(), yAxis.z(), zAxis.z(), 0.0f,
+								  0.0f, 0.0f, 0.0f, 1.0f;
+			}
+
+			Eigen::Quaternionf quaternion(rotationMatrix.block<3, 3>(0, 0));
+			return quaternion;
+		}
+
+		static Quaternion LookRotation(csl::math::Vector3 forward)
+		{
+			return LookRotation(forward, csl::math::Vector3(0.0f, 1.0f, 0.0f));
+		}
+
+		static Quaternion FromAngleAxis(float angle, csl::math::Vector3 axis)
+		{
+			return csl::math::Quaternion(Eigen::AngleAxisf(angle, axis));
+		}
 	};
 
 	class alignas(16) Matrix44 : public Eigen::Matrix4f
