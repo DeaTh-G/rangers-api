@@ -35,9 +35,6 @@
 #include "Hedgehog/Game/GameDocument.h"
 #include "Hedgehog/Game/GameUpdateListener.h"
 
-// Hedgehog Input Components
-#include "Hedgehog/Input/goc/goc_Input.h"
-
 #include "System/Player/PlayerInformation.h"
 #include "System/Player/Blackboard.h"
 #include "System/Player/BlackboardBattle.h"
