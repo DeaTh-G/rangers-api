@@ -4,7 +4,10 @@ namespace hh::fnd
 {
 	class TlsfHeapAllocatorBase : public csl::fnd::IAllocator
 	{
-		
+	private:
+		csl::fnd::IAllocator* pAllocator;
+		csl::fnd::TlsfHeapBase* pHeap;
+		void* pBuffer;
 	};
 
 	class ThreadSafeTlsfHeapAllocator : public TlsfHeapAllocatorBase
@@ -15,6 +18,8 @@ namespace hh::fnd
 		
 		inline static void* ms_addrAlloc = sigScan("\x48\x8B\x49\x10\x48\x8B\x01\x45\x85\xC0", "xxxxxxxxxx", (void*)0x140D43FE0);
 		inline static FUNCTION_PTR(void*, __fastcall, ms_fpAlloc, ms_addrAlloc, ThreadSafeTlsfHeapAllocator*, size_t, int);
+
+		csl::fnd::TlsfHeapTemplate<csl::fnd::Mutex> heap;
 
 	public:
 		~ThreadSafeTlsfHeapAllocator() override
@@ -27,9 +32,9 @@ namespace hh::fnd
 			return ms_fpAlloc(this, in_size, in_alignment);
 		}
 
-		/*void Free(void* in_pMemory) override
+		void Free(void* in_pMemory) override
 		{
 			
-		}*/
+		}
 	};
 }

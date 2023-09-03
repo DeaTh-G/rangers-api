@@ -10,6 +10,8 @@
 
 #define INSERT_PADDING(length) char CONCAT2(pad, __LINE__)[length]
 
+#define UNKNOWN(type) type CONCAT2(unk, __LINE__)
+
 #define ASSERT(condition, message) static_assert(condition, message)
 
 #define ASSERT_OFFSETOF(type, field, offset) \

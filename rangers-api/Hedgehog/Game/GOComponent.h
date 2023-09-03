@@ -7,21 +7,28 @@ namespace app::player
 
 namespace hh::game
 {
-	class alignas(8) ComponentClass
+	class GOComponent;
+	class GameObject;
+	class GOComponentClass
 	{
 	public:
 		const char* pName;
-		void* pUnk1{};
-		void* pUnk2{};
+		void* inheritanceChain{};
+		GOComponentClass* parent{};
+		const char* dynamicName;
+		size_t size;
+        GOComponent* (*Instantiate)(csl::fnd::IAllocator* pAllocator);
+		void* unk1;
+		void* unk2;
 	};
 	
 	class GOComponent : public hh::fnd::RefByHandleObject
 	{
 	public:
 		INSERT_PADDING(16);
-		app::player::Sonic* pSonic{};
+		GameObject* pOwnerGameObject{};
 		INSERT_PADDING(24);
-		ComponentClass* pStaticClass{};
+		GOComponentClass* pStaticClass{};
 		INSERT_PADDING(48);
 		
 		virtual void fUnk1() = 0;

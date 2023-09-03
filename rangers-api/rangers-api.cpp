@@ -1,0 +1,112 @@
+#include <stdint.h>
+
+#define EXPORTING_TYPES
+
+typedef struct _RTL_CRITICAL_SECTION {
+    void* DebugInfo;
+    int LockCount;
+    int RecursionCount;
+    void* OwningThread;        // from the thread's ClientId->UniqueThread
+    void* LockSemaphore;
+    void* SpinCount;        // force size on 64-bit systems when packed
+} RTL_CRITICAL_SECTION, *PRTL_CRITICAL_SECTION;
+typedef RTL_CRITICAL_SECTION CRITICAL_SECTION;
+
+void* sigScan(const char* signature, const char* mask, size_t sigSize, void* memory, const size_t memorySize);
+void* sigScan(const char* signature, const char* mask, void* hint);
+int strcmp(const char* x, const char* y);
+
+namespace csl::math 
+{
+	class Vector2 { public: float x; float y; };
+	class alignas(16) Vector3 { public: float x; float y; float z; };
+	class alignas(16) Vector4 { public: float x; float y; float z; float w; };
+	class Angle3 : Vector3 {};
+	class alignas(16) Quaternion  {
+	public:
+		float x; float y; float z; float w;
+		void SetRotationBetweenVectors(const Vector4& a, const Vector4& b, const Vector4& fallback);
+	};
+	class alignas(16) Matrix44 { Vector4 t; Vector4 u; Vector4 v; Vector4 w; };
+	class alignas(16) Matrix34 : Matrix44 {};
+
+	class Segment3
+	{
+	public:
+		Vector3 m_Start{};
+		Vector3 m_End{};
+	};
+
+	class Capsule
+	{
+	public:
+		Segment3 m_Segment{};
+		float m_Radius{};
+	};
+	
+	class Aabb
+	{
+	public:
+		Vector3 m_Min{};
+		Vector3 m_Max{};
+	};
+
+	class Transform
+	{
+	public:
+		Vector3 m_Position;
+		Quaternion m_Rotation;
+		Vector3 m_Scale;
+		bool m_IsDirty;
+	};
+
+	class CalculatedTransform
+	{
+	public:
+		Matrix34 m_Mtx;
+		Vector3 m_Scale;
+		size_t m_Flags;
+	};
+
+	template<typename T>
+	inline static const T& Clamp(const T& value, const T& min, const T& max)
+	{
+		if (value < min)
+			return min;
+		
+		if (value > max)
+			return max;
+		
+		return value;
+	}
+
+	template<typename T>
+	inline static const T& Max(const T& value, const T& max)
+	{
+		if (value > max)
+			return value;
+
+		return max;
+	}
+
+	template<typename T>
+	inline static const T& Min(const T& value, const T& min)
+	{
+		if (value < min)
+			return value;
+
+		return min;
+	}
+	
+	class Constants
+	{
+	public:
+		inline static const Vector2 Vector2Zero{ 0, 0 };
+		inline static const Vector3 Vector3Zero{ 0, 0, 0 };
+		inline static const Quaternion QuaternionIdentity{ 0, 0, 0, 1 };
+	};
+}
+
+#include "rangers-api.h"
+
+// template class csl::ut::MoveArray<csl::fnd::IAllocator*>;

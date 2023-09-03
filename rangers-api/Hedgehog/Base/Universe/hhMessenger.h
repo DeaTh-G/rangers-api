@@ -14,9 +14,10 @@ namespace hh::fnd
 		inline static FUNCTION_PTR(void, __fastcall, ms_fpSendMessageImmToPlayer, ms_addrSendMessageImmToPlayer, Messenger*, app::GameDocument*, int, Message&);
 
 	public:
+		uint32_t actorId;
 		void* pUnk1;
-		void* pUnk2;
-		void* pUnk3;
+		uint32_t pUnk2;
+		uint32_t pUnk3;
 
 		virtual void fUnk1();
 		virtual void fUnk2();

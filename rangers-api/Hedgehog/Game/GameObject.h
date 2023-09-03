@@ -2,22 +2,66 @@
 
 namespace hh::game
 {
+	class GameDocument;
+	class GameObject;
+
+    class GameObjectClass {
+    public:
+        const char *pName;
+        const char *pScopedName;
+        UNKNOWN(uint64_t);
+        size_t objectSize;
+        GameObject* (*Instantiate)(csl::fnd::IAllocator* pAllocator);
+        UNKNOWN(uint64_t);
+        UNKNOWN(uint64_t);
+        UNKNOWN(uint64_t);
+        UNKNOWN(uint64_t);
+        UNKNOWN(uint64_t);
+        UNKNOWN(uint64_t);
+    };
+
 	class GameObject : public fnd::Messenger
 	{
-	public:
-		INSERT_PADDING(24);
-		app::GameDocument* pDocument{};
+		class Unk1 {
+			GameObject* pGameObject;
+			UNKNOWN(csl::ut::MoveArray<void*>);
+		};
 
-		INSERT_PADDING(8);
-		//GameObjectClass* pStaticClass{};
+		struct Unk2 {
+			UNKNOWN(int64_t);
+			UNKNOWN(int64_t);
+			UNKNOWN(int64_t);
+			UNKNOWN(int64_t);
+		};
+
+	public:
+		UNKNOWN(char);
+		UNKNOWN(char);
+		UNKNOWN(char);
+		UNKNOWN(char);
+		UNKNOWN(char);
+		UNKNOWN(void*);
+		UNKNOWN(uint32_t);
+		GameDocument* pOwnerDocument{};
+
+		UNKNOWN(void*);
+		//??GameObjectClass* pStaticClass{};
 
 	private:
-		csl::ut::MoveArray<GOComponent*> m_Components{ pAllocator };
-
-	public:
-		INSERT_PADDING(64); // Even more Components 2nd and 3rd being GOCPlayerParameter and GOCPlayerBlackboard
-		const char* pObjectName{};
-		INSERT_PADDING(408);
+		csl::ut::InplaceMoveArray<GOComponent*, 8> m_Components;
+		csl::ut::VariableString pObjectName;
+		csl::ut::InplaceMoveArray<hh::fnd::Property, 2> m_Properties;
+		UNKNOWN(csl::ut::MoveArray<void*>);
+		uint32_t m_ComponentFlags{};
+		csl::ut::MoveArray<GOComponent> m_VisualComponents;
+		csl::ut::MoveArray<GOComponent> m_PhysicsComponents;
+		csl::ut::MoveArray<GOComponent> m_AudibleComponents;
+		UNKNOWN(csl::ut::MoveArray<void*>);
+		UNKNOWN(Unk1);
+		UNKNOWN(void*);
+		GameObjectClass* pClass;
+		UNKNOWN(Unk2);
+		
 
 		template <typename T>
 		T* GetGOC()
@@ -58,5 +102,7 @@ namespace hh::game
 		{
 			return GetGOC(in_pComponentName);
 		}
+
+		hh::game::GOComponent* InstantiateComponent(const GOComponentClass& componentClass);
 	};
 }

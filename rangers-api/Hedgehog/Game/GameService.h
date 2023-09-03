@@ -1,12 +1,9 @@
 #pragma once
 
-namespace app
-{
-	class GameDocument;
-}
-
 namespace hh::game
 {
+	class GameDocument;
+
 	class alignas(8) GameServiceClass
 	{
 	public:
@@ -15,16 +12,15 @@ namespace hh::game
 		void* pUnk2{};
 	};
 	
-	class GameService : public hh::fnd::Messenger
+	class alignas(8) GameService : public hh::fnd::Messenger
 	{
 	public:
-		app::GameDocument* pDocument;
+		GameDocument* pDocument;
 		GameServiceClass* pStaticClass;
+		UNKNOWN(uint32_t);
+		csl::fnd::Mutex mutex;
 
 		virtual void fUnk1() = 0;
 		virtual void fUnk2() = 0;
-
-	private:
-		INSERT_PADDING(48);
 	};
 }

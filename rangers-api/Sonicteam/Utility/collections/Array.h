@@ -2,7 +2,7 @@
 
 namespace csl::ut
 {
-	static constexpr size_t SIGN_BIT = ((1u << ((sizeof(size_t) * CHAR_BIT) - 1)));
+	static constexpr size_t SIGN_BIT = 0x80000000;
 	
 	template<typename T>
 	class Array
