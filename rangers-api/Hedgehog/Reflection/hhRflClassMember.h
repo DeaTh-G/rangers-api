@@ -24,6 +24,7 @@ namespace hh::fnd
 			TYPE_SINT64,
 			TYPE_UINT64,
 			TYPE_FLOAT,
+			TYPE_VECTOR2,
 			TYPE_VECTOR3,
 			TYPE_VECTOR4,
 			TYPE_QUATERNION,
@@ -38,7 +39,14 @@ namespace hh::fnd
 			TYPE_CSTRING,
 			TYPE_STRING,
 			TYPE_OBJECT_ID,
-			TYPE_POSITION
+			TYPE_POSITION,
+			TYPE_COLOR_BYTE,
+			TYPE_COLOR_FLOAT,
+		};
+
+		struct Value : public RflEntity {
+			Type m_Type;
+			void* m_Value;
 		};
 
 		struct alignas(8) Metadata
@@ -123,6 +131,7 @@ namespace hh::fnd
 		DEFINE_METADATA(TYPE_SINT64, int64_t),
 		DEFINE_METADATA(TYPE_UINT64, uint64_t),
 		DEFINE_METADATA(TYPE_FLOAT, float),
+		DEFINE_METADATA_WITH_NAME(TYPE_VECTOR2, "vector2", csl::math::Vector2),
 		DEFINE_METADATA_WITH_NAME(TYPE_VECTOR3, "vector3", csl::math::Vector3),
 		DEFINE_METADATA_WITH_NAME(TYPE_VECTOR4, "vector4", csl::math::Vector4),
 		DEFINE_METADATA_WITH_NAME(TYPE_QUATERNION, "quaternion", csl::math::Quaternion),
@@ -138,6 +147,8 @@ namespace hh::fnd
 		DEFINE_METADATA_WITH_NAME(TYPE_STRING, "string", csl::ut::VariableString),
 		DEFINE_METADATA_WITH_NAME(TYPE_OBJECT_ID, "csetobjectid", uint32_t),
 		DEFINE_METADATA_FULL(TYPE_POSITION, "position", 0xC, 4),
+		DEFINE_METADATA_WITH_NAME(TYPE_COLOR_BYTE, "color8", csl::ut::Color<uint8_t>),
+		DEFINE_METADATA_WITH_NAME(TYPE_COLOR_FLOAT, "colorf", csl::ut::Color<float>),
 	};
 
 #undef DEFINE_METADATA_WITH_NAME

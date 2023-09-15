@@ -22,5 +22,6 @@ namespace app::level {
         UNKNOWN(void*);
     public:
         ~LevelInfo(){}
+		virtual void* GetClassId();
     };
 }

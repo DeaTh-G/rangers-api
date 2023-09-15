@@ -19,11 +19,13 @@ namespace hh::fnd
 		uint32_t pUnk2;
 		uint32_t pUnk3;
 
-		virtual void fUnk1();
-		virtual void fUnk2();
-		virtual int fUnk3() { return 0; }
+		virtual ~Messenger() {}
+
+		virtual void* GetClassId();
+		virtual void fUnk2() { return !fUnk3(); }
+		virtual bool fUnk3() { return false; }
 		virtual void fUnk4();
-		virtual int fUnk5() { return 1; }
+		virtual bool fUnk5() { return 1; }
 
 		void SendMessageImmToPlayer(app::GameDocument* in_pGameDocument, int in_playerNo, Message& in_rMessage)
 		{

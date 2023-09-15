@@ -31,5 +31,6 @@ namespace app::ui
 		{
 			return ms_pServiceName;
 		}
+		virtual void* GetClassId();
 	};
 }

@@ -22,22 +22,50 @@ namespace hh::game
 		void* unk2;
 	};
 	
-	class GOComponent : public hh::fnd::RefByHandleObject
+	class GOComponent : public fnd::RefByHandleObject
 	{
 	public:
-		INSERT_PADDING(16);
+		enum GOCEvent {
+			DEACTIVATE = 0,
+			ACTIVATE,
+			UNK2,
+			UNK3,
+			UNK4,
+			UNK5,
+			OBJECT_LAYER_CHANGED,
+		};
+
+		struct Unk1 {
+			UNKNOWN(int64_t);
+			UNKNOWN(int64_t);
+		};
+
+		UNKNOWN(void*);
+		uint32_t flags;
+		UNKNOWN(int32_t);
 		GameObject* pOwnerGameObject{};
-		INSERT_PADDING(24);
+		UNKNOWN(uint32_t);
+		char flags38;
+		UNKNOWN(uint16_t);
+		UNKNOWN(char);
+		UNKNOWN(void*);
 		GOComponentClass* pStaticClass{};
-		INSERT_PADDING(48);
+		Unk1 unknown43[3];
+
+		GOComponent(csl::fnd::IAllocator* pAllocator);
 		
-		virtual void fUnk1() = 0;
-		virtual void fUnk2() = 0;
-		virtual void fUnk3() = 0;
-		virtual void fUnk4() = 0;
+		virtual void GetFamilyId() = 0;
+		virtual void Update() = 0;
+		virtual void GetDebugInfoMaybe() = 0;
+		virtual void ProcessMessage(fnd::Message& msg) = 0;
 		virtual void fUnk5() = 0;
-		virtual void fUnk6() = 0;
-		virtual void fUnk7() = 0;
-		virtual void fUnk8() = 0;
+		virtual void LoadReflection(const fnd::RflClass& rflClass) = 0;
+
+		/*
+		 * When event is OBJECT_LAYER_CHANGED, data contains previous layer id.
+		 */
+		virtual void OnGOCEvent(GOCEvent event, GameObject& ownerGameObject, void* data) = 0;
+
+		static GOComponent* Instantiate(GameObject& ownerGameObject, const GOComponentClass& componentClass);
 	};
 }

@@ -15,9 +15,9 @@ namespace hh::game
         UNKNOWN(uint64_t);
         UNKNOWN(uint64_t);
         UNKNOWN(uint64_t);
-        UNKNOWN(uint64_t);
-        UNKNOWN(uint64_t);
-        UNKNOWN(uint64_t);
+        uint32_t memberValueCount;
+        hh::fnd::RflClassMember::Value* pMemberValues;
+        hh::fnd::RflClass* reflectionClass;
     };
 
 	class GameObject : public fnd::Messenger
@@ -34,14 +34,21 @@ namespace hh::game
 			UNKNOWN(int64_t);
 		};
 
+		enum ComponentType : char {
+			VISIBLE,
+			PHYSICS,
+			AUDIBLE,
+		};
+
 	public:
+		csl::ut::Bitset<char> statusFlags;
+		char layer{ 6 };
+		csl::ut::Bitset<ComponentType> forceComponentsFlags;
+		csl::ut::Bitset<ComponentType> componentsAreForcedOrNonEmptyFlags;
 		UNKNOWN(char);
-		UNKNOWN(char);
-		UNKNOWN(char);
-		UNKNOWN(char);
-		UNKNOWN(char);
-		UNKNOWN(void*);
-		UNKNOWN(uint32_t);
+		uint32_t m_VisualComponentsLengthWithUnk48InHiWord;
+		uint32_t m_PhysicsComponentsLengthWithUnk48InHiWord;
+		uint32_t m_AudibleComponentsLengthWithUnk48InHiWord;
 		GameDocument* pOwnerDocument{};
 
 		UNKNOWN(void*);
@@ -62,6 +69,7 @@ namespace hh::game
 		GameObjectClass* pClass;
 		UNKNOWN(Unk2);
 		
+		virtual void* GetClassId();
 
 		template <typename T>
 		T* GetGOC()
@@ -103,6 +111,6 @@ namespace hh::game
 			return GetGOC(in_pComponentName);
 		}
 
-		hh::game::GOComponent* InstantiateComponent(const GOComponentClass& componentClass);
+		void AttachComponent(GOComponent& component);
 	};
 }

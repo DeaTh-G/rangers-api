@@ -6,26 +6,36 @@ namespace hh::fnd
 	{
 	protected:
 		const size_t m_Idx{};
-		const size_t m_Value{};
-		const char* m_pName{};
-		const uint64_t flags{};
+		const char* m_pEnglishName{};
+		const char* m_pJapaneseName{};
+		const uint64_t m_Flags{};
 
 	public:
-		[[nodiscard]] const char* GetName() const
+		[[nodiscard]] const char* GetEnglishName() const
 		{
-			return m_pName;
+			return m_pEnglishName;
 		}
 
-		[[nodiscard]] size_t GetValue() const
+		[[nodiscard]] const char* GetJapaneseName() const
 		{
-			return m_Value;
+			return m_pJapaneseName;
+		}
+
+		[[nodiscard]] size_t GetIndex() const
+		{
+			return m_Idx;
+		}
+
+		[[nodiscard]] size_t GetFlags() const
+		{
+			return m_Flags;
 		}
 	};
 	
 	class RflClassEnum : public RflEntity
 	{
 	protected:
-		const RflArray<RflClassEnumMember*> m_pValues{};
+		const RflArray<RflClassEnumMember> m_pValues{};
 
 	public:
 		const RflClassEnumMember* GetValues() const

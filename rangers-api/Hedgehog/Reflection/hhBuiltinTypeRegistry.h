@@ -2,7 +2,6 @@
 
 namespace hh::fnd
 {
-
 	class BuiltinTypeRegistry : public BaseObject
 	{
 	public:

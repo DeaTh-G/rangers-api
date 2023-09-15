@@ -20,6 +20,7 @@
 #include "Sonicteam/Utility/collections/InPlaceMoveArray.h"
 #include "Sonicteam/Utility/collections/StringMap.h"
 #include "Sonicteam/Utility/Bitset.h"
+#include "Sonicteam/Utility/Color.h"
 #include "Sonicteam/Utility/VariableString.h"
 
 #include "Hedgehog/System/hhAllocator.h"
@@ -40,21 +41,6 @@
 // // // System Messages
 // // #include "System/Messages/MsgRobChaosEmerald.h"
 
-// // // Hedgehog Game Library
-#include "Hedgehog/Game/GameService.h"
-#include "Hedgehog/Game/GameStepListener.h"
-#include "Hedgehog/Game/GOComponent.h"
-#include "Hedgehog/Game/GameObject.h"
-#include "Hedgehog/Game/GameDocument.h"
-// #include "Hedgehog/Game/GameUpdateListener.h"
-#include "Hedgehog/Game/GameObjectSystem.h"
-
-// #include "System/Player/PlayerInformation.h"
-// #include "System/Player/Blackboard.h"
-// #include "System/Player/BlackboardBattle.h"
-// #include "System/Player/Player.h"
-// #include "System/Player/Sonic.h"
-
 // Hedgehog Reflection Library
 #include "Hedgehog/Reflection/hhInternalClassMember.h"
 #include "Hedgehog/Reflection/hhRflEntity.h"
@@ -72,6 +58,24 @@
 #include "Hedgehog/Reflection/hhDataValue.h"
 // #include "Hedgehog/Reflection/hhVariantDataUtil.h"
 // #include "Hedgehog/Reflection/hhRflSerializeUtil.h"
+
+// Hedgehog Game Library
+#include "Hedgehog/Game/GameService.h"
+#include "Hedgehog/Game/GameStepListener.h"
+#include "Hedgehog/Game/GOComponent.h"
+#include "Hedgehog/Game/GameObject.h"
+#include "Hedgehog/Game/GameDocument.h"
+// #include "Hedgehog/Game/GameUpdateListener.h"
+#include "Hedgehog/Game/GameObjectSystem.h"
+
+#include "Hedgehog/Game/GOComponents/GOCTinyFsm2.h"
+
+// #include "System/Player/PlayerInformation.h"
+// #include "System/Player/Blackboard.h"
+// #include "System/Player/BlackboardBattle.h"
+// #include "System/Player/Player.h"
+// #include "System/Player/Sonic.h"
+
 
 // // System Game Object Components
 // #include "System/Player/goc/goc_PlayerBlackboard.h"

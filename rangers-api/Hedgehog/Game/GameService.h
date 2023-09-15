@@ -20,7 +20,6 @@ namespace hh::game
 		UNKNOWN(uint32_t);
 		csl::fnd::Mutex mutex;
 
-		virtual void fUnk1() = 0;
-		virtual void fUnk2() = 0;
+		virtual void* GetClassId();
 	};
 }

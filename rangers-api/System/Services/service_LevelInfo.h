@@ -17,6 +17,7 @@ namespace app::level
 		{
 			return ms_pServiceName;
 		}
+		virtual void* GetClassId();
 	};
 
 }

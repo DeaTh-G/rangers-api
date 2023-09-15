@@ -7,6 +7,8 @@ namespace hh::fnd
 	public:
 		bool isRefCounted{};
 		uint32_t RefCount{};
+
+		ReferencedObject(bool isRefCounted) : isRefCounted(isRefCounted) {}
 	};
 
 	class RefByHandleObject : public ReferencedObject
