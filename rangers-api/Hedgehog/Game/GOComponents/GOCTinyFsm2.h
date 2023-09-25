@@ -17,8 +17,8 @@ namespace hh::game {
         csl::ut::Bitset<Flags> flags;
         uint32_t transitionPhase;
         csl::ut::InplaceMoveArray<void*, 1> unk11;
-        UNKNOWN(csl::ut::MoveArray<void*>);
-        UNKNOWN(void*);
+        csl::ut::MoveArray<void*> unk20;
+        void* unk21;
         
 		virtual void Update() {
 

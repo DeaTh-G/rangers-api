@@ -17,7 +17,7 @@ namespace hh::game
 	public:
 		GameDocument* pDocument;
 		GameServiceClass* pStaticClass;
-		UNKNOWN(uint32_t);
+		uint32_t unk20;
 		csl::fnd::Mutex mutex;
 
 		virtual void* GetClassId();

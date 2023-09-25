@@ -2,24 +2,24 @@
 
 namespace app::level {
     class LevelInfo : public hh::game::GameService, public save::SaveManagerListener {
-        UNKNOWN(void*);
-        UNKNOWN(void*);
-        UNKNOWN(char);
-        UNKNOWN(void*);
-        UNKNOWN(void*);
-        UNKNOWN(void*);
-        UNKNOWN(char);
-        UNKNOWN(void*);
-        UNKNOWN(void*);
-        UNKNOWN(void*);
-        UNKNOWN(void*);
-        UNKNOWN(uint32_t);
-        UNKNOWN(void*);
-        UNKNOWN(void*);
-        UNKNOWN(csl::ut::MoveArray<void*>);
-        UNKNOWN(uint16_t);
-        UNKNOWN(char);
-        UNKNOWN(void*);
+        void* unk5;
+        void* unk6;
+        char unk7;
+        void* unk8;
+        void* unk9;
+        void* unk10;
+        char unk11;
+        void* unk12;
+        void* unk13;
+        void* unk14;
+        void* unk15;
+        uint32_t unk16;
+        void* unk17;
+        void* unk18;
+        csl::ut::MoveArray<void*> unk19;
+        uint16_t unk20;
+        char unk21;
+        void* unk22;
     public:
         ~LevelInfo(){}
 		virtual void* GetClassId();

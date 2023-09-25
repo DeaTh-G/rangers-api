@@ -9,12 +9,12 @@ namespace hh::game
     public:
         const char *pName;
         const char *pScopedName;
-        UNKNOWN(uint64_t);
+        uint64_t unk12;
         size_t objectSize;
         GameObject* (*Instantiate)(csl::fnd::IAllocator* pAllocator);
-        UNKNOWN(uint64_t);
-        UNKNOWN(uint64_t);
-        UNKNOWN(uint64_t);
+        uint64_t unk15;
+        uint64_t unk16;
+        uint64_t unk17;
         uint32_t memberValueCount;
         hh::fnd::RflClassMember::Value* pMemberValues;
         hh::fnd::RflClass* reflectionClass;
@@ -24,14 +24,14 @@ namespace hh::game
 	{
 		class Unk1 {
 			GameObject* pGameObject;
-			UNKNOWN(csl::ut::MoveArray<void*>);
+			csl::ut::MoveArray<void*> unk27;
 		};
 
 		struct Unk2 {
-			UNKNOWN(int64_t);
-			UNKNOWN(int64_t);
-			UNKNOWN(int64_t);
-			UNKNOWN(int64_t);
+			int64_t unk31;
+			int64_t unk32;
+			int64_t unk33;
+			int64_t unk34;
 		};
 
 		enum ComponentType : char {
@@ -45,29 +45,29 @@ namespace hh::game
 		char layer{ 6 };
 		csl::ut::Bitset<ComponentType> forceComponentsFlags;
 		csl::ut::Bitset<ComponentType> componentsAreForcedOrNonEmptyFlags;
-		UNKNOWN(char);
+		char unk48;
 		uint32_t m_VisualComponentsLengthWithUnk48InHiWord;
 		uint32_t m_PhysicsComponentsLengthWithUnk48InHiWord;
 		uint32_t m_AudibleComponentsLengthWithUnk48InHiWord;
 		GameDocument* pOwnerDocument{};
 
-		UNKNOWN(void*);
+		void* unk54;
 		//??GameObjectClass* pStaticClass{};
 
 	private:
 		csl::ut::InplaceMoveArray<GOComponent*, 8> m_Components;
 		csl::ut::VariableString pObjectName;
 		csl::ut::InplaceMoveArray<hh::fnd::Property, 2> m_Properties;
-		UNKNOWN(csl::ut::MoveArray<void*>);
+		csl::ut::MoveArray<void*> unk61;
 		uint32_t m_ComponentFlags{};
 		csl::ut::MoveArray<GOComponent> m_VisualComponents;
 		csl::ut::MoveArray<GOComponent> m_PhysicsComponents;
 		csl::ut::MoveArray<GOComponent> m_AudibleComponents;
-		UNKNOWN(csl::ut::MoveArray<void*>);
-		UNKNOWN(Unk1);
-		UNKNOWN(void*);
+		csl::ut::MoveArray<void*> unk66;
+		Unk1 unk67;
+		void* unk68;
 		GameObjectClass* pClass;
-		UNKNOWN(Unk2);
+		Unk2 unk70;
 		
 		virtual void* GetClassId();
 

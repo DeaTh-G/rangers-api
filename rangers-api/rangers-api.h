@@ -25,6 +25,8 @@
 
 #include "Hedgehog/System/hhAllocator.h"
 
+#include "Hedgehog/Utility/FSM/StateDesc.h"
+
 // Hedgehog Library
 #include "Hedgehog/Base/System/hhBaseObject.h"
 #include "Hedgehog/Base/System/hhReferencedObject.h"
@@ -97,6 +99,15 @@
 // #include "System/HUD/RequestOverlayCaption.h"
 
 // #include "System/Script/ScriptSequence.h"
+
+// Builtin RflCustomAttributes
+// #include "ApplicationCommon/Reflection/CaptionAttribute.h"
+// #include "ApplicationCommon/Reflection/RangeAttribute.h"
+
+
+#include "Application/Reflection/Types.h"
+
+#include "Application/FSM/StateContext.h"
 
 #include "Application/Save/SaveManagerListener.h"
 

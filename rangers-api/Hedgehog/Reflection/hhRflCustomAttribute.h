@@ -21,6 +21,18 @@ namespace hh::fnd
 			return m_pType;
 		}
 	};
+
+	// template<typename T>
+	// class RflCustomAttributeTemplate : public RflCustomAttribute {
+	// public:
+	// 	typedef T UnderlyingType;
+	
+	// public:
+	// 	inline const T* GetData() const
+	// 	{
+	// 		return reinterpret_cast<T*>(RflCustomAttribute::GetData());
+	// 	}
+	// }
 	
 	class RflCustomAttributes : public RflArray<RflCustomAttribute>
 	{

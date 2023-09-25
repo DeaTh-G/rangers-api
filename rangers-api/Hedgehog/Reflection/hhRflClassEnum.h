@@ -5,7 +5,7 @@ namespace hh::fnd
 	class RflClassEnumMember
 	{
 	protected:
-		const size_t m_Idx{};
+		const int32_t m_Idx{};
 		const char* m_pEnglishName{};
 		const char* m_pJapaneseName{};
 		const uint64_t m_Flags{};

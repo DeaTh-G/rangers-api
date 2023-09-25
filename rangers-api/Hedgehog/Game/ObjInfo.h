@@ -2,9 +2,9 @@
 
 namespace hh::game {
     class ObjInfo : public ReferencedObject {
-        UNKNOWN(void*);
-        UNKNOWN(void*);
-        UNKNOWN(void*);
-        UNKNOWN(void*);
+        void* unk5;
+        void* unk6;
+        void* unk7;
+        void* unk8;
     }
 }

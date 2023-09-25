@@ -3,21 +3,21 @@
 namespace csl::fnd {
     class alignas(8) TlsfHeapBase : public HeapBase {
         struct BlockHead {
-            UNKNOWN(uint64_t);
-            UNKNOWN(uint64_t);
-            UNKNOWN(uint64_t);
-            UNKNOWN(uint64_t);
-            UNKNOWN(uint32_t);
-            uint32_t unknown[25];
-            void* unknown2[25][32];
+            uint64_t unk1;
+            uint64_t unk2;
+            uint64_t unk3;
+            uint64_t unk4;
+            uint32_t unk5;
+            uint32_t unk6[25];
+            void* unk7[25][32];
         };
 
         void* bufferBegin;
         void* bufferEnd;
-        UNKNOWN(uint64_t);
-        UNKNOWN(uint64_t);
-        UNKNOWN(uint64_t);
-        UNKNOWN(uint32_t);
+        uint64_t unk101;
+        uint64_t unk102;
+        uint64_t unk103;
+        uint32_t unk104;
         uint64_t block;
         bool initialized;
     };

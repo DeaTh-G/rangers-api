@@ -36,19 +36,19 @@ namespace hh::game
 		};
 
 		struct Unk1 {
-			UNKNOWN(int64_t);
-			UNKNOWN(int64_t);
+			int64_t unk39;
+			int64_t unk40;
 		};
 
-		UNKNOWN(void*);
+		void* unk43;
 		uint32_t flags;
-		UNKNOWN(int32_t);
+		int32_t unk45;
 		GameObject* pOwnerGameObject{};
-		UNKNOWN(uint32_t);
-		char flags38;
-		UNKNOWN(uint16_t);
-		UNKNOWN(char);
-		UNKNOWN(void*);
+		uint32_t unk47;
+		char flags38; // seen 0, 1, 2
+		uint16_t unk49;
+		char unk50;
+		void* unk51;
 		GOComponentClass* pStaticClass{};
 		Unk1 unknown43[3];
 
