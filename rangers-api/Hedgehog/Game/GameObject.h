@@ -2,7 +2,7 @@
 
 namespace hh::game
 {
-	class GameDocument;
+	class GameManager;
 	class GameObject;
 
     class GameObjectClass {
@@ -49,7 +49,7 @@ namespace hh::game
 		uint32_t m_VisualComponentsLengthWithUnk48InHiWord;
 		uint32_t m_PhysicsComponentsLengthWithUnk48InHiWord;
 		uint32_t m_AudibleComponentsLengthWithUnk48InHiWord;
-		GameDocument* pOwnerDocument{};
+		GameManager* pOwnerDocument{};
 
 		void* unk54;
 		//??GameObjectClass* pStaticClass{};

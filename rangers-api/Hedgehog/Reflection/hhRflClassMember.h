@@ -138,7 +138,7 @@ namespace hh::fnd
 		DEFINE_METADATA_WITH_NAME(TYPE_MATRIX34, "matrix34", csl::math::Matrix34),
 		DEFINE_METADATA_WITH_NAME(TYPE_MATRIX44, "matrix44", csl::math::Matrix44),
 		DEFINE_METADATA_WITH_NAME(TYPE_POINTER, "pointer", void*),
-		DEFINE_METADATA_FULL(TYPE_ARRAY, "array", sizeof(csl::ut::Array<void>), -1),
+		DEFINE_METADATA_FULL(TYPE_ARRAY, "array", sizeof(csl::ut::MoveArray<void*>), -1),
 		DEFINE_METADATA_FULL(TYPE_SIMPLE_ARRAY, "simplearray", 8, -1),
 		DEFINE_METADATA_FULL(TYPE_ENUM, "enum", -1, -1),
 		DEFINE_METADATA_FULL(TYPE_STRUCT, "struct", -1, -1),

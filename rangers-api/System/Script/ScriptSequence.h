@@ -97,7 +97,7 @@ namespace app
 		int OverlayJobCount;
 		INSERT_PADDING(376);
 
-		GameDocument* GetDocument()
+		GameManager* GetDocument()
 		{
 			return pManager->pDocument;
 		}

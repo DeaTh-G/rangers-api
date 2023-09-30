@@ -2,38 +2,40 @@
 
 namespace hh::game
 {
+	class GameManagerUnk1 {
+		class Unk2 {
+			void* unk10;
+			void* unk11;
+			void* unk12;
+		};
 
-	class GameDocument : public hh::fnd::ReferencedObject
+		void* unk15;
+		Unk2 unk16;
+		Unk2 unk17;
+		uint32_t unk18;
+	};
+
+	class GameManager;
+
+	class GameManagerOperationQueue : public fnd::ReferencedObject {
+		GameManager* pGameManager;
+		csl::ut::MoveArray<void*> unk1;
+		csl::ut::MoveArray<void*> unk2;
+		GameManagerUnk1 unk3;
+		csl::fnd::Mutex mutex;
+	public:
+		GameManagerOperationQueue(csl::fnd::IAllocator* pAllocator, GameManager* pGameManager);
+	};
+
+	class GameManager : public fnd::ReferencedObject, public fnd::ReloaderListener, private csl::ut::NonCopyable
 	{
-		class Unk1 {
-			class Unk2 {
-				void* unk10;
-				void* unk11;
-				void* unk12;
-			};
+		inline static void* ms_addrStaticGameManagerUsage = sigScan("\x48\x89\x2D\xCC\xCC\xCC\xCC\x8D\x75\x20", "xxx????xxx", (void*)0x14FE91CB8);
+		inline static GameManager** ms_ppGameManager = reinterpret_cast<GameManager**>(7 + (size_t)ms_addrStaticGameManagerUsage + (*(int32_t*)(((char*)ms_addrStaticGameManagerUsage) + 3)));
 
-			void* unk15;
-			Unk2 unk16;
-			Unk2 unk17;
-			uint32_t unk18;
-		};
-
-		class alignas(8) Layer : public hh::fnd::ReferencedObject
-		{
-			csl::ut::VariableString name;
-			csl::ut::MoveArray<GameObject*> objects;
-			uint32_t unk25;
-		};
-
-	private:
-		inline static void* ms_addrStaticGameDocumentUsage = sigScan("\x48\x89\x2D\xCC\xCC\xCC\xCC\x8D\x75\x20", "xxx????xxx", (void*)0x14FE91CB8);
-		inline static GameDocument** ms_ppGameDocument = reinterpret_cast<GameDocument**>(7 + (size_t)ms_addrStaticGameDocumentUsage + (*(int32_t*)(((char*)ms_addrStaticGameDocumentUsage) + 3)));
-
-		void* unk32;
 		uint32_t unk33;
 		uint32_t unk34;
 		void* unk35;
-		csl::ut::FixedArray<Layer*, 32> m_Layers{};
+		csl::ut::FixedArray<GameObjectLayer*, 32> m_GameObjectLayers{};
 		csl::ut::MoveArray<GameObject*> m_Objects{ pAllocator };
 		csl::ut::MoveArray<GameService*> m_Services{ pAllocator };
 		csl::ut::StringMap<GameService*> m_ServicesByName{ pAllocator };
@@ -50,15 +52,17 @@ namespace hh::game
 		void* unk50;
 		uint32_t unk51;
 		csl::ut::MoveArray<void*> unk52;
-		Unk1 unk53;
-		void* unk54;
+		GameManagerUnk1 unk53;
+		GameManagerOperationQueue* pOperationQueue;
 		uint32_t unk55;
-		void* unk56;
+		GameApplication* pApplication;
 
 	public:
-		inline static GameDocument* GetSingleton()
+		GameManager(csl::fnd::IAllocator* pAllocator, GameApplication* pApplication);
+
+		inline static GameManager* GetSingleton()
 		{
-			return *ms_ppGameDocument;
+			return *ms_ppGameManager;
 		}
 
 		template <typename T>

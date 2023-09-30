@@ -9,10 +9,7 @@
 // // Common Sonicteam Library
 // #include "Sonicteam/math/math.h"
 #include "Sonicteam/System/IAllocator.h"
-#include "Sonicteam/System/Singleton.h"
-#include "Sonicteam/System/Mutex.h"
-#include "Sonicteam/System/HeapBase.h"
-#include "Sonicteam/System/TlsfHeap.h"
+
 #include "Sonicteam/Utility/collections/Array.h"
 #include "Sonicteam/Utility/collections/FixedArray.h"
 #include "Sonicteam/Utility/collections/HashMap.h"
@@ -21,7 +18,15 @@
 #include "Sonicteam/Utility/collections/StringMap.h"
 #include "Sonicteam/Utility/Bitset.h"
 #include "Sonicteam/Utility/Color.h"
+#include "Sonicteam/Utility/NonCopyable.h"
+#include "Sonicteam/Utility/Pair.h"
 #include "Sonicteam/Utility/VariableString.h"
+
+#include "Sonicteam/System/Singleton.h"
+#include "Sonicteam/System/Mutex.h"
+#include "Sonicteam/System/HeapBase.h"
+#include "Sonicteam/System/TlsfHeap.h"
+#include "Sonicteam/System/Delegate.h"
 
 #include "Hedgehog/System/hhAllocator.h"
 
@@ -32,6 +37,8 @@
 #include "Hedgehog/Base/System/hhReferencedObject.h"
 #include "Hedgehog/Base/System/hhProperty.h"
 #include "Hedgehog/Base/System/hhCollection.h"
+#include "Hedgehog/Base/System/hhHandle.h"
+#include "Hedgehog/Base/System/ReloaderListener.h"
 
 // Hedgehog Universe Library
 #include "Hedgehog/Base/Universe/hhMessage.h"
@@ -39,6 +46,12 @@
 
 #include "Hedgehog/Base/Type/hhBaseTypes.h"
 #include "Hedgehog/Base/Type/WorldPosition.h"
+#include "Hedgehog/Base/Type/LogData.h"
+
+// Hedgehog Framework
+#include "Hedgehog/Framework/KeyEventHandler.h"
+#include "Hedgehog/Framework/MouseEventHandler.h"
+#include "Hedgehog/Framework/Application.h"
 
 // // // System Messages
 // // #include "System/Messages/MsgRobChaosEmerald.h"
@@ -66,11 +79,25 @@
 #include "Hedgehog/Game/GameStepListener.h"
 #include "Hedgehog/Game/GOComponent.h"
 #include "Hedgehog/Game/GameObject.h"
-#include "Hedgehog/Game/GameDocument.h"
+#include "Hedgehog/Game/GameObjectLayer.h"
+#include "Hedgehog/Game/GameApplication.h"
+#include "Hedgehog/Game/GameManager.h"
 // #include "Hedgehog/Game/GameUpdateListener.h"
 #include "Hedgehog/Game/GameObjectSystem.h"
 
 #include "Hedgehog/Game/GOComponents/GOCTinyFsm2.h"
+
+#include "SurfRide/Cast.h"
+
+#include "Hedgehog/UI/GOCSprite.h"
+#include "Hedgehog/UI/GOCUICollider.h"
+#include "Hedgehog/UI/GOCUIComposition.h"
+#include "Hedgehog/UI/Types.h"
+#include "Hedgehog/UI/UIElement.h"
+#include "Hedgehog/UI/UIPanel.h"
+#include "Hedgehog/UI/UIStackPanel.h"
+#include "Hedgehog/UI/UIGridPanel.h"
+#include "Hedgehog/UI/UIListViewElement.h"
 
 // #include "System/Player/PlayerInformation.h"
 // #include "System/Player/Blackboard.h"
