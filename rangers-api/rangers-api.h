@@ -82,6 +82,10 @@
 #include "Hedgehog/Game/GameObjectLayer.h"
 #include "Hedgehog/Game/GameApplication.h"
 #include "Hedgehog/Game/GameManager.h"
+#include "Hedgehog/Game/ObjInfo.h"
+#include "Hedgehog/Game/GameObjectRegistry.h"
+#include "Hedgehog/Game/GOComponentRegistry.h"
+#include "Hedgehog/Game/ObjInfoRegistry.h"
 // #include "Hedgehog/Game/GameUpdateListener.h"
 #include "Hedgehog/Game/GameObjectSystem.h"
 
@@ -93,6 +97,7 @@
 #include "Hedgehog/UI/GOCUICollider.h"
 #include "Hedgehog/UI/GOCUIComposition.h"
 #include "Hedgehog/UI/Types.h"
+#include "Hedgehog/UI/UIObject.h"
 #include "Hedgehog/UI/UIElement.h"
 #include "Hedgehog/UI/UIPanel.h"
 #include "Hedgehog/UI/UIStackPanel.h"

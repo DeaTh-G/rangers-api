@@ -23,10 +23,10 @@ namespace hh::ui {
         uint64_t field_198;
         uint64_t field_1A0;
         uint64_t field_1A8;
-        csl::ut::MoveArray<void*> field_1B0;
-        csl::ut::StringMap<void*> field_1D0;
-        csl::ut::MoveArray<void*> field_1F0;
-        csl::ut::StringMap<void*> field_210;
+        csl::ut::MoveArray<void*> casts;
+        csl::ut::StringMap<void*> castMap;
+        csl::ut::MoveArray<void*> layers;
+        csl::ut::StringMap<void*> layerMap;
     public:
         static GOCSprite* Instantiate(csl::fnd::IAllocator* pAllocator);
     };

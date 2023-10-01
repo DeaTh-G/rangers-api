@@ -1,19 +1,75 @@
 #pragma once
 
 namespace hh::ui {
+    class UIListViewElement;
+
+    class UIListViewItemBase : public UIObject {
+        UIListViewElement* listView;
+        uint64_t unk102;
+        uint64_t unk103;
+        int32_t index;
+        uint16_t unk105;
+        bool unk106;
+    public:
+        UIListViewItemBase(csl::fnd::IAllocator* pAllocator);
+        void SetListViewElement(hh::ui::UIListViewElement* listViewElement);
+        void SetDimensions(const Dimensions& dimensions);
+        virtual void* GetClassId();
+        virtual void Update();
+        virtual void UnkFunc3() {}
+        virtual void UnkFunc4() {}
+    };
+
+    class UIListViewItem : public UIListViewItemBase {
+        struct alignas(8) Unk2 {
+            uint32_t unk1;
+            csl::ut::VariableString unk2;
+            csl::ut::VariableString unk3;
+            csl::ut::VariableString unk4;
+            csl::ut::VariableString unk5;
+            uint32_t unk6;
+            uint64_t unk7;
+            uint32_t unk8;
+        public:
+            void Clear();
+        };
+
+        struct alignas(8) Unk1 {
+            csl::fnd::IAllocator* pAllocator;
+            Unk2 unk1;
+            csl::ut::MoveArray<void*> unk2;
+        public:
+            Unk1(csl::fnd::IAllocator* pAllocator);
+            void Set(const char* str1, const char* str2);
+        };
+
+        csl::ut::MoveArray<void*> unk1;
+        csl::ut::MoveArray<void*> unk2;
+        Unk1 unk3;
+    public:
+        UIListViewItem(csl::fnd::IAllocator* pAllocator, uint64_t unk);
+        void Set(const char* str1, const char* str2);
+        virtual void* GetClassId();
+        virtual void UnkFunc3();
+        virtual void UnkFunc4();
+    };
+
     class UIListViewElement : public UIElement {
         class alignas(8) ScrollController : public fnd::ReferencedObject {
-            uint64_t unk1;
+            uint32_t unk1;
+            uint32_t unk1b;
             uint64_t unk2;
             UIListViewElement* pListView;
             UIPanel* panel;
-            uint32_t unk4;
+            uint16_t unk4;
+            int16_t scrollPosition;
             uint16_t unk5;
             uint16_t documentHeight;
             uint32_t unk6;
             char unk7;
-            uint64_t unk8;
+            uint32_t unk8;
             uint32_t unk9;
+            uint32_t unk10;
         };
         
         class ScissorCastListener : public fnd::ReferencedObject, public SurfRide::CastListener {
@@ -70,16 +126,30 @@ namespace hh::ui {
         };
 
         UIListViewElement();
+        void AddItem(UIListViewItem* item);
+        virtual void GetClassId();
+        virtual void UnkFunc2();
+        virtual void UnkFunc3();
+        virtual void UnkFunc4();
+        virtual void UnkFunc5();
+        virtual bool UnkFunc9();
+        virtual void UnkFunc10();
+        virtual void UnkFunc11();
+        virtual bool CheckSomethingInTheCast() { return true; }
+        virtual void UnkFunc14();
+        virtual void UnkFunc16();
+        virtual void UnkFunc17();
+
         csl::fnd::Delegate<void ()> unk15;
         csl::fnd::Delegate<void ()> unk16;
         csl::fnd::Delegate<void ()> unk17;
         csl::fnd::Delegate<void ()> unk18;
         csl::fnd::Delegate<void ()> unk19;
-        csl::fnd::Delegate<void ()> unk20;
+        csl::fnd::Delegate<void (UIListViewElement*, bool)> onScroll;
         csl::ut::MoveArray<void*> unk21;
         csl::ut::MoveArray<void*> unk22;
-        char unk23;
-        uint32_t unk24;
+        bool unk23;
+        float unk24;
         UIListViewLayout layout;
         csl::ut::MoveArray<void*> unk26;
         csl::ut::MoveArray<void*> unk27;
@@ -90,8 +160,14 @@ namespace hh::ui {
         uint32_t unk31;
         float grabAdjustScrollTime;
         uint32_t unk32;
-        uint32_t unk33;
-        uint32_t unk34;
+        bool unk33;
+        bool scrollEnabled;
+        bool fixedLayout;
+        bool unk34;
         bool unk35;
+        bool unk36;
+        bool unk37;
+        bool unk38;
+        bool unk39;
     };
 }

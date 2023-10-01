@@ -16,5 +16,9 @@ namespace hh::ui {
     public:
         UIGridPanel(csl::fnd::IAllocator* pAllocator);
         void Initialize(const Layout& layout);
+        virtual void LayoutChildren();
+        virtual uint32_t GetWidth();
+        virtual uint32_t GetHeight();
+        virtual void GetChildCount();
     };
 }

@@ -110,3 +110,5 @@ namespace csl::math
 #include "rangers-api.h"
 
 // template class csl::ut::MoveArray<csl::fnd::IAllocator*>;
+template class csl::fnd::Delegate<void ()>;
+template class csl::fnd::Delegate<void (hh::ui::UIListViewElement*, bool)>;
