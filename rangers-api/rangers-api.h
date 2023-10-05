@@ -7,7 +7,8 @@
 #include "External/Lua541/include/lua.hpp"
 
 // Common Sonicteam Library
-#include "Sonicteam/math/math.h"
+#include "cslib/csl/math/math.h"
+
 #include "Sonicteam/System/IAllocator.h"
 #include "cslib/csl/ut/array.h"
 #include "cslib/csl/ut/fixedarray.h"
