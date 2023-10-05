@@ -5,7 +5,7 @@ namespace app
 	class MsgRobChaosEmerald : public hh::fnd::MessageAsyncHandlerInplace<MsgRobChaosEmerald>, public fnd::AppMessage<MsgRobChaosEmerald>
 	{
 	private:
-		inline static uint32_t MessageID = 0x2275;
+		inline static uint32_t MessageID = 0x22D9;
 
 	public:
 		char EmeraldType{};
