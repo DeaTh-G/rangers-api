@@ -39,9 +39,11 @@
 #include "Hedgehog/Game/GameDocument.h"
 #include "Hedgehog/Game/GameUpdateListener.h"
 
+// System Player
+#include "System/Player/Blackboard/Blackboard.h"
+#include "System/Player/Blackboard/BlackboardBattle.h"
+
 #include "System/Player/PlayerInformation.h"
-#include "System/Player/Blackboard.h"
-#include "System/Player/BlackboardBattle.h"
 #include "System/Player/Player.h"
 #include "System/Player/Sonic.h"
 #include "System/Player/PlayerHsmContext.h"
