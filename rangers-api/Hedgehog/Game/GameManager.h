@@ -9,8 +9,8 @@ namespace hh::game
 		inline static GameManager** ms_ppGameDocument = reinterpret_cast<GameManager**>(7 + (size_t)ms_addrStaticGameDocumentUsage + (*(int32_t*)(((char*)ms_addrStaticGameDocumentUsage) + 3)));
 
 		INSERT_PADDING(280);
-		csl::ut::MoveArray<GameObject*> m_Objects{ pAllocator };
-		csl::ut::MoveArray<GameService*> m_Services{ pAllocator };
+		csl::ut::MoveArray<GameObject*> Objects{ pAllocator };
+		csl::ut::MoveArray<GameService*> Services{ pAllocator };
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
 		INSERT_PADDING(32); // csl::ut::MoveArray<hh::game::GameManagerListener> m_ManagerListeners{ pAllocator };
@@ -18,7 +18,7 @@ namespace hh::game
 		INSERT_PADDING(32); // csl::ut::MoveArray<hh::game::ComponentListener> m_ComponentListeners{ pAllocator };
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
-		csl::ut::MoveArray<GameStepListener> m_StepListeners{ pAllocator };
+		csl::ut::MoveArray<GameStepListener> StepListeners{ pAllocator };
 
 		INSERT_PADDING(232);
 
@@ -31,7 +31,7 @@ namespace hh::game
 		template <typename T>
 		T* GetService()
 		{
-			for (auto* pService : m_Services)
+			for (auto* pService : Services)
 			{
 				if (pService == nullptr)
 					continue;
@@ -45,7 +45,7 @@ namespace hh::game
 
 		GameService* GetService(const char* in_pServiceName)
 		{
-			for (auto* pService : m_Services)
+			for (auto* pService : Services)
 			{
 				if (pService == nullptr)
 					continue;
@@ -60,7 +60,7 @@ namespace hh::game
 		template <typename T>
 		T* GetGameObject()
 		{
-			for (auto* pObject : m_Objects)
+			for (auto* pObject : Objects)
 			{
 				if (pObject == nullptr)
 					continue;
@@ -74,7 +74,7 @@ namespace hh::game
 
 		GameObject* GetGameObject(const char* in_pObjectName)
 		{
-			for (auto* pObject : m_Objects)
+			for (auto* pObject : Objects)
 			{
 				if (pObject == nullptr)
 					continue;
