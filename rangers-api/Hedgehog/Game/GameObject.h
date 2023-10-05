@@ -6,13 +6,13 @@ namespace hh::game
 	{
 	public:
 		INSERT_PADDING(24);
-		app::GameDocument* pDocument{};
+		GameManager* pManager{};
 
 		INSERT_PADDING(8);
 		//GameObjectClass* pStaticClass{};
 
 	private:
-		csl::ut::MoveArray<GOComponent*> m_Components{ pAllocator };
+		csl::ut::MoveArray<GOComponent*> Components{ pAllocator };
 
 	public:
 		INSERT_PADDING(64); // Even more Components 2nd and 3rd being GOCPlayerParameter and GOCPlayerBlackboard
@@ -22,7 +22,7 @@ namespace hh::game
 		template <typename T>
 		T* GetGOC()
 		{
-			for (auto* pComponent : m_Components)
+			for (auto* pComponent : Components)
 			{
 				if (pComponent == nullptr)
 					continue;
@@ -34,9 +34,9 @@ namespace hh::game
 			return { nullptr };
 		}
 
-		hh::game::GOComponent* GetGOC(const char* in_pComponentName)
+		GOComponent* GetGOC(const char* in_pComponentName)
 		{
-			for (auto* pComponent : m_Components)
+			for (auto* pComponent : Components)
 			{
 				if (pComponent == nullptr)
 					continue;
@@ -46,17 +46,6 @@ namespace hh::game
 			}
 
 			return { nullptr };
-		}
-
-		template <typename T>
-		T* GetComponent()
-		{
-			return GetGOC<T>();
-		}
-
-		hh::game::GOComponent* GetComponent(const char* in_pComponentName)
-		{
-			return GetGOC(in_pComponentName);
 		}
 	};
 }

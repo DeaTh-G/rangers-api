@@ -1,12 +1,9 @@
 #pragma once
 
-namespace app::player
-{
-	class Sonic;
-}
-
 namespace hh::game
 {
+	class GameObject;
+
 	class alignas(8) ComponentClass
 	{
 	public:
@@ -19,7 +16,7 @@ namespace hh::game
 	{
 	public:
 		INSERT_PADDING(16);
-		app::player::Sonic* pSonic{};
+		GameObject* pOwner{};
 		INSERT_PADDING(24);
 		ComponentClass* pStaticClass{};
 		INSERT_PADDING(48);
