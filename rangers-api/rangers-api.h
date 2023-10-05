@@ -6,10 +6,13 @@
 // Lua 5.4.1
 #include "External/Lua541/include/lua.hpp"
 
-// Common Sonicteam Library
+// Common Sonicteam Math Library
 #include "cslib/csl/math/math.h"
 
-#include "Sonicteam/System/IAllocator.h"
+// Common Sonicteam Foundation Library
+#include "cslib/csl/fnd/IAllocator.h"
+
+// Common Sonicteam Utility Library
 #include "cslib/csl/ut/array.h"
 #include "cslib/csl/ut/fixedarray.h"
 #include "cslib/csl/ut/movearray.h"
