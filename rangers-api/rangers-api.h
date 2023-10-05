@@ -9,10 +9,10 @@
 // Common Sonicteam Library
 #include "Sonicteam/math/math.h"
 #include "Sonicteam/System/IAllocator.h"
-#include "Sonicteam/Utility/collections/Array.h"
-#include "Sonicteam/Utility/collections/FixedArray.h"
-#include "Sonicteam/Utility/collections/MoveArray.h"
-#include "Sonicteam/Utility/collections/StringMap.h"
+#include "cslib/csl/ut/array.h"
+#include "cslib/csl/ut/fixedarray.h"
+#include "cslib/csl/ut/movearray.h"
+#include "cslib/csl/ut/stringmap.h"
 
 #include "Hedgehog/System/hhAllocator.h"
 
@@ -40,6 +40,7 @@
 #include "System/Player/BlackboardBattle.h"
 #include "System/Player/Player.h"
 #include "System/Player/Sonic.h"
+#include "System/Player/PlayerHsmContext.h"
 
 // System Game Object Components
 #include "System/Player/goc/goc_PlayerBlackboard.h"
