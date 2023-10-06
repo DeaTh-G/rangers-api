@@ -68,6 +68,8 @@ namespace hh::game
 		void* unk68;
 		GameObjectClass* pClass;
 		Unk2 unk70;
+		Unk2 unk71;
+		Unk2 unk72;
 		
 		virtual void* GetClassId();
 
@@ -111,6 +113,8 @@ namespace hh::game
 			return GetGOC(in_pComponentName);
 		}
 
+		GameObject(csl::fnd::IAllocator* pAllocator);
 		void AttachComponent(GOComponent& component);
+		void SetForceComponentsFlag(ComponentType type, bool enabled);
 	};
 }

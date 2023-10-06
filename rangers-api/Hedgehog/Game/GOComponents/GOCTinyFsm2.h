@@ -20,9 +20,12 @@ namespace hh::game {
         csl::ut::MoveArray<void*> unk20;
         void* unk21;
         
-		virtual void Update() {
-
-        }
+		virtual void* GetClassId();
+		virtual void Update();
+		virtual void GetDebugInfoMaybe();
+		virtual bool ProcessMessage(fnd::Message& msg);
+		virtual bool fUnk5() { return false; }
+		virtual void OnGOCEvent(GOCEvent event, GameObject& ownerGameObject, void* data);
 
         inline void DispatchFSM(void* e) {
             fsm->Dispatch(targetObject || pOwnerGameObject, e);

@@ -13,7 +13,6 @@ namespace hh::fnd {
         void* unk9;
 
     public:
-        ManagedResource();
-
-    }
+        ManagedResource(csl::fnd::IAllocator* pAllocator);
+    };
 }

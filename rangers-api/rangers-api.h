@@ -31,8 +31,6 @@
 #include "Hedgehog/System/hhAllocator.h"
 #include "Hedgehog/System/SingletonInitNode.h"
 
-#include "Hedgehog/Utility/FSM/StateDesc.h"
-
 // Hedgehog Library
 #include "Hedgehog/Base/System/hhBaseObject.h"
 #include "Hedgehog/Base/System/hhReferencedObject.h"
@@ -42,9 +40,13 @@
 #include "Hedgehog/Base/System/HandleManager.h"
 #include "Hedgehog/Base/System/ReloaderListener.h"
 
+
 // Hedgehog Universe Library
 #include "Hedgehog/Base/Universe/hhMessage.h"
 #include "Hedgehog/Base/Universe/hhMessenger.h"
+
+#include "Hedgehog/Utility/FSM/StateDesc.h"
+#include "Hedgehog/Utility/FSM/State.h"
 
 #include "Hedgehog/Base/Type/hhBaseTypes.h"
 #include "Hedgehog/Base/Type/WorldPosition.h"
@@ -54,6 +56,11 @@
 #include "Hedgehog/Framework/KeyEventHandler.h"
 #include "Hedgehog/Framework/MouseEventHandler.h"
 #include "Hedgehog/Framework/Application.h"
+
+// Resources
+#include "Hedgehog/Resource/ManagedResource.h"
+
+#include "Hedgehog/HID/ActiveDeviceManager.h"
 
 // // // System Messages
 // // #include "System/Messages/MsgRobChaosEmerald.h"
@@ -91,10 +98,15 @@
 // #include "Hedgehog/Game/GameUpdateListener.h"
 #include "Hedgehog/Game/GameObjectSystem.h"
 
+#include "Hedgehog/Game/GOComponents/GOCInput.h"
 #include "Hedgehog/Game/GOComponents/GOCTinyFsm2.h"
+
+#include "Hedgehog/Sound/GOCSound.h"
 
 #include "SurfRide/Cast.h"
 
+#include "Hedgehog/UI/ResSurfRideProject.h"
+#include "Hedgehog/UI/LayerController.h"
 #include "Hedgehog/UI/GOCSprite.h"
 #include "Hedgehog/UI/GOCUICollider.h"
 #include "Hedgehog/UI/GOCUIComposition.h"
@@ -105,6 +117,7 @@
 #include "Hedgehog/UI/UIStackPanel.h"
 #include "Hedgehog/UI/UIGridPanel.h"
 #include "Hedgehog/UI/UIListViewElement.h"
+#include "Hedgehog/UI/UIListener.h"
 
 // #include "System/Player/PlayerInformation.h"
 // #include "System/Player/Blackboard.h"
@@ -146,3 +159,13 @@
 #include "Application/Save/SaveManagerListener.h"
 
 #include "Application/Level/LevelInfo.h"
+
+#include "Application/Sound/CustomSound.h"
+
+#include "Application/UI/UIMusicSelect.h"
+
+
+#include "Application/Player/PlayerHsmContext.h"
+#include "Application/Player/GOCPlayerState.h"
+#include "Application/Player/PlayerStateBase.h"
+#include "Application/Player/States.h"

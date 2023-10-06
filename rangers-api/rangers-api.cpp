@@ -112,3 +112,5 @@ namespace csl::math
 // template class csl::ut::MoveArray<csl::fnd::IAllocator*>;
 template class csl::fnd::Delegate<void ()>;
 template class csl::fnd::Delegate<void (hh::ui::UIListViewElement*, bool)>;
+template class csl::fnd::Delegate<void (hh::ui::UIListViewElement*, hh::ui::ListViewEventArg&)>;
+// template class csl::ut::Pair<app::ui::UIMusicSelect*, void (app::ui::UIMusicSelect::*)(hh::ui::UIListViewElement*, hh::ui::ListViewEventArg&)>;

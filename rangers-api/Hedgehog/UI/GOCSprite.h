@@ -7,9 +7,9 @@ namespace hh::ui {
         hh::fnd::LogData log3;
         uint64_t field_E0;
         uint64_t field_E8;
-        uint64_t field_F0;
-        csl::ut::VariableString field_F8;
-        uint64_t field_108;
+        hh::ui::ResSurfRideProject* projectResource;
+        csl::ut::VariableString projectName;
+        bool field_108;
         uint64_t field_110;
         csl::ut::MoveArray<void*> field_118;
         csl::ut::MoveArray<void*> field_138;
@@ -27,7 +27,21 @@ namespace hh::ui {
         csl::ut::StringMap<void*> castMap;
         csl::ut::MoveArray<void*> layers;
         csl::ut::StringMap<void*> layerMap;
-    public:
+        
         static GOCSprite* Instantiate(csl::fnd::IAllocator* pAllocator);
+    public:
+        struct alignas(8) Config {
+            hh::ui::ResSurfRideProject* projectResource;
+            const char* name;
+            uint32_t unk1;
+            bool unk2;
+            uint32_t unk3;
+            uint32_t unk4;
+            uint32_t unk5;
+            uint32_t unk6;
+            uint32_t unk7;
+        };
+
+        void Initialize(const Config& config);
     };
 }

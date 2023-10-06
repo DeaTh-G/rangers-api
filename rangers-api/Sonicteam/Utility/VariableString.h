@@ -49,6 +49,8 @@ namespace csl::ut
 		{
 			m_pAllocator = pAlloc;
 		}
+
+		VariableString(VariableString&& other);
 		
 		~VariableString()
 		{

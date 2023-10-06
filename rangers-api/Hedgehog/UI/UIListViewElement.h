@@ -54,6 +54,9 @@ namespace hh::ui {
         virtual void UnkFunc4();
     };
 
+    struct ListViewEventArg {
+    };
+
     class UIListViewElement : public UIElement {
         class alignas(8) ScrollController : public fnd::ReferencedObject {
             uint32_t unk1;
@@ -141,7 +144,7 @@ namespace hh::ui {
         virtual void UnkFunc17();
 
         csl::fnd::Delegate<void ()> unk15;
-        csl::fnd::Delegate<void ()> unk16;
+        csl::fnd::Delegate<void (UIListViewElement*, ListViewEventArg&)> unk16;
         csl::fnd::Delegate<void ()> unk17;
         csl::fnd::Delegate<void ()> unk18;
         csl::fnd::Delegate<void ()> unk19;
