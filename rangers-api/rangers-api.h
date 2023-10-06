@@ -29,6 +29,7 @@
 #include "Sonicteam/System/Delegate.h"
 
 #include "Hedgehog/System/hhAllocator.h"
+#include "Hedgehog/System/SingletonInitNode.h"
 
 #include "Hedgehog/Utility/FSM/StateDesc.h"
 
@@ -38,6 +39,7 @@
 #include "Hedgehog/Base/System/hhProperty.h"
 #include "Hedgehog/Base/System/hhCollection.h"
 #include "Hedgehog/Base/System/hhHandle.h"
+#include "Hedgehog/Base/System/HandleManager.h"
 #include "Hedgehog/Base/System/ReloaderListener.h"
 
 // Hedgehog Universe Library

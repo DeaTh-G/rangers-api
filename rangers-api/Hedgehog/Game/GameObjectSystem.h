@@ -12,6 +12,8 @@ namespace hh::game {
         fnd::ThreadSafeTlsfHeapAllocator heapAllocator;
         GameObjectRegistry* pGameObjectRegistry;
         GOComponentRegistry* pGOComponentRegistry;
+
+        static fnd::HandleManager* handleManager;
     public:
         GameObjectSystem(csl::fnd::IAllocator* pAllocator);
 
