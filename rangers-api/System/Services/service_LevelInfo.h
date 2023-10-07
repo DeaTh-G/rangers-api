@@ -10,7 +10,7 @@ namespace app::level
 	public:
 		void* pStageData{};
 		INSERT_PADDING(72);
-		csl::ut::FixedArray<player::PlayerInformation*, 1> playerInfos{};
+		csl::ut::FixedArray<player::PlayerInformation*, 1> pPlayerInfos{};
 		INSERT_PADDING(48);
 		
 		static const char* GetServiceName()
@@ -18,5 +18,4 @@ namespace app::level
 			return ms_pServiceName;
 		}
 	};
-
 }
