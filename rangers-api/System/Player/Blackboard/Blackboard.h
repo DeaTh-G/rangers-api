@@ -22,7 +22,7 @@ namespace app::player
 		template <typename T>
 		T* GetBlackboardContent()
 		{
-			for (auto* pBlackboard : m_Blackboards)
+			for (auto* pBlackboard : Blackboards)
 			{
 				if (pBlackboard == nullptr)
 					continue;
