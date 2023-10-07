@@ -8,7 +8,7 @@ namespace app::player
 		inline static const char* ms_pObjectName = "Sonic";
 
 	public:
-		INSERT_PADDING(16);
+		SonicContext* pContext{};
 
 		static const char* GetObjectName()
 		{
