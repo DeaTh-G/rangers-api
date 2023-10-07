@@ -39,23 +39,29 @@
 #include "Hedgehog/Game/GameManager.h"
 #include "Hedgehog/Game/GameUpdateListener.h"
 
+// Save
+#include "System/Save/SaveManagerListener.h"
+
 // System Player
 #include "System/Player/Blackboard/Blackboard.h"
+#include "System/Player/Blackboard/BlackboardStatus.h"
 #include "System/Player/Blackboard/BlackboardBattle.h"
 
 #include "System/Player/PlayerInformation.h"
-#include "System/Player/Player.h"
-#include "System/Player/Sonic.h"
 #include "System/Player/PlayerHsmContext.h"
+#include "System/Player/PlayerVisual.h"
+#include "System/Player/VisualHuman.h"
+#include "System/Player/VisualSuperSonic.h"
+#include "System/Player/Player.h"
+#include "System/Player/SonicContext.h"
+#include "System/Player/Sonic.h"
 
 // System Game Object Components
 #include "System/Player/goc/goc_PlayerBlackboard.h"
+#include "System/Player/goc/goc_PlayerVisual.h"
 #include "System/Player/goc/goc_PlayerKinematicParams.h"
 
 #include "System/AppResourceManagerListener.h"
-
-// Save
-#include "System/Save/SaveManagerListener.h"
 
 // Services
 #include "System/Services/service_LevelInfo.h"
