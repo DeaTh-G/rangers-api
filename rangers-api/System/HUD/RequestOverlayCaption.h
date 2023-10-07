@@ -7,7 +7,7 @@ namespace app::ui
 		void* m_Unk4{};
 		void* m_Unk5{};
 		int64_t m_Unk6{ 0x80000000 };
-		hh::fnd::ThreadSafeTlsfHeapAllocator* m_pAllocator{ GameDocument::GetSingleton()->pAllocator };
+		hh::fnd::ThreadSafeTlsfHeapAllocator* m_pAllocator{ hh::game::GameManager::GetSingleton()->pAllocator };
 	};
 
 	class RequestOverlayCaption : public RequestOverlayBegin, public RequestOverlayTagReplace, public CaptionInfo
@@ -25,7 +25,7 @@ namespace app::ui
 
 		RequestOverlayCaption()
 		{
-			pAllocator = GameDocument::GetSingleton()->pAllocator;
+			pAllocator = hh::game::GameManager::GetSingleton()->pAllocator;
 		}
 
 		void SetupCaptionInfo(const char* in_pTextName, const char* in_pCueName, float in_Unk2)
