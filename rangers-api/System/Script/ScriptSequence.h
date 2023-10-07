@@ -97,9 +97,9 @@ namespace app
 		int OverlayJobCount;
 		INSERT_PADDING(376);
 
-		GameDocument* GetDocument()
+		hh::game::GameManager* GetManager()
 		{
-			return pManager->pDocument;
+			return pManager->pManager;
 		}
 		
 		void SetCaptionType(int jobCount)
