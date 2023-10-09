@@ -17,5 +17,10 @@ namespace app::level
 		{
 			return ms_pServiceName;
 		}
+
+		PlayerInformation* GetPlayerInformation(size_t in_playerNo = 0) const
+		{
+			return pPlayerInfos[in_playerNo];
+		}
 	};
 }
