@@ -9,8 +9,8 @@ namespace hh::game
 		inline static GameManager** ms_ppGameDocument = reinterpret_cast<GameManager**>(7 + (size_t)ms_addrStaticGameDocumentUsage + (*(int32_t*)(((char*)ms_addrStaticGameDocumentUsage) + 3)));
 
 		INSERT_PADDING(280);
-		csl::ut::MoveArray<GameObject*> Objects{ pAllocator };
-		csl::ut::MoveArray<GameService*> Services{ pAllocator };
+		csl::ut::ObjectMoveArray<GameObject*> Objects{ pAllocator };
+		csl::ut::ObjectMoveArray<GameService*> Services{ pAllocator };
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
 		INSERT_PADDING(32); // csl::ut::MoveArray<hh::game::GameManagerListener> m_ManagerListeners{ pAllocator };
@@ -18,7 +18,7 @@ namespace hh::game
 		INSERT_PADDING(32); // csl::ut::MoveArray<hh::game::ComponentListener> m_ComponentListeners{ pAllocator };
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
 		INSERT_PADDING(32); // csl::ut::MoveArray<>
-		csl::ut::MoveArray<GameStepListener> StepListeners{ pAllocator };
+		csl::ut::ObjectMoveArray<GameStepListener> StepListeners{ pAllocator };
 
 		INSERT_PADDING(232);
 

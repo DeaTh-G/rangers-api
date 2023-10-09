@@ -25,6 +25,11 @@ namespace hh::fnd
 		virtual void fUnk4();
 		virtual int fUnk5() { return 1; }
 
+		MessageManager* GetMessageManager() const
+		{
+			return pManager;
+		}
+
 		void SendMessageImmToPlayer(hh::game::GameManager* in_pGameDocument, int in_playerNo, Message& in_rMessage)
 		{
 			ms_fpSendMessageImmToPlayer(this, in_pGameDocument, in_playerNo, in_rMessage);

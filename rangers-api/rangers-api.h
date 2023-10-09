@@ -13,20 +13,24 @@
 #include "cslib/csl/fnd/IAllocator.h"
 
 // Common Sonicteam Utility Library
-#include "cslib/csl/ut/array.h"
 #include "cslib/csl/ut/fixedarray.h"
 #include "cslib/csl/ut/movearray.h"
+#include "cslib/csl/ut/objectmovearray.h"
 #include "cslib/csl/ut/stringmap.h"
 
 #include "Hedgehog/System/hhAllocator.h"
 
 // Hedgehog Library
+#include "Hedgehog/Base/Universe/hhHandleManager.h"
 #include "Hedgehog/Base/System/hhBaseObject.h"
 #include "Hedgehog/Base/System/hhReferencedObject.h"
 
 // Hedgehog Universe Library
 #include "Hedgehog/Base/Universe/hhMessage.h"
 #include "Hedgehog/Base/Universe/hhMessenger.h"
+#include "Hedgehog/Base/Universe/hhMessageManager.h"
+
+#include "Hedgehog/Base/Universe/hhHandleManager.inl"
 
 // System Messages
 #include "System/Messages/MsgRobChaosEmerald.h"

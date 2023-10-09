@@ -2,15 +2,13 @@
 
 namespace csl::ut
 {
-	static constexpr size_t SIGN_BIT = ((1u << ((sizeof(size_t) * CHAR_BIT) - 1)));
-
 	template<typename T>
-	class MoveArray
+	class ObjectMoveArray
 	{
 	protected:
 		T* m_pBuffer{};
-		uint32_t m_length{};
-		uint32_t m_capacity{};
+		size_t m_length{};
+		size_t m_capacity{};
 		fnd::IAllocator* m_pAllocator{};
 
 		T* get(size_t i) const
@@ -86,22 +84,22 @@ namespace csl::ut
 			this->m_pBuffer = static_cast<T*>(new_buffer);
 		}
 
-		MoveArray()
+		ObjectMoveArray()
 		{
 
 		}
 
-		MoveArray(fnd::IAllocator* in_pAllocator) : m_pAllocator(in_pAllocator)
+		ObjectMoveArray(fnd::IAllocator* in_pAllocator) : m_pAllocator(in_pAllocator)
 		{
 
 		}
 
-		MoveArray(size_t in_capacity, fnd::IAllocator* in_pAllocator) : MoveArray(in_pAllocator)
+		ObjectMoveArray(size_t in_capacity, fnd::IAllocator* in_pAllocator) : MoveArray(in_pAllocator)
 		{
 			reserve(in_capacity);
 		}
 
-		~MoveArray()
+		~ObjectMoveArray()
 		{
 			if (m_pAllocator && !isInplace())
 				m_pAllocator->Free(this->m_pBuffer);
@@ -165,7 +163,7 @@ namespace csl::ut
 				this->m_length = 0;
 		}
 
-		void swap(MoveArray& rArray)
+		void swap(ObjectMoveArray& rArray)
 		{
 			auto* tempBuffer = this->m_pBuffer;
 			auto tempLen = this->m_length;

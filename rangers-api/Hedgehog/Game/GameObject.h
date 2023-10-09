@@ -12,7 +12,7 @@ namespace hh::game
 		//GameObjectClass* pStaticClass{};
 
 	private:
-		csl::ut::MoveArray<GOComponent*> Components{ pAllocator };
+		csl::ut::ObjectMoveArray<GOComponent*> Components{ pAllocator };
 
 	public:
 		INSERT_PADDING(64); // Even more Components 2nd and 3rd being GOCPlayerParameter and GOCPlayerBlackboard
