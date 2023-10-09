@@ -14,5 +14,6 @@ namespace hh::fnd
 
 	class RefByHandleObject : public ReferencedObject
 	{
+		int Handle{};
 	};
 }

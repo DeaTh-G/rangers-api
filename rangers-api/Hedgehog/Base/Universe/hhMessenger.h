@@ -7,6 +7,8 @@ namespace hh::game
 
 namespace hh::fnd
 {
+	class MessageManager;
+
 	class Messenger : public RefByHandleObject
 	{
 	private:
@@ -14,8 +16,7 @@ namespace hh::fnd
 		inline static FUNCTION_PTR(void, __fastcall, ms_fpSendMessageImmToPlayer, ms_addrSendMessageImmToPlayer, Messenger*, hh::game::GameManager*, int, Message&);
 
 	public:
-		void* pUnk1;
-		void* pUnk2;
+		MessageManager* pManager;
 		void* pUnk3;
 
 		virtual void fUnk1();
