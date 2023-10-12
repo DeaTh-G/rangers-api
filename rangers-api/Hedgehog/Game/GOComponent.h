@@ -15,7 +15,7 @@ namespace hh::game
 	class GOComponent : public hh::fnd::RefByHandleObject
 	{
 	public:
-		INSERT_PADDING(16);
+		INSERT_PADDING(8);
 		GameObject* pOwner{};
 		INSERT_PADDING(24);
 		ComponentClass* pStaticClass{};
