@@ -48,8 +48,9 @@
 
 // System Player
 #include "System/Player/Blackboard/Blackboard.h"
-#include "System/Player/Blackboard/BlackboardStatus.h"
 #include "System/Player/Blackboard/BlackboardBattle.h"
+#include "System/Player/Blackboard/BlackboardItem.h"
+#include "System/Player/Blackboard/BlackboardStatus.h"
 
 #include "System/Player/PlayerInformation.h"
 #include "System/Player/PlayerHsmContext.h"
@@ -70,6 +71,7 @@
 // Services
 #include "System/Services/service_LevelInfo.h"
 #include "System/Services/service_PhotoMode.h"
+#include "System/Services/service_ScriptSequenceManager.h"
 #include "System/Services/service_UIOverlay.h"
 
 // HUD

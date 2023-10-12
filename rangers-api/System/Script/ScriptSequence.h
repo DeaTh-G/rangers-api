@@ -1,10 +1,5 @@
 #pragma once
 
-namespace app
-{
-	class ScriptSequence;
-}
-
 template <int (app::ScriptSequence::*callback)(lua_State*)>
 int RegisterCallback(lua_State* in_pThis)
 {
@@ -73,11 +68,6 @@ namespace app
 			}
 		};
 	}
-
-	class ScriptSequenceManager : public hh::game::GameService, hh::game::GameStepListener, app::save::SaveManagerListener
-	{
-		INSERT_PADDING(232);
-	};
 
 	class ScriptSequence : public hh::fnd::Messenger, hh::game::GameStepListener
 	{
