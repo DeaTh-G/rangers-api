@@ -48,8 +48,9 @@
 
 // System Player
 #include "System/Player/Blackboard/Blackboard.h"
-#include "System/Player/Blackboard/BlackboardStatus.h"
 #include "System/Player/Blackboard/BlackboardBattle.h"
+#include "System/Player/Blackboard/BlackboardItem.h"
+#include "System/Player/Blackboard/BlackboardStatus.h"
 
 #include "System/Player/PlayerInformation.h"
 #include "System/Player/PlayerHsmContext.h"
