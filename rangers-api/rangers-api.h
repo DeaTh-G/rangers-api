@@ -69,6 +69,7 @@
 #include "System/AppResourceManagerListener.h"
 
 // Services
+#include "System/Services/service_StageInfo.h"
 #include "System/Services/service_LevelInfo.h"
 #include "System/Services/service_PhotoMode.h"
 #include "System/Services/service_ScriptSequenceManager.h"

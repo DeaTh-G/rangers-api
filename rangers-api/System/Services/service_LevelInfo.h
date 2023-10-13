@@ -8,7 +8,7 @@ namespace app::level
 		inline static const char* ms_pServiceName = "LevelInfo";
 		
 	public:
-		void* pStageData{};
+		app::level::StageData* pStageData{};
 		INSERT_PADDING(72);
 		csl::ut::FixedArray<PlayerInformation*, 1> pPlayerInfos{};
 		INSERT_PADDING(48);
