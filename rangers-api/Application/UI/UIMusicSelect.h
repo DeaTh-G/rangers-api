@@ -3,9 +3,9 @@
 namespace app::ui {
     class UIMusicSelect : public hh::game::GameObject, public hh::ui::UIListener, public hh::hid::ActiveDeviceManagerListener, public app::snd::CustomSoundListener {
         hh::ui::LayerController* layerController;
-        void* refBtn;
-        void* refPcBtnT;
-        void* refPcBtnB;
+        hh::ui::LayerController* refBtn;
+        hh::ui::LayerController* refPcBtnT;
+        hh::ui::LayerController* refPcBtnB;
         float float1;
         bool field_284;
         hh::game::GOCInput* gocInput;
@@ -17,9 +17,11 @@ namespace app::ui {
         bool field_2DC;
         bool inlooporloop;
         bool field_2E0;
-        bool field_2E1;
+        bool someMusicSelectFlags;
         bool field_2E2;
-        uint32_t field_2E4;
+        bool field_2E3;
+        bool field_2E4;
+        uint32_t field_2E6;
         uint32_t field_2E8;
         uint32_t field_2EC;
         uint32_t field_2F4;

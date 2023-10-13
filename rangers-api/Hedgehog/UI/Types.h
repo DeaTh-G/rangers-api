@@ -17,4 +17,9 @@ namespace hh::ui {
         uint16_t x;
         uint16_t y;
     };
+
+    struct Rectangle {
+        Position position;
+        Dimensions dimensions;
+    };
 }

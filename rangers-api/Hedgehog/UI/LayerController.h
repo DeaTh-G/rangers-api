@@ -1,5 +1,24 @@
 #pragma once
 
 namespace hh::ui {
-    class LayerController {};
+    class LayerController : public fnd::ReferencedObject {
+        GOCSprite* gocSprite;
+        fnd::Handle<SurfRideLayerHandle> layer;
+        uint16_t id;
+        char unk1;
+        csl::ut::MoveArray<void*> unk2;
+        bool unk3;
+        fnd::Handle<SurfRideCastHandle> posCast;
+        uint32_t unk5;
+        uint64_t unk6;
+        csl::ut::MoveArray<void*> unk7;
+    
+    public:
+        LayerController(csl::fnd::IAllocator* pAllocator, GOCSprite* gocSprite, SurfRide::Layer* layer, uint16_t id);
+        SurfRide::Cast* GetCast(const char* name);
+        SurfRide::Layer* GetLayer();
+        LayerController* GetChildLayer(const char* refCastName, uint16_t id);
+        void SetVisibility(bool visible);
+        void StartAnimation(const char* name, float initialFrame);
+    };
 }

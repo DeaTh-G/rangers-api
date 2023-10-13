@@ -10,9 +10,9 @@ namespace app::player {
     };
 
     class StateJump : public StateJumpBase {
-        virtual void ProcessMessage(void* hsm, const hh::fnd::Message& message);
-        virtual void UnkFunc12();
-        virtual void UnkFunc13();
-        virtual void Update();
+        virtual bool ProcessMessage(void* hsm, const hh::fnd::Message& message);
+        virtual void UnkFunc12(void* hsm, uint32_t unkParam2);
+        virtual void UnkFunc13(void* hsm, uint32_t unkParam2);
+        virtual bool Update(void* hsm, float unkParam2);
     };
 }

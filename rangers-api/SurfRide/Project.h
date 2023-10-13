@@ -2,8 +2,8 @@
 
 namespace SurfRide
 {
-    struct SRS_SCENE;
-    class Scene;
+    // struct SRS_SCENE;
+    // class Scene;
 
     struct SRS_PROJECT
     {
@@ -22,49 +22,61 @@ namespace SurfRide
         void* pUserData{};
     };
 
-    class Project : public Base
+    class Project : public ReferencedObject
     {
+        void LoadTextureListChunk(void* data, BinaryData& binaryData);
+        void LoadProjectChunk(void* data, BinaryData& binaryData, bool cloneBinaryData);
     public:
-        Camera Camera{};
-        SRS_PROJECT* pBinaryProject{};
-        int RefCount{};
-        void* pTextureLists{};
-        ReferenceCount<Scene>* prcScenes{};
-        int SceneCount{};
-        ReferenceCount<BinaryData> rcBinaryData{};
-        bool OwnsBinaryData{};
+        // Camera Camera{};
+        const SRS_PROJECT* pProjectData;
+        void* pTextureLists;
+        uint32_t textureListCount;
+        csl::ut::MoveArray<void*> scenes;
+        BinaryData* binaryData;
+        void* pBinaryDataData;
+        // ReferenceCount<Scene>* prcScenes{};
+        // int SceneCount{};
+        // ReferenceCount<BinaryData> rcBinaryData{};
+        // bool OwnsBinaryData{};
 
-        void IncrementReferenceCount()
-        {
-            RefCount++;
-        }
+        Project();
+        static Project* Instantiate(const BinaryData& binaryData, bool cloneBinaryData);
 
-        void DecrementReferenceCount()
-        {
-            RefCount--;
-        }
+        SRS_CAMERA* GetCameraData();
 
-        int GetReferenceCount()
-        {
-            return RefCount;
-        }
+        Scene* GetScene(const char* name);
 
-        void DeleteData()
-        {
+        // void IncrementReferenceCount()
+        // {
+        //     RefCount++;
+        // }
 
-        }
+        // void DecrementReferenceCount()
+        // {
+        //     RefCount--;
+        // }
 
-        void Cleanup()
-        {
-            if (OwnsBinaryData)
-                DeleteData();
-        }
+        // int GetReferenceCount()
+        // {
+        //     return RefCount;
+        // }
 
-        const char* GetName() const
-        {
-            return pBinaryProject->pName;
-        }
+        // void DeleteData()
+        // {
 
-        const SurfRide::ReferenceCount<Scene> GetScene(const char* in_pSceneName) const;
+        // }
+
+        // void Cleanup()
+        // {
+        //     if (OwnsBinaryData)
+        //         DeleteData();
+        // }
+
+        // const char* GetName() const
+        // {
+        //     return pBinaryProject->pName;
+        // }
+
+        // const SurfRide::ReferenceCount<Scene> GetScene(const char* in_pSceneName) const;
     };
 }

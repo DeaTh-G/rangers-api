@@ -2,95 +2,99 @@
 
 namespace SurfRide
 {
-	class Layer;
-	class Transform;
-	class SRS_TRS_BASE;
-	class SRS_MOTION;
-	class SRS_TRACK;
-	class DrawInterface;
-	class SRS_CELL3D;
-	class TextureList;
+	// class Layer;
+	// class Transform;
+	// class SRS_TRS_BASE;
+	// class SRS_MOTION;
+	// class SRS_TRACK;
+	// class DrawInterface;
+	// class SRS_CELL3D;
+	// class TextureList;
 
 	struct SRS_CASTNODE;
 
-	class Cast : public Base
-	{
-	public:
-		virtual Color GetLocalMaterialColor() const;
-		virtual Color GetGlobalMaterialColor() const;
-		virtual void SetLocalMaterialColor(const Color& in_rColor);
-		virtual Color GetLocalIlluminationColor() const;
-		virtual Color GetGlobalIlluminationColor() const;
-		virtual void SetLocalIlluminationColor(const Color& in_rColor);
-		virtual bool GetLocalDisplayFlag() const;
-		virtual bool GetGlobalDIsplayFlag() const;
-		virtual void SetLocalDisplayFlag(bool in_displayFlag);
-		virtual ~Cast() = default;
-		virtual void CalcMotion(float in_unk, float in_unk2, bool in_unk3, bool in_unk4, const SRS_MOTION* in_pMotion);
-		virtual void MakeCellData(bool in_unk, Transform* in_pTransform, void* in_pUnk2);
-		virtual void Update(float in_deltaTime, const Transform* in_pTransform, const Cast* in_pCast, Transform* in_pTransform2, void* in_pUnk);
-		virtual void UpdateParentsAndThisTransformRecursively();
-		virtual void UpdateParentsTransformRecursively();
-		virtual void UpdateThis(float in_deltaTime, const Transform* in_pTransform, const Cast* in_pCast, Transform* in_pTransform2, void* in_pUnk);
-		virtual void Draw(DrawInterface* in_pInterface, Transform* in_pTransform, void* in_pUnk);
-		virtual Transform* GetTransform();
-		virtual void CalcTrackTypeWidth(float in_unk, const SRS_TRACK* in_pTrack);
-		virtual void CalcTrackTypeHeight(float in_unk, const SRS_TRACK* in_pTrack);
-		virtual void CalcTrackTypeCropIndex0(float in_unk, const SRS_TRACK* in_pTrack);
-		virtual void CalcTrackTypeCropIndex1(float in_unk, const SRS_TRACK* in_pTrack);
-		virtual int GetCellCount() const;
-		virtual void InitializeTransformFromLayerBuffer(Transform* in_pTransform);
-		virtual void CopyTransformToLayerBuffer(Transform* in_pTransform, Transform* out_pTransform, bool in_unk);
-		virtual void CopyCellToLayerBuffer(void* in_pCell, void* out_pCell, uint in_unk);
-		virtual void* GetCell() const;
-		virtual void EntryStateCallBack(void (*)(const SRS_CELL3D& in_rCell, TextureList** in_ppTextureList));
-		virtual void DeleteStateCallBack();
+	// class Cast : public Base
+	// {
+	// public:
+	// 	virtual Color GetLocalMaterialColor() const;
+	// 	virtual Color GetGlobalMaterialColor() const;
+	// 	virtual void SetLocalMaterialColor(const Color& in_rColor);
+	// 	virtual Color GetLocalIlluminationColor() const;
+	// 	virtual Color GetGlobalIlluminationColor() const;
+	// 	virtual void SetLocalIlluminationColor(const Color& in_rColor);
+	// 	virtual bool GetLocalDisplayFlag() const;
+	// 	virtual bool GetGlobalDIsplayFlag() const;
+	// 	virtual void SetLocalDisplayFlag(bool in_displayFlag);
+	// 	virtual ~Cast() = default;
+	// 	virtual void CalcMotion(float in_unk, float in_unk2, bool in_unk3, bool in_unk4, const SRS_MOTION* in_pMotion);
+	// 	virtual void MakeCellData(bool in_unk, Transform* in_pTransform, void* in_pUnk2);
+	// 	virtual void Update(float in_deltaTime, const Transform* in_pTransform, const Cast* in_pCast, Transform* in_pTransform2, void* in_pUnk);
+	// 	virtual void UpdateParentsAndThisTransformRecursively();
+	// 	virtual void UpdateParentsTransformRecursively();
+	// 	virtual void UpdateThis(float in_deltaTime, const Transform* in_pTransform, const Cast* in_pCast, Transform* in_pTransform2, void* in_pUnk);
+	// 	virtual void Draw(DrawInterface* in_pInterface, Transform* in_pTransform, void* in_pUnk);
+	// 	virtual Transform* GetTransform();
+	// 	virtual void CalcTrackTypeWidth(float in_unk, const SRS_TRACK* in_pTrack);
+	// 	virtual void CalcTrackTypeHeight(float in_unk, const SRS_TRACK* in_pTrack);
+	// 	virtual void CalcTrackTypeCropIndex0(float in_unk, const SRS_TRACK* in_pTrack);
+	// 	virtual void CalcTrackTypeCropIndex1(float in_unk, const SRS_TRACK* in_pTrack);
+	// 	virtual int GetCellCount() const;
+	// 	virtual void InitializeTransformFromLayerBuffer(Transform* in_pTransform);
+	// 	virtual void CopyTransformToLayerBuffer(Transform* in_pTransform, Transform* out_pTransform, bool in_unk);
+	// 	virtual void CopyCellToLayerBuffer(void* in_pCell, void* out_pCell, uint in_unk);
+	// 	virtual void* GetCell() const;
+	// 	virtual void EntryStateCallBack(void (*)(const SRS_CELL3D& in_rCell, TextureList** in_ppTextureList));
+	// 	virtual void DeleteStateCallBack();
 
-		INSERT_PADDING(4);
-		Transform* pTransform{};
-		SRS_TRS_BASE* pBinaryTransform{};
-		INSERT_PADDING(4); // ReferenceCount<Blur>;
-		INSERT_PADDING(4); // ReferenceCount<Reflect>;
-		INSERT_PADDING(4);
-		SRS_CASTNODE* pCastNode{};
-		int RefCount{};
-		Layer* pParentLayer{};
-		INSERT_PADDING(8);
-		ReferenceCount<Cast> rcUnk1{};
-		ReferenceCount<Cast> rcUnk2{};
-		ReferenceCount<Cast> rcUnk3{};
-		int Flags{};
-		ReferenceCount<BinaryData> rcBinaryData{};
-		INSERT_PADDING(1);
-		bool OwnsBinaryData{};
-		INSERT_PADDING(6);
+	// 	INSERT_PADDING(4);
+	// 	Transform* pTransform{};
+	// 	SRS_TRS_BASE* pBinaryTransform{};
+	// 	INSERT_PADDING(4); // ReferenceCount<Blur>;
+	// 	INSERT_PADDING(4); // ReferenceCount<Reflect>;
+	// 	INSERT_PADDING(4);
+	// 	SRS_CASTNODE* pCastNode{};
+	// 	int RefCount{};
+	// 	Layer* pParentLayer{};
+	// 	INSERT_PADDING(8);
+	// 	ReferenceCount<Cast> rcUnk1{};
+	// 	ReferenceCount<Cast> rcUnk2{};
+	// 	ReferenceCount<Cast> rcUnk3{};
+	// 	int Flags{};
+	// 	ReferenceCount<BinaryData> rcBinaryData{};
+	// 	INSERT_PADDING(1);
+	// 	bool OwnsBinaryData{};
+	// 	INSERT_PADDING(6);
 
-		void IncrementReferenceCount()
-		{
-			RefCount++;
-		}
+	// 	void IncrementReferenceCount()
+	// 	{
+	// 		RefCount++;
+	// 	}
 
-		void DecrementReferenceCount()
-		{
-			RefCount--;
-		}
+	// 	void DecrementReferenceCount()
+	// 	{
+	// 		RefCount--;
+	// 	}
 
-		int GetReferenceCount()
-		{
-			return RefCount;
-		}
+	// 	int GetReferenceCount()
+	// 	{
+	// 		return RefCount;
+	// 	}
 
-		void DeleteData()
-		{
-			SrFree(this);
-		}
+	// 	void DeleteData()
+	// 	{
+	// 		SrFree(this);
+	// 	}
 
-		bool Cleanup()
-		{
-			if (OwnsBinaryData)
-				DeleteData();
-		}
-	};
+	// 	bool Cleanup()
+	// 	{
+	// 		if (OwnsBinaryData)
+	// 			DeleteData();
+	// 	}
+	// };
+
+	// struct Unk {
+	// 	csl::ut::MoveArray<void*> unk1;
+	// };
 
 	struct SRS_LAYER
 	{
@@ -106,52 +110,72 @@ namespace SurfRide
 		void* pUserData{};
 	};
 
-	class Layer : public Base
+	class Cast;
+	class ReferenceCast;
+	class Scene;
+	class Layer : public ReferencedObject
 	{
 	public:
-		SRS_LAYER* pBinaryLayer{};
-		int RefCount{};
-		Scene* pOwner{};
-		ReferenceCount<Cast>* prcCasts{};
-		int CastCount{};
-		INSERT_PADDING(12) {};
-		INSERT_PADDING(4) {}; // ReferenceCount<Cast> rcCastBegin{};
-		INSERT_PADDING(4) {}; // ReferenceCount<Cast> rcCastEnd{};
-		int CurrentAnimationIndex{};
-		float Unk8{};
-		float Unk9{};
-		float Unk10{};
-		float AnimationFrameCount{};
-		INSERT_PADDING(8) {};
-		int Flags{};
-		void* pBinaryData{};
-		bool OwnsBinaryData{};
-		bool Unk1{};
-		bool Unk2{};
-		bool Unk3{};
-		bool Unk4{};
-		bool IsAnimationEnd{};
-		bool Unk6{};
-		int Unk7{};
+		struct Unk2 {
+			csl::math::Vector4 translation;
+			uint32_t rotationX;
+			uint32_t rotationY;
+			uint32_t rotationZ;
+			csl::math::Vector4 scale;
+			csl::ut::Color<uint8_t> materialColor;
+			csl::ut::Color<uint8_t> illuminationColor;
+			int32_t unk7;
+			int32_t unk8;
+			uint16_t unk9;
+			uint32_t unk10[13];
+			Layer* layer;
+			uint64_t unk16;
+			uint64_t unk17;
+			csl::math::Matrix44 unk18;
+			
+			Unk2(Layer* layer);
+		};
 
-	private:
-		inline static FUNCTION_PTR(void, __thiscall, ms_fpCtor, ASLR(0x00C639C0), Layer*, SRS_LAYER*, Scene*, void** in_pBinaryData);
+		csl::ut::MoveArray<void*> unk1;
+		const SRS_LAYER* layerData;
+		csl::ut::VariableString name;
+		Scene* scene;
+		ReferenceCast* referenceCast;
+		csl::ut::MoveArray<Cast*> casts;
+		csl::ut::MoveArray<void*> unk5;
+		csl::ut::MoveArray<Cast*> animatingCasts;
+		csl::ut::MoveArray<void*> unk7;
+		csl::ut::MoveArray<void*> unk8;
+		csl::ut::StringMap<Cast*> castsByName;
+		uint32_t currentAnimationIndex;
+		float currentFrame;
+		float currentFrame2;
+		float startFrame;
+		float endFrame;
+		float unk11a;
+		float currentFrame3;
+		uint32_t unk13;
+		uint32_t flags;
+		bool atAnimationStart;
+		bool unk14b;
+		bool isLooping;
+		bool dontLoop;
+		bool atAnimationEnd;
+		bool playInReverse;
+		bool unk16;
+		uint32_t unk17;
+		uint32_t unk18;
+		uint32_t unk19;
+		Unk2 unk20;
 
-	public:
-		Layer(SRS_LAYER* in_pBinaryLayer, Scene* in_pScene, void** in_pBinaryData)
-		{
-			ms_fpCtor(this, in_pBinaryLayer, in_pScene, in_pBinaryData);
-		}
-
-		Layer()
-		{
-
-		}
+		Layer(const SRS_LAYER& layerData, Scene* scene);
 
 		const char* GetName() const
 		{
 			return pBinaryLayer->pName;
 		}
+
+		Cast* GetCast(const char* name);
 
 		void IncrementReferenceCount()
 		{
@@ -179,7 +203,7 @@ namespace SurfRide
 				DeleteData();
 		}
 
-		SRS_ANIMATION* GetAnimation()
+		SRS_ANIMATION* GetCurrentAnimation()
 		{
 			if (pBinaryLayer->pAnimations)
 				pBinaryLayer->pAnimations[CurrentAnimationIndex];
@@ -187,19 +211,21 @@ namespace SurfRide
 			return pBinaryLayer->pAnimations;
 		}
 
+		void SetAnimation(int animationId);
+
 		int GetAnimationID() const
 		{
 			return pBinaryLayer->pAnimations[CurrentAnimationIndex].ID;
 		}
 
-		int GetAnimationID(const char* in_pAnimationName) const
+		int GetAnimationID(const char* name) const
 		{
 			if (!pBinaryLayer->AnimationCount)
 				return -1;
 		
 			for (size_t i = 0; i < pBinaryLayer->AnimationCount; i++)
 			{
-				if (strcmp(pBinaryLayer->pAnimations[i].pName, in_pAnimationName) == 0)
+				if (strcmp(pBinaryLayer->pAnimations[i].pName, name) == 0)
 					return pBinaryLayer->pAnimations[i].ID;
 			}
 
@@ -214,18 +240,13 @@ namespace SurfRide
 				Flags &= ~0x100;
 		}
 
-		void SetRepeatFlag(bool in_repeat)
-		{
-			Unk3 = in_repeat;
-			Unk4 = in_repeat;
-		}
+		bool StartAnimation(int animationId, float initialFrame, bool playInReverse);
+		bool StartAnimation(int animationId);
+		void SetAnimationFrame(float frame);
 
-		void SetCurrentFrame(float in_frame)
-		{
-			Unk8 = in_frame;
-			Unk9 = in_frame;
-			Unk1 = true;
-			IsAnimationEnd = false;
-		}
+	private:
+		void StartCurrentAnimation();
+		void InitializeAnimation(SRS_ANIMATION* animation);
+		void UpdateAnimation(float timestep);
 	};
 }

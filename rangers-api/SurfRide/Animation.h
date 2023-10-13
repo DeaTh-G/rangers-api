@@ -2,7 +2,7 @@
 
 namespace SurfRide
 {
-	enum SRE_CURVE_TYPE : ushort
+	enum SRE_CURVE_TYPE : uint16_t
 	{
 		eCurveType_TranslationX,
 		eCurveType_TranslationY,
@@ -51,44 +51,46 @@ namespace SurfRide
 		eCurveType_IlluminationColorA,
 	};
 
-	union SRU_FRAME_TYPE
-	{
-		int Int;
-		bool Boolean;
-		char Character;
-		float Float;
-		Color Color;
-	};
+	// TODO: parser doesn't understand unions yet
+	// union SRU_FRAME_TYPE
+	// {
+	// 	int Int;
+	// 	bool Boolean;
+	// 	char Character;
+	// 	float Float;
+	// 	csl::ut::Color<uint8_t> Color;
+	// };
 
 	struct SRS_KEYFRAME
 	{
-		int Frame{};
-		SRU_FRAME_TYPE Value{};
+		uint32_t Frame{};
+		// SRU_FRAME_TYPE Value{};
+		uint32_t Value{};
 	};
 
 	struct SRS_TRACK
 	{
 		SRE_CURVE_TYPE TrackType{};
-		short KeyCount{};
-		uint Flags{};
-		uint FirstFrame{};
-		uint LastFrame{};
+		uint16_t KeyCount{};
+		uint32_t Flags{};
+		uint32_t FirstFrame{};
+		uint32_t LastFrame{};
 		SRS_KEYFRAME* pKeyFrame{};
 	};
 
 	struct SRS_MOTION
 	{
-		ushort CastId{};
-		short TrackCount{};
+		uint16_t CastId{};
+		uint16_t TrackCount{};
 		SRS_TRACK* pTracks{};
 	};
 
-	struct alignas(4) SRS_ANIMATION
+	struct SRS_ANIMATION
 	{
 		const char* pName{};
-		int ID{};
-		int LinkCount{};
-		int FrameCount{};
+		uint32_t ID{};
+		uint32_t LinkCount{};
+		uint32_t FrameCount{};
 		SRS_MOTION* pLinks{};
 		void* pUserData{};
 		bool IsLooping{};

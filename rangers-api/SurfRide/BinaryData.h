@@ -2,38 +2,39 @@
 
 namespace SurfRide
 {
-	class BinaryData : public Base
-	{
+	class BinaryData : public ReferencedObject {
+		void* pData{};
 	public:
-		virtual ~BinaryData() = default;
+		BinaryData(void* pData): pData(pData) {}
 
-		void* pBinaryData{};
-		int RefCount{};
-
-		void IncrementReferenceCount()
-		{
-			RefCount++;
+		void* GetSWIFData() {
+			return pData == nullptr || *reinterpret_cast<uint32_t*>(pData) != 'FIWS' ? nullptr : pData;
 		}
 
-		void DecrementReferenceCount()
-		{
-			RefCount--;
-		}
+		// void IncrementReferenceCount()
+		// {
+		// 	RefCount++;
+		// }
 
-		int GetReferenceCount()
-		{
-			return RefCount;
-		}
+		// void DecrementReferenceCount()
+		// {
+		// 	RefCount--;
+		// }
 
-		void DeleteData()
-		{
+		// uint16_t GetReferenceCount()
+		// {
+		// 	return RefCount;
+		// }
 
-		}
+		// void DeleteData()
+		// {
 
-		void Cleanup()
-		{
-			if (pBinaryData)
-				DeleteData();
-		}
+		// }
+
+		// void Cleanup()
+		// {
+		// 	if (pData)
+		// 		DeleteData();
+		// }
 	};
 }

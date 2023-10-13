@@ -2,8 +2,8 @@
 
 namespace SurfRide
 {
-	struct SRS_LAYER;
-	class Layer;
+	// struct SRS_LAYER;
+	// class Layer;
 
 	struct SRS_SCENE
 	{
@@ -16,60 +16,71 @@ namespace SurfRide
 		short CurrentCameraIndex{};
 		SRS_CAMERA* pCameras{};
 		int BackgroundColor{};
-		Math::Vector2 Resolution{};
+		csl::math::Vector2 Resolution{};
 		void* pUserData{};
 	};
 
-	class Scene : public Base
+	class Project;
+	class Scene : public ReferencedObject
 	{
+		SRS_SCENE* sceneData;
+		Project* project;
+		Camera camera;
+		csl::ut::MoveArray<Layer*> layers;
+		uint32_t unk1;
+		uint32_t flags;
+
 	public:
-		SRS_SCENE* pBinaryScene{};
-		int RefCount{};
-		Camera Camera{};
-		int CurrentCameraIndex{};
-		Project* pOwner{};
-		ReferenceCount<Layer>* prcLayers{};
-		int LayerCount{};
-		int Priority{};
-		Math::Vector2 Resolution{ 1.0f, 1.0f };
-		INSERT_PADDING(4) {};
-		bool IsMultiResolutionProcess{};
-		int Flags{};
-		ReferenceCount<BinaryData> rcBinaryData{};
-		bool OwnsBinaryData{};
-		INSERT_PADDING(7);
+		Scene(const SRS_SCENE& sceneData, Project* project);
 
-		void IncrementReferenceCount()
-		{
-			RefCount++;
-		}
+		Layer* GetLayer(const char* layers);
+		// SRS_SCENE* pBinaryScene{};
+		// int RefCount{};
+		// Camera Camera{};
+		// int CurrentCameraIndex{};
+		// Project* pOwner{};
+		// ReferenceCount<Layer>* prcLayers{};
+		// int LayerCount{};
+		// int Priority{};
+		// Math::Vector2 Resolution{ 1.0f, 1.0f };
+		// INSERT_PADDING(4) {};
+		// bool IsMultiResolutionProcess{};
+		// int Flags{};
+		// ReferenceCount<BinaryData> rcBinaryData{};
+		// bool OwnsBinaryData{};
+		// INSERT_PADDING(7);
 
-		void DecrementReferenceCount()
-		{
-			RefCount--;
-		}
+		// void IncrementReferenceCount()
+		// {
+		// 	RefCount++;
+		// }
 
-		int GetReferenceCount()
-		{
-			return RefCount;
-		}
+		// void DecrementReferenceCount()
+		// {
+		// 	RefCount--;
+		// }
 
-		void DeleteData()
-		{
+		// int GetReferenceCount()
+		// {
+		// 	return RefCount;
+		// }
 
-		}
+		// void DeleteData()
+		// {
 
-		void Cleanup()
-		{
-			if (OwnsBinaryData)
-				DeleteData();
-		}
+		// }
 
-		const char* GetName()
-		{
-			return pBinaryScene->pName;
-		}
+		// void Cleanup()
+		// {
+		// 	if (OwnsBinaryData)
+		// 		DeleteData();
+		// }
 
-		const ReferenceCount<Layer> GetLayer(const char* in_pLayerName) const;
+		// const char* GetName()
+		// {
+		// 	return pBinaryScene->pName;
+		// }
+
+		// const ReferenceCount<Layer> GetLayer(const char* in_pLayerName) const;
 	};
 }

@@ -20,7 +20,7 @@ namespace hh::ut {
     class StateDesc : public internal::StateDescImpl {
     public:
         StateDesc(const char* name, Instantiator instantiator, int32_t unk)
-            : StateImpl { name, instantiator, unk } {}
+            : StateDescImpl { name, instantiator, unk } {}
 
         virtual ~StateDesc() {}
     };

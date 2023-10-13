@@ -27,7 +27,13 @@ namespace csl::math
 		float x; float y; float z; float w;
 		void SetRotationBetweenVectors(const Vector4& a, const Vector4& b, const Vector4& fallback);
 	};
-	class alignas(16) Matrix44 { Vector4 t; Vector4 u; Vector4 v; Vector4 w; };
+	class alignas(16) Matrix44 {
+		Vector4 t; Vector4 u; Vector4 v; Vector4 w;
+	public:
+		static Matrix44 CreateViewMatrix(Vector3 position, Vector3 up, Vector3 target);
+		static Matrix44 CreateOrthogonalProjectionMatrix(float top, float bottom, float left, float right, float nearClip, float farClip);
+		static Matrix44 CreatePerspectiveProjectionMatrix(float fov, float aspectRatio, float nearClip, float farClip);
+	};
 	class alignas(16) Matrix34 : Matrix44 {};
 
 	class Segment3
@@ -113,4 +119,5 @@ namespace csl::math
 template class csl::fnd::Delegate<void ()>;
 template class csl::fnd::Delegate<void (hh::ui::UIListViewElement*, bool)>;
 template class csl::fnd::Delegate<void (hh::ui::UIListViewElement*, hh::ui::ListViewEventArg&)>;
-// template class csl::ut::Pair<app::ui::UIMusicSelect*, void (app::ui::UIMusicSelect::*)(hh::ui::UIListViewElement*, hh::ui::ListViewEventArg&)>;
+template class csl::fnd::Delegate<void (hh::ui::GOCSprite*)>;
+template class csl::ut::Pair<app::ui::UIMusicSelect*, void (app::ui::UIMusicSelect::*)(hh::ui::UIListViewElement*, hh::ui::ListViewEventArg&)>;

@@ -10,11 +10,38 @@ namespace app::player {
     public:
         uint64_t unk2;
         uint64_t unk3;
-        csl::ut::MoveArray<void*> unk1;
-        uint64_t unk4;
+        GOCPlayerHsm* hsm;
+        csl::ut::MoveArray<void*> messageHandlers;
         csl::ut::InplaceMoveArray<Unk1, 3> unk5;
         uint64_t unk9;
         uint32_t unk10;
         int32_t unk11;
+
+        virtual bool DoUnkFunc8() { return UnkFunc8(unk4); }
+        virtual void DoUnkFunc9(uint32_t unkParam) { return UnkFunc9(unk4, unkParam); }
+        virtual void DoUnkFunc10(uint32_t unkParam) { return UnkFunc10(unk4, unkParam); }
+        virtual bool DoUnkFunc11(float unkParam) { return UnkFunc11(unk4, unkParam); }
+        virtual bool DoUnkFunc15(uint32_t unkParam, float unkParam2) { return UnkFunc15(unk4, unkParam, unkParam2); }
+        virtual bool DoStart(uint32_t unkParam, float unkParam2) { return Start(unk4, unkParam, unkParam2); }
+        virtual bool DoProcessMessage(const hh::fnd::Message& message) { return ProcessMessage(unk4, message); }
+
+        virtual bool UnkFunc8(void* hsm) { return Exit(hsm); }
+        virtual void UnkFunc9(void* hsm, uint32_t unkParam2) { UnkFunc12(hsm, unkParam2); }
+        virtual void UnkFunc10(void* hsm, uint32_t unkParam2) { UnkFunc13(hsm, unkParam2); }
+        virtual bool ProcessMessage(void* hsm, const hh::fnd::Message& message);
+        virtual bool UnkFunc11(void* hsm, float unkParam2) { return false; }
+        virtual bool UnkFunc15(void* hsm, uint32_t unkParam2, float unkParam3);
+        virtual bool Start(void* hsm, uint32_t unkParam2, float unkParam3) { return false; }
+
+        virtual bool Exit(void* hsm) { return false; }
+        virtual void UnkFunc12(void* hsm, uint32_t unkParam2) {}
+        virtual void UnkFunc13(void* hsm, uint32_t unkParam2) {}
+        virtual bool UnkFunc14(void* hsm, uint32_t unkParam2, float unkParam3) {
+            if (unkParam2 == 0) {
+                Update(hsm, unkParam3);
+            }
+            return false;
+        }
+        virtual bool Update(void* hsm, float unkParam2) { return false; }
     };
 }

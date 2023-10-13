@@ -2,12 +2,13 @@
 
 namespace hh::fnd
 {
+	class Messenger;
 	class Message
 	{
 	public:
 		uint32_t ID{};
-		uint32_t Sender{};
-		uint32_t Receiver{};
+		Handle<Messenger> Sender{};
+		Handle<Messenger> Receiver{};
 		char Handled{};
 		bool Broadcasted{};
 		const uint32_t Mask{ (uint32_t)-1 };

@@ -67,12 +67,14 @@ namespace hh::ui {
             uint16_t unk4;
             int16_t scrollPosition;
             uint16_t unk5;
-            uint16_t documentHeight;
+            int16_t panelHeight;
             uint32_t unk6;
-            char unk7;
+            bool enabled;
             uint32_t unk8;
             uint32_t unk9;
             uint32_t unk10;
+        public:
+            void ScrollTo(uint32_t scrollPosition);
         };
         
         class ScissorCastListener : public fnd::ReferencedObject, public SurfRide::CastListener {
@@ -128,21 +130,6 @@ namespace hh::ui {
             uint64_t unk45;
         };
 
-        UIListViewElement();
-        void AddItem(UIListViewItem* item);
-        virtual void GetClassId();
-        virtual void UnkFunc2();
-        virtual void UnkFunc3();
-        virtual void UnkFunc4();
-        virtual void UnkFunc5();
-        virtual bool UnkFunc9();
-        virtual void UnkFunc10();
-        virtual void UnkFunc11();
-        virtual bool CheckSomethingInTheCast() { return true; }
-        virtual void UnkFunc14();
-        virtual void UnkFunc16();
-        virtual void UnkFunc17();
-
         csl::fnd::Delegate<void ()> unk15;
         csl::fnd::Delegate<void (UIListViewElement*, ListViewEventArg&)> unk16;
         csl::fnd::Delegate<void ()> unk17;
@@ -172,5 +159,24 @@ namespace hh::ui {
         bool unk37;
         bool unk38;
         bool unk39;
+    public:
+
+        UIListViewElement();
+        void AddItem(UIListViewItem* item);
+        void Reset();
+        UIListViewItem* GetItem(uint32_t index);
+        LayerController* GetItemLayerController(UIListViewItem* item);
+        virtual void GetClassId();
+        virtual void UnkFunc2();
+        virtual void UnkFunc3();
+        virtual void UnkFunc4();
+        virtual void UnkFunc5();
+        virtual bool UnkFunc9();
+        virtual void UnkFunc10();
+        virtual void UnkFunc11();
+        virtual bool CheckSomethingInTheCast() { return true; }
+        virtual void UnkFunc14();
+        virtual void UnkFunc16();
+        virtual void UnkFunc17();
     };
 }

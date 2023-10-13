@@ -54,6 +54,7 @@ namespace hh::game
 		void* unk54;
 		//??GameObjectClass* pStaticClass{};
 
+		GameObject(csl::fnd::IAllocator* pAllocator);
 	private:
 		csl::ut::InplaceMoveArray<GOComponent*, 8> m_Components;
 		csl::ut::VariableString pObjectName;
@@ -113,8 +114,12 @@ namespace hh::game
 			return GetGOC(in_pComponentName);
 		}
 
-		GameObject(csl::fnd::IAllocator* pAllocator);
 		void AttachComponent(GOComponent& component);
 		void SetForceComponentsFlag(ComponentType type, bool enabled);
+
+		/*
+		 * Broadcasts a message to all the messengers registered in the associated LevelInfo.
+		 */
+		bool BroadcastMessage(fnd::Message& message);
 	};
 }

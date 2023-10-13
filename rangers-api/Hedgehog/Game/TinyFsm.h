@@ -12,24 +12,24 @@ namespace hh::game {
         TiFSM_SIGNAL_UPDATE_PHASE_2 = 6,
         TiFSM_SIGNAL_MESSAGE = 7,
         TiFSM_SIGNAL_USER = 100,
-    }
+    };
 
     enum TinyFsmStateType : char {
-        TFSM_STATE_TYPE_0 = 0
-        TFSM_STATE_TYPE_DELEGATE = 0
-        TFSM_STATE_TYPE_TOP = 0
-        TFSM_STATE_TYPE_3 = 0
-        TFSM_STATE_TYPE_4 = 0
-    }
+        TFSM_STATE_TYPE_0 = 0,
+        TFSM_STATE_TYPE_DELEGATE = 0,
+        TFSM_STATE_TYPE_TOP = 0,
+        TFSM_STATE_TYPE_3 = 0,
+        TFSM_STATE_TYPE_4 = 0,
+    };
 
     class TinyFsmEvent {
         TinyFsmSignal signal;
-    }
+    };
 
     template<typename T>
     class TinyFsmState<T> {
         typedef TinyFsmState<T>* (T::*MemberPtr)(TinyFsmState &result, TinyFsmEvent *inputEvent);
-    }
+    };
 
     template<typename T, typename TEvent = TiFsmBasicEvent<T>>
 	class TTinyFsm

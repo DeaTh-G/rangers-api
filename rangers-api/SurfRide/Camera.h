@@ -6,25 +6,22 @@ namespace SurfRide
 	{
 		const char* pName{};
 		int ID{};
-		Math::Vector3 Position{};
-		Math::Vector3 Target{};
+		csl::math::Vector3 Position{};
+		csl::math::Vector3 Target{};
 		int Flags{};
+		int Fov;
 		float NearPlane{};
 		float FarPlane{};
-		INSERT_PADDING(8);
+		uint64_t unk;
 	};
 
 	class Camera
 	{
 	public:
-		const char* pName{};
-		int ID{};
-		Math::Vector3 Position{};
-		Math::Vector3 Target{};
-		int FieldOfView{};
-		float NearPlane{};
-		float FarPlane{};
-		INSERT_PADDING(8);
-		INSERT_PADDING(48);
+		SRS_CAMERA camera;
+		csl::math::Matrix44 viewMatrix;
+		csl::math::Matrix44 projectionMatrix;
+
+		Camera(const SRS_CAMERA& camera, float resolutionX, float resolutionY);
 	};
 }

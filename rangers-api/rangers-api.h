@@ -15,6 +15,7 @@
 #include "Sonicteam/Utility/collections/HashMap.h"
 #include "Sonicteam/Utility/collections/MoveArray.h"
 #include "Sonicteam/Utility/collections/InPlaceMoveArray.h"
+#include "Sonicteam/Utility/collections/PointerMap.h"
 #include "Sonicteam/Utility/collections/StringMap.h"
 #include "Sonicteam/Utility/Bitset.h"
 #include "Sonicteam/Utility/Color.h"
@@ -47,10 +48,13 @@
 
 #include "Hedgehog/Utility/FSM/StateDesc.h"
 #include "Hedgehog/Utility/FSM/State.h"
+#include "Hedgehog/Utility/FSM/Hsm.h"
 
 #include "Hedgehog/Base/Type/hhBaseTypes.h"
 #include "Hedgehog/Base/Type/WorldPosition.h"
 #include "Hedgehog/Base/Type/LogData.h"
+
+#include "Hedgehog/GraphicsFoundation/Renderable.h"
 
 // Hedgehog Framework
 #include "Hedgehog/Framework/KeyEventHandler.h"
@@ -103,11 +107,23 @@
 
 #include "Hedgehog/Sound/GOCSound.h"
 
+#include "SurfRide/Base.h"
+#include "SurfRide/ReferencedObject.h"
+#include "SurfRide/BinaryData.h"
+#include "SurfRide/Camera.h"
+#include "SurfRide/Animation.h"
+#include "SurfRide/Layer.h"
+#include "SurfRide/Scene.h"
+#include "SurfRide/Project.h"
 #include "SurfRide/Cast.h"
+#include "SurfRide/ImageCast.h"
+#include "SurfRide/ReferenceCast.h"
 
 #include "Hedgehog/UI/ResSurfRideProject.h"
-#include "Hedgehog/UI/LayerController.h"
+#include "Hedgehog/UI/SurfRideProjectContext.h"
+#include "Hedgehog/UI/SurfRideHandle.h"
 #include "Hedgehog/UI/GOCSprite.h"
+#include "Hedgehog/UI/LayerController.h"
 #include "Hedgehog/UI/GOCUICollider.h"
 #include "Hedgehog/UI/GOCUIComposition.h"
 #include "Hedgehog/UI/Types.h"
@@ -152,11 +168,15 @@
 // #include "ApplicationCommon/Reflection/RangeAttribute.h"
 
 
+#include "ApplicationCommon/FSM/GOCHsm2.h"
+
 #include "Application/Reflection/Types.h"
 
 #include "Application/FSM/StateContext.h"
 
+#include "Application/Save/SaveDataAccessor.h"
 #include "Application/Save/SaveManagerListener.h"
+#include "Application/Save/Accessors/OptionData.h"
 
 #include "Application/Level/LevelInfo.h"
 
@@ -165,7 +185,9 @@
 #include "Application/UI/UIMusicSelect.h"
 
 
+#include "Application/Player/PlayerCounterTimer.h"
 #include "Application/Player/PlayerHsmContext.h"
+#include "Application/Player/GOCPlayerHsm.h"
 #include "Application/Player/GOCPlayerState.h"
 #include "Application/Player/PlayerStateBase.h"
 #include "Application/Player/States.h"

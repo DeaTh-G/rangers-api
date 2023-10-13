@@ -13,5 +13,9 @@ namespace hh::fnd
 		{
 			return pAllocator;
 		}
+
+		void operatordelete() {
+			pAllocator->Free(this);
+		}
 	};
 }
