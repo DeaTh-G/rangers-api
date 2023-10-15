@@ -10,9 +10,4 @@ namespace hh::fnd
 
 		ReferencedObject(bool isRefCounted) : isRefCounted(isRefCounted) {}
 	};
-
-	class alignas(8) RefByHandleObject : public ReferencedObject
-	{
-		uint32_t handle;
-	};
 }

@@ -175,8 +175,8 @@ namespace hh::ui {
         virtual void UnkFunc10();
         virtual void UnkFunc11();
         virtual bool CheckSomethingInTheCast() { return true; }
-        virtual void UnkFunc14();
-        virtual void UnkFunc16();
-        virtual void UnkFunc17();
+        virtual bool UnkFunc14();
+        virtual void NotifyUnk1();
+        virtual void NotifyUnk3();
     };
 }

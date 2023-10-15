@@ -39,9 +39,9 @@ namespace hh::fnd
 	public:
 		[[nodiscard]] const RflCustomAttribute* GetAttribute(const char* name) const
 		{
-			for (size_t i = 0; i < m_Count; i++)
+			for (size_t i = 0; i < count; i++)
 			{
-				const auto* attribute = &m_pAttributes[i];
+				const auto* attribute = &items[i];
 
 				if (attribute->GetName() == name || !strcmp(attribute->GetName(), name))
 				{

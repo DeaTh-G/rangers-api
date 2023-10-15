@@ -9,8 +9,8 @@ namespace hh::fnd
 	protected:
 		const RflClass* m_pParent{};
 		uint32_t m_ClassSize{};
-		const RflArray<RflClassEnum> m_pEnums{};
-		const RflArray<RflClassMember> m_pMembers{};
+		const RflArray<RflClassEnum> m_pEnums{ nullptr, 0 };
+		const RflArray<RflClassMember> m_pMembers{ nullptr, 0 };
 		const RflCustomAttributes* m_pAttributes{};
 
 	public:
@@ -21,12 +21,10 @@ namespace hh::fnd
 			uint32_t declaredEnumsNum,
 			const RflClassMember* pDeclaredMembers,
 			uint32_t declaredMembersNum,
-			const RflCustomAttributes* pAttributes) : RflEntity(pName)
+			const RflCustomAttributes* pAttributes) : RflEntity{ pName }, m_pEnums{ pDeclaredEnums, declaredEnumsNum }, m_pMembers{ pDeclaredMembers, declaredMembersNum }
 		{
 			m_pParent = pParent;
 			m_ClassSize = objectSizeInBytes;
-			m_pEnums = { pDeclaredEnums, declaredEnumsNum };
-			m_pMembers = { pDeclaredMembers, declaredMembersNum };
 			m_pAttributes = pAttributes;
 		}
 
@@ -42,11 +40,11 @@ namespace hh::fnd
 		
 		[[nodiscard]] uint32_t GetNumMembers() const
 		{
-			uint32_t count = m_MemberCount;
+			uint32_t count = m_pMembers.count;
 
 			for (const RflClass* base = m_pParent; base != nullptr; base = base->m_pParent)
 			{
-				count += base->m_MemberCount;
+				count += base->m_pMembers.count;
 			}
 			
 			return count;
@@ -66,16 +64,17 @@ namespace hh::fnd
 
 			while(true)
 			{
-				j += cls->m_MemberCount;
+				j += cls->m_pMembers.count;
 				if (j >= 0)
 					break;
 
-				cls = cls->m_pParent;
-				if (!cls)
-					return cls->m_pMembers;
+				const RflClass* parent = cls->m_pParent;
+				if (!parent)
+					return cls->m_pMembers.items;
+				cls = parent;
 			}
 			
-			return &cls->m_pMembers[j];
+			return &cls->m_pMembers.items[j];
 		}
 
 		[[nodiscard]] const RflClassMember* GetMemberByName(const char* name) const
@@ -94,12 +93,12 @@ namespace hh::fnd
 
 		[[nodiscard]] uint32_t GetDeclaredMemberIndexByName(const char* name) const
 		{
-			if (m_MemberCount <= 0)
+			if (m_pMembers.count <= 0)
 				return -1;
 
-			for (uint32_t i = 0; i < m_MemberCount; i++)
+			for (uint32_t i = 0; i < m_pMembers.count; i++)
 			{
-				const auto* memberName = m_pMembers[i].GetName();
+				const auto* memberName = m_pMembers.items[i].GetName();
 				if (memberName == name || !strcmp(memberName, name))
 				{
 					return i;
@@ -116,7 +115,7 @@ namespace hh::fnd
 			if (i == static_cast<uint32_t>(-1))
 				return nullptr;
 
-			return &m_pMembers[i];
+			return &m_pMembers.items[i];
 		}
 		
 		[[nodiscard]] const RflCustomAttribute* GetAttribute(const char* name) const

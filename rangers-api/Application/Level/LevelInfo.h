@@ -21,7 +21,6 @@ namespace app::level {
         char unk21;
         void* unk22;
     public:
-        ~LevelInfo(){}
-		virtual void* GetClassId();
+        virtual void* GetClassId();
     };
 }

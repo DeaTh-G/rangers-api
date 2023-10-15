@@ -21,7 +21,7 @@ namespace app::ui {
         bool field_2E2;
         bool field_2E3;
         bool field_2E4;
-        uint32_t field_2E6;
+        float field_2E6;
         uint32_t field_2E8;
         uint32_t field_2EC;
         uint32_t field_2F4;
@@ -29,6 +29,10 @@ namespace app::ui {
         bool field_2FC;
     public:
         UIMusicSelect* Instantiate(csl::fnd::IAllocator* pAllocator);
-        void Load(bool unk);
+
+        virtual void Initialize();
+        virtual void Dispose();
+        virtual void Update(uint64_t unkParam, uint64_t unkParam2);
+		virtual void UnkFunc11(uint64_t a1, uint64_t a2, uint64_t a3, uint64_t a4);
     };
 }

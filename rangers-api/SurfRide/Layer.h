@@ -172,61 +172,61 @@ namespace SurfRide
 
 		const char* GetName() const
 		{
-			return pBinaryLayer->pName;
+			return layerData->pName;
 		}
 
 		Cast* GetCast(const char* name);
 
-		void IncrementReferenceCount()
-		{
-			RefCount++;
-		}
+		// void IncrementReferenceCount()
+		// {
+		// 	RefCount++;
+		// }
 
-		void DecrementReferenceCount()
-		{
-			RefCount--;
-		}
+		// void DecrementReferenceCount()
+		// {
+		// 	RefCount--;
+		// }
 
-		int GetReferenceCount()
-		{
-			return RefCount;
-		}
+		// int GetReferenceCount()
+		// {
+		// 	return RefCount;
+		// }
 
-		void DeleteData()
-		{
+		// void DeleteData()
+		// {
 
-		}
+		// }
 
-		void Cleanup()
-		{
-			if (OwnsBinaryData)
-				DeleteData();
-		}
+		// void Cleanup()
+		// {
+		// 	if (OwnsBinaryData)
+		// 		DeleteData();
+		// }
 
 		SRS_ANIMATION* GetCurrentAnimation()
 		{
-			if (pBinaryLayer->pAnimations)
-				pBinaryLayer->pAnimations[CurrentAnimationIndex];
+			if (layerData->pAnimations)
+				layerData->pAnimations[currentAnimationIndex];
 
-			return pBinaryLayer->pAnimations;
+			return layerData->pAnimations;
 		}
 
 		void SetAnimation(int animationId);
 
 		int GetAnimationID() const
 		{
-			return pBinaryLayer->pAnimations[CurrentAnimationIndex].ID;
+			return layerData->pAnimations[currentAnimationIndex].ID;
 		}
 
 		int GetAnimationID(const char* name) const
 		{
-			if (!pBinaryLayer->AnimationCount)
+			if (!layerData->AnimationCount)
 				return -1;
 		
-			for (size_t i = 0; i < pBinaryLayer->AnimationCount; i++)
+			for (size_t i = 0; i < layerData->AnimationCount; i++)
 			{
-				if (strcmp(pBinaryLayer->pAnimations[i].pName, name) == 0)
-					return pBinaryLayer->pAnimations[i].ID;
+				if (strcmp(layerData->pAnimations[i].pName, name) == 0)
+					return layerData->pAnimations[i].ID;
 			}
 
 			return -1;
@@ -235,9 +235,9 @@ namespace SurfRide
 		void SetHideFlag(bool in_hide)
 		{
 			if (in_hide)
-				Flags |= 0x100;
+				flags |= 0x100;
 			else
-				Flags &= ~0x100;
+				flags &= ~0x100;
 		}
 
 		bool StartAnimation(int animationId, float initialFrame, bool playInReverse);

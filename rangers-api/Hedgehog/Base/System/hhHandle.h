@@ -5,13 +5,13 @@ namespace hh::fnd
 	class HandleBase
 	{
 	protected:
-		uint32_t m_Handle;
+		uint32_t handle;
 
 		void Set(const RefByHandleObject* pObj)
 		{
 			if (pObj)
 			{
-				m_Handle = pObj->m_Handle;
+				handle = pObj->handle;
 			}
 		}
 		
@@ -29,12 +29,12 @@ namespace hh::fnd
         // TODO: fix
 		RefByHandleObject* Get(void* handleManager) const
 		{
-			return null;
+			return nullptr;
 		}
 
 		bool operator==(const RefByHandleObject* pObj)
 		{
-			return m_Handle == pObj->m_Handle;
+			return handle == pObj->handle;
 		}
 
 		bool operator!=(const RefByHandleObject* pObj)
@@ -50,7 +50,7 @@ namespace hh::fnd
 
 		HandleBase& operator=(const HandleBase& hObj)
 		{
-			m_Handle = hObj.m_Handle;
+			handle = hObj.handle;
 			return *this;
 		}
 	};
@@ -82,7 +82,7 @@ namespace hh::fnd
 
 		Handle<T>& operator=(const Handle<T>& hObj)
 		{
-			m_Handle = hObj.m_Handle;
+			handle = hObj.handle;
 			return *this;
 		}
 

@@ -15,7 +15,7 @@ namespace hh::game
 	class alignas(8) GameService : public hh::fnd::Messenger
 	{
 	public:
-		GameManager* pDocument;
+		GameManager* pGameManager;
 		GameServiceClass* pStaticClass;
 		uint32_t unk20;
 		csl::fnd::Mutex mutex;

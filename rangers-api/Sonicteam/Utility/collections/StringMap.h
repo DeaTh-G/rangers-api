@@ -112,7 +112,7 @@ namespace csl::ut
 		
 		iterator end() const
 		{
-			return iterator(this, m_CapacityMax + 1);
+			return iterator(this, GetCapacity());
 		}
 
 		void insert(const char* key, TValue value)

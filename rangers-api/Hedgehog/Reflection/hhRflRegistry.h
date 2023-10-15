@@ -5,18 +5,12 @@ namespace hh::fnd
 	class RflRegistryBase : public BaseObject
 	{
 	protected:
-		csl::ut::StringMap<RflEntity*> m_Items{ GetAllocator() };
-
-	public:
-		RflRegistryBase()
-		{
-			
-		}
+		csl::ut::StringMap<const RflEntity*> m_Items{ GetAllocator() };
 
 		const RflEntity* GetByName(const char* pName) const
 		{
-			auto result = m_Types[pName];
-			if (result == m_Types.end())
+			auto result = m_Items[pName];
+			if (result == m_Items.end())
 				return nullptr;
 
 			return result;
@@ -24,7 +18,7 @@ namespace hh::fnd
 		
 		void Register(const RflEntity* pInfo)
 		{
-			m_Types.insert(pInfo->GetName(), pInfo);
+			m_Items.insert(pInfo->GetName(), pInfo);
 		}
 
 		void RegisterList(const RflEntity** pInfoList)
@@ -32,14 +26,21 @@ namespace hh::fnd
 			size_t i = 0;
 			while (pInfoList[i])
 			{
-				RegisterTypeInfo(pInfoList[i]);
+				Register(pInfoList[i]);
 				i++;
 			}
+		}
+
+	public:
+		RflRegistryBase()
+		{
+
 		}
 	};
 
 	template<typename T>
 	class RflRegistryTemplate : public RflRegistryBase {
+	public:
 		inline const T* GetByName(const char* pName) const
 		{
 			return reinterpret_cast<const T*>(RflRegistryBase::GetByName(pName));
@@ -52,7 +53,7 @@ namespace hh::fnd
 
 		inline void RegisterList(const T** pInfoList)
 		{
-			RegisterList(pInfoList)
+			RegisterList(pInfoList);
 		}
 	};
 }

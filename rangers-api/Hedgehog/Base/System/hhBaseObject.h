@@ -14,8 +14,12 @@ namespace hh::fnd
 			return pAllocator;
 		}
 
-		void operatordelete() {
-			pAllocator->Free(this);
+		static void* operator new(size_t count, csl::fnd::IAllocator* pAllocator) {
+			return pAllocator->Alloc(count, 8);
+		}
+
+		static void operator delete(void* ptr, size_t size) noexcept {
+			static_cast<BaseObject*>(ptr)->pAllocator->Free(ptr);
 		}
 	};
 }

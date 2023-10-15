@@ -1,7 +1,7 @@
 #pragma once
 
 namespace hh::ui {
-    class UIObject : fnd::ReferencedObject {
+    class UIObject : public fnd::ReferencedObject {
         Position position;
         Dimensions dimensions;
     public:

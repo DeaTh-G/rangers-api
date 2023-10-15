@@ -76,10 +76,10 @@ namespace SurfRide
 		// 		DeleteData();
 		// }
 
-		// const char* GetName()
-		// {
-		// 	return pBinaryScene->pName;
-		// }
+		const char* GetName() const
+		{
+			return sceneData->pName;
+		}
 
 		// const ReferenceCount<Layer> GetLayer(const char* in_pLayerName) const;
 	};

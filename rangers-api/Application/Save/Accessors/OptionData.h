@@ -6,6 +6,6 @@ namespace app::save {
     };
     
     class OptionAc : public SaveDataAccessor<OptionData> {
-        OptionAc(hh::game::GameObject* gameObject) {}
+        OptionAc(hh::game::GameObject* gameObject) : SaveDataAccessor<OptionData>{ gameObject } {}
     };
 }

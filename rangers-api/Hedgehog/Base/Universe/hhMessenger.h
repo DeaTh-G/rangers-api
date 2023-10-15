@@ -21,16 +21,14 @@ namespace hh::fnd
 
 	public:
 		void* pMessageManager; // hh::fnd::MessageManager*
-		uint32_t pUnk2;
+		uint32_t messageMask;
 		uint32_t pUnk3;
 
-		virtual ~Messenger() {}
-
 		virtual void* GetClassId();
-		virtual void fUnk2() { return !fUnk3(); }
+		virtual bool fUnk2(Message& message) { return !fUnk3(); }
 		virtual bool fUnk3() { return false; }
 		virtual bool ProcessMessage(Message& message);
-		virtual bool fUnk5() { return 1; }
+		virtual bool IsAcceptingMessages() { return 1; }
 
 		void SendMessageImmToPlayer(app::GameManager* in_pGameManager, int in_playerNo, Message& in_rMessage)
 		{

@@ -54,7 +54,9 @@ namespace hh::ui {
             uint32_t unk7;
         };
 
+        static game::GOComponentClass* GetClass();
         void Initialize(const Config& config);
         LayerController* GetLayerController(const char* sceneName, const char* layerName, uint16_t id);
+        SurfRide::Project* GetProject();
     };
 }

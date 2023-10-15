@@ -121,3 +121,6 @@ template class csl::fnd::Delegate<void (hh::ui::UIListViewElement*, bool)>;
 template class csl::fnd::Delegate<void (hh::ui::UIListViewElement*, hh::ui::ListViewEventArg&)>;
 template class csl::fnd::Delegate<void (hh::ui::GOCSprite*)>;
 template class csl::ut::Pair<app::ui::UIMusicSelect*, void (app::ui::UIMusicSelect::*)(hh::ui::UIListViewElement*, hh::ui::ListViewEventArg&)>;
+template class hh::game::InputComponent::InputMonitor<uint16_t>;
+template class hh::game::InputComponent::InputMonitor<uint32_t>;
+template class hh::game::InputComponent::InputMonitor<csl::math::Vector4>;

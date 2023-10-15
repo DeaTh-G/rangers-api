@@ -37,7 +37,7 @@ namespace hh::ui {
         virtual void UnkFunc11() {}
         virtual void UnkFunc12() {}
         virtual bool CheckSomethingInTheCast();
-        virtual void UnkFunc14() { return true; }
+        virtual bool UnkFunc14() { return true; }
         virtual void UnkFunc15() {}
         virtual void NotifyUnk1();
         virtual void NotifyUnk3();

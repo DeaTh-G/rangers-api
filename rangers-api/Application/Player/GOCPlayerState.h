@@ -17,13 +17,13 @@ namespace app::player {
         uint32_t unk10;
         int32_t unk11;
 
-        virtual bool DoUnkFunc8() { return UnkFunc8(unk4); }
-        virtual void DoUnkFunc9(uint32_t unkParam) { return UnkFunc9(unk4, unkParam); }
-        virtual void DoUnkFunc10(uint32_t unkParam) { return UnkFunc10(unk4, unkParam); }
-        virtual bool DoUnkFunc11(float unkParam) { return UnkFunc11(unk4, unkParam); }
-        virtual bool DoUnkFunc15(uint32_t unkParam, float unkParam2) { return UnkFunc15(unk4, unkParam, unkParam2); }
-        virtual bool DoStart(uint32_t unkParam, float unkParam2) { return Start(unk4, unkParam, unkParam2); }
-        virtual bool DoProcessMessage(const hh::fnd::Message& message) { return ProcessMessage(unk4, message); }
+        virtual bool DoUnkFunc8() { return UnkFunc8(hsm); }
+        virtual void DoUnkFunc9(uint32_t unkParam) { return UnkFunc9(hsm, unkParam); }
+        virtual void DoUnkFunc10(uint32_t unkParam) { return UnkFunc10(hsm, unkParam); }
+        virtual bool DoUnkFunc11(float unkParam) { return UnkFunc11(hsm, unkParam); }
+        virtual bool DoUnkFunc15(uint32_t unkParam, float unkParam2) { return UnkFunc15(hsm, unkParam, unkParam2); }
+        virtual bool DoStart(uint32_t unkParam, float unkParam2) { return Start(hsm, unkParam, unkParam2); }
+        virtual bool DoProcessMessage(const hh::fnd::Message& message) { return ProcessMessage(hsm, message); }
 
         virtual bool UnkFunc8(void* hsm) { return Exit(hsm); }
         virtual void UnkFunc9(void* hsm, uint32_t unkParam2) { UnkFunc12(hsm, unkParam2); }

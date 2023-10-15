@@ -6,8 +6,13 @@
 // // Lua 5.4.1
 // #include "External/Lua541/include/lua.hpp"
 
-// // Common Sonicteam Library
-// #include "Sonicteam/math/math.h"
+// Common Sonicteam Library
+
+#ifndef EXPORTING_TYPES
+#include "Sonicteam/math/math.h"
+#include <functional>
+#endif
+
 #include "Sonicteam/System/IAllocator.h"
 
 #include "Sonicteam/Utility/collections/Array.h"
@@ -35,6 +40,7 @@
 // Hedgehog Library
 #include "Hedgehog/Base/System/hhBaseObject.h"
 #include "Hedgehog/Base/System/hhReferencedObject.h"
+#include "Hedgehog/Base/System/RefByHandleObject.h"
 #include "Hedgehog/Base/System/hhProperty.h"
 #include "Hedgehog/Base/System/hhCollection.h"
 #include "Hedgehog/Base/System/hhHandle.h"
@@ -61,6 +67,25 @@
 #include "Hedgehog/Framework/MouseEventHandler.h"
 #include "Hedgehog/Framework/Application.h"
 
+// HID
+#include "Hedgehog/HID/InputDevice.h"
+#include "Hedgehog/HID/InputDeviceFactory.h"
+#include "Hedgehog/HID/ActiveDeviceManager.h"
+#include "Hedgehog/HID/DeviceManager.h"
+#include "Hedgehog/HID/DeviceManagerWin32.h"
+#include "Hedgehog/HID/InputMap.h"
+
+#include "Hedgehog/HID/InputDevices/Keyboard.h"
+#include "Hedgehog/HID/InputDevices/KeyboardWin32.h"
+#include "Hedgehog/HID/InputDevices/Mouse.h"
+#include "Hedgehog/HID/InputDevices/MouseWin32.h"
+#include "Hedgehog/HID/InputDevices/Gamepad.h"
+#include "Hedgehog/HID/InputDevices/GamepadSteam.h"
+#include "Hedgehog/HID/InputDevices/Pointing.h"
+#include "Hedgehog/HID/InputDevices/PointingWin32.h"
+#include "Hedgehog/HID/InputDevices/Vibration.h"
+#include "Hedgehog/HID/InputDevices/VibrationWin32.h"
+
 // Resources
 #include "Hedgehog/Resource/ManagedResource.h"
 
@@ -82,24 +107,24 @@
 #include "Hedgehog/Reflection/hhRflTypeInfoRegistry.h"
 #include "Hedgehog/Reflection/hhRflClassNameRegistry.h"
 #include "Hedgehog/Reflection/hhBuiltinTypeRegistry.h"
-#include "Hedgehog/Reflection/hhDataResource.h"
+// #include "Hedgehog/Reflection/hhDataResource.h"
 #include "Hedgehog/Reflection/hhDataValue.h"
 // #include "Hedgehog/Reflection/hhVariantDataUtil.h"
 // #include "Hedgehog/Reflection/hhRflSerializeUtil.h"
 
 // Hedgehog Game Library
 #include "Hedgehog/Game/GameService.h"
-#include "Hedgehog/Game/GameStepListener.h"
 #include "Hedgehog/Game/GOComponent.h"
 #include "Hedgehog/Game/GameObject.h"
 #include "Hedgehog/Game/GameObjectLayer.h"
 #include "Hedgehog/Game/GameApplication.h"
 #include "Hedgehog/Game/GameManager.h"
+#include "Hedgehog/Game/InputManager.h"
+#include "Hedgehog/Game/InputComponent.h"
 #include "Hedgehog/Game/ObjInfo.h"
 #include "Hedgehog/Game/GameObjectRegistry.h"
 #include "Hedgehog/Game/GOComponentRegistry.h"
 #include "Hedgehog/Game/ObjInfoRegistry.h"
-// #include "Hedgehog/Game/GameUpdateListener.h"
 #include "Hedgehog/Game/GameObjectSystem.h"
 
 #include "Hedgehog/Game/GOComponents/GOCInput.h"
@@ -125,7 +150,6 @@
 #include "Hedgehog/UI/GOCSprite.h"
 #include "Hedgehog/UI/LayerController.h"
 #include "Hedgehog/UI/GOCUICollider.h"
-#include "Hedgehog/UI/GOCUIComposition.h"
 #include "Hedgehog/UI/Types.h"
 #include "Hedgehog/UI/UIObject.h"
 #include "Hedgehog/UI/UIElement.h"
@@ -134,6 +158,7 @@
 #include "Hedgehog/UI/UIGridPanel.h"
 #include "Hedgehog/UI/UIListViewElement.h"
 #include "Hedgehog/UI/UIListener.h"
+#include "Hedgehog/UI/GOCUIComposition.h"
 
 // #include "System/Player/PlayerInformation.h"
 // #include "System/Player/Blackboard.h"
@@ -191,3 +216,4 @@
 #include "Application/Player/GOCPlayerState.h"
 #include "Application/Player/PlayerStateBase.h"
 #include "Application/Player/States.h"
+#include "Application/MyApplication.h"

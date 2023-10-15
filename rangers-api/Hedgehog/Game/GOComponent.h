@@ -25,10 +25,14 @@ namespace hh::game
 	class GOComponent : public fnd::RefByHandleObject
 	{
 	public:
-		enum GOCEvent {
-			DEACTIVATE = 0,
-			ACTIVATE,
-			UNK2,
+		enum class GOCEventMask : uint32_t {
+			WANT_MESSAGE_768_EVENT = 0x200,
+		};
+
+		enum class GOCEvent {
+			ACTIVATE = 0,
+			DEACTIVATE,
+			MESSAGE_768,
 			UNK3,
 			UNK4,
 			UNK5,
@@ -43,12 +47,12 @@ namespace hh::game
 		uint32_t flags;
 		int32_t unk45;
 		GameObject* pOwnerGameObject{};
-		uint32_t unk47;
+		csl::ut::Bitset<GOCEventMask> gocEventMask;
 		char flags38; // seen 0, 1, 2
 		uint16_t unk49;
 		char unk50;
 		uint32_t unk51;
-		uint32_t unk52;
+		uint32_t messageMask;
 		GOComponentClass* pStaticClass{};
 		Unk1 unknown43[3];
 

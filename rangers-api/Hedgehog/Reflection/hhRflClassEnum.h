@@ -35,34 +35,34 @@ namespace hh::fnd
 	class RflClassEnum : public RflEntity
 	{
 	protected:
-		const RflArray<RflClassEnumMember> m_pValues{};
+		const RflArray<RflClassEnumMember> m_pValues{ nullptr, 0 };
 
 	public:
 		const RflClassEnumMember* GetValues() const
 		{
-			return m_pValues;
+			return m_pValues.items;
 		}
 
 		size_t GetValueCount() const
 		{
-			return m_MemberCount;
+			return m_pValues.count;
 		}
 
-		bool GetNameOfValue(size_t value, const char** pp_name) const
+		bool GetEnglishNameOfValue(size_t value, const char** pp_name) const
 		{
-			if (m_MemberCount <= 0)
+			if (m_pValues.count <= 0)
 				return false;
 
 			if (!pp_name)
 				return false;
 			
-			for (size_t i = 0; i < m_MemberCount; i++)
+			for (size_t i = 0; i < m_pValues.count; i++)
 			{
-				const RflClassEnumMember* p_member = &m_pValues[i];
+				const RflClassEnumMember* p_member = &m_pValues.items[i];
 				
-				if (p_member->GetValue() == value)
+				if (p_member->GetIndex() == value)
 				{
-					*pp_name = p_member->GetName();
+					*pp_name = p_member->GetEnglishName();
 					return true;
 				}
 			}
@@ -70,21 +70,65 @@ namespace hh::fnd
 			return false;
 		}
 
-		bool GetValueOfName(const char* name, size_t* p_value) const
+		bool GetJapaneseNameOfValue(size_t value, const char** pp_name) const
 		{
-			if (m_MemberCount <= 0)
+			if (m_pValues.count <= 0)
+				return false;
+
+			if (!pp_name)
+				return false;
+
+			for (size_t i = 0; i < m_pValues.count; i++)
+			{
+				const RflClassEnumMember* p_member = &m_pValues.items[i];
+
+				if (p_member->GetIndex() == value)
+				{
+					*pp_name = p_member->GetJapaneseName();
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		bool GetValueOfEnglishName(const char* name, size_t* p_value) const
+		{
+			if (m_pValues.count <= 0)
 				return false;
 
 			if (!p_value)
 				return false;
 
-			for (size_t i = 0; i < m_MemberCount; i++)
+			for (size_t i = 0; i < m_pValues.count; i++)
 			{
-				const RflClassEnumMember* p_member = &m_pValues[i];
+				const RflClassEnumMember* p_member = &m_pValues.items[i];
 
-				if (p_member->GetName() == name || !strcmp(p_member->GetName(), name))
+				if (p_member->GetEnglishName() == name || !strcmp(p_member->GetEnglishName(), name))
 				{
-					*p_value = p_member->GetValue();
+					*p_value = p_member->GetIndex();
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		bool GetValueOfJapaneseName(const char* name, size_t* p_value) const
+		{
+			if (m_pValues.count <= 0)
+				return false;
+
+			if (!p_value)
+				return false;
+
+			for (size_t i = 0; i < m_pValues.count; i++)
+			{
+				const RflClassEnumMember* p_member = &m_pValues.items[i];
+
+				if (p_member->GetJapaneseName() == name || !strcmp(p_member->GetJapaneseName(), name))
+				{
+					*p_value = p_member->GetIndex();
 					return true;
 				}
 			}

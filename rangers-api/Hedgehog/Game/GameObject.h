@@ -1,5 +1,9 @@
 #pragma once
 
+namespace hh::ui {
+	class LayerController;
+}
+
 namespace hh::game
 {
 	class GameManager;
@@ -34,14 +38,18 @@ namespace hh::game
 			int64_t unk34;
 		};
 
-		enum ComponentType : char {
+	public:
+		enum class ComponentType : char {
 			VISIBLE,
 			PHYSICS,
 			AUDIBLE,
 		};
 
-	public:
-		csl::ut::Bitset<char> statusFlags;
+		enum class StatusFlags : char {
+			DONT_PROCESS_MESSAGES = 0,
+		};
+
+		csl::ut::Bitset<StatusFlags> statusFlags;
 		char layer{ 6 };
 		csl::ut::Bitset<ComponentType> forceComponentsFlags;
 		csl::ut::Bitset<ComponentType> componentsAreForcedOrNonEmptyFlags;
@@ -73,6 +81,15 @@ namespace hh::game
 		Unk2 unk72;
 		
 		virtual void* GetClassId();
+		virtual bool fUnk2(fnd::Message& message);
+		virtual bool ProcessMessage(fnd::Message& message);
+		virtual bool IsAcceptingMessages() { return !statusFlags.test(StatusFlags::DONT_PROCESS_MESSAGES); }
+		virtual void Initialize() {}
+		virtual void Dispose() {}
+		virtual void Update(uint64_t unkParam, uint64_t unkParam2) {}
+		virtual void UnkFunc9() {}
+		virtual void UnkFunc10() {}
+		virtual void UnkFunc11(uint64_t a1, uint64_t a2, uint64_t a3, uint64_t a4);
 
 		template <typename T>
 		T* GetGOC()
@@ -109,6 +126,13 @@ namespace hh::game
 			return GetGOC<T>();
 		}
 
+		hh::game::GOComponent* InstantiateComponent(GOComponentClass* gocClass);
+	protected:
+		template<typename T>
+		T* InstantiateComponent(GOComponentClass gocClass) {
+			return dynamic_cast<T*>(InstantiateComponent(gocClass));
+		}
+
 		hh::game::GOComponent* GetComponent(const char* in_pComponentName)
 		{
 			return GetGOC(in_pComponentName);
@@ -121,5 +145,9 @@ namespace hh::game
 		 * Broadcasts a message to all the messengers registered in the associated LevelInfo.
 		 */
 		bool BroadcastMessage(fnd::Message& message);
+
+		void SetLayer(char layer);
+
+		void LinkActionToUIKey(ui::LayerController* layerController, const char* uiPath, const char* actionName, bool unkParam);
 	};
 }
