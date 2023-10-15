@@ -27,8 +27,9 @@ namespace hh::game {
 		virtual bool fUnk5() { return false; }
 		virtual void OnGOCEvent(GOCEvent event, GameObject& ownerGameObject, void* data);
 
-        inline void DispatchFSM(void* e) {
-            fsm->Dispatch(targetObject || pOwnerGameObject, e);
-        }
+        inline void DispatchFSM(void* e);
+        // {
+        //     fsm->Dispatch(targetObject || pOwnerGameObject, e);
+        // }
     };
 }

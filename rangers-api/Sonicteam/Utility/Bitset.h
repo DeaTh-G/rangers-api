@@ -1,12 +1,12 @@
 #pragma once
-#define CHAR_BIT 8
+#include <type_traits>
 
 namespace csl::ut
 {
-	template <typename T, size_t BitSize = sizeof(T) * CHAR_BIT>
+	template <typename T>
 	class Bitset
 	{
-		T m_dummy : BitSize;
+		T m_dummy;
 		
 	public:
 		Bitset()
@@ -31,17 +31,17 @@ namespace csl::ut
 
 		constexpr void reset(T bit)
 		{
-			m_dummy &= ~(1 << bit);
+			m_dummy = T{ static_cast<std::underlying_type_t<T>>(m_dummy) & ~(1 << static_cast<std::underlying_type_t<T>>(bit)) };
 		}
 
 		constexpr void flip(T bit)
 		{
-			m_dummy ^= 1 << bit;
+			m_dummy = T{ static_cast<std::underlying_type_t<T>>(m_dummy) & (1 << static_cast<std::underlying_type_t<T>>(bit)) };
 		}
 		
 		constexpr void set(T bit)
 		{
-			m_dummy |= 1 << bit;
+			m_dummy = T{ static_cast<std::underlying_type_t<T>>(m_dummy) & (1 << static_cast<std::underlying_type_t<T>>(bit)) };
 		}
 
 		void set(T bit, bool flag)
@@ -59,7 +59,7 @@ namespace csl::ut
 		
 		constexpr bool test(T bit) const
 		{
-			return m_dummy & (1 << bit);
+			return static_cast<std::underlying_type_t<T>>(m_dummy) & (1 << static_cast<std::underlying_type_t<T>>(bit));
 		}
 		
 		operator T() const { return m_dummy; }

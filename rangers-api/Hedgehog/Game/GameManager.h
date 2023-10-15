@@ -52,9 +52,6 @@ namespace hh::game
 
 	class GameManager : public fnd::ReferencedObject, public fnd::ReloaderListener, private csl::ut::NonCopyable
 	{
-		inline static void* ms_addrStaticGameManagerUsage = sigScan("\x48\x89\x2D\xCC\xCC\xCC\xCC\x8D\x75\x20", "xxx????xxx", (void*)0x14FE91CB8);
-		inline static GameManager** ms_ppGameManager = reinterpret_cast<GameManager**>(7 + (size_t)ms_addrStaticGameManagerUsage + (*(int32_t*)(((char*)ms_addrStaticGameManagerUsage) + 3)));
-
 		uint32_t unk33;
 		uint32_t unk34;
 		void* unk35;
@@ -82,11 +79,6 @@ namespace hh::game
 
 	public:
 		GameManager(csl::fnd::IAllocator* pAllocator, GameApplication* pApplication);
-
-		inline static GameManager* GetSingleton()
-		{
-			return *ms_ppGameManager;
-		}
 
 		template <typename T>
 		T* GetService()

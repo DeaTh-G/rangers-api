@@ -4,9 +4,6 @@ namespace csl::ut
 {
 	class StringMapOperation
 	{
-		inline static constexpr size_t HASH_MASK = 0x7FFFFFFF;
-		inline static constexpr size_t HASH_MAGIC = 31;
-
 	public:
 		inline static size_t hash(const char* key)
 		{
@@ -23,12 +20,12 @@ namespace csl::ut
 				do
 				{
 					++i;
-					hashResult = HASH_MAGIC * hashResult + c;
+					hashResult = 31 * hashResult + c;
 					c = pStr[i];
 				} while (pStr[i]);
 			}
 
-			return hashResult & HASH_MASK;
+			return hashResult;
 		}
 
 		inline static bool compare(const char* key, const char* other)

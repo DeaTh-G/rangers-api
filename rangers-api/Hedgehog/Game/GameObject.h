@@ -69,9 +69,9 @@ namespace hh::game
 		csl::ut::InplaceMoveArray<hh::fnd::Property, 2> m_Properties;
 		csl::ut::MoveArray<void*> unk61;
 		uint32_t m_ComponentFlags{};
-		csl::ut::MoveArray<GOComponent> m_VisualComponents;
-		csl::ut::MoveArray<GOComponent> m_PhysicsComponents;
-		csl::ut::MoveArray<GOComponent> m_AudibleComponents;
+		csl::ut::MoveArray<GOComponent*> m_VisualComponents;
+		csl::ut::MoveArray<GOComponent*> m_PhysicsComponents;
+		csl::ut::MoveArray<GOComponent*> m_AudibleComponents;
 		csl::ut::MoveArray<void*> unk66;
 		Unk1 unk67;
 		void* unk68;

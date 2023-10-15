@@ -107,7 +107,7 @@ namespace csl::ut
 	protected:
 		void Insert(size_t key, size_t value)
 		{
-			size_t hash = TOp::hash(key);
+			size_t hash = TOp::hash(key) & 0x7FFFFFFFFFFFFFFF;
 			if (m_Length || GetCapacity())
 			{
 				if (2 * m_Length >= GetCapacity())
@@ -207,7 +207,7 @@ namespace csl::ut
 			if (!m_pElements)
 				return end();
 			
-			const size_t hash = TOp::hash(key);
+			const size_t hash = TOp::hash(key) & 0x7FFFFFFFFFFFFFFF;
 			size_t idx = hash & (GetCapacity() - 1);
 			const Elem* pElem = &m_pElements[idx];
 			

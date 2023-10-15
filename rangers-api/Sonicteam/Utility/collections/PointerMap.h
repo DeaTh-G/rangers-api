@@ -4,15 +4,25 @@ namespace csl::ut
 {
 	class PointerMapOperation
 	{
-		inline static constexpr size_t HASH_MAGIC = 0x9E3779B1;
-
 	protected:
 		size_t m_Dummy;
 		
 	public:
-		size_t hash(size_t key)
+		/*
+		 * This uses MurmurHash3's avalanche mix finalizer for x64.
+		 * I couldn't find any evidence for an actual hash function being used.
+		 * Maybe they decided that pointers are random enough to be acceptably
+		 * distributed after only applying an avalanche mixer.
+		 */
+		size_t hash(size_t k)
 		{
-			return HASH_MAGIC * key;
+			k ^= k >> 33;
+			k *= 0xff51afd7ed558ccd;
+			k ^= k >> 33;
+			k *= 0xc4ceb9fe1a85ec53;
+			k ^= k >> 33;
+
+			return k;
 		}
 
 		bool compare(size_t key, size_t other)
