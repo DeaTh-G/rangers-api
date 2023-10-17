@@ -15,13 +15,18 @@ namespace hh::game
         const char *pScopedName;
         uint64_t unk12;
         size_t objectSize;
-        GameObject* (*Instantiate)(csl::fnd::IAllocator* pAllocator);
+        GameObject* (*instantiator)(csl::fnd::IAllocator* pAllocator);
         uint64_t unk15;
         uint64_t unk16;
         uint64_t unk17;
         uint32_t memberValueCount;
         hh::fnd::RflClassMember::Value* pMemberValues;
         hh::fnd::RflClass* reflectionClass;
+	private:
+		GameObject* Instantiate(csl::fnd::IAllocator* pAllocator) const;
+	public:
+		template<typename T>
+		T* Instantiate(csl::fnd::IAllocator* pAllocator) const { return static_cast<T*>(Instantiate(pAllocator)); }
     };
 
 	class GameObject : public fnd::Messenger
@@ -83,8 +88,8 @@ namespace hh::game
 		virtual void* GetClassId();
 		virtual bool fUnk2(fnd::Message& message);
 		virtual bool ProcessMessage(fnd::Message& message);
-		virtual bool IsAcceptingMessages() { return !statusFlags.test(StatusFlags::DONT_PROCESS_MESSAGES); }
-		virtual void Initialize() {}
+		virtual bool IsAcceptingMessages();
+		virtual void Initialize(GameManager* gameManager) {}
 		virtual void Dispose() {}
 		virtual void Update(uint64_t unkParam, uint64_t unkParam2) {}
 		virtual void UnkFunc9() {}
@@ -129,8 +134,8 @@ namespace hh::game
 		hh::game::GOComponent* InstantiateComponent(GOComponentClass* gocClass);
 	protected:
 		template<typename T>
-		T* InstantiateComponent(GOComponentClass gocClass) {
-			return dynamic_cast<T*>(InstantiateComponent(gocClass));
+		T* InstantiateComponent(GOComponentClass* gocClass) {
+			return static_cast<T*>(InstantiateComponent(gocClass));
 		}
 
 		hh::game::GOComponent* GetComponent(const char* in_pComponentName)
@@ -148,6 +153,6 @@ namespace hh::game
 
 		void SetLayer(char layer);
 
-		void LinkActionToUIKey(ui::LayerController* layerController, const char* uiPath, const char* actionName, bool unkParam);
+		void LinkActionToUIKey(ui::LayerController* layerController, const char* uiPath, const char* actionName, void* unkParam);
 	};
 }

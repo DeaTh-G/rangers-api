@@ -21,5 +21,9 @@ namespace hh::fnd
 		static void operator delete(void* ptr, size_t size) noexcept {
 			static_cast<BaseObject*>(ptr)->pAllocator->Free(ptr);
 		}
+
+		static void operator delete(void* ptr, csl::fnd::IAllocator* pAllocator) noexcept {
+			pAllocator->Free(ptr);
+		}
 	};
 }

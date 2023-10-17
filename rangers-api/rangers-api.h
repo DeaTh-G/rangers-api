@@ -209,6 +209,8 @@
 
 #include "Application/UI/UIMusicSelect.h"
 
+#include "Application/Game/GameMode.h"
+#include "Application/Game/GameModeStage.h"
 
 #include "Application/Player/PlayerCounterTimer.h"
 #include "Application/Player/PlayerHsmContext.h"

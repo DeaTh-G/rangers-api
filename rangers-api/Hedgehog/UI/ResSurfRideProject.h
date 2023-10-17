@@ -5,5 +5,7 @@ namespace hh::ui {
         csl::ut::MoveArray<void*> unk101;
         void* unk102;
         uint16_t unk103;
+    public:
+        static ResSurfRideProject* Load(const char* name);
     };
 }

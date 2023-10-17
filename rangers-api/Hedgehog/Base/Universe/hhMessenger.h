@@ -20,6 +20,8 @@ namespace hh::fnd
 		uint32_t messageMask;
 		uint32_t pUnk3;
 
+		Messenger(csl::fnd::IAllocator* pAllocator);
+
 		virtual void* GetClassId();
 		virtual bool fUnk2(Message& message) { return !fUnk3(); }
 		virtual bool fUnk3() { return false; }

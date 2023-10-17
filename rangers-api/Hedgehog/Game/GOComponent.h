@@ -59,16 +59,16 @@ namespace hh::game
 		GOComponent(csl::fnd::IAllocator* pAllocator);
 
 		virtual void* GetClassId();
-		virtual void Update() {}
+		virtual void Update();
 		virtual void GetDebugInfoMaybe();
-		virtual bool ProcessMessage(fnd::Message& msg) { return false; }
+		virtual bool ProcessMessage(fnd::Message& msg);
 		virtual bool fUnk5();
-		virtual void LoadReflection(const fnd::RflClass& rflClass) {}
+		virtual void LoadReflection(const fnd::RflClass& rflClass);
 
 		/*
 		 * When event is OBJECT_LAYER_CHANGED, data contains previous layer id.
 		 */
-		virtual void OnGOCEvent(GOCEvent event, GameObject& ownerGameObject, void* data) {}
+		virtual void OnGOCEvent(GOCEvent event, GameObject& ownerGameObject, void* data);
 
 		static GOComponent* Instantiate(GameObject& ownerGameObject, const GOComponentClass& componentClass);
 	};

@@ -9,16 +9,12 @@ namespace hh::fnd
 
 		const RflEntity* GetByName(const char* pName) const
 		{
-			auto result = m_Items[pName];
-			if (result == m_Items.end())
-				return nullptr;
-
-			return result;
+			return m_Items.GetValueOrFallback(pName, nullptr);
 		}
 		
 		void Register(const RflEntity* pInfo)
 		{
-			m_Items.insert(pInfo->GetName(), pInfo);
+			m_Items.Insert(pInfo->GetName(), pInfo);
 		}
 
 		void RegisterList(const RflEntity** pInfoList)

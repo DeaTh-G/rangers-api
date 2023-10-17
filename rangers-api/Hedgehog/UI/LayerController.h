@@ -20,5 +20,6 @@ namespace hh::ui {
         LayerController* GetChildLayer(const char* refCastName, uint16_t id);
         void SetVisibility(bool visible);
         void StartAnimation(const char* name, float initialFrame);
+        void UnkFunc1(const char* castName, bool flagDisabled);
     };
 }

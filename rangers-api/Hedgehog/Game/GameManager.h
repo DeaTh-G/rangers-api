@@ -138,6 +138,8 @@ namespace hh::game
 		// 	return { nullptr };
 		// }
 
+		void RegisterObject(GameObject* object, void* transform, GameObject* parent, void* probablyObjInfoOrSomething);
+		void RegisterNamedObject(GameObject* object, const char* name, bool copyName, void* transform, GameObject* parent);
 		void RegisterGameStepListener(GameStepListener& listener);
 		void UnregisterGameStepListener(GameStepListener& listener);
 		void RegisterGamePauseListener(GamePauseListener& listener);

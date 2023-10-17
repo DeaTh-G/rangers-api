@@ -2,7 +2,7 @@
 
 namespace csl::ut
 {
-	template<typename TOp>
+	template<typename TKey, typename TValue, typename TOp>
 	class HashMap
 	{
 		inline static constexpr size_t INVALID_KEY = static_cast<size_t>(-1);
@@ -11,8 +11,8 @@ namespace csl::ut
 		struct Elem
 		{
 			size_t m_Hash;
-			size_t m_Key;
-			size_t m_Value;
+			TKey m_Key;
+			TValue m_Value;
 		};
 		
 		Elem* m_pElements{};
@@ -59,7 +59,7 @@ namespace csl::ut
 			m_Length = 0;
 
 			m_pElements = AllocateMemory(capacity);
-			memset(m_pElements, INVALID_KEY, sizeof(Elem) * capacity);
+			memset(m_pElements, -1, sizeof(Elem) * capacity);
 
 			if (oldElements)
 			{
@@ -85,12 +85,12 @@ namespace csl::ut
 				ResizeTbl(cap);
 		}
 		
+	public:
 		HashMap(fnd::IAllocator* pAllocator)
 		{
 			m_pAllocator = pAllocator;
 		}
 
-	public:
 		void reserve(size_t capacity)
 		{
 			Reserve(capacity);
@@ -105,7 +105,82 @@ namespace csl::ut
 		}
 		
 	protected:
-		void Insert(size_t key, size_t value)
+		size_t GetBegin() const
+		{
+			for (size_t i = 0; i < GetCapacity() - 1; i++)
+			{
+				if (m_pElements[i].m_Hash != INVALID_KEY)
+					return i;
+			}
+			
+			return GetCapacity();
+		}
+
+		size_t GetNext(size_t idx) const
+		{
+			for (size_t i = idx + 1; i < GetCapacity() - 1; i++)
+			{
+				if (m_pElements[i].m_Hash != INVALID_KEY)
+					return i;
+			}
+
+			return GetCapacity();
+		}
+		
+	public:
+		struct iterator
+		{
+			const HashMap* m_pOwner;
+			size_t m_CurIdx;
+
+			friend bool operator==(const iterator& a, const iterator& b) { return a.m_CurIdx == b.m_CurIdx; }
+			friend bool operator!=(const iterator& a, const iterator& b) { return a.m_CurIdx != b.m_CurIdx; }
+
+			iterator& operator++() { m_CurIdx = m_pOwner->GetNext(m_CurIdx); return *this; }
+			iterator operator++(int) { iterator tmp = *this; m_CurIdx = m_pOwner->GetNext(m_CurIdx); return tmp; }
+
+			TKey& key() const
+			{
+				return m_pOwner->GetKey(this);
+			}
+
+			TValue& operator*() const
+			{
+				return m_pOwner->GetValue(this);
+			}
+
+			TValue* operator->() const
+			{
+				return &operator*();
+			}
+
+			operator TValue& ()
+			{
+				return operator*();
+			}
+		};
+
+		iterator begin() const
+		{
+			return iterator{ this, GetBegin() };
+		}
+
+		iterator end() const
+		{
+			return iterator{ this, GetCapacity() };
+		}
+
+		void clear()
+		{
+			m_Length = 0;
+			for (size_t i = 0; i < GetCapacity(); ++i)
+			{
+				auto& element = m_pElements[i];
+				element.m_Hash = INVALID_KEY;
+			}
+		}
+
+		iterator Insert(TKey key, TValue value)
 		{
 			size_t hash = TOp::hash(key) & 0x7FFFFFFFFFFFFFFF;
 			if (m_Length || GetCapacity())
@@ -147,62 +222,20 @@ namespace csl::ut
 					}
 				}
 			}
+
+			return { this, idx };
 		}
 
-		size_t GetBegin() const
-		{
-			for (size_t i = 0; i < GetCapacity() - 1; i++)
-			{
-				if (m_pElements[i].m_Hash != INVALID_KEY)
-					return i;
-			}
-			
-			return GetCapacity();
+		TValue& GetValueOrFallback(const TKey& key, TValue&& fallback) const {
+			auto result = Find(key);
+
+			if (result == end())
+				return fallback;
+
+			return GetValue(result);
 		}
 
-		size_t GetNext(size_t idx) const
-		{
-			for (size_t i = idx + 1; i < GetCapacity() - 1; i++)
-			{
-				if (m_pElements[i].m_Hash != INVALID_KEY)
-					return i;
-			}
-
-			return GetCapacity();
-		}
-		
-	public:
-		struct iterator
-		{
-			const HashMap* m_pOwner;
-			size_t m_CurIdx;
-
-			friend bool operator==(const iterator& a, const iterator& b) { return a.m_CurIdx == b.m_CurIdx; }
-			friend bool operator!=(const iterator& a, const iterator& b) { return a.m_CurIdx != b.m_CurIdx; }
-		};
-
-		iterator begin() const
-		{
-			return iterator{ this, GetBegin() };
-		}
-
-		iterator end() const
-		{
-			return iterator{ this, GetCapacity() };
-		}
-
-		void clear()
-		{
-			m_Length = 0;
-			for (size_t i = 0; i < GetCapacity(); ++i)
-			{
-				auto& element = m_pElements[i];
-				element.m_Hash = INVALID_KEY;
-			}
-		}
-
-	protected:
-		iterator Find(size_t key) const
+		iterator Find(const TKey& key) const
 		{
 			if (!m_pElements)
 				return end();
@@ -226,22 +259,17 @@ namespace csl::ut
 			return iterator{ this, idx };
 		}
 
-		size_t GetKey(iterator iter) const
+		TKey& GetKey(iterator iter) const
 		{
 			return iter.m_pOwner->m_pElements[iter.m_CurIdx].m_Key;
 		}
 		
-		size_t GetValue(iterator iter) const
+		TValue& GetValue(iterator iter) const
 		{
 			return iter.m_pOwner->m_pElements[iter.m_CurIdx].m_Value;
 		}
-
-		size_t* GetValuePtr(iterator iter) const
-		{
-			return &iter.m_pOwner->m_pElements[iter.m_CurIdx].m_Value;
-		}
 		
-		void Erase(size_t key)
+		void Erase(const TKey& key)
 		{
 			auto result = Find(key);
 
@@ -250,8 +278,6 @@ namespace csl::ut
 
 			Elem* pElem = &m_pElements[result.m_CurIdx];
 			pElem->m_Hash = INVALID_KEY;
-			pElem->m_Key = INVALID_KEY;
-			pElem->m_Value = INVALID_KEY;
 			m_Length--;
 		}
 
@@ -262,8 +288,6 @@ namespace csl::ut
 
 			Elem* pElem = &m_pElements[iter.m_CurIdx];
 			pElem->m_Hash = INVALID_KEY;
-			pElem->m_Key = INVALID_KEY;
-			pElem->m_Value = INVALID_KEY;
 			m_Length--;
 		}
 	};

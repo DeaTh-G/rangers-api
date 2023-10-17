@@ -46,7 +46,7 @@ namespace hh::ui {
             hh::ui::ResSurfRideProject* projectResource;
             const char* name;
             uint32_t unk1;
-            bool unk2;
+            uint8_t unk2;
             uint32_t unk3;
             uint32_t unk4;
             uint32_t unk5;

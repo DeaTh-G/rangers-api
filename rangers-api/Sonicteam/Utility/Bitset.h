@@ -1,5 +1,8 @@
 #pragma once
+
+#ifndef EXPORTING_TYPES
 #include <type_traits>
+#endif
 
 namespace csl::ut
 {
@@ -16,6 +19,7 @@ namespace csl::ut
 
 		Bitset(T value) : m_dummy(value){}
 
+#ifndef EXPORTING_TYPES
 		// This doesn't actually exist, i just want to make bits easily
 		template<typename... TArgs>
 		constexpr Bitset(TArgs... bits)
@@ -63,5 +67,6 @@ namespace csl::ut
 		}
 		
 		operator T() const { return m_dummy; }
+#endif
 	};
 }

@@ -9,8 +9,8 @@ namespace hh::hid {
     };
 
     class ActiveDeviceManagerListener {
-        virtual void OnDeviceChange() = 0;
-        virtual void ADML_UnkFunc2() = 0;
+        virtual void OnDeviceChange() {};
+        virtual void ADML_UnkFunc2() {};
     };
 
     class ActiveDeviceManager : public fnd::ReferencedObject, public UnknownListener {

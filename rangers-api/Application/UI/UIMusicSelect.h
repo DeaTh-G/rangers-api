@@ -28,11 +28,12 @@ namespace app::ui {
         uint32_t float2;
         bool field_2FC;
     public:
-        UIMusicSelect* Instantiate(csl::fnd::IAllocator* pAllocator);
+        static UIMusicSelect* Instantiate(csl::fnd::IAllocator* pAllocator);
 
-        virtual void Initialize();
-        virtual void Dispose();
-        virtual void Update(uint64_t unkParam, uint64_t unkParam2);
-		virtual void UnkFunc11(uint64_t a1, uint64_t a2, uint64_t a3, uint64_t a4);
+        virtual bool fUnk2(hh::fnd::Message& message) override;
+        virtual void Initialize(hh::game::GameManager* gameManager) override;
+        virtual void Dispose() override;
+        virtual void Update(uint64_t unkParam, uint64_t unkParam2) override;
+        virtual void OnDeviceChange() override;
     };
 }
