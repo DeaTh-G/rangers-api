@@ -21,7 +21,7 @@ namespace SurfRide {
 		void* m_pData{};
 		short m_ChildIndex{};
 		short m_SiblingIndex{};
-		void* m_pUserData{};
+		SRS_USERDATA* m_pUserData{};
 	};
 
     class Cast : public ReferencedObject {
@@ -52,6 +52,7 @@ namespace SurfRide {
     public:
 
         Cast(const SRS_CASTNODE& castData, void* unkParam, Layer* layer);
+        UserData GetUserData();
         void SetFlag1000(bool enabled);
     };
 }

@@ -13,7 +13,7 @@ namespace csl::ut
 		{
 			this->m_capacity = Bsz;
 			this->m_capacity |= SIGN_BIT;
-			this->p_buffer = (T*)reserved;
+			this->m_pBuffer = (T*)reserved;
 		}
 	};
 

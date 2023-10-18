@@ -27,7 +27,7 @@ namespace hh::game {
     };
 
     template<typename T>
-    class TinyFsmState<T> {
+    class TinyFsmState {
         typedef TinyFsmState<T>* (T::*MemberPtr)(TinyFsmState &result, TinyFsmEvent *inputEvent);
     };
 

@@ -1,14 +1,16 @@
 #pragma once
 
 namespace hh::ui {
+    class UIElement;
+    class UIElementGroup;
     class UIElementGroupContainer;
     class GOCUIComposition : public game::GOComponent {
         csl::ut::MoveArray<void*> unk101;
-        csl::ut::MoveArray<void*> unk102;
+        csl::fnd::Delegate<void (GOCUIComposition* gocUIComposition)> onCurrentGroupChange;
         bool unk103;
-        uint32_t unk104;
-        UIElementGroupContainer* container;
-        csl::ut::MoveArray<void*> unk106;
+        int currentGroupIndex;
+        UIElementGroupContainer* rootContainer;
+        csl::ut::MoveArray<UIElementGroup*> elementGroups;
         csl::ut::MoveArray<void*> unk107;
         csl::ut::MoveArray<void*> unk108;
         SurfRide::Project* project;
@@ -19,6 +21,9 @@ namespace hh::ui {
         uint64_t unk114;
 
         static GOCUIComposition* Instantiate(csl::fnd::IAllocator* pAllocator);
+        void Unk12421(SurfRide::Project* project, csl::ut::InplaceMoveArray<const char*, 32>& sceneNames);
+        int FindGlobalIndexOfGroup(UIElementGroupContainer* container, const char* name);
+        void SetCurrentGroupByGlobalIndex(int index);
     public:
         struct alignas(8) Config {
             uint32_t unk1;
@@ -29,7 +34,8 @@ namespace hh::ui {
         static game::GOComponentClass* GetClass();
         void Initialize(const Config& config);
         void SetProject(SurfRide::Project* project);
+        void SetCurrentGroup(const char* name);
         void DoSomething();
-        UIElement* GetUIElement(const char* name);
+        UIElement* FindElement(const char* name);
     };
 }

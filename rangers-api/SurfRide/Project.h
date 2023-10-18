@@ -31,7 +31,7 @@ namespace SurfRide
         const SRS_PROJECT* pProjectData;
         void* pTextureLists;
         uint32_t textureListCount;
-        csl::ut::MoveArray<void*> scenes;
+        csl::ut::MoveArray<SurfRide::Scene*> scenes;
         BinaryData* binaryData;
         void* pBinaryDataData;
         // ReferenceCount<Scene>* prcScenes{};

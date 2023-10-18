@@ -72,7 +72,7 @@ namespace hh::ui {
             bool enabled;
             uint32_t unk8;
             uint32_t unk9;
-            uint32_t unk10;
+            int unk10;
         public:
             void ScrollTo(uint32_t scrollPosition);
         };
@@ -110,7 +110,7 @@ namespace hh::ui {
                 float grabAdjustScrollTime; // User data GRAB_ADJUST_SCROLL_TIME
                 Dimensions dimensions;
                 uint32_t scrollStartRow;
-                uint32_t scrollBarMinSize;  // User data SCROLL_BAR_MIN_SIZE, max 100
+                int scrollBarMinSize;  // User data SCROLL_BAR_MIN_SIZE, max 100
                 uint32_t scrollLargeChange; // User data SCROLL_LARGE_CHANGE
                 bool scrollEnabled;         // User data SCROLL_ENABLED
                 bool loopHorizontally;      // User data LOOP || LOOP_H
@@ -123,7 +123,7 @@ namespace hh::ui {
             Options options;
             uint32_t documentWidth;
             uint32_t documentHeight;
-            uint32_t unk42;
+            fnd::Handle<SurfRideCastHandle> unk42;
             UIPanel* panel;
             ScrollController* pScrollController;
             uint64_t unk44;
@@ -161,11 +161,13 @@ namespace hh::ui {
         bool unk39;
     public:
 
-        UIListViewElement();
+        UIListViewElement(csl::fnd::IAllocator* pAllocator, SurfRide::Cast* cast, GOCUIComposition* gocUIComposition);
         void AddItem(UIListViewItem* item);
         void Reset();
         UIListViewItem* GetItem(uint32_t index);
         LayerController* GetItemLayerController(UIListViewItem* item);
+        LayerController* GetSomeLayerController();
+        void NUnkFunc1(int a2, char a3, char a4);
         virtual void GetClassId();
         virtual void UnkFunc2();
         virtual void UnkFunc3();

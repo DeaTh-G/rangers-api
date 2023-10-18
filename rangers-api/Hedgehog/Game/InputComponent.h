@@ -2,8 +2,8 @@
 
 namespace hh::game {
     class InputListener {
-        virtual void UnkFunc1() = 0;
-        virtual void UnkFunc2() = 0;
+        virtual void IL_UnkFunc1() {};
+        virtual void IL_UnkFunc2() {};
     };
 
     class InputComponent : public fnd::ReferencedObject {
