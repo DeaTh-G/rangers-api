@@ -57,14 +57,14 @@ namespace app
 			};
 			
 		private:
-			LuaWrapper m_Wrapper{};
+			LuaWrapper Wrapper{};
 
 			INSERT_PADDING(160);
 
 		public:
 			LuaWrapper* GetLuaWrapper() const
 			{
-				return (LuaWrapper*)&m_Wrapper;
+				return (LuaWrapper*)&Wrapper;
 			}
 		};
 	}
@@ -92,10 +92,10 @@ namespace app
 			return pManager->pManager;
 		}
 		
-		void SetCaptionType(int jobCount)
+		void SetCaptionType(int in_jobCount)
 		{
 			OverlayType = 4;
-			OverlayJobCount = jobCount;
+			OverlayJobCount = in_jobCount;
 		}
 
 		void PlayLipAnimation(const char* in_pCaptionName)

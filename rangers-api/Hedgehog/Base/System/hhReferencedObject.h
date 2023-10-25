@@ -9,7 +9,7 @@ namespace hh::fnd
 		int Unk1{};
 		int RefCount{};
 		
-		inline static void* operator new(size_t size, void* memory) { return memory; }
+		inline static void* operator new(size_t in_size, void* in_pMemory) { return in_pMemory; }
 	};
 
 	class RefByHandleObject : public ReferencedObject

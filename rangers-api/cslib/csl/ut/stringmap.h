@@ -8,12 +8,12 @@ namespace csl::ut
 		inline static constexpr size_t HASH_MAGIC = 31;
 
 	public:
-		static size_t hash(const char* key)
+		static size_t hash(const char* in_pKey)
 		{
-			if (!key)
+			if (!in_pKey)
 				return 0;
 
-			const char* pStr = reinterpret_cast<const char*>(key);
+			const char* pStr = reinterpret_cast<const char*>(in_pKey);
 			size_t hashResult{};
 			size_t i = 0;
 			char c = *pStr;

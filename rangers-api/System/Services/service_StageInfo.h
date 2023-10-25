@@ -37,59 +37,59 @@ namespace app::level
 	public:
 		enum EAttributeFlags
 		{
-			EAttributeFlags_Cyber = 0x01,
-			EAttributeFlags_Minigame = 0x02,
-			EAttributeFlags_Hacking = 0x03,
-			EAttributeFlags_LastBoss = 0x04,
-			EAttributeFlags_MasterTrial = 0x05,
-			EAttributeFlags_Tutorial = 0x06,
-			EAttributeFlags_Navmesh = 0x08,
-			EAttributeFlags_HeightField = 0x09,
-			EAttributeFlags_PointCloud = 0x0A,
-			EAttributeFlags_Autosave = 0x0B,
-			EAttributeFlags_Diving = 0x0D,
-			EAttributeFlags_SideStep = 0x0E,
-			EAttributeFlags_Athletic = 0x0F,
-			EAttributeFlags_Boarding = 0x10,
-			EAttributeFlags_Drift = 0x11,
-			EAttributeFlags_SideView = 0x12,
-			EAttributeFlags_Lava = 0x13,
-			EAttributeFlags_Sonic = 0x14,
-			EAttributeFlags_Tails = 0x15,
-			EAttributeFlags_Amy = 0x16,
-			EAttributeFlags_Knuckles = 0x17,
-			EAttributeFlags_BattleRush = 0x18,
-			EAttributeFlags_BossRush = 0x19,
-			EAttributeFlags_Extra = 0x1A,
-			EAttributeFlags_DeleteFallDeadCollision = 0x1B,
-			EAttributeFlags_DeleteAirWallCollision = 0x1C,
-			EAttributeFlags_DeleteGrindRail = 0x1D,
-			EAttributeFlags_ChangeNewCollision = 0x1E,
-			EAttributeFlags_RestrictDebris = 0x1F,
-			EAttributeFlags_SpecialParryEffect = 0x20
+			eAttributeFlags_Cyber = 0x01,
+			eAttributeFlags_Minigame = 0x02,
+			eAttributeFlags_Hacking = 0x03,
+			eAttributeFlags_LastBoss = 0x04,
+			eAttributeFlags_MasterTrial = 0x05,
+			eAttributeFlags_Tutorial = 0x06,
+			eAttributeFlags_Navmesh = 0x08,
+			eAttributeFlags_HeightField = 0x09,
+			eAttributeFlags_PointCloud = 0x0A,
+			eAttributeFlags_Autosave = 0x0B,
+			eAttributeFlags_Diving = 0x0D,
+			eAttributeFlags_SideStep = 0x0E,
+			eAttributeFlags_Athletic = 0x0F,
+			eAttributeFlags_Boarding = 0x10,
+			eAttributeFlags_Drift = 0x11,
+			eAttributeFlags_SideView = 0x12,
+			eAttributeFlags_Lava = 0x13,
+			eAttributeFlags_Sonic = 0x14,
+			eAttributeFlags_Tails = 0x15,
+			eAttributeFlags_Amy = 0x16,
+			eAttributeFlags_Knuckles = 0x17,
+			eAttributeFlags_BattleRush = 0x18,
+			eAttributeFlags_BossRush = 0x19,
+			eAttributeFlags_Extra = 0x1A,
+			eAttributeFlags_DeleteFallDeadCollision = 0x1B,
+			eAttributeFlags_DeleteAirWallCollision = 0x1C,
+			eAttributeFlags_DeleteGrindRail = 0x1D,
+			eAttributeFlags_ChangeNewCollision = 0x1E,
+			eAttributeFlags_RestrictDebris = 0x1F,
+			eAttributeFlags_SpecialParryEffect = 0x20
 		};
 
 		enum ECyberModeFlags
 		{
-			ECyberModeFlags_LowGravity = 0x01,
-			ECyberModeFlags_TimeExtend = 0x02,
-			ECyberModeFlags_SpeedScale = 0x03,
-			ECyberModeFlags_Nitro = 0x04,
-			ECyberModeFlags_MaxSpeedChallenge = 0x05
+			eCyberModeFlags_LowGravity = 0x01,
+			eCyberModeFlags_TimeExtend = 0x02,
+			eCyberModeFlags_SpeedScale = 0x03,
+			eCyberModeFlags_Nitro = 0x04,
+			eCyberModeFlags_MaxSpeedChallenge = 0x05
 		};
 
 		enum EMissionFlags
 		{
-			EMissionFlags_Goal = 0x01,
-			EMissionFlags_Rank = 0x02,
-			EMissionFlags_Ring = 0x04,
-			EMissionFlags_RedRing = 0x05,
-			EMissionFlags_NumberRing = 0x06,
-			EMissionFlags_SilverMoonRing = 0x07,
-			EMissionFlags_HideGoal = 0x08,
-			EMissionFlags_ShadowTails = 0x09,
-			EMissionFlags_Mine = 0x0A,
-			EMissionFlags_Animal = 0x0B
+			eMissionFlags_Goal = 0x01,
+			eMissionFlags_Rank = 0x02,
+			eMissionFlags_Ring = 0x04,
+			eMissionFlags_RedRing = 0x05,
+			eMissionFlags_NumberRing = 0x06,
+			eMissionFlags_SilverMoonRing = 0x07,
+			eMissionFlags_HideGoal = 0x08,
+			eMissionFlags_ShadowTails = 0x09,
+			eMissionFlags_Mine = 0x0A,
+			eMissionFlags_Animal = 0x0B
 		};
 
 	public:

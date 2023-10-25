@@ -5,7 +5,7 @@ namespace csl::ut
 	template<typename T, size_t Len>
 	class FixedArray
 	{
-		T m_Items[Len];
+		T Items[Len];
 
 	public:
 		constexpr size_t size() const
@@ -15,32 +15,32 @@ namespace csl::ut
 
 		constexpr const T* begin() const
 		{
-			return m_Items;
+			return Items;
 		}
 
 		constexpr const T* end() const
 		{
-			return &m_Items[Len];
+			return &Items[Len];
 		}
 
 		constexpr T* begin()
 		{
-			return m_Items;
+			return Items;
 		}
 
 		constexpr T* end()
 		{
-			return &m_Items[Len];
+			return &Items[Len];
 		}
 		
-		constexpr T operator[] (size_t i) const
+		constexpr T operator[] (size_t in_index) const
 		{
-			return m_Items[i];
+			return Items[in_index];
 		}
 
-		constexpr T& operator[] (size_t i)
+		constexpr T& operator[] (size_t in_index)
 		{
-			return m_Items[i];
+			return Items[in_index];
 		}
 	};
 }

@@ -9,47 +9,47 @@ namespace app::player
 	public:
 		enum StateFlags
 		{
-			IsBoost = 0x00,
-			IsAirBoost = 0x04,
-			IsGrindJump = 0x06,
-			IsGrind = 0x07,
-			IsJump = 0x08,
-			IsDoubleJump = 0x09,
-			IsBounceJump = 0x0A,
-			IsFall = 0x0B,
-			IsStomp = 0x0C,
-			IsDiving = 0x0D,
-			IsDivingBoost = 0x0E,
-			IsCyloop = 0x11,
-			IsCyloopEnd = 0x12,
-			IsDrift = 0x13,
-			IsHoming = 0x17,
-			IsParry = 0x18,
-			IsWallClimb = 0x19,
-			IsIdle = 0x1A,
-			IsWallClimbIdle = 0x1C,
-			IsBoarding = 0x1E,
-			IsSpringJump = 0x21,
-			IsPhantomRush = 0x26
+			eStateFlags_IsBoost = 0x00,
+			eStateFlags_IsAirBoost = 0x04,
+			eStateFlags_IsGrindJump = 0x06,
+			eStateFlags_IsGrind = 0x07,
+			eStateFlags_IsJump = 0x08,
+			eStateFlags_IsDoubleJump = 0x09,
+			eStateFlags_IsBounceJump = 0x0A,
+			eStateFlags_IsFall = 0x0B,
+			eStateFlags_IsStomp = 0x0C,
+			eStateFlags_IsDiving = 0x0D,
+			eStateFlags_IsDivingBoost = 0x0E,
+			eStateFlags_IsCyloop = 0x11,
+			eStateFlags_IsCyloopEnd = 0x12,
+			eStateFlags_IsDrift = 0x13,
+			eStateFlags_IsHoming = 0x17,
+			eStateFlags_IsParry = 0x18,
+			eStateFlags_IsWallClimb = 0x19,
+			eStateFlags_IsIdle = 0x1A,
+			eStateFlags_IsWallClimbIdle = 0x1C,
+			eStateFlags_IsBoarding = 0x1E,
+			eStateFlags_IsSpringJump = 0x21,
+			eStateFlags_IsPhantomRush = 0x26
 		};
 		
 		enum CombatFlags
 		{
-			IsPerfectParry = 0x10
+			eCombatFlags_IsPerfectParry = 0x10
 		};
 
 		enum WorldFlags
 		{
-			IsDead = 0x01,
-			IsDamagedOrRepelled = 0x02,
-			IsOutOfControl = 0x07,
-			IsAutoRun = 0x0A,
-			IsCyberSpace = 0x1E,
-			IsPowerBoost = 0x28,
-			IsAirTrick = 0x2A,
-			IsHeightMapCollision = 0x37,
-			IsNoClip = 0x38,
-			IsBattle = 0x3A
+			eWorldFlags_IsDead = 0x01,
+			eWorldFlags_IsDamagedOrRepelled = 0x02,
+			eWorldFlags_IsOutOfControl = 0x07,
+			eWorldFlags_IsAutoRun = 0x0A,
+			eWorldFlags_IsCyberSpace = 0x1E,
+			eWorldFlags_IsPowerBoost = 0x28,
+			eWorldFlags_IsAirTrick = 0x2A,
+			eWorldFlags_IsHeightMapCollision = 0x37,
+			eWorldFlags_IsNoClip = 0x38,
+			eWorldFlags_IsBattle = 0x3A
 		};
 		
 	public:

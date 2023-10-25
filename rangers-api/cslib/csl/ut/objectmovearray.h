@@ -6,82 +6,82 @@ namespace csl::ut
 	class ObjectMoveArray
 	{
 	protected:
-		T* m_pBuffer{};
-		size_t m_length{};
-		size_t m_capacity{};
-		fnd::IAllocator* m_pAllocator{};
+		T* pBuffer{};
+		size_t Length{};
+		size_t Capacity{};
+		fnd::IAllocator* pAllocator{};
 
-		T* get(size_t i) const
+		T* get(size_t in_index) const
 		{
-			if (!this->m_pBuffer)
+			if (!this->pBuffer)
 				return nullptr;
 
-			return &this->m_pBuffer[i];
+			return &this->pBuffer[in_index];
 		}
 
 		bool isInplace()
 		{
-			return this->m_capacity & csl::ut::SIGN_BIT;
+			return this->Capacity & csl::ut::SIGN_BIT;
 		}
 
 	public:
-		void change_allocator(fnd::IAllocator* new_allocator)
+		void change_allocator(fnd::IAllocator* in_pAllocator)
 		{
-			if (!new_allocator)
+			if (!in_pAllocator)
 			{
 				return;
 			}
 
-			if (isInplace() || !this->m_pBuffer)
+			if (isInplace() || !this->pBuffer)
 			{
-				m_pAllocator = new_allocator;
+				pAllocator = in_pAllocator;
 				return;
 			}
 
-			if (m_pAllocator == new_allocator)
+			if (pAllocator == in_pAllocator)
 			{
 				return;
 			}
 
 			// Make a new m_pBuffer
-			void* new_buffer = new_allocator->Alloc(this->capacity() * sizeof(T), 16);
+			void* new_buffer = in_pAllocator->Alloc(this->capacity() * sizeof(T), 16);
 
 			// Copy buffers
-			memcpy(new_buffer, this->m_pBuffer, sizeof(T) * this->m_length);
+			memcpy(new_buffer, this->pBuffer, sizeof(T) * this->Length);
 
 			// Free our old m_pBuffer
-			if (m_pAllocator && !isInplace())
+			if (pAllocator && !isInplace())
 			{
-				m_pAllocator->Free(this->m_pBuffer);
+				pAllocator->Free(this->pBuffer);
 			}
 
-			m_pAllocator = new_allocator;
-			this->m_pBuffer = static_cast<T*>(new_buffer);
+			pAllocator = in_pAllocator;
+			this->pBuffer = static_cast<T*>(new_buffer);
 		}
 
-		void reserve(size_t len)
+		void reserve(size_t in_length)
 		{
 			// We already have enough reserved, return
-			if (len <= this->capacity())
+			if (in_length <= this->capacity())
 				return;
 
 			// Allocate a new m_pBuffer with the appropriate reserved storage
-			void* new_buffer = m_pAllocator->Alloc(sizeof(T) * len, 16);
+			void* new_buffer = pAllocator->Alloc(sizeof(T) * in_length, 16);
 
-			if (this->m_pBuffer)
+			if (this->pBuffer)
 			{
-				memcpy(new_buffer, this->m_pBuffer, sizeof(T) * this->m_length);
+				memcpy(new_buffer, this->pBuffer, sizeof(T) * this->Length);
 			}
 
 			// Free our old m_pBuffer
 			if (!isInplace())
 			{
-				m_pAllocator->Free(this->m_pBuffer);
+				pAllocator->Free(this->pBuffer);
 			}
 
 			// Assign our new m_pBuffer and set the new m_capacity
-			this->m_capacity = len;
-			this->m_pBuffer = static_cast<T*>(new_buffer);
+			this->Capacity = in_length;
+			this->pBuffer = static_cast<T*>(new_buffer);
 		}
 
 		ObjectMoveArray()
@@ -89,7 +89,7 @@ namespace csl::ut
 
 		}
 
-		ObjectMoveArray(fnd::IAllocator* in_pAllocator) : m_pAllocator(in_pAllocator)
+		ObjectMoveArray(fnd::IAllocator* in_pAllocator) : pAllocator(in_pAllocator)
 		{
 
 		}
@@ -101,105 +101,105 @@ namespace csl::ut
 
 		~ObjectMoveArray()
 		{
-			if (m_pAllocator && !isInplace())
-				m_pAllocator->Free(this->m_pBuffer);
+			if (pAllocator && !isInplace())
+				pAllocator->Free(this->pBuffer);
 		}
 
 		[[nodiscard]] T* begin() const { return get(0); }
 
-		[[nodiscard]] T* end() const { return get(this->m_length); }
+		[[nodiscard]] T* end() const { return get(this->Length); }
 
 		[[nodiscard]] T front() const { return *get(0); }
 
 		[[nodiscard]] size_t size() const
 		{
-			return this->m_length;
+			return this->Length;
 		}
 
 		[[nodiscard]] size_t capacity() const
 		{
-			return this->m_capacity & ~csl::ut::SIGN_BIT;
+			return this->Capacity & ~csl::ut::SIGN_BIT;
 		}
 
 		csl::fnd::IAllocator* get_allocator()
 		{
-			return m_pAllocator;
+			return pAllocator;
 		}
 
 		void push_back(const T& item)
 		{
-			this->m_length++;
-			if (this->m_length > this->capacity())
+			this->Length++;
+			if (this->Length > this->capacity())
 			{
-				reserve(this->m_length * 2);
+				reserve(this->Length * 2);
 			}
 
-			this->m_pBuffer[this->m_length - 1] = item;
+			this->pBuffer[this->Length - 1] = item;
 		}
 
 		void push_back_unchecked(const T& item)
 		{
-			this->m_length++;
-			this->m_pBuffer[this->m_length - 1] = item;
+			this->Length++;
+			this->pBuffer[this->Length - 1] = item;
 		}
 
 		void remove(size_t i)
 		{
-			if (i > this->m_length)
+			if (i > this->Length)
 				return;
 
-			this->m_pBuffer[i] = this->m_pBuffer[i + 1];
-			this->m_length--;
+			this->pBuffer[i] = this->pBuffer[i + 1];
+			this->Length--;
 		}
 
 		bool empty()
 		{
-			return this->m_length == 0;
+			return this->Length == 0;
 		}
 
 		void clear()
 		{
 			if (!empty())
-				this->m_length = 0;
+				this->Length = 0;
 		}
 
-		void swap(ObjectMoveArray& rArray)
+		void swap(ObjectMoveArray& in_rArray)
 		{
-			auto* tempBuffer = this->m_pBuffer;
-			auto tempLen = this->m_length;
-			auto tempCap = this->m_capacity;
-			auto* tempAllocator = this->m_pAllocator;
+			auto* tempBuffer = this->pBuffer;
+			auto tempLen = this->Length;
+			auto tempCap = this->Capacity;
+			auto* tempAllocator = this->pAllocator;
 
-			this->m_pBuffer = rArray.m_pBuffer;
-			this->m_length = rArray.m_length;
-			this->m_capacity = rArray.m_capacity;
-			this->m_pAllocator = rArray.m_pAllocator;
+			this->pBuffer = in_rArray.pBuffer;
+			this->Length = in_rArray.Length;
+			this->Capacity = in_rArray.Capacity;
+			this->pAllocator = in_rArray.pAllocator;
 
-			rArray.m_pBuffer = tempBuffer;
-			rArray.m_length = tempLen;
-			rArray.m_capacity = tempCap;
-			rArray.m_pAllocator = tempAllocator;
+			in_rArray.pBuffer = tempBuffer;
+			in_rArray.Length = tempLen;
+			in_rArray.Capacity = tempCap;
+			in_rArray.pAllocator = tempAllocator;
 		}
 
-		size_t find(const T& item) const
+		size_t find(const T& in_rItem) const
 		{
-			for (size_t i = 0; i < this->m_length; i++)
+			for (size_t i = 0; i < this->Length; i++)
 			{
-				if (*this->get(i) == item)
+				if (*this->get(i) == in_rItem)
 					return i;
 			}
 
 			return -1;
 		}
 
-		const T& operator[] (size_t i) const
+		const T& operator[] (size_t in_index) const
 		{
-			return *this->get(i);
+			return *this->get(in_index);
 		}
 
-		T& operator[] (size_t i)
+		T& operator[] (size_t in_index)
 		{
-			return *this->get(i);
+			return *this->get(in_index);
 		}
 	};
 }

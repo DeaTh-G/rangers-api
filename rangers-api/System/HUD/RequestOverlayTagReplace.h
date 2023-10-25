@@ -4,9 +4,9 @@ namespace app::ui
 {
 	class RequestOverlayTagReplace
 	{
-		void* m_pUnk1{};
-		void* m_pUnk2{};
-		int64_t m_Unk3{ 0x80000000 };
-		hh::fnd::ThreadSafeTlsfHeapAllocator* m_pAllocator{ hh::game::GameManager::GetSingleton()->pAllocator };
+		void* pUnk4{};
+		void* pUnk5{};
+		int64_t Unk6{ 0x80000000 };
+		hh::fnd::ThreadSafeTlsfHeapAllocator* pAllocator{ hh::game::GameManager::GetSingleton()->pAllocator };
 	};
 }
