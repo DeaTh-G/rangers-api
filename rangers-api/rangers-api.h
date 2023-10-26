@@ -70,6 +70,7 @@
 
 // Services
 #include "System/Services/service_ChallengeTimeManager.h"
+#include "System/Services/service_EnemyManager.h"
 #include "System/Services/service_StageInfo.h"
 #include "System/Services/service_LevelInfo.h"
 #include "System/Services/service_PhotoMode.h"
