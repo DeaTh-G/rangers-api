@@ -35,7 +35,15 @@ namespace app::player
 		
 		enum CombatFlags
 		{
-			eCombatFlags_IsPerfectParry = 0x10
+			eCombatFlags_IsPerfectParry = 0x10,
+			eCombatFlags_IsCycloneKick = 0x2A,
+			eCombatFlags_IsSonicBoom = 0x2D,
+			eCombatFlags_IsWildRush = 0x2E,
+			eCombatFlags_IsLoopKick = 0x2F,
+			eCombatFlags_IsSpinSlash = 0x30,
+			eCombatFlags_IsStompAttack = 0x31,
+			eCombatFlags_IsHomingShot = 0x33,
+			eCombatFlags_IsCrossSlash = 0x34
 		};
 
 		enum WorldFlags
