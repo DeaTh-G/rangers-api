@@ -28,21 +28,6 @@ namespace hh::game
 			return *ms_ppGameDocument;
 		}
 
-		template <typename T>
-		T* GetService()
-		{
-			for (auto* pService : Services)
-			{
-				if (pService == nullptr)
-					continue;
-
-				if (strcmp(pService->pStaticClass->pName, T::GetServiceName()) == 0)
-					return reinterpret_cast<T*>(pService);
-			}
-		
-			return { nullptr };
-		}
-
 		GameService* GetService(const char* in_pServiceName)
 		{
 			for (auto* pService : Services)
@@ -58,18 +43,9 @@ namespace hh::game
 		}
 
 		template <typename T>
-		T* GetGameObject()
+		T* GetService()
 		{
-			for (auto* pObject : Objects)
-			{
-				if (pObject == nullptr)
-					continue;
-
-				if (strcmp(pObject->pObjectName, T::GetObjectName()) == 0)
-					return reinterpret_cast<T*>(pObject);
-			}
-
-			return { nullptr };
+			return (T*)GetService(T::GetServiceName());
 		}
 
 		GameObject* GetGameObject(const char* in_pObjectName)
@@ -84,6 +60,12 @@ namespace hh::game
 			}
 
 			return { nullptr };
+		}
+
+		template <typename T>
+		T* GetGameObject()
+		{
+			return (T*)GetGameObject(T::GetObjectName());
 		}
 	};
 }
