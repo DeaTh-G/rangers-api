@@ -1,5 +1,27 @@
 #pragma once
 
+#define IS_STATE_FLAG(in_pBlackboardStatus, in_name) ((in_pBlackboardStatus->StateFlags & (1L << (int)app::player::BlackboardStatus::StateFlags::eStateFlags_##in_name)) != 0)
+#define IS_COMBAT_FLAG(in_pBlackboardStatus, in_name) ((in_pBlackboardStatus->CombatFlags & (1L << (int)app::player::BlackboardStatus::CombatFlags::eCombatFlags_##in_name)) != 0)
+#define IS_WORLD_FLAG(in_pBlackboardStatus, in_name) ((in_pBlackboardStatus->WorldFlags & (1L << (int)app::player::BlackboardStatus::WorldFlags::eWorldFlags_##in_name)) != 0)
+
+#define SET_STATE_FLAG(in_pBlackboardStatus, in_name, in_isEnabled) \
+	if (in_isEnabled) \
+		in_pBlackboardStatus->StateFlags |= (1L << (int)app::player::BlackboardStatus::StateFlags::eStateFlags_##in_name); \
+	else \
+		in_pBlackboardStatus->StateFlags &= ~(1L << (int)app::player::BlackboardStatus::StateFlags::eStateFlags_##in_name);
+
+#define SET_COMBAT_FLAG(in_pBlackboardStatus, in_name, in_isEnabled) \
+	if (in_isEnabled) \
+		in_pBlackboardStatus->CombatFlags |= (1L << (int)app::player::BlackboardStatus::CombatFlags::eCombatFlags_##in_name); \
+	else \
+		in_pBlackboardStatus->CombatFlags &= ~(1L << (int)app::player::BlackboardStatus::CombatFlags::eCombatFlags_##in_name);
+
+#define SET_WORLD_FLAG(in_pBlackboardStatus, in_name, in_isEnabled) \
+	if (in_isEnabled) \
+		in_pBlackboardStatus->WorldFlags |= (1L << (int)app::player::BlackboardStatus::WorldFlags::eWorldFlags_##in_name); \
+	else \
+		in_pBlackboardStatus->WorldFlags &= ~(1L << (int)app::player::BlackboardStatus::WorldFlags::eWorldFlags_##in_name);
+
 namespace app::player
 {
 	class alignas(16) BlackboardStatus : public BlackboardContent
