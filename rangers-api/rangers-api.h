@@ -61,6 +61,12 @@
 #include "System/Player/SonicContext.h"
 #include "System/Player/Sonic.h"
 
+// System Player State
+#include "System/Player/State/Plugin.h"
+#include "System/Player/State/PlayerPlugin.h"
+#include "System/Player/State/PluginManager.h"
+#include "System/Player/State/PluginAirTrick.h"
+
 // System Game Object Components
 #include "System/Player/goc/goc_PlayerBlackboard.h"
 #include "System/Player/goc/goc_PlayerVisual.h"
