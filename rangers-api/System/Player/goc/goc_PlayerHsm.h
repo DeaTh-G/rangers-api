@@ -2,6 +2,9 @@
 
 namespace app::player
 {
+	template <typename T>
+	class StatePluginManager;
+
 	class GOCPlayerHsm : public hh::game::GOComponent
 	{
 	private:
