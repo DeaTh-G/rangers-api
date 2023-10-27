@@ -31,12 +31,7 @@ namespace hh::fnd
 		template<typename T>
 		inline static T* GetMessengerByHandle(uint32_t in_handle)
 		{
-			auto* pHandleManager = HandleManagerBase::GetSingleton();
-
-			if (pHandleManager)
-				return pHandleManager->GetObjectByHandle<T>(in_handle);
-
-			return { nullptr };
+			return static_cast<T*>(GetMessengerByHandle(in_handlle));
 		}
 	};
 }

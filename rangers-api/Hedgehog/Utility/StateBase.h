@@ -28,9 +28,9 @@ namespace hh::ut
 		typedef bool (T::*ProcessMessage_t)(hh::fnd::Message*, bool);
 
 	public:
-		csl::ut::ObjectMoveArray<ProcessMessage_t*> Unknown1{};
-		csl::ut::ObjectMoveArray<void*> Unknown2{};
-		void* pUnknown3;
+		csl::ut::ObjectMoveArray<ProcessMessage_t*> Unk1{};
+		csl::ut::ObjectMoveArray<void*> Unk2{};
+		void* pUnk3;
 		INSERT_PADDING(56) {};
 	};
 

@@ -4,7 +4,7 @@ namespace app::ui
 {
 	class RequestOverlayBegin;
 
-	class UIOverlayService : public hh::game::GameService, hh::game::GameUpdateListener, app::fnd::AppResourceManagerListener
+	class UIOverlayService : public hh::game::GameService, public hh::game::GameUpdateListener, public app::fnd::AppResourceManagerListener
 	{
 	private:
 		inline static const char* ms_pServiceName = "UIOverlayService";

@@ -2,7 +2,7 @@
 
 namespace app::game
 {
-	class PhotoModeService : public hh::game::GameService, hh::game::GameStepListener, app::fnd::AppResourceManagerListener
+	class PhotoModeService : public hh::game::GameService, public hh::game::GameStepListener, public app::fnd::AppResourceManagerListener
 	{
 	private:
 		inline static const char* ms_pServiceName = "PhotoModeService";

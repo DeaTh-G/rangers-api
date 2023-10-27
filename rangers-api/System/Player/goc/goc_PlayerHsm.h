@@ -4,6 +4,7 @@ namespace app::player
 {
 	template <typename T>
 	class StatePluginManager;
+	class PlayerStateParameter;
 
 	class GOCPlayerHsm : public hh::game::GOComponent
 	{
@@ -14,11 +15,11 @@ namespace app::player
 		INSERT_PADDING(8);
 		hh::ut::HsmBase Hsm{};
 		INSERT_PADDING(8);
-		void* pPlayerStateParameter{}; // app::player::PlayerStateParameter
+		PlayerStateParameter* pPlayerStateParameter{};
 		StatePluginManager<PlayerHsmContext>* pStatePluginManager{};
 		INSERT_PADDING(4);
-		int32_t StateID{};
-		int32_t ParentStateID{};
+		int StateID{};
+		int ParentStateID{};
 		INSERT_PADDING(80);
 
 		static const char* GetComponentName()
@@ -26,12 +27,9 @@ namespace app::player
 			return ms_pComponentName;
 		}
 
-		int32_t GetStateID()
+		int GetCurrentStateID()
 		{
-			if (Hsm.CurrentStateIndex)
-				return Hsm.pStates[Hsm.CurrentStateIndex - 1]->StateID;
-
-			return -1;
+			return Hsm.getCurrentStateID();
 		}
 	};
 }

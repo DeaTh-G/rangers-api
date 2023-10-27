@@ -7,7 +7,7 @@ namespace app
 
 namespace app
 {
-	class ScriptSequenceManager : public hh::game::GameService, hh::game::GameStepListener, app::save::SaveManagerListener
+	class ScriptSequenceManager : public hh::game::GameService, public hh::game::GameStepListener, public app::save::SaveManagerListener
 	{
     private:
 		inline static const char* ms_pServiceName = "ScriptSequenceManager";

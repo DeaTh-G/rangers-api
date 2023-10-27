@@ -15,6 +15,20 @@ namespace hh::ut
 			INSERT_PADDING(40);
 
 			virtual ~HsmImpl() = default;
+
+		public:
+			StateImpl* getState(int in_index) const
+			{
+				return pStates[in_index];
+			}
+
+			int getCurrentStateID() const
+			{
+				if (CurrentStateIndex)
+					return getState(CurrentStateIndex - 1)->StateID;
+
+				return -1;
+			}
 		};
 	}
 

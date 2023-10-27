@@ -4,7 +4,7 @@ namespace app::level
 {
 	class StageData;
 
-	class StageInfo : public hh::game::GameService, app::fnd::AppResourceManagerListener
+	class StageInfo : public hh::game::GameService, public app::fnd::AppResourceManagerListener
 	{
 	private:
 		inline static const char* ms_pServiceName = "StageInfo";

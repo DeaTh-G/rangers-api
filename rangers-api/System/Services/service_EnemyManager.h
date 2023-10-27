@@ -2,7 +2,7 @@
 
 namespace app
 {
-	class alignas(16) EnemyManager : public hh::game::GameService, hh::game::GameStepListener
+	class alignas(16) EnemyManager : public hh::game::GameService, public hh::game::GameStepListener
 	{
 	private:
 		inline static const char* ms_pServiceName = "EnemyManager";

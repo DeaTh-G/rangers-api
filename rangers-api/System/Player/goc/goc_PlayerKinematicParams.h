@@ -2,7 +2,7 @@
 
 namespace app::player
 {
-	class GOCPlayerKinematicParams : hh::game::GOComponent
+	class GOCPlayerKinematicParams : public hh::game::GOComponent
 	{
 	private:
 		inline static const char* ms_pComponentName = "GOCPlayerKinematicParams";

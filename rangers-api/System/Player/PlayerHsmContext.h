@@ -8,13 +8,16 @@ namespace app::player
 	class alignas(8) PlayerHsmContext : public hh::fnd::ReferencedObject, public app::save::SaveManagerListener
 	{
 	public:
+		class OutOfControlTimerList;
+		class DamagedObjects;
+
 		Player* pPlayer{};
 		BlackboardStatus* pBlackboardStatus{};
 		INSERT_PADDING(8);
 		GOCPlayerHsm* pGOCPlayerHsm;
 		INSERT_PADDING(56);
-		void* pOutOfControlTimerList; // app::player::PlayerHsmContext::OutOfControlTimerList
-		void* pDamagedObjects;        // app::player::PlayerHsmContext::DamagedObjects
+		OutOfControlTimerList* pOutOfControlTimerList;
+		DamagedObjects* pDamagedObjects;
 
 		Player* GetPlayer() const
 		{

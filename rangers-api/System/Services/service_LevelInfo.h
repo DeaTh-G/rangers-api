@@ -2,7 +2,7 @@
 
 namespace app::level
 {
-	class LevelInfo : public hh::game::GameService, app::fnd::AppResourceManagerListener
+	class LevelInfo : public hh::game::GameService, public app::fnd::AppResourceManagerListener
 	{
 	private:
 		inline static const char* ms_pServiceName = "LevelInfo";
