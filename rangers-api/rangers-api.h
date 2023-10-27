@@ -13,6 +13,7 @@
 #include "cslib/csl/fnd/IAllocator.h"
 
 // Common Sonicteam Utility Library
+#include "cslib/csl/ut/bitset.h"
 #include "cslib/csl/ut/fixedarray.h"
 #include "cslib/csl/ut/movearray.h"
 #include "cslib/csl/ut/objectmovearray.h"
