@@ -30,7 +30,7 @@ namespace app::player
 			eStateFlags_IsWallClimbIdle = 0x1C,
 			eStateFlags_IsBoarding = 0x1E,
 			eStateFlags_IsSpringJump = 0x21,
-			eStateFlags_IsPhantomRush = 0x26
+			// eStateFlags_IsPhantomRush = 0x26 // Removed in the Final Horizon Update
 		};
 		
 		enum ECombatFlags
