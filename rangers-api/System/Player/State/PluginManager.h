@@ -10,14 +10,14 @@ namespace app::player
 		csl::ut::ObjectMoveArray<StatePluginBase*> Plugins;
 		INSERT_PADDING(8);
 
-		StatePluginBase* GetStatePlugin(const char* in_pServiceName)
+		StatePluginBase* GetStatePlugin(const char* in_pPluginName)
 		{
 			for (auto* pPlugin : Plugins)
 			{
 				if (pPlugin == nullptr)
 					continue;
 
-				if (pPlugin->GetNameHash() == csl::ut::StringMapOperation::hash(in_pServiceName))
+				if (pPlugin->GetNameHash() == csl::ut::StringMapOperation::hash(in_pPluginName))
 					return pPlugin;
 			}
 
