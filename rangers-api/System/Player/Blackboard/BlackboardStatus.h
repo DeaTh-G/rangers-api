@@ -1,27 +1,5 @@
 #pragma once
 
-#define IS_STATE_FLAG(in_pBlackboardStatus, in_name) ((in_pBlackboardStatus->StateFlags & (1L << (int)app::player::BlackboardStatus::StateFlags::eStateFlags_##in_name)) != 0)
-#define IS_COMBAT_FLAG(in_pBlackboardStatus, in_name) ((in_pBlackboardStatus->CombatFlags & (1L << (int)app::player::BlackboardStatus::CombatFlags::eCombatFlags_##in_name)) != 0)
-#define IS_WORLD_FLAG(in_pBlackboardStatus, in_name) ((in_pBlackboardStatus->WorldFlags & (1L << (int)app::player::BlackboardStatus::WorldFlags::eWorldFlags_##in_name)) != 0)
-
-#define SET_STATE_FLAG(in_pBlackboardStatus, in_name, in_isEnabled) \
-	if (in_isEnabled) \
-		in_pBlackboardStatus->StateFlags |= (1L << (int)app::player::BlackboardStatus::StateFlags::eStateFlags_##in_name); \
-	else \
-		in_pBlackboardStatus->StateFlags &= ~(1L << (int)app::player::BlackboardStatus::StateFlags::eStateFlags_##in_name);
-
-#define SET_COMBAT_FLAG(in_pBlackboardStatus, in_name, in_isEnabled) \
-	if (in_isEnabled) \
-		in_pBlackboardStatus->CombatFlags |= (1L << (int)app::player::BlackboardStatus::CombatFlags::eCombatFlags_##in_name); \
-	else \
-		in_pBlackboardStatus->CombatFlags &= ~(1L << (int)app::player::BlackboardStatus::CombatFlags::eCombatFlags_##in_name);
-
-#define SET_WORLD_FLAG(in_pBlackboardStatus, in_name, in_isEnabled) \
-	if (in_isEnabled) \
-		in_pBlackboardStatus->WorldFlags |= (1L << (int)app::player::BlackboardStatus::WorldFlags::eWorldFlags_##in_name); \
-	else \
-		in_pBlackboardStatus->WorldFlags &= ~(1L << (int)app::player::BlackboardStatus::WorldFlags::eWorldFlags_##in_name);
-
 namespace app::player
 {
 	class alignas(16) BlackboardStatus : public BlackboardContent
@@ -29,7 +7,7 @@ namespace app::player
 		inline static const char* ms_pBlackboardName = "BlackboardStatus";
 
 	public:
-		enum StateFlags
+		enum EStateFlags
 		{
 			eStateFlags_IsBoost = 0x00,
 			eStateFlags_IsAirBoost = 0x04,
@@ -55,7 +33,7 @@ namespace app::player
 			eStateFlags_IsPhantomRush = 0x26
 		};
 		
-		enum CombatFlags
+		enum ECombatFlags
 		{
 			eCombatFlags_IsPerfectParry = 0x10,
 			eCombatFlags_IsCycloneKick = 0x2A,
@@ -68,7 +46,7 @@ namespace app::player
 			eCombatFlags_IsCrossSlash = 0x34
 		};
 
-		enum WorldFlags
+		enum EWorldFlags
 		{
 			eWorldFlags_IsDead = 0x01,
 			eWorldFlags_IsDamagedOrRepelled = 0x02,
@@ -85,11 +63,10 @@ namespace app::player
 	public:
 		INSERT_PADDING(4);
 		bool IsSuper;
-		int64_t CombatFlags;
-		INSERT_PADDING(8);
-		int64_t StateFlags;
-		int64_t WorldFlags;
-		INSERT_PADDING(300);
+		csl::ut::Bitset<uint64_t> CombatFlags[2]{};
+		csl::ut::Bitset<uint64_t> StateFlags;
+		csl::ut::Bitset<uint64_t> WorldFlags[2]{};
+		INSERT_PADDING(410);
 
 		size_t GetNameHash() override
 		{
@@ -99,6 +76,36 @@ namespace app::player
 		static const char* GetBlackboardName()
 		{
 			return ms_pBlackboardName;
+		}
+
+		bool GetCombatFlag(ECombatFlags in_flag)
+		{
+			return CombatFlags[in_flag >> 6].test(in_flag & 0x3F);
+		}
+
+		void SetCombatFlag(ECombatFlags in_flag, bool in_isEnable)
+		{
+			CombatFlags[in_flag >> 6].set(in_flag & 0x3F);
+		}
+
+		bool GetStateFlag(EStateFlags in_flag)
+		{
+			return StateFlags.test(in_flag);
+		}
+
+		void SetStateFlag(EStateFlags in_flag, bool in_isEnable)
+		{
+			StateFlags.set(in_flag);
+		}
+
+		bool GetWorldFlag(EWorldFlags in_flag)
+		{
+			return WorldFlags[in_flag >> 6].test(in_flag & 0x3F);
+		}
+
+		void SetWorldFlag(EWorldFlags in_flag, bool in_isEnable)
+		{
+			WorldFlags[in_flag >> 6].set(in_flag & 0x3F);
 		}
 	};
 }
