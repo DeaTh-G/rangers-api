@@ -13,6 +13,7 @@
 #include "cslib/csl/fnd/IAllocator.h"
 
 // Common Sonicteam Utility Library
+#include "cslib/csl/ut/noncopyable.h"
 #include "cslib/csl/ut/bitset.h"
 #include "cslib/csl/ut/fixedarray.h"
 #include "cslib/csl/ut/movearray.h"
@@ -43,6 +44,10 @@
 #include "Hedgehog/Game/GameObject.h"
 #include "Hedgehog/Game/GameManager.h"
 #include "Hedgehog/Game/GameUpdateListener.h"
+
+// Hedgehog Utility Library
+#include "Hedgehog/Utility/StateBase.h"
+#include "Hedgehog/Utility/HsmBase.h"
 
 // Save
 #include "System/Save/SaveManagerListener.h"
