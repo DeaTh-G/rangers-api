@@ -11,7 +11,8 @@ namespace hh::ut
 			int CurrentStateIndex{};
 			INSERT_PADDING(16);
 			csl::ut::ObjectMoveArray<StateImpl*> pStates{};
-			INSERT_PADDING(48);
+			StateImpl* pState{};
+			INSERT_PADDING(40);
 
 			virtual ~HsmImpl() = default;
 		};

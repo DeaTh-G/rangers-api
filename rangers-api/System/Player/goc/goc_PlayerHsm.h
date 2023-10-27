@@ -10,6 +10,7 @@ namespace app::player
 	public:
 		INSERT_PADDING(8);
 		hh::ut::HsmBase Hsm{};
+		INSERT_PADDING(8);
 		void* pPlayerStateParameter{}; // app::player::PlayerStateParameter
 		StatePluginManager<PlayerHsmContext>* pStatePluginManager{};
 		INSERT_PADDING(4);
