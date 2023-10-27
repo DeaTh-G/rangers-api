@@ -4,12 +4,15 @@ namespace app::player
 {
 	class StatePluginAirTrick : PlayerStatePlugin
 	{
+	private:
+		inline static const char* ms_pName = "VisualSuperSonic";
+
 	public:
 		INSERT_PADDING(24);
 
 		inline static const char* GetPluginName()
 		{
-			return "StatePluginAirTrick";
+			return ms_pName;
 		}
 	};
 }

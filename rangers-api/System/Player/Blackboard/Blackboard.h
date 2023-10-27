@@ -19,22 +19,7 @@ namespace app::player
 		csl::ut::ObjectMoveArray<BlackboardContent*> Blackboards;
 
 	public:
-		template <typename T>
-		T* GetBlackboardContent()
-		{
-			for (auto* pBlackboard : Blackboards)
-			{
-				if (pBlackboard == nullptr)
-					continue;
-
-				if (pBlackboard->GetNameHash() == csl::ut::StringMapOperation::hash(T::GetBlackboardName()))
-					return reinterpret_cast<T*>(pBlackboard);
-			}
-
-			return { nullptr };
-		}
-
-		app::player::BlackboardContent* GetBlackboardContent(const char* in_pBlackboardName = "")
+		app::player::BlackboardContent* GetBlackboardContent(const char* in_pBlackboardName)
 		{
 			for (auto* pBlackboard : Blackboards)
 			{
@@ -46,6 +31,12 @@ namespace app::player
 			}
 
 			return { nullptr };
+		}
+
+		template <typename T>
+		T* GetBlackboardContent()
+		{
+			return static_cast<T*>(GetBlackboardContent(T::GetBlackboardName()));
 		}
 	};
 }

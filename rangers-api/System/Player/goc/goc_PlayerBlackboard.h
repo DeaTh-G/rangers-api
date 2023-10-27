@@ -2,7 +2,7 @@
 
 namespace app::player
 {
-	class GOCPlayerBlackboard : hh::game::GOComponent
+	class GOCPlayerBlackboard : public hh::game::GOComponent
 	{
 	private:
 		inline static const char* ms_pComponentName = "GOCPlayerBlackboard";

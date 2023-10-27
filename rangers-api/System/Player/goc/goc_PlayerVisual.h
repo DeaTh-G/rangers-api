@@ -2,7 +2,7 @@
 
 namespace app::player
 {
-	class GOCPlayerVisual : hh::game::GOComponent
+	class GOCPlayerVisual : public hh::game::GOComponent
 	{
 	private:
 		inline static const char* ms_pComponentName = "GOCPlayerVisual";
@@ -15,7 +15,7 @@ namespace app::player
 		template <typename T>
 		T* GetVisual()
 		{
-			if (pPlayerVisual && pPlayerVisual->GetNameHash() == csl::ut::StringMapOperation::hash(T::ms_pName))
+			if (pPlayerVisual && pPlayerVisual->GetNameHash() == csl::ut::StringMapOperation::hash(T::GetVisualName()))
 				return static_cast<T*>(pPlayerVisual);
 
 			return { nullptr };

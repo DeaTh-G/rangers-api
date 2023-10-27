@@ -45,7 +45,7 @@ namespace hh::game
 		template <typename T>
 		T* GetService()
 		{
-			return (T*)GetService(T::GetServiceName());
+			return static_cast<T*>(GetService(T::GetServiceName()));
 		}
 
 		GameObject* GetGameObject(const char* in_pObjectName)
@@ -65,7 +65,7 @@ namespace hh::game
 		template <typename T>
 		T* GetGameObject()
 		{
-			return (T*)GetGameObject(T::GetObjectName());
+			return static_cast<T*>(GetGameObject(T::GetObjectName()));
 		}
 	};
 }
