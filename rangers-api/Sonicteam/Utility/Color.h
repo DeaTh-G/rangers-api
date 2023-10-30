@@ -2,7 +2,7 @@
 
 namespace csl::ut {
     template<typename T>
-    struct Color {
+    struct alignas(4) Color {
         T r;
         T g;
         T b;

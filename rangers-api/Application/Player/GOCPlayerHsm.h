@@ -18,7 +18,15 @@ namespace app::player {
         uint16_t unk113;
         bool unk114;
     public:
+        struct Config {
+
+        };
+
         GOCPlayerHsm(csl::fnd::IAllocator* pAllocator);
         static GOCPlayerHsm* Instantiate(csl::fnd::IAllocator* pAllocator);
+        void Initialize(const Config& config);
+        void SetState(uint32_t stateId, uint32_t unkParam1);
+
+        GOCOMPONENT_CLASS_DECLARATION
     };
 }

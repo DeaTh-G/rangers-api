@@ -53,6 +53,8 @@ namespace hh::game
 
 	class GameManager : public fnd::ReferencedObject, public fnd::ReloaderListener, private csl::ut::NonCopyable
 	{
+		GameService* CreateService(GameServiceClass* gameServiceClass, csl::fnd::IAllocator* residentAllocator);
+	public:
 		uint32_t unk33;
 		uint32_t unk34;
 		void* unk35;
@@ -78,9 +80,10 @@ namespace hh::game
 		uint32_t unk55;
 		GameApplication* pApplication;
 
-		GameService* CreateService(GameServiceClass* gameServiceClass, csl::fnd::IAllocator* residentAllocator);
-	public:
 		GameManager(csl::fnd::IAllocator* pAllocator, GameApplication* pApplication);
+
+		static GameManager* instance;
+		static GameManager* GetInstance();
 
 		template <typename T>
 		T* GetService()
@@ -126,19 +129,19 @@ namespace hh::game
 		// 	return { nullptr };
 		// }
 
-		// GameObject* GetGameObject(const char* in_pObjectName)
-		// {
-		// 	for (auto* pObject : m_Objects)
-		// 	{
-		// 		if (pObject == nullptr)
-		// 			continue;
+		GameObject* GetGameObject(const char* in_pObjectName)
+		{
+			for (auto* pObject : m_Objects)
+			{
+				if (pObject == nullptr)
+					continue;
 
-		// 		if (strcmp(pObject->pObjectName, in_pObjectName) == 0)
-		// 			return pObject;
-		// 	}
+				if (strcmp(pObject->pObjectName, in_pObjectName) == 0)
+					return pObject;
+			}
 
-		// 	return { nullptr };
-		// }
+			return { nullptr };
+		}
 
 		template<typename T>
 		T* CreateService(csl::fnd::IAllocator* residentAllocator) {

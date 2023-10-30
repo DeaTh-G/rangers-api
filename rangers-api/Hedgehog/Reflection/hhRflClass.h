@@ -7,13 +7,13 @@ namespace hh::fnd
 	class RflClass : public RflEntity
 	{
 	protected:
+	public:
 		const RflClass* m_pParent{};
 		uint32_t m_ClassSize{};
 		const RflArray<RflClassEnum> m_pEnums{ nullptr, 0 };
 		const RflArray<RflClassMember> m_pMembers{ nullptr, 0 };
 		const RflCustomAttributes* m_pAttributes{};
 
-	public:
 		RflClass(const char* pName, 
 			const RflClass* pParent,
 			uint32_t objectSizeInBytes,
@@ -33,7 +33,7 @@ namespace hh::fnd
 			return m_pParent;
 		}
 
-		[[nodiscard]] uint32_t GetSizeInBytes() const
+		[[nodiscard]] uint32_t GetDeclaredSizeInBytes() const
 		{
 			return m_ClassSize;
 		}
@@ -124,6 +124,34 @@ namespace hh::fnd
 				return nullptr;
 
 			return m_pAttributes->GetAttribute(name);
+		}
+
+		size_t GetAlignment() const {
+			size_t maxAlignment = 0;
+
+			if (m_pParent) {
+				maxAlignment = m_pParent->GetAlignment();
+			}
+			
+			for (uint32_t i = 0; i < m_pMembers.count; i++) {
+				size_t memberAlignment = m_pMembers.items[i].GetAlignment();
+
+				if (memberAlignment > maxAlignment) {
+					maxAlignment = memberAlignment;
+				}
+			}
+
+			return maxAlignment;
+		}
+
+		size_t GetSizeInBytes() const
+		{
+			auto size = GetDeclaredSizeInBytes();
+			auto alignment = GetAlignment();
+			auto misalignment = size % alignment;
+			auto alignedSize = misalignment > 0 ? size + alignment - misalignment : size;
+
+			return alignedSize;
 		}
 	};
 }

@@ -53,13 +53,14 @@ namespace hh::fnd
 		{
 			Type m_Type;
 			const char* m_pName;
-			uint16_t m_ByteSize;
-			uint16_t m_ByteAlignment;
+			int16_t m_ByteSize;
+			int16_t m_ByteAlignment;
 		};
 
 		static const Metadata ms_typeMetadata[];
 		
 	protected:
+	public:
 		RflClass* m_pClass{};
 		RflClassEnum* m_pEnum{};
 		Type m_Type{};
@@ -69,7 +70,6 @@ namespace hh::fnd
 		uint32_t m_Offset{};
 		const RflCustomAttributes* m_pAttributes{};
 
-	public:
 		[[nodiscard]] const RflClass* GetClass() const
 		{
 			return m_pClass;
@@ -111,6 +111,14 @@ namespace hh::fnd
 		}
 		
 		[[nodiscard]] size_t GetSizeInBytes() const;
+		[[nodiscard]] size_t GetSingleSizeInBytes() const;
+		[[nodiscard]] size_t GetSubTypeSizeInBytes() const;
+		[[nodiscard]] size_t GetAlignment() const;
+		[[nodiscard]] size_t GetSubTypeAlignment() const;
+		[[nodiscard]] size_t GetArraySizeInBytes(size_t count) const;
+		[[nodiscard]] size_t GetSubTypeArraySizeInBytes(size_t count) const;
+
+		static const RflClassMember::Metadata& GetTypeMetadata();
 	};
 
 #define DEFINE_METADATA_FULL(id, type, size, align) Metadata { id, type, (unsigned char)(size), (unsigned char)(align) }
@@ -139,7 +147,7 @@ namespace hh::fnd
 		DEFINE_METADATA_WITH_NAME(TYPE_MATRIX44, "matrix44", csl::math::Matrix44),
 		DEFINE_METADATA_WITH_NAME(TYPE_POINTER, "pointer", void*),
 		DEFINE_METADATA_FULL(TYPE_ARRAY, "array", sizeof(csl::ut::MoveArray<void*>), -1),
-		DEFINE_METADATA_FULL(TYPE_SIMPLE_ARRAY, "simplearray", 8, -1),
+		DEFINE_METADATA_FULL(TYPE_SIMPLE_ARRAY, "simplearray", 16, -1),
 		DEFINE_METADATA_FULL(TYPE_ENUM, "enum", -1, -1),
 		DEFINE_METADATA_FULL(TYPE_STRUCT, "struct", -1, -1),
 		DEFINE_METADATA_FULL(TYPE_FLAGS, "flags", -1, -1),
@@ -159,38 +167,82 @@ namespace hh::fnd
 
 #include "hhRflClass.h"
 
-inline size_t hh::fnd::RflClassMember::GetSizeInBytes() const
+inline size_t hh::fnd::RflClassMember::GetSubTypeSizeInBytes() const
 {
-	const unsigned char type = m_Type;
-	const unsigned char underlyingType = m_SubType;
-	
-	switch (type)
+	switch (m_SubType) {
+	case TYPE_VOID:
+		return 0;
+	case TYPE_STRUCT:
+		return GetStructClass()->GetSizeInBytes();
+	default:
+		return ms_typeMetadata[m_SubType].m_ByteSize;
+	}
+}
+
+inline size_t hh::fnd::RflClassMember::GetSingleSizeInBytes() const
+{
+	switch (m_Type)
 	{
 	case TYPE_VOID:
 		return 0;
-
-	case TYPE_ARRAY:
-	{
-		size_t underlyingSize = 1;
-		if (underlyingType == TYPE_STRUCT)
-			underlyingSize = GetStructClass()->GetSizeInBytes();
-		else
-			underlyingSize = ms_typeMetadata[underlyingType].m_ByteSize;
-
-		if (GetCstyleArraySize())
-			return ms_typeMetadata[underlyingType].m_ByteSize * underlyingSize * GetCstyleArraySize();
-			
-		return ms_typeMetadata[underlyingType].m_ByteSize * underlyingSize;
-	}
-
 	case TYPE_STRUCT:
 		return GetStructClass()->GetSizeInBytes();
+	case TYPE_ENUM:
+	case TYPE_FLAGS:
+		return GetSubTypeSizeInBytes();
+		
+	default:
+		return ms_typeMetadata[m_Type].m_ByteSize;
+	}
+}
+
+inline size_t hh::fnd::RflClassMember::GetSizeInBytes() const
+{
+	return m_ArrayLength ? m_ArrayLength * GetSingleSizeInBytes() : GetSingleSizeInBytes();
+}
+
+inline size_t hh::fnd::RflClassMember::GetSubTypeAlignment() const
+{
+	switch(m_SubType) {
+	case TYPE_VOID:
+		return 0;
+
+	case TYPE_STRUCT:
+		return GetStructClass()->GetAlignment();
+
+	default:
+		return ms_typeMetadata[m_SubType].m_ByteAlignment ? ms_typeMetadata[m_SubType].m_ByteAlignment : -1;
+	}
+}
+
+inline size_t hh::fnd::RflClassMember::GetAlignment() const
+{
+	switch(m_Type) {
+	case TYPE_VOID:
+		return 0;
+
+	case TYPE_STRUCT:
+		return GetStructClass()->GetAlignment();
+	
+	case TYPE_ARRAY:
+		return alignof(csl::ut::MoveArray<void*>);
+	
+	case TYPE_SIMPLE_ARRAY:
+		return alignof(size_t);
 
 	case TYPE_ENUM:
 	case TYPE_FLAGS:
-		return ms_typeMetadata[underlyingType].m_ByteSize;
+		return GetSubTypeAlignment();
 		
 	default:
-		return ms_typeMetadata[type].m_ByteSize;
+		return ms_typeMetadata[m_Type].m_ByteAlignment ? ms_typeMetadata[m_Type].m_ByteAlignment : -1;
 	}
+}
+
+inline size_t hh::fnd::RflClassMember::GetArraySizeInBytes(size_t count) const {
+	return GetSizeInBytes() * count;
+}
+
+inline size_t hh::fnd::RflClassMember::GetSubTypeArraySizeInBytes(size_t count) const {
+	return GetSubTypeSizeInBytes() * count;
 }

@@ -72,13 +72,13 @@ namespace csl::ut
 			Set(pStr, GetAllocator());
 		}
 		
-		const char* c_str() const
-		{
-			if (m_pStr)
-				return reinterpret_cast<const char*>(reinterpret_cast<size_t>(m_pStr) & ~1);
+		const char* c_str() const;
+		// {
+		// 	if (m_pStr)
+		// 		return reinterpret_cast<const char*>(reinterpret_cast<size_t>(m_pStr) & ~1);
 
-			return ms_Empty;
-		}
+		// 	return ms_Empty;
+		// }
 
 		char* c_str()
 		{

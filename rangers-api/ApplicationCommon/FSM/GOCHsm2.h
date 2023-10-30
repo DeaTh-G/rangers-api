@@ -11,7 +11,12 @@ namespace app_cmn::fsm {
         uint64_t unk106;
         uint64_t unk107;
     public:
+        struct Config {
+
+        };
+
         GOCHsm2(csl::fnd::IAllocator* pAllocator);
         static GOCHsm2* Instantiate(csl::fnd::IAllocator* pAllocator);
+        void Initialize(const Config& config);
     };
 }

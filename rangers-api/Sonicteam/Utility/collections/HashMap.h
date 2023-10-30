@@ -141,12 +141,12 @@ namespace csl::ut
 
 			TKey& key() const
 			{
-				return m_pOwner->GetKey(this);
+				return m_pOwner->GetKey(*this);
 			}
 
 			TValue& operator*() const
 			{
-				return m_pOwner->GetValue(this);
+				return m_pOwner->GetValue(*this);
 			}
 
 			TValue* operator->() const
@@ -202,7 +202,6 @@ namespace csl::ut
 			{
 				pElem->m_Hash = hash;
 				pElem->m_Key = key;
-				pElem->m_Value = value;
 				m_Length++;
 			}
 			else
@@ -216,12 +215,13 @@ namespace csl::ut
 					{
 						pElem->m_Hash = hash;
 						pElem->m_Key = key;
-						pElem->m_Value = value;
 						m_Length++;
 						break;
 					}
 				}
 			}
+
+			pElem->m_Value = value;
 
 			return { this, idx };
 		}
@@ -259,12 +259,12 @@ namespace csl::ut
 			return iterator{ this, idx };
 		}
 
-		TKey& GetKey(iterator iter) const
+		TKey& GetKey(const iterator& iter) const
 		{
 			return iter.m_pOwner->m_pElements[iter.m_CurIdx].m_Key;
 		}
 		
-		TValue& GetValue(iterator iter) const
+		TValue& GetValue(const iterator& iter) const
 		{
 			return iter.m_pOwner->m_pElements[iter.m_CurIdx].m_Value;
 		}

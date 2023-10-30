@@ -12,8 +12,10 @@ namespace csl::ut
 		 * Maybe they decided that pointers are random enough to be acceptably
 		 * distributed after only applying an avalanche mixer.
 		 */
-		inline static size_t hash(TKey k)
+		inline static size_t hash(TKey key)
 		{
+			size_t k = (size_t)key;
+
 			k ^= k >> 33;
 			k *= 0xff51afd7ed558ccd;
 			k ^= k >> 33;

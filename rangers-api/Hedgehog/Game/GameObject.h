@@ -68,9 +68,9 @@ namespace hh::game
 		//??GameObjectClass* pStaticClass{};
 
 		GameObject(csl::fnd::IAllocator* pAllocator);
-	private:
 		csl::ut::InplaceMoveArray<GOComponent*, 8> m_Components;
 		csl::ut::VariableString pObjectName;
+	private:
 		csl::ut::InplaceMoveArray<hh::fnd::Property, 2> m_Properties;
 		csl::ut::MoveArray<void*> unk61;
 		uint32_t m_ComponentFlags{};
@@ -136,11 +136,6 @@ namespace hh::game
 		GOComponent* GetComponent(GOComponentClass* componentClass);
 	protected:
 		template<typename T>
-		T* GetComponent() {
-			return static_cast<T*>(GetComponent(T::GetClass()));
-		}
-
-		template<typename T>
 		T* InstantiateComponent() {
 			return static_cast<T*>(InstantiateComponent(T::GetClass()));
 		}
@@ -162,8 +157,9 @@ namespace hh::game
 
 		void LinkActionToUIKey(ui::LayerController* layerController, const char* uiPath, const char* actionName, void* unkParam);
 	public:
-		inline void SetLayerUnsafe(char layer){
-			SetLayer(layer);
+		template<typename T>
+		T* GetComponent() {
+			return static_cast<T*>(GetComponent(T::GetClass()));
 		}
 	};
 }

@@ -1,5 +1,10 @@
 #pragma once
 
+#define GOCOMPONENT_CLASS_DECLARATION private:\
+		static hh::game::GOComponentClass* instance;\
+	public:\
+		static hh::game::GOComponentClass* GetClass();
+
 namespace app::player
 {
 	class Sonic;

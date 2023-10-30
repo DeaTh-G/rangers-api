@@ -41,6 +41,18 @@ namespace hh::fnd
 		inline operator T&() {
 			return *ptr;
 		}
+
+		inline operator T*() {
+			return ptr;
+		}
+
+		inline bool operator==(const Reference<T>& other) {
+			return ptr == other.ptr;
+		}
+
+		// inline bool operator==(const T* other) {
+		// 	return ptr == other;
+		// }
 	};
 
 	class alignas(8) ReferencedObject : public BaseObject

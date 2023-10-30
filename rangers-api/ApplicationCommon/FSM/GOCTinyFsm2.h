@@ -8,8 +8,12 @@ namespace app_cmn::fsm {
     class GOCTinyFsm2<hh::game::GameObject> : public hh::game::GOComponent {
     public:
         struct Event : public hh::ut::TinyFsmEvent {
-            hh::fnd::Message* message;
-            void* updateEvent;
+            union EventData {
+                hh::fnd::Message* message;
+                float deltaTime;
+            };
+
+            EventData data;
         };
         typedef hh::ut::TinyFsm<hh::game::GameObject, Event> Fsm_t;
         typedef typename Fsm_t::State_t State_t;
@@ -43,8 +47,12 @@ namespace app_cmn::fsm {
         };
 
         struct Event : public hh::ut::TinyFsmEvent {
-            hh::fnd::Message* message;
-            void* updateEvent;
+            union EventData {
+                hh::fnd::Message* message;
+                float deltaTime;
+            };
+
+            EventData data;
         };
 
         typedef hh::ut::TinyFsm<T, Event> Fsm_t;

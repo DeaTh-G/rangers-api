@@ -275,6 +275,7 @@ namespace hh::ui {
         UIListViewElement(csl::fnd::IAllocator* pAllocator, SurfRide::Cast* cast, GOCUIComposition* gocUIComposition);
         void AddItem(UIListViewItem* item);
         void Reset();
+        int GetCurrentItemIndex();
         UIListViewItem* GetItem(uint32_t index);
         LayerController* GetItemLayerController(UIListViewItem* item);
         LayerController* GetCurrentItemViewLayerController();

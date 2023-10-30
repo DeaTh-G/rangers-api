@@ -2,7 +2,7 @@
 
 namespace hh::game {
     class GameApplication : public fw::Application {
-        void* unk101;
+        fnd::Reference<GameManager> gameManager;
         void* unk102;
 
         static GameApplication* instance;

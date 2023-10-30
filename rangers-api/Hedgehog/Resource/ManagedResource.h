@@ -3,7 +3,7 @@
 namespace hh::fnd {
     class ManagedResource;
 
-    class ManagedResourceClass {
+    struct ManagedResourceClass {
         const char *pName;
         const char *pScopedName;
         uint32_t objectSize;
@@ -24,6 +24,15 @@ namespace hh::fnd {
 
     public:
         ManagedResource(csl::fnd::IAllocator* pAllocator);
+
+        inline const char* GetName() {
+            return name.c_str();
+        }
+
+        inline ManagedResourceClass& GetClass() {
+            return *managedResourceClass;
+        }
+
         virtual void UnkFunc1(void* unkParam) { this->UnkFunc2(unkParam); }
         virtual void UnkFunc2(void* unkParam) = 0;
         virtual void UnkFunc3() = 0;

@@ -46,6 +46,7 @@
 #include "Hedgehog/Base/System/RefByHandleObject.h"
 #include "Hedgehog/Base/System/hhProperty.h"
 #include "Hedgehog/Base/System/hhCollection.h"
+#include "Hedgehog/Base/System/HFrame.h"
 #include "Hedgehog/Base/System/hhHandle.h"
 #include "Hedgehog/Base/System/HandleManager.h"
 #include "Hedgehog/Base/System/ReloaderListener.h"
@@ -64,6 +65,7 @@
 #include "Hedgehog/Base/Type/WorldPosition.h"
 #include "Hedgehog/Base/Type/LogData.h"
 
+#include "Hedgehog/GraphicsFoundation/GraphicsContext.h"
 #include "Hedgehog/GraphicsFoundation/Renderable.h"
 
 // Hedgehog Framework
@@ -91,6 +93,8 @@
 #include "Hedgehog/HID/InputDevices/Vibration.h"
 #include "Hedgehog/HID/InputDevices/VibrationWin32.h"
 
+#include "Hedgehog/Cri/CriSystem.h"
+
 #include "Hedgehog/Filesystem/FileInfo.h"
 #include "Hedgehog/Filesystem/FileBind.h"
 
@@ -101,6 +105,7 @@
 #include "Hedgehog/Resource/ManagedResource.h"
 #include "Hedgehog/Resource/Packfile.h"
 #include "Hedgehog/Resource/ResourceLoader.h"
+#include "Hedgehog/Resource/ResourceManagerRelatedUnk1.h"
 #include "Hedgehog/Resource/ResourceManager.h"
 
 #include "Hedgehog/HID/ActiveDeviceManager.h"
@@ -109,6 +114,7 @@
 // // #include "System/Messages/MsgRobChaosEmerald.h"
 
 // Hedgehog Reflection Library
+#include "Hedgehog/Reflection/ResReflection.h"
 #include "Hedgehog/Reflection/hhInternalClassMember.h"
 #include "Hedgehog/Reflection/hhRflEntity.h"
 #include "Hedgehog/Reflection/hhRflArray.h"
@@ -143,6 +149,7 @@
 #include "Hedgehog/Game/ErrorViewer.h"
 
 #include "Hedgehog/Game/GOComponents/GOCInput.h"
+#include "Hedgehog/Game/GOComponents/GOCTransform.h"
 
 #include "Hedgehog/Game/DevMenu/Menu.h"
 
@@ -263,10 +270,13 @@
 
 #include "Application/Game/MenuSelect.h"
 
+#include "Application/Player/CharacterId.h"
 #include "Application/Player/PlayerCounterTimer.h"
 #include "Application/Player/PlayerHsmContext.h"
 #include "Application/Player/GOCPlayerHsm.h"
 #include "Application/Player/GOCPlayerState.h"
+#include "Application/Player/GOCPlayerParameter.h"
+#include "Application/Player/GOCPlayerKinematicParams.h"
 #include "Application/Player/PlayerStateBase.h"
 #include "Application/Player/States.h"
 

@@ -5,8 +5,8 @@ namespace hh::fnd
 	class RflEntity
 	{
 	protected:
-		const char* m_pName{};
     public:
+		const char* m_pName{};
 		RflEntity(const char* name) : m_pName{ name } {}
 
         const char* GetName() const
