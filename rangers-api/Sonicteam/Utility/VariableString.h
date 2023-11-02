@@ -80,13 +80,13 @@ namespace csl::ut
 		// 	return ms_Empty;
 		// }
 
-		char* c_str()
-		{
-			if (m_pStr)
-				return reinterpret_cast<char*>(reinterpret_cast<size_t>(m_pStr) & ~1);
+		//char* c_str()
+		//{
+		//	if (m_pStr)
+		//		return reinterpret_cast<char*>(reinterpret_cast<size_t>(m_pStr) & ~1);
 
-			return m_pStr;
-		}
+		//	return m_pStr;
+		//}
 
 		bool Compare(const char* pStr) const
 		{
@@ -98,10 +98,10 @@ namespace csl::ut
 			return c_str();
 		}
 
-		operator char* ()
-		{
-			return c_str();
-		}
+		//operator char* ()
+		//{
+		//	return c_str();
+		//}
 		
 		VariableString& operator=(const char* pStr)
 		{

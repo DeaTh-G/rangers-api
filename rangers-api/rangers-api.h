@@ -18,6 +18,7 @@
 #include "Sonicteam/Utility/collections/Array.h"
 #include "Sonicteam/Utility/collections/FixedArray.h"
 #include "Sonicteam/Utility/collections/HashMap.h"
+#include "Sonicteam/Utility/collections/LinkList.h"
 #include "Sonicteam/Utility/collections/MoveArray.h"
 #include "Sonicteam/Utility/collections/MoveArray32.h"
 #include "Sonicteam/Utility/collections/InPlaceMoveArray.h"
@@ -65,6 +66,40 @@
 #include "Hedgehog/Base/Type/WorldPosition.h"
 #include "Hedgehog/Base/Type/LogData.h"
 
+#include "Hedgehog/Cri/CriSystem.h"
+
+#include "Hedgehog/Filesystem/FileInfo.h"
+#include "Hedgehog/Filesystem/FileBind.h"
+
+// Resources
+#include "Hedgehog/Resource/Uri.h"
+#include "Hedgehog/Resource/InplaceUri.h"
+#include "Hedgehog/Resource/TempInplaceUri.h"
+#include "Hedgehog/Resource/ResourceNameResolver.h"
+#include "Hedgehog/Resource/FilePathResolver.h"
+#include "Hedgehog/Resource/ManagedResource.h"
+#include "Hedgehog/Resource/ResourceTypeRegistry.h"
+#include "Hedgehog/Resource/ResourceContainer.h"
+#include "Hedgehog/Resource/SimpleResourceContainer.h"
+#include "Hedgehog/Resource/DynamicResourceContainer.h"
+#include "Hedgehog/Resource/Packfile.h"
+#include "Hedgehog/Resource/ResourceLoader.h"
+#include "Hedgehog/Resource/ResourceManagerRelatedUnk1.h"
+#include "Hedgehog/Resource/ResourceManager.h"
+#include "Hedgehog/Resource/FilePathResolverUtil.h"
+
+#include "Hedgehog/Needle/NeedleObject.h"
+#include "Hedgehog/Needle/NeedleRefcountObject.h"
+#include "Hedgehog/Needle/NeedleRefcountResource.h"
+#include "Hedgehog/Needle/SurfaceBase.h"
+#include "Hedgehog/Needle/Texture.h"
+#include "Hedgehog/Needle/ImplDX11/TextureDX11Impl.h"
+#include "Hedgehog/Needle/ImplDX11/NeedleResourceContainer.h"
+#include "Hedgehog/Needle/ImplDX11/DevicUniqueObjectContainerDX11.h"
+#include "Hedgehog/Needle/ImplDX11/DeviceObjectDX11.h"
+#include "Hedgehog/Needle/ImplDX11/RenderingDeviceDX11.h"
+
+#include "Hedgehog/GraphicsFoundation/ResTexture.h"
 #include "Hedgehog/GraphicsFoundation/GraphicsContext.h"
 #include "Hedgehog/GraphicsFoundation/Renderable.h"
 
@@ -92,21 +127,6 @@
 #include "Hedgehog/HID/InputDevices/PointingWin32.h"
 #include "Hedgehog/HID/InputDevices/Vibration.h"
 #include "Hedgehog/HID/InputDevices/VibrationWin32.h"
-
-#include "Hedgehog/Cri/CriSystem.h"
-
-#include "Hedgehog/Filesystem/FileInfo.h"
-#include "Hedgehog/Filesystem/FileBind.h"
-
-// Resources
-#include "Hedgehog/Resource/Uri.h"
-#include "Hedgehog/Resource/InplaceUri.h"
-#include "Hedgehog/Resource/TempInplaceUri.h"
-#include "Hedgehog/Resource/ManagedResource.h"
-#include "Hedgehog/Resource/Packfile.h"
-#include "Hedgehog/Resource/ResourceLoader.h"
-#include "Hedgehog/Resource/ResourceManagerRelatedUnk1.h"
-#include "Hedgehog/Resource/ResourceManager.h"
 
 #include "Hedgehog/HID/ActiveDeviceManager.h"
 

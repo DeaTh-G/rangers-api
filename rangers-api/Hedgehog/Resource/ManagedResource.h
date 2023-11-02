@@ -3,7 +3,7 @@
 namespace hh::fnd {
     class ManagedResource;
 
-    struct ManagedResourceClass {
+    struct ResourceTypeInfo {
         const char *pName;
         const char *pScopedName;
         uint32_t objectSize;
@@ -15,7 +15,7 @@ namespace hh::fnd {
         csl::ut::VariableString name;
         csl::ut::VariableString unk2;
         csl::ut::VariableString unk3;
-        ManagedResourceClass* managedResourceClass;
+        const ResourceTypeInfo* resourceTypeInfo;
         void* unk5;
         void* unk6;
         void* unk7;
@@ -29,12 +29,12 @@ namespace hh::fnd {
             return name.c_str();
         }
 
-        inline ManagedResourceClass& GetClass() {
-            return *managedResourceClass;
+        inline const ResourceTypeInfo& GetClass() {
+            return *resourceTypeInfo;
         }
 
-        virtual void UnkFunc1(void* unkParam) { this->UnkFunc2(unkParam); }
-        virtual void UnkFunc2(void* unkParam) = 0;
+        virtual void UnkFunc1(void* unkParam, uint64_t unkParam2) { this->UnkFunc2(unkParam, unkParam2); }
+        virtual void UnkFunc2(void* unkParam, uint64_t unkParam2) = 0;
         virtual void UnkFunc3() = 0;
         virtual void UnkFunc4() {}
         virtual void UnkFunc5() {}

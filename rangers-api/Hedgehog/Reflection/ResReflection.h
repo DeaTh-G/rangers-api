@@ -25,7 +25,7 @@ namespace hh::fnd {
             return static_cast<T*>(reinterpret_cast<ResReflection<void>>(this)->GetData());
         }
 
-        virtual void UnkFunc2(void* unkParam) override;
+        virtual void UnkFunc2(void* unkParam, uint64_t unkParam2) override;
         virtual void UnkFunc3() override;
     };
 }

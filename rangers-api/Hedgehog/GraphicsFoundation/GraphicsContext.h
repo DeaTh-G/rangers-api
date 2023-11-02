@@ -1,24 +1,5 @@
 #pragma once
 
-namespace hh::needle {
-    namespace ImplDX11 {
-        class DevicUniqueObjectContainerDX11 {
-        public:
-            void* unk[2];
-            ID3D11Device* d3dDevice;
-        };
-        class DeviceObjectDX11 {
-        public:
-            void* unk[2];
-            DevicUniqueObjectContainerDX11* objContainer;
-        };
-        class RenderingDeviceDX11 {
-        public:
-            void* unk[4];
-            DeviceObjectDX11* deviceObject;
-        };
-    }
-}
 namespace hh::gfnd {
     struct ViewportDimensions {
         float x;
