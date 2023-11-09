@@ -6,7 +6,7 @@ namespace csl::ut
 	class InplaceMoveArray : public MoveArray<T>
 	{
 	protected:
-		char reserved[sizeof(T) * Bsz]{};
+		T reserved[Bsz]{};
 
 	public:
 		constexpr InplaceMoveArray(fnd::IAllocator* allocator_) : MoveArray<T>(allocator_)

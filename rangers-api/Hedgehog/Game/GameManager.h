@@ -148,6 +148,10 @@ namespace hh::game
 			return static_cast<T*>(CreateService(T::GetClass(), residentAllocator));
 		}
 
+		csl::ut::MoveArray<GameService*>& GetServices() {
+			return m_Services;
+		}
+
 		void RegisterService(GameService* service);
 		void RegisterObject(GameObject* object, void* transform, GameObject* parent, void* probablyObjInfoOrSomething);
 		void RegisterNamedObject(GameObject* object, const char* name, bool copyName, void* transform, GameObject* parent);

@@ -18,10 +18,13 @@ namespace hh::fnd {
     public:
         ResourceManager();
         void Setup();
+        csl::ut::MoveArray<DynamicResourceContainer*>& GetResourceContainers() {
+            return resourceContainers;
+        }
 
         template<typename T>
         inline T* GetResource(const char* name) {
-            return static_cast<T*>(GetResource(name, T::GetClass()));
+            return static_cast<T*>(GetResource(name, T::GetTypeInfo()));
         }
 
         class ResourceListener {

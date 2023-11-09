@@ -11,7 +11,7 @@ namespace hh::gfnd {
     public:
         ResTexture(csl::fnd::IAllocator* allocator);
         static ResTexture* Instantiate(csl::fnd::IAllocator* allocator);
-        static fnd::ResourceTypeInfo* GetTypeInfo();
+        static const fnd::ResourceTypeInfo* GetTypeInfo();
 
         hh::needle::Texture* GetTexture() { return texture; }
 

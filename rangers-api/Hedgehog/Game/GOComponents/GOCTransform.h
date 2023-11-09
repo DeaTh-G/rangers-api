@@ -31,9 +31,9 @@ namespace hh::game {
         void Initialize(const Config& config);
         void SetInheritedFlags(Flag flags);
         void SetLocalTransform(const csl::math::Transform& transform);
-        void SetLocalTranslation(const csl::math::Vector4& position);
+        void SetLocalTranslation(const csl::math::Vector3& position);
         void SetLocalRotation(const csl::math::Quaternion& rotation);
-        void SetLocalTranslationAndRotation(const csl::math::Vector4& position, const csl::math::Quaternion& rotation);
+        void SetLocalTranslationAndRotation(const csl::math::Vector3& position, const csl::math::Quaternion& rotation);
         void SetParent(GOCTransform* parent);
         bool IsExistParent();
         

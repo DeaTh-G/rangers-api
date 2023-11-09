@@ -95,7 +95,7 @@ namespace csl::math
 		}
 	};
 
-	class alignas(16) Matrix34 : public Eigen::Matrix<float, 3, 4>
+	class alignas(16) Matrix34 : public Eigen::Matrix4f
 	{
 	public:
 		Vector3& GetColumn(uint32_t column) const
@@ -301,9 +301,9 @@ namespace csl::math
 	class Transform
 	{
 	public:
-		Vector4 position;
+		Vector3 position;
 		Quaternion rotation;
-		Vector4 scale;
+		Vector3 scale;
 
 		inline bool operator==(const Transform& other) const {
 			return position == other.position && rotation == other.rotation && scale == other.scale;

@@ -6,6 +6,7 @@ namespace hh::ui {
         void* unk102;
         uint16_t unk103;
     public:
+        static const fnd::ResourceTypeInfo* GetTypeInfo();
         static ResSurfRideProject* Load(const char* name);
     };
 }

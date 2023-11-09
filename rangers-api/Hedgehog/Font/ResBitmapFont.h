@@ -13,6 +13,7 @@ namespace hh::font {
     class ResBitmapFont : public fnd::ManagedResource {
         BFNT_ROOT* binaryData;
     public:
+        static const fnd::ResourceTypeInfo* GetTypeInfo();
         virtual void UnkFunc2(void* unkParam, uint64_t unkParam2);
         virtual void UnkFunc3();
         virtual void UnkFunc4();

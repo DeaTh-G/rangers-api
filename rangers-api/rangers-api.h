@@ -81,6 +81,7 @@
 #include "Hedgehog/Resource/ResourceTypeRegistry.h"
 #include "Hedgehog/Resource/ResourceContainer.h"
 #include "Hedgehog/Resource/SimpleResourceContainer.h"
+#include "Hedgehog/Resource/StaticResourceContainer.h"
 #include "Hedgehog/Resource/DynamicResourceContainer.h"
 #include "Hedgehog/Resource/Packfile.h"
 #include "Hedgehog/Resource/ResourceLoader.h"
@@ -91,10 +92,22 @@
 #include "Hedgehog/Needle/NeedleObject.h"
 #include "Hedgehog/Needle/NeedleRefcountObject.h"
 #include "Hedgehog/Needle/NeedleRefcountResource.h"
+#include "Hedgehog/Needle/TNeedleRefcountResource.h"
 #include "Hedgehog/Needle/SurfaceBase.h"
 #include "Hedgehog/Needle/Texture.h"
-#include "Hedgehog/Needle/ImplDX11/TextureDX11Impl.h"
+#include "Hedgehog/Needle/Buffer.h"
+#include "Hedgehog/Needle/ConstantBuffer.h"
+#include "Hedgehog/Needle/VertexShader.h"
+#include "Hedgehog/Needle/PixelShader.h"
+#include "Hedgehog/Needle/ComputeShader.h"
+#include "Hedgehog/Needle/RenderTarget.h"
+#include "Hedgehog/Needle/UnorderedAccessView.h"
+#include "Hedgehog/Needle/DepthStencil.h"
+#include "Hedgehog/Needle/RenderingDevice.h"
 #include "Hedgehog/Needle/ImplDX11/NeedleResourceContainer.h"
+#include "Hedgehog/Needle/ImplDX11/TextureDX11Impl.h"
+#include "Hedgehog/Needle/ImplDX11/BufferDX11Impl.h"
+#include "Hedgehog/Needle/ImplDX11/ShaderDX11Impl.h"
 #include "Hedgehog/Needle/ImplDX11/DevicUniqueObjectContainerDX11.h"
 #include "Hedgehog/Needle/ImplDX11/DeviceObjectDX11.h"
 #include "Hedgehog/Needle/ImplDX11/RenderingDeviceDX11.h"
@@ -275,6 +288,7 @@
 #include "Application/Save/SaveManagerListener.h"
 #include "Application/Save/Accessors/OptionData.h"
 
+
 #include "Application/Level/LevelInfo.h"
 
 #include "Application/Sound/CustomSound.h"
@@ -285,10 +299,12 @@
 #include "Application/UI/AppUITextInterface.h"
 #include "Application/UI/UIMusicSelect.h"
 
+#include "Application/Game/GameCondition.h"
 #include "Application/Game/GameMode.h"
 #include "Application/Game/GameModeStage.h"
 
 #include "Application/Game/MenuSelect.h"
+#include "Application/Graphics/FxParamManager.h"
 
 #include "Application/Player/CharacterId.h"
 #include "Application/Player/PlayerCounterTimer.h"

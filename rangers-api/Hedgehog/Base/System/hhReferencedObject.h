@@ -9,6 +9,11 @@ namespace hh::fnd
 		Reference() {
 		}
 
+		Reference(T* rawPtr) {
+			rawPtr->Acquire();
+			ptr = rawPtr;
+		}
+
 		~Reference() {
 			if (ptr != nullptr)
 				ptr->Free();
@@ -17,7 +22,9 @@ namespace hh::fnd
 		inline Reference<T>& operator=(T* const other) {
 			T* old = ptr;
 
-			other->Acquire();
+			if (other != nullptr)
+				other->Acquire();
+
 			ptr = other;
 
 			if (old != nullptr)
@@ -27,32 +34,39 @@ namespace hh::fnd
 		}
 
 		inline Reference<T>& operator=(const Reference<T>& other) {
-			*this = other->ptr;
+			*this = other.ptr;
+			return *this;
 		}
 
-		inline T& operator*() {
+		inline Reference<T>& operator=(Reference<T>&& other) {
+			this->ptr = other.ptr;
+			other.ptr = nullptr;
+			return *this;
+		}
+
+		inline T& operator*() const {
 			return *ptr;
 		}
 
-		inline T* operator->() {
+		inline T* operator->() const {
 			return ptr;
 		}
 
-		inline operator T&() {
+		inline operator T&() const {
 			return *ptr;
 		}
 
-		inline operator T*() {
+		inline operator T*() const {
 			return ptr;
 		}
 
-		inline bool operator==(const Reference<T>& other) {
+		inline bool operator==(const Reference<T>& other) const {
 			return ptr == other.ptr;
 		}
 
-		// inline bool operator==(const T* other) {
-		// 	return ptr == other;
-		// }
+		inline bool operator==(T* const other) const {
+			return ptr == other;
+		}
 	};
 
 	class alignas(8) ReferencedObject : public BaseObject

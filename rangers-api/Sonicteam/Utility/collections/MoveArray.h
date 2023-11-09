@@ -111,10 +111,27 @@ namespace csl::ut
 			this->m_pBuffer[this->m_length - 1] = item;
 		}
 
+		void push_back(T&& item)
+		{
+			this->m_length++;
+			if (this->m_length > this->capacity())
+			{
+				reserve(this->m_length * 2);
+			}
+
+			this->m_pBuffer[this->m_length - 1] = std::move(item);
+		}
+
 		void push_back_unchecked(const T& item)
 		{
 			this->m_length++;
 			this->m_pBuffer[this->m_length - 1] = item;
+		}
+
+		void push_back_unchecked(T&& item)
+		{
+			this->m_length++;
+			this->m_pBuffer[this->m_length - 1] = std::move(item);
 		}
 
 		void remove(size_t i)

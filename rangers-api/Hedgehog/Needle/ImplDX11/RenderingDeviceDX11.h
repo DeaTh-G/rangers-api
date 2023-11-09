@@ -1,59 +1,56 @@
 #pragma once
 
-namespace hh::needle {
-    namespace ImplDX11 {
-        class RenderingDeviceDX11 {
-        public:
-            void* unk[3];
-            DeviceObjectDX11* deviceObject;
-            virtual ~RenderingDeviceDX11();
-            virtual uint32_t UnkFunc1() { return 0; }
-            virtual void UnkFunc2();
-            virtual void UnkFunc3();
-            virtual void UnkFunc4();
-            virtual void UnkFunc5() {}
-            virtual uint32_t UnkFunc6() { return 0; }
-            virtual bool UnkFunc7() { return false; }
-            virtual void UnkFunc8();
-            virtual void UnkFunc9();
-            virtual void UnkFunc10();
-            virtual Texture* CreateTexture2D();
-            virtual void UnkFunc11();
-            virtual void UnkFunc12();
-            virtual void UnkFunc13();
-            virtual void UnkFunc14();
-            virtual void UnkFunc15();
-            virtual void UnkFunc16();
-            virtual void UnkFunc17();
-            virtual void UnkFunc18();
-            virtual void UnkFunc19();
-            virtual void UnkFunc20() {}
-            virtual void UnkFunc21() {}
-            virtual void UnkFunc22();
-            virtual void UnkFunc23();
-            virtual void UnkFunc24();
-            virtual void UnkFunc25();
-            virtual void UnkFunc26();
-            virtual void UnkFunc27();
-            virtual void UnkFunc28();
-            virtual void UnkFunc29();
-            virtual void UnkFunc30();
-            virtual void UnkFunc31();
-            virtual void UnkFunc32();
-            virtual void UnkFunc33();
-            virtual void UnkFunc34();
-            virtual void UnkFunc35();
-            virtual void UnkFunc36() {}
-            virtual void UnkFunc37() {}
-            virtual void UnkFunc38();
-            virtual void UnkFunc39();
-            virtual void UnkFunc40();
-            virtual void UnkFunc41();
-            virtual void UnkFunc42();
-            virtual void UnkFunc43();
-            virtual void UnkFunc44();
-            virtual void UnkFunc45();
-            virtual void UnkFunc46();
-        };
-    }
+#define NEEDLE_RESOURCE_RENDERING_DEVICE_DX11 0x5F5F313156454452ui64
+
+namespace hh::needle::ImplDX11 {
+    class RenderingDeviceDX11 : public RenderingDevice {
+    public:
+        static constexpr size_t resourceId = NEEDLE_RESOURCE_RENDERING_DEVICE_DX11;
+
+        void* unk[1];
+        DeviceObjectDX11* deviceObject;
+
+        virtual void* QueryResource(size_t id) override;
+        virtual const void* QueryResource(size_t id) const override;
+        virtual void CreateDeviceContext() override;
+        virtual void* UnkFunc9() override;
+        virtual void OtherCreateDeviceContext() override; // CreateDeviceDispatch?
+        virtual Texture* CreateTexture(const TextureCreationInfo& creationInfo) override;
+        virtual void CreateTextureView(const TextureViewCreationInfo& creationInfo, NeedleRefcountResource* resource) override;
+        virtual void UnkFunc12() override;
+        virtual void UnkFunc13() override;
+        virtual void UnkFunc14() override;
+        virtual void UnkFunc15() override;
+        virtual void UnkFunc16() override;
+        virtual void UnkFunc17() override;
+        virtual void UnkFunc18() override;
+        virtual void UnkFunc19() override;
+        virtual void UnkFunc20() override {}
+        virtual void UnkFunc21() override {}
+        virtual void UnkFunc22() override;
+        virtual void UnkFunc23() override;
+        virtual void UnkFunc24() override;
+        virtual void UnkFunc25() override;
+        virtual void UnkFunc26() override;
+        virtual void UnkFunc27() override;
+        virtual void UnkFunc28() override;
+        virtual void UnkFunc29() override;
+        virtual void UnkFunc30() override;
+        virtual void UnkFunc31() override;
+        virtual void UnkFunc32() override;
+        virtual void UnkFunc33() override;
+        virtual void UnkFunc34() override;
+        virtual void UnkFunc35() override;
+        virtual void UnkFunc36() override {}
+        virtual void UnkFunc37() override {}
+        virtual void UnkFunc38() override;
+        virtual void UnkFunc39() override;
+        virtual void UnkFunc40() override;
+        virtual void UnkFunc41() override;
+        virtual void UnkFunc42() override;
+        virtual void UnkFunc43() override;
+        virtual void UnkFunc44() override;
+        virtual void UnkFunc45() override;
+        virtual void UnkFunc46() override;
+    };
 }

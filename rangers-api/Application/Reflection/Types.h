@@ -303,6 +303,160 @@ namespace app::rfl {
         static void Clean(FxSkyCommon* pInstance);
     };
 
+    struct FxBrunetonSkyNight {
+        float lunarIntensityInSky;
+        float starIntensityInSky;
+        float lunarIntensityInCloud;
+        float lunarIntensity;
+        float skyIntensity;
+        csl::ut::Color<uint8_t> lunarLightColor;
+        csl::math::Vector4 lunarLightColorOffset;
+        float lunarLightPower;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxBrunetonSkyNight* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxBrunetonSkyNight* pInstance);
+        static void Clean(FxBrunetonSkyNight* pInstance);
+    };
+
+    struct FxBrunetonSky {
+        float illuminanceScale;
+        csl::ut::Color<uint8_t> rayleighColor;
+        csl::ut::Color<uint8_t> lightColorScale;
+        float miePhaseFunctionG;
+        csl::ut::Color<uint8_t> mieScatteringColor;
+        float mieScatteringScale;
+        csl::ut::Color<uint8_t> mieAbsorptionColor;
+        float mieAbsorptionScale;
+        csl::ut::Color<uint8_t> rayleighScatteringColor;
+        float rayleighScatteringScale;
+        csl::ut::Color<uint8_t> groundAlbedo;
+        csl::ut::Color<uint8_t> groundIrradianceScale;
+        csl::ut::Color<uint8_t> cubemapColorScale;
+        float cubemapColorAngleRatio;
+        bool enableScattering;
+        float scatteringRatio;
+        FxBrunetonSkyNight night;
+        bool enableLimitY;
+        float debugSkyCubeIntensity;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxBrunetonSky* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxBrunetonSky* pInstance);
+        static void Clean(FxBrunetonSky* pInstance);
+    };
+
+    struct FxSebastienSky {
+        float miePhaseFunctionG;
+        csl::ut::Color<uint8_t> mieScatteringColor;
+        csl::math::Vector4 mieScatteringColorOffset;
+        float mieScatteringScale;
+        csl::ut::Color<uint8_t> mieAbsorptionColor;
+        csl::math::Vector4 mieAbsorptionColorOffset;
+        float mieAbsorptionScale;
+        csl::ut::Color<uint8_t> rayleighScatteringColor;
+        csl::math::Vector4 rayleighScatteringColorOffset;
+        float rayleighScatteringScale;
+        csl::ut::Color<uint8_t> groundAlbedo;
+        csl::math::Vector4 groundAlbedoOffset;
+        bool enableGround;
+        int32_t numScatteringOrder;
+        bool enableScattering;
+        bool enableLimitY;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxSebastienSky* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxSebastienSky* pInstance);
+        static void Clean(FxSebastienSky* pInstance);
+    };
+
+    struct FxCloudProcedural {
+        csl::math::Vector3 uvScale;
+        csl::math::Vector3 colorGamma;
+        csl::math::Vector3 colorScale;
+        csl::math::Vector3 colorOffset;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxCloudProcedural* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxCloudProcedural* pInstance);
+        static void Clean(FxCloudProcedural* pInstance);
+    };
+
+    struct FxCloudBlendParameter {
+        bool enable;
+        float probability;
+        float cloudiness;
+        FxCloudProcedural proceduralCloud;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxCloudBlendParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxCloudBlendParameter* pInstance);
+        static void Clean(FxCloudBlendParameter* pInstance);
+    };
+
+    struct FxCloudParameter {
+        bool enable;
+        bool enableAnimation;
+        float animationFrame;
+        float animationSpeed;
+        float animationAngle;
+        float animationSpeedCirrus;
+        float animationAngleCirrus;
+        float skyHorizonOffset;
+        float cloudStartHeight;
+        float cloudCoverageSpeed;
+        float cloudTypeSpeed;
+        float cloudWetnessSpeed;
+        float miePhaseFunctionG;
+        float silverIntensity;
+        float silverSpread;
+        float scale;
+        float density;
+        float densityThreshold;
+        csl::ut::Color<uint8_t> cloudsExtinctionColor1;
+        csl::math::Vector4 cloudsExtinctionColor1Offset;
+        csl::ut::Color<uint8_t> cloudsExtinctionColor2;
+        csl::math::Vector4 cloudsExtinctionColor2Offset;
+        csl::ut::Color<uint8_t> cloudsExtinctionColor3;
+        csl::math::Vector4 cloudsExtinctionColor3Offset;
+        float cloudExtinctionBlend;
+        bool enableShadow;
+        int32_t shadowCoverage;
+        float shadowValueMin;
+        FxCloudBlendParameter blendParam;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxCloudParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxCloudParameter* pInstance);
+        static void Clean(FxCloudParameter* pInstance);
+    };
+
+    struct FxCrepuscularRay {
+        bool enable;
+        float density;
+        float decay;
+        float weight;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxCrepuscularRay* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxCrepuscularRay* pInstance);
+        static void Clean(FxCrepuscularRay* pInstance);
+    };
+
     struct FxManualHeightFog {
         csl::math::Vector3 sunColor;
         csl::math::Vector3 ambColor;
@@ -339,30 +493,103 @@ namespace app::rfl {
         static void Clean(FxHeightFog* pInstance);
     };
 
-    struct FxSebastienSky {
-        float miePhaseFunctionG;
-        csl::ut::Color<uint8_t> mieScatteringColor;
-        csl::math::Vector4 mieScatteringColorOffset;
-        float mieScatteringScale;
-        csl::ut::Color<uint8_t> mieAbsorptionColor;
-        csl::math::Vector4 mieAbsorptionColorOffset;
-        float mieAbsorptionScale;
-        csl::ut::Color<uint8_t> rayleighScatteringColor;
-        csl::math::Vector4 rayleighScatteringColorOffset;
-        float rayleighScatteringScale;
-        csl::ut::Color<uint8_t> groundAlbedo;
-        csl::math::Vector4 groundAlbedoOffset;
-        bool enableGround;
-        int32_t numScatteringOrder;
-        bool enableScattering;
-        bool enableLimitY;
+    struct FxAtmosphereParameter {
+        bool enable;
+        FxSun sunParam;
+        FxMoon moonParam;
+        FxSkyCommon commonSkyParam;
+        FxBrunetonSky brunetonSkyParam;
+        FxSebastienSky sebastienSkyParam;
+        FxCloudParameter cloudParam;
+        FxCrepuscularRay crepuscularRayParam;
+        FxHeightFog heightFogParam;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxSebastienSky* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxSebastienSky* pInstance);
-        static void Clean(FxSebastienSky* pInstance);
+        static void Construct(FxAtmosphereParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxAtmosphereParameter* pInstance);
+        static void Clean(FxAtmosphereParameter* pInstance);
+    };
+
+    struct FxDensityDebugParameter {
+        bool underSelect;
+        float factor;
+        float unit[32];
+        int8_t chunk[32];
+        float lodAddition;
+        int32_t chunkAddition;
+        float drawLimitLenght;
+        bool drawCallReduction;
+        bool enableDither;
+        int32_t ditherGrass;
+        int32_t ditherOther;
+        int32_t ditherPreComputeGrass;
+        int32_t ditherPreComputeOther;
+        int32_t computeMode;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxDensityDebugParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxDensityDebugParameter* pInstance);
+        static void Clean(FxDensityDebugParameter* pInstance);
+    };
+
+    struct FxDensityLodParameter {
+        float lodRatio;
+        float lodRise;
+        float lodDecrease;
+        float lodThreshold;
+        bool lodFadeEnable;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxDensityLodParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxDensityLodParameter* pInstance);
+        static void Clean(FxDensityLodParameter* pInstance);
+    };
+
+    struct FxDensityParameter {
+        enum class PlacementType : int8_t {
+            CirclePacking = 0,
+            RandomPos = 1,
+            PT_COUNT = 2,
+        };
+
+        enum class ShadowCullingType : int8_t {
+            Normal = 0,
+            AabbUpScale2 = 1,
+            ShadowFrustum = 2,
+        };
+
+        bool enable;
+        bool precomputeEnable;
+        bool cameraUpdate;
+        PlacementType placement;
+        float placementScale;
+        bool alphaEnable;
+        float alphaThreshold;
+        float alphaScale;
+        bool complementEnable;
+        bool disableCut;
+        ShadowCullingType shadowCulling;
+        bool occlusionCulling;
+        float occlusionSize;
+        float occlusionShadowSize;
+        float occlusionBias;
+        FxDensityLodParameter lodParam;
+        bool angleCulling;
+        float angleCullingParam;
+        FxDensityDebugParameter debugParam;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxDensityParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxDensityParameter* pInstance);
+        static void Clean(FxDensityParameter* pInstance);
     };
 
     struct FxDensityWindParameter {
@@ -517,510 +744,314 @@ namespace app::rfl {
         static void Clean(GlobalLightParameter* pInstance);
     };
 
-    struct PerformanceSetting {
-        float smallCullingThreshold;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PerformanceSetting* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PerformanceSetting* pInstance);
-        static void Clean(PerformanceSetting* pInstance);
-    };
-
-    struct ProgressTimePairData {
-        float hourlyTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ProgressTimePairData* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ProgressTimePairData* pInstance);
-        static void Clean(ProgressTimePairData* pInstance);
-    };
-
-    struct StageCameraParameter {
-        float zNear;
-        float zFar;
-        float fovy;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageCameraParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageCameraParameter* pInstance);
-        static void Clean(StageCameraParameter* pInstance);
-    };
-
-    struct StageCommonAtmosphereParameter {
-        float illuminanceScale;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageCommonAtmosphereParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageCommonAtmosphereParameter* pInstance);
-        static void Clean(StageCommonAtmosphereParameter* pInstance);
-    };
-
-    struct StageCommonDecalModelParameter {
-        float cullingRange;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageCommonDecalModelParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageCommonDecalModelParameter* pInstance);
-        static void Clean(StageCommonDecalModelParameter* pInstance);
-    };
-
-    struct StageCommonParameter {
-        float deadline;
-        float oceanSurface;
-        float deadFallTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageCommonParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageCommonParameter* pInstance);
-        static void Clean(StageCommonParameter* pInstance);
-    };
-
-    struct TimeIntervalData {
-        HourMinuteData beginTime;
-        HourMinuteData endTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(TimeIntervalData* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(TimeIntervalData* pInstance);
-        static void Clean(TimeIntervalData* pInstance);
-    };
-
-    struct StageCommonTimeProgressParameter {
-        bool enable;
-        float solarRadiusScale;
-        float azimuthAngle;
-        float latitude;
-        float longitude;
-        int32_t month;
-        int32_t day;
-        float time;
-        float hourlyTime;
-        ProgressTimePairData overrideSpeeds[8];
-        TimeIntervalData night;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageCommonTimeProgressParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageCommonTimeProgressParameter* pInstance);
-        static void Clean(StageCommonTimeProgressParameter* pInstance);
-    };
-
-    struct StageCommonWeatherProgressParameter {
-        bool enable;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageCommonWeatherProgressParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageCommonWeatherProgressParameter* pInstance);
-        static void Clean(StageCommonWeatherProgressParameter* pInstance);
-    };
-
-    struct StageTerrainPrecisionParameter {
-        float heightRange;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageTerrainPrecisionParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageTerrainPrecisionParameter* pInstance);
-        static void Clean(StageTerrainPrecisionParameter* pInstance);
-    };
-
-    struct StageTerrainMaterialParameter {
-        float uvScaleDetail;
-        float uvScaleBase;
-        float detailDistance;
-        float detailFadeRange;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageTerrainMaterialParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageTerrainMaterialParameter* pInstance);
-        static void Clean(StageTerrainMaterialParameter* pInstance);
-    };
-
-    struct StageTerrainParameter {
-        bool useHeightMapTerrain;
-        bool useHalfPrecision;
-        StageTerrainPrecisionParameter precision;
-        int32_t worldSize;
-        int32_t heightMapTexelDensity;
-        float heightScale;
-        float smallestCellSize;
-        float slopeClipThrethold;
-        csl::math::Vector2 aabbMin;
-        csl::math::Vector2 aabbMax;
-        StageTerrainMaterialParameter material;
-        bool enableGbufferBlending;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageTerrainParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageTerrainParameter* pInstance);
-        static void Clean(StageTerrainParameter* pInstance);
-    };
-
-    struct StageConfig {
-        StageCommonParameter common;
-        StageCameraParameter camera;
-        StageTerrainParameter terrain;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(StageConfig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(StageConfig* pInstance);
-        static void Clean(StageConfig* pInstance);
-    };
-
-    struct FxTerrainParameter {
-        bool enableDrawGrid;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxTerrainParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxTerrainParameter* pInstance);
-        static void Clean(FxTerrainParameter* pInstance);
-    };
-
-    struct FxDropParameter {
-        float uvScale;
-        float timeScale;
-        float normalIntensity;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxDropParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxDropParameter* pInstance);
-        static void Clean(FxDropParameter* pInstance);
-    };
-
-    struct FxPuddleParameter {
-        float heightThreshold;
-        float slopeThreshold;
-        float noiseScaleXZ;
-        float noiseScaleY;
-        float noiseThreshold;
-        float noiseAttenu;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxPuddleParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxPuddleParameter* pInstance);
-        static void Clean(FxPuddleParameter* pInstance);
-    };
-
-    struct FxRippleParameter {
-        float intensity;
-        float uvScale;
-        float timeScale;
-        float normalIntensity;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxRippleParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxRippleParameter* pInstance);
-        static void Clean(FxRippleParameter* pInstance);
-    };
-
-    struct FxRainParameter {
-        bool enableDrop;
-        bool enableFilter;
-        bool enableRipple;
-        float intensity;
-        csl::math::Vector4 dropColor;
-        bool dropRotTarget;
-        bool enableDropOcc;
-        float dropCameraLerp;
-        float dropCameraRate;
-        float dropCameraRotation;
-        float dropWidth;
-        float dropLength;
-        float dropWind;
-        float dropRange;
-        csl::math::Vector4 filterColor;
-        float filterRange;
-        float filterEdge;
-        float filterAngle;
-        FxRippleParameter ripple;
-        FxDropParameter drop;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxRainParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxRainParameter* pInstance);
-        static void Clean(FxRainParameter* pInstance);
-    };
-
-    struct FxWeatherParameter {
-        float wetness;
-        FxPuddleParameter puddle;
-        FxRainParameter rain;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxWeatherParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxWeatherParameter* pInstance);
-        static void Clean(FxWeatherParameter* pInstance);
-    };
-
-    struct FxInteractiveWaveParameter {
-        bool enable;
-        bool enableDebugDisplay;
-        float waveDamping;
-        float waveReduceRange;
-        float waveSpeed;
-        float simurationScale;
-        float playerMaxSpeed;
-        bool isInWaterDummy;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxInteractiveWaveParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxInteractiveWaveParameter* pInstance);
-        static void Clean(FxInteractiveWaveParameter* pInstance);
-    };
-
-    struct CapsuleParam {
-        enum class VolumeType : int8_t {
-            VOLUME_SPHERE = 0,
-            VOLUME_CAPSULE = 1,
+    struct DebugScreenOption {
+        enum class ChannelMode : int8_t {
+            CHANNELMODE_RGB = 0,
+            CHANNELMODE_RRR = 1,
+            CHANNELMODE_GGG = 2,
+            CHANNELMODE_BBB = 3,
+            CHANNELMODE_AAA = 4,
+            CHANNELMODE_RG = 5,
+            CHANNELMODE_BA = 6,
         };
 
-        enum class LODLevel : int8_t {
-            LOD_HIGH = 0,
-            LOD_MIDDLE = 1,
-            LOD_LOW = 2,
+        enum class DebugScreenType : int8_t {
+            DEBUG_SCREEN_GBUFFER0 = 0,
+            DEBUG_SCREEN_GBUFFER1 = 1,
+            DEBUG_SCREEN_GBUFFER2 = 2,
+            DEBUG_SCREEN_GBUFFER3 = 3,
+            DEBUG_SCREEN_DEPTHBUFFER = 4,
+            DEBUG_SCREEN_CSM0 = 5,
+            DEBUG_SCREEN_CSM1 = 6,
+            DEBUG_SCREEN_CSM2 = 7,
+            DEBUG_SCREEN_CSM3 = 8,
+            DEBUG_SCREEN_HDR = 9,
+            DEBUG_SCREEN_BLOOM = 10,
+            DEBUG_SCREEN_RLR = 11,
+            DEBUG_SCREEN_GODRAY = 12,
+            DEBUG_SCREEN_SSAO = 13,
+            DEBUG_SCREEN_CSM_CACHE0 = 14,
+            DEBUG_SCREEN_CSM_CACHE1 = 15,
+            DEBUG_SCREEN_CSM_CACHE2 = 16,
+            DEBUG_SCREEN_CSM_CACHE3 = 17,
+            DEBUG_SCREEN_CSM_CACHE4 = 18,
+            DEBUG_SCREEN_CSM_CACHE5 = 19,
+            DEBUG_SCREEN_CUSTOM0 = 20,
+            DEBUG_SCREEN_CUSTOM1 = 21,
+            DEBUG_SCREEN_CUSTOM2 = 22,
+            DEBUG_SCREEN_CUSTOM3 = 23,
         };
 
-        csl::ut::VariableString type;
-        VolumeType volume;
-        int32_t priority;
-        csl::math::Vector3 translation;
-        csl::math::Vector3 rotation;
-        csl::math::Vector3 scale;
-        csl::math::Vector3 rate;
-        float radius;
-        LODLevel lod;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(CapsuleParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(CapsuleParam* pInstance);
-        static void Clean(CapsuleParam* pInstance);
-    };
-
-    struct FxDetailParameter {
-        float detailDistance;
-        float detailFadeRange;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxDetailParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxDetailParameter* pInstance);
-        static void Clean(FxDetailParameter* pInstance);
-    };
-
-    struct FxDistanceFogParameter {
-        bool enable;
-        csl::math::Vector3 color;
-        float intensity;
-        float nearDist;
-        float farDist;
-        float influence;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxDistanceFogParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxDistanceFogParameter* pInstance);
-        static void Clean(FxDistanceFogParameter* pInstance);
-    };
-
-    struct FxDynamicResolutionParameter {
-        enum class Mode : int8_t {
-            DISABLE = 0,
-            ENABLE = 1,
-            FIXED_RESOLUTION = 2,
+        enum class ErrorCheckType : int8_t {
+            ERROR_CHECK_NONE = 0,
+            ERROR_CHECK_NAN = 1,
+            ERROR_CHECK_ALBEDO = 2,
+            ERROR_CHECK_NORMAL = 3,
         };
 
-        Mode mode;
-        float fixedResolutionRatio;
-        float minResolutionRatio;
-        float minTargetTimeDifference;
-        float maxTargetTimeDifference;
-        float increaseRate;
-        float decreaseRate;
-        float increaseMaxScaleDelta;
-        float decreaseMaxScaleDelta;
-        bool debugSineFluctuation;
+        enum class VisualizeMode : int8_t {
+            DEFAULT = 0,
+            HEATMAP_TYPE0 = 1,
+            HEATMAP_TYPE1 = 2,
+            HEATMAP_TYPE2 = 3,
+            VECTOR2D_TYPE0 = 4,
+            VECTOR2D_TYPE1 = 5,
+            VECTOR2D_TYPE2 = 6,
+        };
 
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxDynamicResolutionParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxDynamicResolutionParameter* pInstance);
-        static void Clean(FxDynamicResolutionParameter* pInstance);
-    };
-
-    struct FxEffectParameter {
-        float lightFieldColorCoefficient;
-        float invTonemapCoefficient;
-        csl::math::Vector3 shadowColor;
-        csl::math::Vector3 directionalLightOverwrite;
-        float directionalLightIntensityOverwrite;
-        bool overwriteDirectionalLight;
-        float localLightIntensityScale;
-        float lodDistances[8];
-        bool enableVisualizeOverdraw;
-        bool renderWireframe;
-        bool upsampleBilateral;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxEffectParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxEffectParameter* pInstance);
-        static void Clean(FxEffectParameter* pInstance);
-    };
-
-    struct FxHeightFogParameter {
         bool enable;
-        csl::math::Vector3 color;
+        bool fullScreen;
+        ChannelMode channelMode;
+        float min;
+        float max;
+        int32_t renderTargetType;
+        int32_t depthTargetType;
+        DebugScreenType screenType;
+        ErrorCheckType errorCheck;
+        VisualizeMode visualizeMode;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(DebugScreenOption* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(DebugScreenOption* pInstance);
+        static void Clean(DebugScreenOption* pInstance);
+    };
+
+    struct GlobalUserParamOption {
+        bool enable;
+        csl::math::Vector4 value;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GlobalUserParamOption* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GlobalUserParamOption* pInstance);
+        static void Clean(GlobalUserParamOption* pInstance);
+    };
+
+    struct FxRenderOption {
+        enum class DebugViewType : int8_t {
+            DEBUG_VIEW_DEFAULT = 0,
+            DEBUG_VIEW_DIR_DIFFUSE = 1,
+            DEBUG_VIEW_DIR_SPECULAR = 2,
+            DEBUG_VIEW_AMB_DIFFUSE = 3,
+            DEBUG_VIEW_AMB_SPECULAR = 4,
+            DEBUG_VIEW_ONLY_IBL = 5,
+            DEBUG_VIEW_ONLY_IBL_SURF_NORMAL = 6,
+            DEBUG_VIEW_SHADOW = 7,
+            DEBUG_VIEW_WHITE_ALBEDO = 8,
+            DEBUG_VIEW_WHITE_ALBEDO_NO_AO = 9,
+            DEBUG_VIEW_USER0 = 10,
+            DEBUG_VIEW_USER1 = 11,
+            DEBUG_VIEW_USER2 = 12,
+            DEBUG_VIEW_USER3 = 13,
+            DEBUG_VIEW_ALBEDO = 14,
+            DEBUG_VIEW_ALBEDO_CHECK_OUTLIER = 15,
+            DEBUG_VIEW_OPACITY = 16,
+            DEBUG_VIEW_NORMAL = 17,
+            DEBUG_VIEW_ROUGHNESS = 18,
+            DEBUG_VIEW_AMBIENT = 19,
+            DEBUG_VIEW_CAVITY = 20,
+            DEBUG_VIEW_REFLECTANCE = 21,
+            DEBUG_VIEW_METALLIC = 22,
+            DEBUG_VIEW_LOCAL_LIGHT = 23,
+            DEBUG_VIEW_SCATTERING_FEX = 24,
+            DEBUG_VIEW_SCATTERING_LIN = 25,
+            DEBUG_VIEW_SSAO = 26,
+            DEBUG_VIEW_RLR = 27,
+            DEBUG_VIEW_IBL_DIFFUSE = 28,
+            DEBUG_VIEW_IBL_SPECULAR = 29,
+            DEBUG_VIEW_ENV_BRDF = 30,
+            DEBUG_VIEW_WORLD_POSITION = 31,
+            DEBUG_VIEW_SHADING_MODEL_ID = 32,
+            DEBUG_VIEW_IBL_CAPTURE = 33,
+            DEBUG_VIEW_IBL_SKY_TERRAIN = 34,
+            DEBUG_VIEW_WRITE_DEPTH_TO_ALPHA = 35,
+            DEBUG_VIEW_SMOOTHNESS = 36,
+            DEBUG_VIEW_OCCLUSION_CAPSULE = 37,
+            DEBUG_VIEW_PROBE = 38,
+            DEBUG_VIEW_COUNT = 39,
+            DEBUG_VIEW_INVALID = 39,
+        };
+
+        enum class LocalLightCullingType : int8_t {
+            LOCAL_LIGHT_CULLING_TYPE_NONE = 0,
+            LOCAL_LIGHT_CULLING_TYPE_CPU_TILE = 1,
+            LOCAL_LIGHT_CULLING_TYPE_GPU_TILE = 2,
+            LOCAL_LIGHT_CULLING_TYPE_GPU_CLUSTER = 3,
+            LOCAL_LIGHT_CULLING_TYPE_COUNT = 4,
+            LOCAL_LIGHT_CULLING_TYPE_DEFAULT = 0,
+        };
+
+        enum class TextureViewType : int8_t {
+            TEXTURE_VIEW_NONE = 0,
+            TEXTURE_VIEW_DEPTH = 1,
+            TEXTURE_VIEW_LUMINANCE = 2,
+            TEXTURE_VIEW_DOF_BOKEH = 3,
+            TEXTURE_VIEW_DOF_BOKEH_NEAR = 4,
+            TEXTURE_VIEW_SSAO_SOURCE = 5,
+            TEXTURE_VIEW_DOWNSAMPLE = 6,
+            TEXTURE_VIEW_COUNT = 7,
+        };
+
+        enum class AmbientSpecularType : int8_t {
+            AMBIENT_SPECULAR_NONE = 0,
+            AMBIENT_SPECULAR_SG = 1,
+            AMBIENT_SPECULAR_IBL = 2,
+            AMBIENT_SPECULAR_BLEND = 3,
+        };
+
+        enum class DebugScreenView : int8_t {
+            DEBUG_SCREEN_VIEW_DEFAULT = 0,
+            DEBUG_SCREEN_VIEW_ALL_ENABLE = 1,
+            DEBUG_SCREEN_VIEW_ALL_DISABLE = 2,
+        };
+
+        DebugViewType debugViewType;
+        bool clearRenderTarget;
+        bool enableDrawCubeProbe;
+        GlobalLightParameter globalLight;
+        bool enablePointLight;
+        bool enableEffectDeformation;
+        bool enablePreMergeIBL;
+        bool enableLitePostEffect;
+        LocalLightCullingType localLightCullingType;
+        float localLightScale;
+        float shadowIBLAttenuation;
+        int32_t maxCubeProbe;
+        bool debugEnableDrawLocalLight;
+        TextureViewType debugTextureViewType;
+        bool debugEnableOutputTextureView;
+        int32_t debugScreenshotResolutionHeight;
+        float debugScreenshotDepthNear;
+        float debugScreenshotDepthFar;
+        AmbientSpecularType debugAmbientSpecularType;
+        bool debugEnableSGGIVer2nd;
+        bool debugEnableAOGI;
+        DebugScreenOption debugScreen[16];
+        DebugScreenView debugScreenView;
+        bool enableMSAA;
+        bool debugEnableDrawFrustumCullFrustum;
+        bool debugEnableFixFrustumCullFrustum;
+        int32_t debugDrawFrustumCullGroupSettingIndex;
+        bool debugEnableOcclusionCullingView;
+        int32_t debugOccluderVertThreshold;
+        GlobalUserParamOption globalUserParam[4];
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxRenderOption* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxRenderOption* pInstance);
+        static void Clean(FxRenderOption* pInstance);
+    };
+
+    struct FxSGGIParameter {
+        float sgStartSmoothness;
+        float sgEndSmoothness;
+        float doStartSmoothness;
+        float doEndSmoothness;
+        float doOffset;
+        float aoOffset;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxSGGIParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxSGGIParameter* pInstance);
+        static void Clean(FxSGGIParameter* pInstance);
+    };
+
+    struct FxRLRParameter {
+        bool enable;
+        bool traceSky;
+        bool useTrans;
+        bool usePenet;
+        bool useQuat;
+        bool useNormal;
+        float rayMarchingCount;
+        float planeNormalDist;
+        float traceThreshold;
+        float resolveReproj;
+        float overrideRatio;
+        float maxRoughness;
+        float roughnessLevel;
+        float uvOffsetScale;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxRLRParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxRLRParameter* pInstance);
+        static void Clean(FxRLRParameter* pInstance);
+    };
+
+    struct FxSSGIDebugParameter {
+        bool useDenoise;
+        float rayLength;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxSSGIDebugParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxSSGIDebugParameter* pInstance);
+        static void Clean(FxSSGIDebugParameter* pInstance);
+    };
+
+    struct FxSSGIParameter {
+        bool enable;
         float intensity;
-        float minHeight;
-        float maxHeight;
-        float nearDist;
-        float farDist;
-        float influence;
+        bool useAlbedo;
+        bool useParameter;
+        FxSSGIDebugParameter debugParam;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxHeightFogParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxHeightFogParameter* pInstance);
-        static void Clean(FxHeightFogParameter* pInstance);
+        static void Construct(FxSSGIParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxSSGIParameter* pInstance);
+        static void Clean(FxSSGIParameter* pInstance);
     };
 
-    struct FxFogParameter {
-        FxDistanceFogParameter distanceFogParam;
-        FxHeightFogParameter heightFogParam;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxFogParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxFogParameter* pInstance);
-        static void Clean(FxFogParameter* pInstance);
-    };
-
-    struct FxInteractionDebugParameter {
+    struct FxPlanarReflectionParameter {
         bool enable;
-        bool collisionEnable;
-        float threshold;
+        csl::math::Vector4 plane;
+        uint32_t width;
+        uint32_t height;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxInteractionDebugParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxInteractionDebugParameter* pInstance);
-        static void Clean(FxInteractionDebugParameter* pInstance);
+        static void Construct(FxPlanarReflectionParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxPlanarReflectionParameter* pInstance);
+        static void Clean(FxPlanarReflectionParameter* pInstance);
     };
 
-    struct FxInteractionParameter {
+    struct FxBloomParameter {
         bool enable;
-        float power;
-        float decrease;
-        float timeScale;
-        FxInteractionDebugParameter debug;
-        float tremorPower;
-        float tremorSpeed;
-        float tremorScaleCriterion;
-        float tremorScaleReduce;
+        bool fast;
+        float bloomScale;
+        float sampleRadiusScale;
+        int32_t blurQuality;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxInteractionParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxInteractionParameter* pInstance);
-        static void Clean(FxInteractionParameter* pInstance);
+        static void Construct(FxBloomParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxBloomParameter* pInstance);
+        static void Clean(FxBloomParameter* pInstance);
     };
 
-    struct FxGpuEnvironmentParameter {
-        float grassDitherStart;
-        float grassDitherEnd;
-        FxInteractionParameter interaction;
-        bool enableZoomBias;
-        float zoomBias;
+    struct FxManualExposureParameter {
+        float exposureValue;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxGpuEnvironmentParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxGpuEnvironmentParameter* pInstance);
-        static void Clean(FxGpuEnvironmentParameter* pInstance);
-    };
-
-    struct FxLODParameter {
-        bool enableDebugDrawLayerRange;
-        float layerRange[32];
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxLODParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxLODParameter* pInstance);
-        static void Clean(FxLODParameter* pInstance);
-    };
-
-    struct FxModelParameter {
-        bool zprepass;
-        bool ditherAsBlueNoize;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxModelParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxModelParameter* pInstance);
-        static void Clean(FxModelParameter* pInstance);
-    };
-
-    struct OcclusionCapsuleList {
-        CapsuleParam capsules[64];
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(OcclusionCapsuleList* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(OcclusionCapsuleList* pInstance);
-        static void Clean(OcclusionCapsuleList* pInstance);
+        static void Construct(FxManualExposureParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxManualExposureParameter* pInstance);
+        static void Clean(FxManualExposureParameter* pInstance);
     };
 
     struct FxAutoExposureParameter {
@@ -1049,380 +1080,262 @@ namespace app::rfl {
         static void Clean(FxAutoExposureParameter* pInstance);
     };
 
-    struct FxDirectionalRadialBlurParameter {
-        bool enable;
-        csl::math::Vector3 center;
-        csl::math::Vector3 direction;
-        float blurPowerMax;
-        float blurPowerMin;
-        float focusRange;
-        float alphaSlope;
-        int32_t sampleNum;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxDirectionalRadialBlurParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxDirectionalRadialBlurParameter* pInstance);
-        static void Clean(FxDirectionalRadialBlurParameter* pInstance);
-    };
-
-    struct FxFieldScanEffectRenderParameter {
-        bool enable;
-        csl::math::Vector3 centerPos;
-        csl::ut::Color<uint8_t> color;
-        float radius1;
-        float radius2;
-        float radius3;
-        float intensity1;
-        float intensity2;
-        float intensity3;
-        float gridIntensity;
-        float innerWidth;
-        float gridLineWidth;
-        float gridLineSpan;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxFieldScanEffectRenderParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxFieldScanEffectRenderParameter* pInstance);
-        static void Clean(FxFieldScanEffectRenderParameter* pInstance);
-    };
-
-    struct FxFXAAParameter {
-        enum class QualityType : int8_t {
-            QUALITY_LOW = 0,
-            QUALITY_MEDIUM = 1,
-            QUALITY_HIGH = 2,
-            QUALITY_COUNT = 3,
+    struct FxCameraControlParameter {
+        enum class Exposure : int8_t {
+            EXPOSURE_MANUAL = 0,
+            EXPOSURE_AUTO = 1,
         };
 
-        QualityType qualityType;
+        Exposure exposureType;
+        FxManualExposureParameter manualExposure;
+        FxAutoExposureParameter autoExposure;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxFXAAParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxFXAAParameter* pInstance);
-        static void Clean(FxFXAAParameter* pInstance);
+        static void Construct(FxCameraControlParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxCameraControlParameter* pInstance);
+        static void Clean(FxCameraControlParameter* pInstance);
     };
 
-    struct FxGodrayVolumeTexture {
-        bool enableVolumeTexture;
-        float uvScale;
-        float timeScale;
-        float animationAngle;
+    struct FxToneMapParameterFilmic {
+        float whitePoint;
+        float toeStrength;
+        float linearAngle;
+        float linearStrength;
+        float shoulderStrength;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxGodrayVolumeTexture* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxGodrayVolumeTexture* pInstance);
-        static void Clean(FxGodrayVolumeTexture* pInstance);
+        static void Construct(FxToneMapParameterFilmic* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxToneMapParameterFilmic* pInstance);
+        static void Clean(FxToneMapParameterFilmic* pInstance);
     };
 
-    struct FxGodrayParameter {
+    struct FxToneMapParameterGT {
+        float maxDisplayBrightness;
+        float contrast;
+        float linearSectionStart;
+        float linearSectionLength;
+        float black;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxToneMapParameterGT* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxToneMapParameterGT* pInstance);
+        static void Clean(FxToneMapParameterGT* pInstance);
+    };
+
+    struct FxToneMapParameter {
+        enum class Tonemap : int8_t {
+            TONEMAP_DISNEY = 0,
+            TONEMAP_FILMIC = 1,
+            TONEMAP_ACES = 2,
+            TONEMAP_GT = 3,
+        };
+
+        Tonemap tonemapType;
+        FxToneMapParameterFilmic tonemapParamFilmic;
+        FxToneMapParameterGT tonemapParamGT;
+        bool updateLuminance;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxToneMapParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxToneMapParameter* pInstance);
+        static void Clean(FxToneMapParameter* pInstance);
+    };
+
+    struct FxColorContrastParameter {
+        enum class LutIndex : int32_t {
+            LUT_INDEX_DEFAULT = 0,
+            LUT_INDEX_WB = 1,
+            LUT_INDEX_USER_0 = 2,
+            LUT_INDEX_USER_1 = 3,
+            LUT_INDEX_USER_2 = 4,
+            LUT_INDEX_USER_3 = 5,
+            LUT_INDEX_USER_4 = 6,
+            LUT_INDEX_USER_5 = 7,
+            LUT_INDEX_COUNT = 8,
+        };
+
         bool enable;
-        bool isUseShadowmap;
-        bool isVariableStep;
-        csl::math::Matrix44 shadow;
-        csl::math::Matrix34 box;
-        csl::math::Vector3 color;
-        float density;
-        float anisotropy;
-        float range;
-        float rayMarchingCount;
-        float rayMarchingStep;
-        float shadowEdge;
-        bool isScanFromBack;
-        int32_t boxCount;
-        bool isNewMode;
-        FxGodrayVolumeTexture volumeTexture;
-        float transparency;
-        bool enable3d;
-        float reProject3d;
-        float logNear3d;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxGodrayParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxGodrayParameter* pInstance);
-        static void Clean(FxGodrayParameter* pInstance);
-    };
-
-    struct FxHBAO_Parameter {
-        float hbaoPower;
-        float hbaoBias;
-        float hbaoRadius;
-        float hbaoFalloff;
-        float hbaoSteps;
-        float hbaoGitter;
-        int8_t hbaoRaycount;
-        bool hbaoGiMaskEnable;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxHBAO_Parameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxHBAO_Parameter* pInstance);
-        static void Clean(FxHBAO_Parameter* pInstance);
-    };
-
-    struct FxHeatHazeParameter {
-        bool enable;
-        float speed;
-        float scale;
-        float cycle;
-        float nearDepth;
-        float farDepth;
-        float maxHeight;
-        float parallaxCorrectFactor;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxHeatHazeParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxHeatHazeParameter* pInstance);
-        static void Clean(FxHeatHazeParameter* pInstance);
-    };
-
-    struct FxHeightMapParameter {
-        bool enable;
-        bool enableMultiHeightmap;
-        bool debugDrawFrustum;
-        bool reprojection;
-        uint32_t renderTargetWidth;
-        uint32_t renderTargetHeight;
-        float referenceValue;
-        float heightScale;
-        float fadeTime;
-        float colorMask;
-        csl::math::Matrix44 viewMatrix;
-        csl::math::Matrix44 projMatrix;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxHeightMapParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxHeightMapParameter* pInstance);
-        static void Clean(FxHeightMapParameter* pInstance);
-    };
-
-    struct FxLightFieldMergeParameter {
-        bool enable;
+        float contrast;
+        float dynamicRange;
+        float crushShadows;
+        float crushHilights;
+        bool useLut;
+        LutIndex lutIndex0;
+        LutIndex lutIndex1;
         float blendRatio;
+        float lutRatio;
+        bool useHlsCorrection;
+        float hlsHueOffset;
+        float hlsLightnessOffset;
+        float hlsSaturationOffset;
+        int32_t hlsColorOffset[3];
+        float hlsColorizeRate;
+        float hlsColorizeHue;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxLightFieldMergeParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxLightFieldMergeParameter* pInstance);
-        static void Clean(FxLightFieldMergeParameter* pInstance);
+        static void Construct(FxColorContrastParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxColorContrastParameter* pInstance);
+        static void Clean(FxColorContrastParameter* pInstance);
     };
 
-    struct FxManualExposureParameter {
-        float exposureValue;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxManualExposureParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxManualExposureParameter* pInstance);
-        static void Clean(FxManualExposureParameter* pInstance);
-    };
-
-    struct FxOcclusionCapsuleParameter {
-        bool enable;
-        bool enableOcclusion;
-        csl::ut::Color<uint8_t> occlusionColor;
-        float occlusionPower;
-        bool enableSpecularOcclusion;
-        float specularOcclusionAlpha;
-        float specularOcclusionPower;
-        float specularOcclusionConeAngle;
-        bool enableShadow;
-        csl::ut::Color<uint8_t> shadowColor;
-        float shadowPower;
-        float shadowConeAngle;
-        float cullingDistance;
-        bool enableManualLight;
-        int32_t manualLightCount;
-        csl::math::Vector3 manualLightPos[4];
-        bool debugDraw;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxOcclusionCapsuleParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxOcclusionCapsuleParameter* pInstance);
-        static void Clean(FxOcclusionCapsuleParameter* pInstance);
-    };
-
-    struct FxPlanarProjectionShadowParameter {
-        bool enable;
-        csl::math::Vector4 projectionPlane;
-        csl::math::Vector3 lightPosition[4];
-        int8_t lightCount;
-        float vanishStart;
-        float vanishDistance;
-        float projectionBias;
-        csl::math::Vector3 shadowMapBoxSize;
-        csl::math::Vector3 shadowMapBoxOffset;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxPlanarProjectionShadowParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxPlanarProjectionShadowParameter* pInstance);
-        static void Clean(FxPlanarProjectionShadowParameter* pInstance);
-    };
-
-    struct FxPlanarReflectionParameter {
-        bool enable;
-        csl::math::Vector4 plane;
-        uint32_t width;
-        uint32_t height;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxPlanarReflectionParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxPlanarReflectionParameter* pInstance);
-        static void Clean(FxPlanarReflectionParameter* pInstance);
-    };
-
-    struct FxRLRParameter {
-        bool enable;
-        bool traceSky;
-        bool useTrans;
-        bool usePenet;
-        bool useQuat;
-        bool useNormal;
-        float rayMarchingCount;
-        float planeNormalDist;
-        float traceThreshold;
-        float resolveReproj;
-        float overrideRatio;
-        float maxRoughness;
-        float roughnessLevel;
-        float uvOffsetScale;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxRLRParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxRLRParameter* pInstance);
-        static void Clean(FxRLRParameter* pInstance);
-    };
-
-    struct FxSceneEnvironmentParameter {
-        float windRotationY;
-        float windStrength;
-        float windNoise;
-        float windAmplitude;
-        float windFrequencies[4];
-        bool enableTreadGrass;
-        csl::math::Vector4 grassLodDistance;
-        bool enableHighLight;
-        float highLightThreshold;
-        float highLightObjectAmbientScale;
-        float highLightObjectAlbedoHeighten;
-        float highLightCharaAmbientScale;
-        float highLightCharaAlbedoHeighten;
-        float highLightCharaFalloffScale;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxSceneEnvironmentParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxSceneEnvironmentParameter* pInstance);
-        static void Clean(FxSceneEnvironmentParameter* pInstance);
-    };
-
-    struct FxScreenBlurParameter {
-        enum class BlurType : int8_t {
-            BLURTYPE_PREV_SURFACE = 0,
-            BLURTYPE_RADIAL = 1,
-            BLURTYPE_CAMERA = 2,
-            BLURTYPE_COUNT = 3,
-        };
-
-        enum class FocusType : int8_t {
-            FOCUSTYPE_CENTER = 0,
-            FOCUSTYPE_LOOKAT = 1,
-            FOCUSTYPE_USER_SETTING = 2,
-            FOCUSTYPE_COUNT = 3,
+    struct FxDOFParameter {
+        enum class RenderTargetSize : int32_t {
+            RTSIZE_FULL_SCALE = 0,
+            RTSIZE_HALF_SCALE = 1,
+            RTSIZE_QUARTER_SCALE = 2,
+            RTSIZE_COUNT = 3,
+            RTSIZE_INVALID = 3,
         };
 
         bool enable;
-        BlurType blurType;
-        float blurPower;
-        FocusType focusType;
-        csl::math::Vector3 focusPosition;
-        float focusRange;
-        float alphaSlope;
-        int32_t sampleNum;
-        bool singleDirectionOpt;
+        bool useFocusLookAt;
+        float foregroundBokehMaxDepth;
+        float foregroundBokehStartDepth;
+        float backgroundBokehStartDepth;
+        float backgroundBokehMaxDepth;
+        bool enableCircleDOF;
+        float cocMaxRadius;
+        float bokehRadiusScale;
+        int32_t bokehSampleCount;
+        float skyFocusDistance;
+        float bokehBias;
+        bool drawFocalPlane;
+        RenderTargetSize rtScale;
+        bool enableSWA;
+        float swaFocus;
+        float swaFocusRange;
+        float swaNear;
+        float swaFar;
+        bool enableEnhancedForeBokeh;
+        float foreBokehScale;
+        float foreBokehMaxLuminance;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxScreenBlurParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxScreenBlurParameter* pInstance);
-        static void Clean(FxScreenBlurParameter* pInstance);
+        static void Construct(FxDOFParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxDOFParameter* pInstance);
+        static void Clean(FxDOFParameter* pInstance);
     };
 
-    struct FxScreenSpaceGodrayParameter {
+    struct FxShadowMapParameter {
+        enum class ShadowRenderingType : int8_t {
+            SHADOW_RENDERING_TYPE_SHADOW_MAP = 0,
+            SHADOW_RENDERING_TYPE_PLANAR_PROJECTION = 1,
+            SHADOW_RENDERING_TYPE_PLANAR_PROJECTION_SHADOW_MAP = 2,
+            SHADOW_RENDERING_TYPE_MULTI_SHADOW_MAP = 3,
+            SHADOW_RENDERING_TYPE_COUNT = 4,
+        };
+
+        enum class ShadowFilter : int8_t {
+            SHADOW_FILTER_POINT = 0,
+            SHADOW_FILTER_PCF = 1,
+            SHADOW_FILTER_PCSS = 2,
+            SHADOW_FILTER_ESM = 3,
+            SHADOW_FILTER_MSM = 4,
+            SHADOW_FILTER_VSM_POINT = 5,
+            SHADOW_FILTER_VSM_LINEAR = 6,
+            SHADOW_FILTER_VSM_ANISO_2 = 7,
+            SHADOW_FILTER_VSM_ANISO_4 = 8,
+            SHADOW_FILTER_VSM_ANISO_8 = 9,
+            SHADOW_FILTER_VSM_ANISO_16 = 10,
+            SHADOW_FILTER_COUNT = 11,
+            SHADOW_FILTER_VSM_FIRST = 5,
+            SHADOW_FILTER_VSM_LAST = 10,
+        };
+
+        enum class ShadowRangeType : int8_t {
+            SHADOW_RANGE_TYPE_CAMERA_LOOKAT = 0,
+            SHADOW_RANGE_TYPE_POSITION_MANUAL = 1,
+            SHADOW_RANGE_TYPE_FULL_MANUAL = 2,
+            SHADOW_RANGE_TYPE_COUNT = 3,
+            SHADOW_RANGE_TYPE_DEFAULT = 0,
+        };
+
+        enum class FitProjection : int8_t {
+            FIT_PROJECTION_TO_CASCADES = 0,
+            FIT_PROJECTION_TO_SCENE = 1,
+            FIT_PROJECTION_TO_ROTATE_CASCADES = 2,
+        };
+
+        enum class FitNearFar : int8_t {
+            FIT_NEARFAR_ZERO_ONE = 0,
+            FIT_NEARFAR_AABB = 1,
+            FIT_NEARFAR_SCENE_AABB = 2,
+        };
+
+        enum class PartitionType : int8_t {
+            PARTITION_PSSM = 0,
+            PARTITION_MANUAL = 1,
+        };
+
+        ShadowRenderingType renderingType;
         bool enable;
-        float rayMarchingCount;
-        float density;
-        float decay;
-        float threshold;
-        float lumMax;
-        float intensity;
-        bool enableDither;
-        csl::math::Vector3 lightPos;
-        csl::math::Vector3 lightDir;
+        ShadowFilter shadowFilter;
+        ShadowRangeType shadowRangeType;
+        FitProjection fitProjection;
+        FitNearFar fitNearFar;
+        PartitionType partitionType;
+        float sceneRange;
+        float sceneCenter[3];
+        float manualLightPos[3];
+        float pssmLambda;
+        float cascadeOffset;
+        int32_t cascadeLevel;
+        float cascadeSplits[4];
+        float cascadeBias[4];
+        float bias;
+        float offset;
+        float normalBias;
+        int32_t width;
+        int32_t height;
+        int32_t blurQuality;
+        int32_t blurSize;
+        float fadeoutDistance;
+        float cascadeTransitionfadeDistance;
+        bool enableCSMCache;
+        float csmCacheMaxHeight;
+        float csmCacheMinHeight;
+        int32_t csmCacheMaxRenderPass;
+        float csmCacheFixedFovy;
+        float csmCacheLightDirectionThreshold;
+        bool csmCacheParallaxCorrectionEnabled;
+        float csmCacheParallaxCorrectionHorizontalBias;
+        float csmCacheParallaxCorrectionVerticalBias;
+        int32_t csmCacheFramesToRender[3];
+        float csmCacheFadeLightElevationAngle;
+        float csmCacheMinLightElevationAngle;
+        csl::math::Matrix44 shadowCameraViewMatrix;
+        csl::math::Matrix44 shadowCameraProjectionMatrix;
+        float shadowCameraNearDepth;
+        float shadowCameraFarDepth;
+        float shadowCameraLookAtDepth;
+        bool enableBackFaceShadow;
+        bool enableShadowCamera;
+        bool enableDrawSceneAABB;
+        bool enableDrawShadowFrustum;
+        bool enableDrawCascade;
+        bool enableDrawCameraFrustum;
+        bool enableDrawCSMCache;
+        bool enableClearOnCSMCacheIsInvalidated;
+        bool enablePauseCamera;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxScreenSpaceGodrayParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxScreenSpaceGodrayParameter* pInstance);
-        static void Clean(FxScreenSpaceGodrayParameter* pInstance);
-    };
-
-    struct FxSeparableSSSParameter {
-        bool enable;
-        float width;
-        float normalOffset;
-        float blurOffsetMax;
-        csl::math::Vector4 strength[16];
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxSeparableSSSParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxSeparableSSSParameter* pInstance);
-        static void Clean(FxSeparableSSSParameter* pInstance);
-    };
-
-    struct FxSGGIParameter {
-        float sgStartSmoothness;
-        float sgEndSmoothness;
-        float doStartSmoothness;
-        float doEndSmoothness;
-        float doOffset;
-        float aoOffset;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxSGGIParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxSGGIParameter* pInstance);
-        static void Clean(FxSGGIParameter* pInstance);
+        static void Construct(FxShadowMapParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxShadowMapParameter* pInstance);
+        static void Clean(FxShadowMapParameter* pInstance);
     };
 
     struct FxShadowHeightMapParameter {
@@ -1440,51 +1353,18 @@ namespace app::rfl {
         static void Clean(FxShadowHeightMapParameter* pInstance);
     };
 
-    struct FxSHLightFieldParameter {
-        enum class DebugDrawType : int8_t {
-            DEBUG_DRAW_NONE = 0,
-            DEBUG_DRAW_ONLY_ENABLED = 1,
-            DEBUG_DRAW_ALL = 2,
-        };
-
+    struct FxVolumetricShadowParameter {
         bool enable;
-        DebugDrawType debugDrawType;
-        bool showSkyVisibility;
-        float debugProbeSize;
-        csl::math::Vector3 multiplyColorUp;
-        csl::math::Vector3 multiplyColorDown;
-        float normalBias;
-        FxLightFieldMergeParameter lfMerge;
+        bool isForceUseShadowmap;
+        bool isUseCloudShadow;
+        bool isUseHeightmapShadow;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxSHLightFieldParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxSHLightFieldParameter* pInstance);
-        static void Clean(FxSHLightFieldParameter* pInstance);
-    };
-
-    struct FxSMAAParameter {
-        enum class Preset : int8_t {
-            PRESET_SPEED = 0,
-            PRESET_QUALITY = 1,
-        };
-
-        enum class TestMode : int8_t {
-            TEST_MODE_DISABLE = 0,
-            TEST_MODE_1 = 1,
-            TEST_MODE_2 = 2,
-        };
-
-        Preset preset;
-        TestMode testMode;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxSMAAParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxSMAAParameter* pInstance);
-        static void Clean(FxSMAAParameter* pInstance);
+        static void Construct(FxVolumetricShadowParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxVolumetricShadowParameter* pInstance);
+        static void Clean(FxVolumetricShadowParameter* pInstance);
     };
 
     struct FxSSAO_Parameter {
@@ -1503,6 +1383,24 @@ namespace app::rfl {
         static void Construct(FxSSAO_Parameter* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(FxSSAO_Parameter* pInstance);
         static void Clean(FxSSAO_Parameter* pInstance);
+    };
+
+    struct FxHBAO_Parameter {
+        float hbaoPower;
+        float hbaoBias;
+        float hbaoRadius;
+        float hbaoFalloff;
+        float hbaoSteps;
+        float hbaoGitter;
+        int8_t hbaoRaycount;
+        bool hbaoGiMaskEnable;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxHBAO_Parameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxHBAO_Parameter* pInstance);
+        static void Clean(FxHBAO_Parameter* pInstance);
     };
 
     struct FxSSS_Parameter {
@@ -1573,31 +1471,313 @@ namespace app::rfl {
         static void Clean(FxSSAOParameter* pInstance);
     };
 
-    struct FxSSGIDebugParameter {
-        bool useDenoise;
-        float rayLength;
+    struct FxLightFieldMergeParameter {
+        bool enable;
+        float blendRatio;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxSSGIDebugParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxSSGIDebugParameter* pInstance);
-        static void Clean(FxSSGIDebugParameter* pInstance);
+        static void Construct(FxLightFieldMergeParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxLightFieldMergeParameter* pInstance);
+        static void Clean(FxLightFieldMergeParameter* pInstance);
     };
 
-    struct FxSSGIParameter {
+    struct FxSHLightFieldParameter {
+        enum class DebugDrawType : int8_t {
+            DEBUG_DRAW_NONE = 0,
+            DEBUG_DRAW_ONLY_ENABLED = 1,
+            DEBUG_DRAW_ALL = 2,
+        };
+
         bool enable;
-        float intensity;
-        bool useAlbedo;
-        bool useParameter;
-        FxSSGIDebugParameter debugParam;
+        DebugDrawType debugDrawType;
+        bool showSkyVisibility;
+        float debugProbeSize;
+        csl::math::Vector3 multiplyColorUp;
+        csl::math::Vector3 multiplyColorDown;
+        float normalBias;
+        FxLightFieldMergeParameter lfMerge;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxSSGIParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxSSGIParameter* pInstance);
-        static void Clean(FxSSGIParameter* pInstance);
+        static void Construct(FxSHLightFieldParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxSHLightFieldParameter* pInstance);
+        static void Clean(FxSHLightFieldParameter* pInstance);
+    };
+
+    struct FxScreenBlurParameter {
+        enum class BlurType : int8_t {
+            BLURTYPE_PREV_SURFACE = 0,
+            BLURTYPE_RADIAL = 1,
+            BLURTYPE_CAMERA = 2,
+            BLURTYPE_COUNT = 3,
+        };
+
+        enum class FocusType : int8_t {
+            FOCUSTYPE_CENTER = 0,
+            FOCUSTYPE_LOOKAT = 1,
+            FOCUSTYPE_USER_SETTING = 2,
+            FOCUSTYPE_COUNT = 3,
+        };
+
+        bool enable;
+        BlurType blurType;
+        float blurPower;
+        FocusType focusType;
+        csl::math::Vector3 focusPosition;
+        float focusRange;
+        float alphaSlope;
+        int32_t sampleNum;
+        bool singleDirectionOpt;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxScreenBlurParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxScreenBlurParameter* pInstance);
+        static void Clean(FxScreenBlurParameter* pInstance);
+    };
+
+    struct FxOcclusionCapsuleParameter {
+        bool enable;
+        bool enableOcclusion;
+        csl::ut::Color<uint8_t> occlusionColor;
+        float occlusionPower;
+        bool enableSpecularOcclusion;
+        float specularOcclusionAlpha;
+        float specularOcclusionPower;
+        float specularOcclusionConeAngle;
+        bool enableShadow;
+        csl::ut::Color<uint8_t> shadowColor;
+        float shadowPower;
+        float shadowConeAngle;
+        float cullingDistance;
+        bool enableManualLight;
+        int32_t manualLightCount;
+        csl::math::Vector3 manualLightPos[4];
+        bool debugDraw;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxOcclusionCapsuleParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxOcclusionCapsuleParameter* pInstance);
+        static void Clean(FxOcclusionCapsuleParameter* pInstance);
+    };
+
+    struct FxEffectParameter {
+        float lightFieldColorCoefficient;
+        float invTonemapCoefficient;
+        csl::math::Vector3 shadowColor;
+        csl::math::Vector3 directionalLightOverwrite;
+        float directionalLightIntensityOverwrite;
+        bool overwriteDirectionalLight;
+        float localLightIntensityScale;
+        float lodDistances[8];
+        bool enableVisualizeOverdraw;
+        bool renderWireframe;
+        bool upsampleBilateral;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxEffectParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxEffectParameter* pInstance);
+        static void Clean(FxEffectParameter* pInstance);
+    };
+
+    struct FxScreenSpaceGodrayParameter {
+        bool enable;
+        float rayMarchingCount;
+        float density;
+        float decay;
+        float threshold;
+        float lumMax;
+        float intensity;
+        bool enableDither;
+        csl::math::Vector3 lightPos;
+        csl::math::Vector3 lightDir;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxScreenSpaceGodrayParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxScreenSpaceGodrayParameter* pInstance);
+        static void Clean(FxScreenSpaceGodrayParameter* pInstance);
+    };
+
+    struct FxGodrayVolumeTexture {
+        bool enableVolumeTexture;
+        float uvScale;
+        float timeScale;
+        float animationAngle;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxGodrayVolumeTexture* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxGodrayVolumeTexture* pInstance);
+        static void Clean(FxGodrayVolumeTexture* pInstance);
+    };
+
+    struct FxGodrayParameter {
+        bool enable;
+        bool isUseShadowmap;
+        bool isVariableStep;
+        csl::math::Matrix44 shadow;
+        csl::math::Matrix34 box;
+        csl::math::Vector3 color;
+        float density;
+        float anisotropy;
+        float range;
+        float rayMarchingCount;
+        float rayMarchingStep;
+        float shadowEdge;
+        bool isScanFromBack;
+        int32_t boxCount;
+        bool isNewMode;
+        FxGodrayVolumeTexture volumeTexture;
+        float transparency;
+        bool enable3d;
+        float reProject3d;
+        float logNear3d;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxGodrayParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxGodrayParameter* pInstance);
+        static void Clean(FxGodrayParameter* pInstance);
+    };
+
+    struct FxHeatHazeParameter {
+        bool enable;
+        float speed;
+        float scale;
+        float cycle;
+        float nearDepth;
+        float farDepth;
+        float maxHeight;
+        float parallaxCorrectFactor;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxHeatHazeParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxHeatHazeParameter* pInstance);
+        static void Clean(FxHeatHazeParameter* pInstance);
+    };
+
+    struct FxPuddleParameter {
+        float heightThreshold;
+        float slopeThreshold;
+        float noiseScaleXZ;
+        float noiseScaleY;
+        float noiseThreshold;
+        float noiseAttenu;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxPuddleParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxPuddleParameter* pInstance);
+        static void Clean(FxPuddleParameter* pInstance);
+    };
+
+    struct FxRippleParameter {
+        float intensity;
+        float uvScale;
+        float timeScale;
+        float normalIntensity;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxRippleParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxRippleParameter* pInstance);
+        static void Clean(FxRippleParameter* pInstance);
+    };
+
+    struct FxDropParameter {
+        float uvScale;
+        float timeScale;
+        float normalIntensity;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxDropParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxDropParameter* pInstance);
+        static void Clean(FxDropParameter* pInstance);
+    };
+
+    struct FxRainParameter {
+        bool enableDrop;
+        bool enableFilter;
+        bool enableRipple;
+        float intensity;
+        csl::math::Vector4 dropColor;
+        bool dropRotTarget;
+        bool enableDropOcc;
+        float dropCameraLerp;
+        float dropCameraRate;
+        float dropCameraRotation;
+        float dropWidth;
+        float dropLength;
+        float dropWind;
+        float dropRange;
+        csl::math::Vector4 filterColor;
+        float filterRange;
+        float filterEdge;
+        float filterAngle;
+        FxRippleParameter ripple;
+        FxDropParameter drop;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxRainParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxRainParameter* pInstance);
+        static void Clean(FxRainParameter* pInstance);
+    };
+
+    struct FxWeatherParameter {
+        float wetness;
+        FxPuddleParameter puddle;
+        FxRainParameter rain;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxWeatherParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxWeatherParameter* pInstance);
+        static void Clean(FxWeatherParameter* pInstance);
+    };
+
+    struct FxSceneEnvironmentParameter {
+        float windRotationY;
+        float windStrength;
+        float windNoise;
+        float windAmplitude;
+        float windFrequencies[4];
+        bool enableTreadGrass;
+        csl::math::Vector4 grassLodDistance;
+        bool enableHighLight;
+        float highLightThreshold;
+        float highLightObjectAmbientScale;
+        float highLightObjectAlbedoHeighten;
+        float highLightCharaAmbientScale;
+        float highLightCharaAlbedoHeighten;
+        float highLightCharaFalloffScale;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxSceneEnvironmentParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxSceneEnvironmentParameter* pInstance);
+        static void Clean(FxSceneEnvironmentParameter* pInstance);
     };
 
     struct FxTAAParameter {
@@ -1625,75 +1805,23 @@ namespace app::rfl {
         static void Clean(FxTAAParameter* pInstance);
     };
 
-    struct FxToneMapParameterFilmic {
-        float whitePoint;
-        float toeStrength;
-        float linearAngle;
-        float linearStrength;
-        float shoulderStrength;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxToneMapParameterFilmic* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxToneMapParameterFilmic* pInstance);
-        static void Clean(FxToneMapParameterFilmic* pInstance);
-    };
-
-    struct FxToneMapParameterGT {
-        float maxDisplayBrightness;
-        float contrast;
-        float linearSectionStart;
-        float linearSectionLength;
-        float black;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxToneMapParameterGT* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxToneMapParameterGT* pInstance);
-        static void Clean(FxToneMapParameterGT* pInstance);
-    };
-
-    struct FxToneMapParameter {
-        enum class Tonemap : int8_t {
-            TONEMAP_DISNEY = 0,
-            TONEMAP_FILMIC = 1,
-            TONEMAP_ACES = 2,
-            TONEMAP_GT = 3,
-        };
-
-        Tonemap tonemapType;
-        FxToneMapParameterFilmic tonemapParamFilmic;
-        FxToneMapParameterGT tonemapParamGT;
-        bool updateLuminance;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxToneMapParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxToneMapParameter* pInstance);
-        static void Clean(FxToneMapParameter* pInstance);
-    };
-
-    struct FxVfDepthParameter {
+    struct FxChromaticAberrationParameter {
         bool enable;
-        float minPenumbraScale;
-        float maxPenumbraScale;
-        float bokehScale;
-        float minDofOpacityScale;
-        float maxDofOpacityScale;
-        float minOpacityScale;
-        float maxOpacityScale;
-        float minOpacityDist;
-        float maxOpacityDist;
+        float offsetR;
+        float offsetG;
+        float offsetB;
+        float curve;
+        float scaleX;
+        float scaleY;
+        float centerX;
+        float centerY;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(FxVfDepthParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxVfDepthParameter* pInstance);
-        static void Clean(FxVfDepthParameter* pInstance);
+        static void Construct(FxChromaticAberrationParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxChromaticAberrationParameter* pInstance);
+        static void Clean(FxChromaticAberrationParameter* pInstance);
     };
 
     struct FxVfImageCircleParameter {
@@ -1727,6 +1855,26 @@ namespace app::rfl {
         static void Clean(FxVfLineParameter* pInstance);
     };
 
+    struct FxVfDepthParameter {
+        bool enable;
+        float minPenumbraScale;
+        float maxPenumbraScale;
+        float bokehScale;
+        float minDofOpacityScale;
+        float maxDofOpacityScale;
+        float minOpacityScale;
+        float maxOpacityScale;
+        float minOpacityDist;
+        float maxOpacityDist;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxVfDepthParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxVfDepthParameter* pInstance);
+        static void Clean(FxVfDepthParameter* pInstance);
+    };
+
     struct FxVignetteParameter {
         enum class GradationMode : int8_t {
             GRADATION_MODE_CIRCLE = 0,
@@ -1758,112 +1906,6 @@ namespace app::rfl {
         static void Construct(FxVignetteParameter* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(FxVignetteParameter* pInstance);
         static void Clean(FxVignetteParameter* pInstance);
-    };
-
-    struct FxVolumetricShadowParameter {
-        bool enable;
-        bool isForceUseShadowmap;
-        bool isUseCloudShadow;
-        bool isUseHeightmapShadow;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxVolumetricShadowParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxVolumetricShadowParameter* pInstance);
-        static void Clean(FxVolumetricShadowParameter* pInstance);
-    };
-
-    struct GlayScaleColor {
-        float blockLNoiseSizeX;
-        float blockLNoiseSizeY;
-        float blockHNoiseSizeX;
-        float blockHNoiseSizeY;
-        float bNoiseHighRate;
-        float intensity;
-        float invertAllRate;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GlayScaleColor* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GlayScaleColor* pInstance);
-        static void Clean(GlayScaleColor* pInstance);
-    };
-
-    struct GlobalUserParamOption {
-        bool enable;
-        csl::math::Vector4 value;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GlobalUserParamOption* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GlobalUserParamOption* pInstance);
-        static void Clean(GlobalUserParamOption* pInstance);
-    };
-
-    struct InterlaceNoise {
-        float blockLNoiseSize;
-        float blockHNoiseSize;
-        float bNoiseHighRate;
-        float intensity;
-        float dropout;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(InterlaceNoise* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(InterlaceNoise* pInstance);
-        static void Clean(InterlaceNoise* pInstance);
-    };
-
-    struct InvertColor {
-        float blockLNoiseSizeX;
-        float blockLNoiseSizeY;
-        float blockHNoiseSizeX;
-        float blockHNoiseSizeY;
-        float bNoiseHighRate;
-        float intensity;
-        float invertAllRate;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(InvertColor* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(InvertColor* pInstance);
-        static void Clean(InvertColor* pInstance);
-    };
-
-    struct UVShift {
-        float blockLNoiseSizeX;
-        float blockLNoiseSizeY;
-        float blockHNoiseSizeX;
-        float blockHNoiseSizeY;
-        float bNoiseHighRate;
-        float intensity;
-        float pixelShiftIntensity;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(UVShift* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(UVShift* pInstance);
-        static void Clean(UVShift* pInstance);
-    };
-
-    struct FxTerrainMaterialBlendingParameter {
-        bool enable;
-        float blendPower;
-        float blendHightPower;
-        float cullingDistance;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(FxTerrainMaterialBlendingParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(FxTerrainMaterialBlendingParameter* pInstance);
-        static void Clean(FxTerrainMaterialBlendingParameter* pInstance);
     };
 
     struct FxWindComputeDebugParameter {
@@ -1912,6 +1954,880 @@ namespace app::rfl {
         static void Construct(FxWindComputeParameter* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(FxWindComputeParameter* pInstance);
         static void Clean(FxWindComputeParameter* pInstance);
+    };
+
+    struct FxTerrainMaterialBlendingParameter {
+        bool enable;
+        float blendPower;
+        float blendHightPower;
+        float cullingDistance;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxTerrainMaterialBlendingParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxTerrainMaterialBlendingParameter* pInstance);
+        static void Clean(FxTerrainMaterialBlendingParameter* pInstance);
+    };
+
+    struct FxInteractionDebugParameter {
+        bool enable;
+        bool collisionEnable;
+        float threshold;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxInteractionDebugParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxInteractionDebugParameter* pInstance);
+        static void Clean(FxInteractionDebugParameter* pInstance);
+    };
+
+    struct FxInteractionParameter {
+        bool enable;
+        float power;
+        float decrease;
+        float timeScale;
+        FxInteractionDebugParameter debug;
+        float tremorPower;
+        float tremorSpeed;
+        float tremorScaleCriterion;
+        float tremorScaleReduce;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxInteractionParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxInteractionParameter* pInstance);
+        static void Clean(FxInteractionParameter* pInstance);
+    };
+
+    struct FxGpuEnvironmentParameter {
+        float grassDitherStart;
+        float grassDitherEnd;
+        FxInteractionParameter interaction;
+        bool enableZoomBias;
+        float zoomBias;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxGpuEnvironmentParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxGpuEnvironmentParameter* pInstance);
+        static void Clean(FxGpuEnvironmentParameter* pInstance);
+    };
+
+    struct FxInteractiveWaveParameter {
+        bool enable;
+        bool enableDebugDisplay;
+        float waveDamping;
+        float waveReduceRange;
+        float waveSpeed;
+        float simurationScale;
+        float playerMaxSpeed;
+        bool isInWaterDummy;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxInteractiveWaveParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxInteractiveWaveParameter* pInstance);
+        static void Clean(FxInteractiveWaveParameter* pInstance);
+    };
+
+    struct UVShift {
+        float blockLNoiseSizeX;
+        float blockLNoiseSizeY;
+        float blockHNoiseSizeX;
+        float blockHNoiseSizeY;
+        float bNoiseHighRate;
+        float intensity;
+        float pixelShiftIntensity;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(UVShift* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(UVShift* pInstance);
+        static void Clean(UVShift* pInstance);
+    };
+
+    struct ColorShift {
+        float blockLNoiseSize;
+        float blockHNoiseSize;
+        float bNoiseHighRate;
+        float intensity;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ColorShift* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ColorShift* pInstance);
+        static void Clean(ColorShift* pInstance);
+    };
+
+    struct InterlaceNoise {
+        float blockLNoiseSize;
+        float blockHNoiseSize;
+        float bNoiseHighRate;
+        float intensity;
+        float dropout;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(InterlaceNoise* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(InterlaceNoise* pInstance);
+        static void Clean(InterlaceNoise* pInstance);
+    };
+
+    struct ColorDropout {
+        float blockLNoiseSizeX;
+        float blockLNoiseSizeY;
+        float blockHNoiseSizeX;
+        float blockHNoiseSizeY;
+        float bNoiseHighRate;
+        float intensity;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ColorDropout* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ColorDropout* pInstance);
+        static void Clean(ColorDropout* pInstance);
+    };
+
+    struct InvertColor {
+        float blockLNoiseSizeX;
+        float blockLNoiseSizeY;
+        float blockHNoiseSizeX;
+        float blockHNoiseSizeY;
+        float bNoiseHighRate;
+        float intensity;
+        float invertAllRate;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(InvertColor* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(InvertColor* pInstance);
+        static void Clean(InvertColor* pInstance);
+    };
+
+    struct GlayScaleColor {
+        float blockLNoiseSizeX;
+        float blockLNoiseSizeY;
+        float blockHNoiseSizeX;
+        float blockHNoiseSizeY;
+        float bNoiseHighRate;
+        float intensity;
+        float invertAllRate;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GlayScaleColor* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GlayScaleColor* pInstance);
+        static void Clean(GlayScaleColor* pInstance);
+    };
+
+    struct FxCyberSpaceStartNoiseParameter {
+        bool enable;
+        UVShift uvShift;
+        ColorShift colorShift;
+        InterlaceNoise interlaceNoise;
+        ColorDropout colorDrop;
+        InvertColor invertColor;
+        GlayScaleColor glayscaleColor;
+        float noiseSpeed;
+        float noiseBias;
+        float noiseWaveAmplitude;
+        float noiseWaveCycle;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxCyberSpaceStartNoiseParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxCyberSpaceStartNoiseParameter* pInstance);
+        static void Clean(FxCyberSpaceStartNoiseParameter* pInstance);
+    };
+
+    struct FxFieldScanEffectRenderParameter {
+        bool enable;
+        csl::math::Vector3 centerPos;
+        csl::ut::Color<uint8_t> color;
+        float radius1;
+        float radius2;
+        float radius3;
+        float intensity1;
+        float intensity2;
+        float intensity3;
+        float gridIntensity;
+        float innerWidth;
+        float gridLineWidth;
+        float gridLineSpan;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxFieldScanEffectRenderParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxFieldScanEffectRenderParameter* pInstance);
+        static void Clean(FxFieldScanEffectRenderParameter* pInstance);
+    };
+
+    struct FxColorAccessibilityFilterParameter {
+        enum class ColorblinidSimulationType : int8_t {
+            COLORBLIND_SIM_NONE = 0,
+            COLORBLIND_SIM_PROTANOPIA = 1,
+            COLORBLIND_SIM_DEUTERANOPIA = 2,
+            COLORBLIND_SIM_TRITANOPIA = 3,
+            COLORBLIND_SIM_ALL = 4,
+        };
+
+        bool enable;
+        float daltonizeFactor;
+        float protanopiaFactor;
+        float deuteranopiaFactor;
+        float tritanopiaFactor;
+        float brightness;
+        float contrast;
+        float maskIntensity[5];
+        ColorblinidSimulationType simulationType;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxColorAccessibilityFilterParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxColorAccessibilityFilterParameter* pInstance);
+        static void Clean(FxColorAccessibilityFilterParameter* pInstance);
+    };
+
+    struct FxSeparableSSSParameter {
+        bool enable;
+        float width;
+        float normalOffset;
+        float blurOffsetMax;
+        csl::math::Vector4 strength[16];
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxSeparableSSSParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxSeparableSSSParameter* pInstance);
+        static void Clean(FxSeparableSSSParameter* pInstance);
+    };
+
+    struct NeedleFxParameter {
+        FxRenderOption renderOption;
+        FxSGGIParameter sggi;
+        FxRLRParameter rlr;
+        FxSSGIParameter ssgi;
+        FxPlanarReflectionParameter planarReflection;
+        FxBloomParameter bloom;
+        FxCameraControlParameter cameraControl;
+        FxToneMapParameter tonemap;
+        FxColorContrastParameter colorContrast;
+        FxLightScatteringParameter lightscattering;
+        FxDOFParameter dof;
+        FxShadowMapParameter shadowmap;
+        FxShadowHeightMapParameter shadowHeightMap;
+        FxVolumetricShadowParameter volShadow;
+        FxSSAOParameter ssao;
+        FxSHLightFieldParameter shlightfield;
+        FxScreenBlurParameter blur;
+        FxOcclusionCapsuleParameter occlusionCapsule;
+        FxEffectParameter effect;
+        FxScreenSpaceGodrayParameter ssGodray;
+        FxGodrayParameter godray;
+        FxHeatHazeParameter heatHaze;
+        FxAtmosphereParameter atmosphere;
+        FxWeatherParameter weather;
+        FxSceneEnvironmentParameter sceneEnv;
+        FxTAAParameter taa;
+        FxDensityParameter density;
+        FxChromaticAberrationParameter chromaticAberration;
+        FxVignetteParameter vignette;
+        FxWindComputeParameter wind;
+        FxTerrainMaterialBlendingParameter terrainBlend;
+        FxGpuEnvironmentParameter gpuEnvironment;
+        FxInteractiveWaveParameter interactiveWave;
+        FxCyberNoiseEffectParameter cyberNoise;
+        FxCyberSpaceStartNoiseParameter cyberStartNoise;
+        FxCyberNPCSSEffectRenderParameter cyberNPCSS;
+        FxFieldScanEffectRenderParameter fieldScan;
+        FxColorAccessibilityFilterParameter colorAccessibility;
+        FxDentParameter dent;
+        FxSeparableSSSParameter ssss;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(NeedleFxParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(NeedleFxParameter* pInstance);
+        static void Clean(NeedleFxParameter* pInstance);
+    };
+
+    struct FxAntiAliasing {
+        enum class AntiAliasingType : int8_t {
+            AATYPE_NONE = 0,
+            AATYPE_TAA = 1,
+            AATYPE_FXAA = 2,
+            AATYPE_SMAA = 3,
+            AATYPE_LAST = 4,
+        };
+
+        enum class UpscaleType : int8_t {
+            USTYPE_LINEAR = 0,
+            USTYPE_FSR_FAST = 1,
+            USTYPE_FSR_EASU = 2,
+            USTYPE_FSR_RCAS = 3,
+        };
+
+        AntiAliasingType aaType;
+        UpscaleType usType;
+        float fsrSharpness;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxAntiAliasing* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxAntiAliasing* pInstance);
+        static void Clean(FxAntiAliasing* pInstance);
+    };
+
+    struct StageCommonAtmosphereParameter {
+        float illuminanceScale;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageCommonAtmosphereParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageCommonAtmosphereParameter* pInstance);
+        static void Clean(StageCommonAtmosphereParameter* pInstance);
+    };
+
+    struct FxLODParameter {
+        bool enableDebugDrawLayerRange;
+        float layerRange[32];
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxLODParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxLODParameter* pInstance);
+        static void Clean(FxLODParameter* pInstance);
+    };
+
+    struct FxDetailParameter {
+        float detailDistance;
+        float detailFadeRange;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxDetailParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxDetailParameter* pInstance);
+        static void Clean(FxDetailParameter* pInstance);
+    };
+
+    struct FxDynamicResolutionParameter {
+        enum class Mode : int8_t {
+            DISABLE = 0,
+            ENABLE = 1,
+            FIXED_RESOLUTION = 2,
+        };
+
+        Mode mode;
+        float fixedResolutionRatio;
+        float minResolutionRatio;
+        float minTargetTimeDifference;
+        float maxTargetTimeDifference;
+        float increaseRate;
+        float decreaseRate;
+        float increaseMaxScaleDelta;
+        float decreaseMaxScaleDelta;
+        bool debugSineFluctuation;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxDynamicResolutionParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxDynamicResolutionParameter* pInstance);
+        static void Clean(FxDynamicResolutionParameter* pInstance);
+    };
+
+    struct TimeIntervalData {
+        HourMinuteData beginTime;
+        HourMinuteData endTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(TimeIntervalData* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(TimeIntervalData* pInstance);
+        static void Clean(TimeIntervalData* pInstance);
+    };
+
+    struct ProgressTimePairData : TimeIntervalData {
+        float hourlyTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ProgressTimePairData* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ProgressTimePairData* pInstance);
+        static void Clean(ProgressTimePairData* pInstance);
+    };
+
+    struct StageCommonTimeProgressParameter {
+        bool enable;
+        float solarRadiusScale;
+        float azimuthAngle;
+        float latitude;
+        float longitude;
+        int32_t month;
+        int32_t day;
+        float time;
+        float hourlyTime;
+        ProgressTimePairData overrideSpeeds[8];
+        TimeIntervalData night;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageCommonTimeProgressParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageCommonTimeProgressParameter* pInstance);
+        static void Clean(StageCommonTimeProgressParameter* pInstance);
+    };
+
+    struct StageCommonWeatherProgressParameter {
+        bool enable;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageCommonWeatherProgressParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageCommonWeatherProgressParameter* pInstance);
+        static void Clean(StageCommonWeatherProgressParameter* pInstance);
+    };
+
+    struct FxTerrainParameter {
+        bool enableDrawGrid;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxTerrainParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxTerrainParameter* pInstance);
+        static void Clean(FxTerrainParameter* pInstance);
+    };
+
+    struct FxModelParameter {
+        bool zprepass;
+        bool ditherAsBlueNoize;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxModelParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxModelParameter* pInstance);
+        static void Clean(FxModelParameter* pInstance);
+    };
+
+    struct StageCommonDecalModelParameter {
+        float cullingRange;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageCommonDecalModelParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageCommonDecalModelParameter* pInstance);
+        static void Clean(StageCommonDecalModelParameter* pInstance);
+    };
+
+    struct PerformanceSetting {
+        float smallCullingThreshold;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PerformanceSetting* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PerformanceSetting* pInstance);
+        static void Clean(PerformanceSetting* pInstance);
+    };
+
+    struct NeedleFxSceneConfig {
+        FxRenderTargetSetting rendertarget;
+        FxAntiAliasing antialiasing;
+        StageCommonAtmosphereParameter atmosphere;
+        FxLODParameter lod;
+        FxDetailParameter detail;
+        FxDynamicResolutionParameter dynamicResolution;
+        StageCommonTimeProgressParameter timeProgress;
+        StageCommonWeatherProgressParameter weatherProgress;
+        FxTerrainParameter terrain;
+        FxModelParameter modelParam;
+        StageCommonDecalModelParameter decalModelParam;
+        PerformanceSetting performance;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(NeedleFxSceneConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(NeedleFxSceneConfig* pInstance);
+        static void Clean(NeedleFxSceneConfig* pInstance);
+    };
+
+    struct TimeProgressAtmosphereParameter {
+        FxSkyCommon commonSkyParam;
+        FxBrunetonSky brunetonSkyParam;
+        FxSebastienSky sebastienSkyParam;
+        FxCloudParameter cloudParam;
+        FxCrepuscularRay crepuscularRayParam;
+        FxHeightFog heightFogParam;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(TimeProgressAtmosphereParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(TimeProgressAtmosphereParameter* pInstance);
+        static void Clean(TimeProgressAtmosphereParameter* pInstance);
+    };
+
+    struct TimeProgressNeedleFxParam {
+        bool enable;
+        float time;
+        FxBloomParameter bloom;
+        FxCameraControlParameter cameraControl;
+        FxCameraControlParameter cameraControlEvent;
+        FxToneMapParameter tonemap;
+        FxColorContrastParameter colorContrast;
+        FxLightScatteringParameter lightscattering;
+        FxEffectParameter effect;
+        FxScreenSpaceGodrayParameter ssGodray;
+        FxGodrayParameter godray;
+        FxHeatHazeParameter heatHaze;
+        TimeProgressAtmosphereParameter atmosphere;
+        FxWeatherParameter weather;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(TimeProgressNeedleFxParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(TimeProgressNeedleFxParam* pInstance);
+        static void Clean(TimeProgressNeedleFxParam* pInstance);
+    };
+
+    struct WeatherFxParameter {
+        bool enable;
+        FxBloomParameter bloom;
+        FxCameraControlParameter cameraControl;
+        FxCameraControlParameter cameraControlEvent;
+        FxToneMapParameter tonemap;
+        FxColorContrastParameter colorContrast;
+        FxLightScatteringParameter lightscattering;
+        FxEffectParameter effect;
+        FxScreenSpaceGodrayParameter ssGodray;
+        FxGodrayParameter godray;
+        FxHeatHazeParameter heatHaze;
+        TimeProgressAtmosphereParameter atmosphere;
+        FxWeatherParameter weather;
+        FxWindComputeParameter wind;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(WeatherFxParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(WeatherFxParameter* pInstance);
+        static void Clean(WeatherFxParameter* pInstance);
+    };
+
+    struct StageCommonParameter {
+        float deadline;
+        float oceanSurface;
+        float deadFallTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageCommonParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageCommonParameter* pInstance);
+        static void Clean(StageCommonParameter* pInstance);
+    };
+
+    struct StageCameraParameter {
+        float zNear;
+        float zFar;
+        float fovy;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageCameraParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageCameraParameter* pInstance);
+        static void Clean(StageCameraParameter* pInstance);
+    };
+
+    struct StageTerrainPrecisionParameter {
+        float heightRange;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageTerrainPrecisionParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageTerrainPrecisionParameter* pInstance);
+        static void Clean(StageTerrainPrecisionParameter* pInstance);
+    };
+
+    struct StageTerrainMaterialParameter {
+        float uvScaleDetail;
+        float uvScaleBase;
+        float detailDistance;
+        float detailFadeRange;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageTerrainMaterialParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageTerrainMaterialParameter* pInstance);
+        static void Clean(StageTerrainMaterialParameter* pInstance);
+    };
+
+    struct StageTerrainParameter {
+        bool useHeightMapTerrain;
+        bool useHalfPrecision;
+        StageTerrainPrecisionParameter precision;
+        int32_t worldSize;
+        int32_t heightMapTexelDensity;
+        float heightScale;
+        float smallestCellSize;
+        float slopeClipThrethold;
+        csl::math::Vector2 aabbMin;
+        csl::math::Vector2 aabbMax;
+        StageTerrainMaterialParameter material;
+        bool enableGbufferBlending;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageTerrainParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageTerrainParameter* pInstance);
+        static void Clean(StageTerrainParameter* pInstance);
+    };
+
+    struct StageConfig {
+        StageCommonParameter common;
+        StageCameraParameter camera;
+        StageTerrainParameter terrain;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(StageConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(StageConfig* pInstance);
+        static void Clean(StageConfig* pInstance);
+    };
+
+    struct NeedleFxSceneData {
+        NeedleFxSceneConfig config;
+        NeedleFxParameter items[16];
+        TimeProgressNeedleFxParam timeItems[24];
+        WeatherFxParameter weatherItems[7];
+        StageConfig stageConfig;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(NeedleFxSceneData* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(NeedleFxSceneData* pInstance);
+        static void Clean(NeedleFxSceneData* pInstance);
+    };
+
+    struct CapsuleParam {
+        enum class VolumeType : int8_t {
+            VOLUME_SPHERE = 0,
+            VOLUME_CAPSULE = 1,
+        };
+
+        enum class LODLevel : int8_t {
+            LOD_HIGH = 0,
+            LOD_MIDDLE = 1,
+            LOD_LOW = 2,
+        };
+
+        csl::ut::VariableString type;
+        VolumeType volume;
+        int32_t priority;
+        csl::math::Vector3 translation;
+        csl::math::Vector3 rotation;
+        csl::math::Vector3 scale;
+        csl::math::Vector3 rate;
+        float radius;
+        LODLevel lod;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(CapsuleParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(CapsuleParam* pInstance);
+        static void Clean(CapsuleParam* pInstance);
+    };
+
+    struct FxDistanceFogParameter {
+        bool enable;
+        csl::math::Vector3 color;
+        float intensity;
+        float nearDist;
+        float farDist;
+        float influence;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxDistanceFogParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxDistanceFogParameter* pInstance);
+        static void Clean(FxDistanceFogParameter* pInstance);
+    };
+
+    struct FxHeightFogParameter {
+        bool enable;
+        csl::math::Vector3 color;
+        float intensity;
+        float minHeight;
+        float maxHeight;
+        float nearDist;
+        float farDist;
+        float influence;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxHeightFogParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxHeightFogParameter* pInstance);
+        static void Clean(FxHeightFogParameter* pInstance);
+    };
+
+    struct FxFogParameter {
+        FxDistanceFogParameter distanceFogParam;
+        FxHeightFogParameter heightFogParam;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxFogParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxFogParameter* pInstance);
+        static void Clean(FxFogParameter* pInstance);
+    };
+
+    struct OcclusionCapsuleList {
+        CapsuleParam capsules[64];
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(OcclusionCapsuleList* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(OcclusionCapsuleList* pInstance);
+        static void Clean(OcclusionCapsuleList* pInstance);
+    };
+
+    struct FxDirectionalRadialBlurParameter {
+        bool enable;
+        csl::math::Vector3 center;
+        csl::math::Vector3 direction;
+        float blurPowerMax;
+        float blurPowerMin;
+        float focusRange;
+        float alphaSlope;
+        int32_t sampleNum;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxDirectionalRadialBlurParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxDirectionalRadialBlurParameter* pInstance);
+        static void Clean(FxDirectionalRadialBlurParameter* pInstance);
+    };
+
+    struct FxFXAAParameter {
+        enum class QualityType : int8_t {
+            QUALITY_LOW = 0,
+            QUALITY_MEDIUM = 1,
+            QUALITY_HIGH = 2,
+            QUALITY_COUNT = 3,
+        };
+
+        QualityType qualityType;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxFXAAParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxFXAAParameter* pInstance);
+        static void Clean(FxFXAAParameter* pInstance);
+    };
+
+    struct FxHeightMapParameter {
+        bool enable;
+        bool enableMultiHeightmap;
+        bool debugDrawFrustum;
+        bool reprojection;
+        uint32_t renderTargetWidth;
+        uint32_t renderTargetHeight;
+        float referenceValue;
+        float heightScale;
+        float fadeTime;
+        float colorMask;
+        csl::math::Matrix44 viewMatrix;
+        csl::math::Matrix44 projMatrix;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxHeightMapParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxHeightMapParameter* pInstance);
+        static void Clean(FxHeightMapParameter* pInstance);
+    };
+
+    struct FxPlanarProjectionShadowParameter {
+        bool enable;
+        csl::math::Vector4 projectionPlane;
+        csl::math::Vector3 lightPosition[4];
+        int8_t lightCount;
+        float vanishStart;
+        float vanishDistance;
+        float projectionBias;
+        csl::math::Vector3 shadowMapBoxSize;
+        csl::math::Vector3 shadowMapBoxOffset;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxPlanarProjectionShadowParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxPlanarProjectionShadowParameter* pInstance);
+        static void Clean(FxPlanarProjectionShadowParameter* pInstance);
+    };
+
+    struct FxSMAAParameter {
+        enum class Preset : int8_t {
+            PRESET_SPEED = 0,
+            PRESET_QUALITY = 1,
+        };
+
+        enum class TestMode : int8_t {
+            TEST_MODE_DISABLE = 0,
+            TEST_MODE_1 = 1,
+            TEST_MODE_2 = 2,
+        };
+
+        Preset preset;
+        TestMode testMode;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxSMAAParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxSMAAParameter* pInstance);
+        static void Clean(FxSMAAParameter* pInstance);
     };
 
     struct ViewSpaceOffsetRflParam {
@@ -2252,7 +3168,18 @@ namespace app::rfl {
         static void Clean(BossRingSupplyStartPosSpawner* pInstance);
     };
 
-    struct ObjCamera3DSpawner {
+    struct ObjCameraSpawner {
+        bool IsCameraView;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ObjCameraSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ObjCameraSpawner* pInstance);
+        static void Clean(ObjCameraSpawner* pInstance);
+    };
+
+    struct ObjCamera3DSpawner : ObjCameraSpawner {
         float offsetUp;
         float distanceMin;
         float distanceMax;
@@ -2268,7 +3195,7 @@ namespace app::rfl {
         static void Clean(ObjCamera3DSpawner* pInstance);
     };
 
-    struct ObjCameraClassicSpawner {
+    struct ObjCameraClassicSpawner : ObjCameraSpawner {
         float fovy;
         float distance;
         float screenUpLimit;
@@ -2339,7 +3266,7 @@ namespace app::rfl {
         static void Clean(ObjCameraClassicChangeParamVolumeSpawner* pInstance);
     };
 
-    struct ObjCameraClassicLimitSpawner {
+    struct ObjCameraClassicLimitSpawner : ObjCameraSpawner {
         csl::ut::VariableString pathName;
         uint32_t limitPointA;
         uint32_t limitPointB;
@@ -2361,7 +3288,7 @@ namespace app::rfl {
         static void Clean(ObjCameraClassicLimitSpawner* pInstance);
     };
 
-    struct ObjCameraCyberPrototypeSpawner {
+    struct ObjCameraCyberPrototypeSpawner : ObjCameraSpawner {
         float fovy;
         float zRot;
         float distance;
@@ -2383,7 +3310,7 @@ namespace app::rfl {
         static void Clean(ObjCameraCyberPrototypeSpawner* pInstance);
     };
 
-    struct ObjCameraCyberStandardSpawner {
+    struct ObjCameraCyberStandardSpawner : ObjCameraSpawner {
         float fovy;
         float zRot;
         float distance;
@@ -2405,7 +3332,7 @@ namespace app::rfl {
         static void Clean(ObjCameraCyberStandardSpawner* pInstance);
     };
 
-    struct ObjCameraCylindricalInnerSpawner {
+    struct ObjCameraCylindricalInnerSpawner : ObjCameraSpawner {
         float fovy;
         csl::ut::VariableString gravityPathName;
         float distance;
@@ -2423,7 +3350,7 @@ namespace app::rfl {
         static void Clean(ObjCameraCylindricalInnerSpawner* pInstance);
     };
 
-    struct ObjCameraCylindricalOuterSpawner {
+    struct ObjCameraCylindricalOuterSpawner : ObjCameraSpawner {
         csl::ut::VariableString gravityPathName;
         float pitch;
         float dist;
@@ -2437,7 +3364,7 @@ namespace app::rfl {
         static void Clean(ObjCameraCylindricalOuterSpawner* pInstance);
     };
 
-    struct ObjCameraFixSpawner {
+    struct ObjCameraFixSpawner : ObjCameraSpawner {
         enum class TargetType : int8_t {
             TARGETTYPE_ABS_COORD = 0,
             TARGETTYPE_LOCATOR = 1,
@@ -2459,7 +3386,7 @@ namespace app::rfl {
         static void Clean(ObjCameraFixSpawner* pInstance);
     };
 
-    struct ObjCameraFollowSpawner {
+    struct ObjCameraFollowSpawner : ObjCameraSpawner {
         float Fovy;
         float ZRot;
         float Distance;
@@ -2477,7 +3404,7 @@ namespace app::rfl {
         static void Clean(ObjCameraFollowSpawner* pInstance);
     };
 
-    struct ObjCameraObjectPanSpawner {
+    struct ObjCameraObjectPanSpawner : ObjCameraSpawner {
         csl::math::Vector3 target;
         float fovy;
         bool enableLimitAngle;
@@ -2496,7 +3423,7 @@ namespace app::rfl {
         static void Clean(ObjCameraObjectPanSpawner* pInstance);
     };
 
-    struct ObjCameraPanSpawner {
+    struct ObjCameraPanSpawner : ObjCameraSpawner {
         enum class PositionMode : int8_t {
             POS_MODE_FIX = 0,
             POS_MODE_MAINTAIN_DISTANCE = 1,
@@ -2520,7 +3447,7 @@ namespace app::rfl {
         static void Clean(ObjCameraPanSpawner* pInstance);
     };
 
-    struct ObjCameraPointSpawner {
+    struct ObjCameraPointSpawner : ObjCameraSpawner {
         float fovy;
         float distance;
         float gravityOffset;
@@ -2535,7 +3462,7 @@ namespace app::rfl {
         static void Clean(ObjCameraPointSpawner* pInstance);
     };
 
-    struct ObjCameraRailSpawner {
+    struct ObjCameraRailSpawner : ObjCameraSpawner {
         float fovy;
         csl::ut::VariableString pathName;
         float pathOffset;
@@ -2550,7 +3477,7 @@ namespace app::rfl {
         static void Clean(ObjCameraRailSpawner* pInstance);
     };
 
-    struct ObjCameraRailAnimationSpawner {
+    struct ObjCameraRailAnimationSpawner : ObjCameraSpawner {
         enum class UpDirectionType : int8_t {
             UPDIR_Y_UP = 0,
             UPDIR_OBJ_TRANSFORM = 1,
@@ -2583,7 +3510,7 @@ namespace app::rfl {
         static void Clean(ObjCameraRailAnimationSpawner* pInstance);
     };
 
-    struct ObjCameraRailDivingSpawner {
+    struct ObjCameraRailDivingSpawner : ObjCameraSpawner {
         float fovy;
         csl::ut::VariableString pathName;
         float distance;
@@ -2598,7 +3525,7 @@ namespace app::rfl {
         static void Clean(ObjCameraRailDivingSpawner* pInstance);
     };
 
-    struct ObjCameraRailForwardViewSpawner {
+    struct ObjCameraRailForwardViewSpawner : ObjCameraSpawner {
         enum class PlayerOffsetType : int8_t {
             PLAYER_OFFSET_NORMAL = 0,
             PLAYER_OFFSET_ABSOLUTE = 1,
@@ -2629,7 +3556,7 @@ namespace app::rfl {
         static void Clean(ObjCameraRailForwardViewSpawner* pInstance);
     };
 
-    struct ObjCameraRailLookSpawner {
+    struct ObjCameraRailLookSpawner : ObjCameraSpawner {
         float fovy;
         float distance;
         csl::ut::VariableString pathName;
@@ -2646,7 +3573,7 @@ namespace app::rfl {
         static void Clean(ObjCameraRailLookSpawner* pInstance);
     };
 
-    struct ObjCameraRailSideViewSpawner {
+    struct ObjCameraRailSideViewSpawner : ObjCameraSpawner {
         enum class OrientationMode : int8_t {
             GRAVITY = 0,
             PATH_NORMAL = 1,
@@ -2718,7 +3645,7 @@ namespace app::rfl {
         static void Clean(ObjCameraShakeTriggerSpawner* pInstance);
     };
 
-    struct ObjCameraSliderSpawner {
+    struct ObjCameraSliderSpawner : ObjCameraSpawner {
         float fovy;
         float distance;
         float distanceAir;
@@ -2778,7 +3705,7 @@ namespace app::rfl {
         static void Clean(ObjCameraStandardLockonParameter* pInstance);
     };
 
-    struct ObjCameraStandardSpawner {
+    struct ObjCameraStandardSpawner : ObjCameraSpawner {
         ObjCameraStandardCommonParameter common;
         ObjCameraStandardDashParameter dash;
         ObjCameraStandardLockonParameter lockon;
@@ -2804,7 +3731,7 @@ namespace app::rfl {
         static void Clean(ObjCameraSubVolumeSpawner* pInstance);
     };
 
-    struct ObjCameraTiltSpawner {
+    struct ObjCameraTiltSpawner : ObjCameraSpawner {
         enum class PositionMode : int8_t {
             POS_MODE_FIX = 0,
             POS_MODE_MAINTAIN_DISTANCE = 1,
@@ -2827,7 +3754,7 @@ namespace app::rfl {
         static void Clean(ObjCameraTiltSpawner* pInstance);
     };
 
-    struct ObjCameraVerticalSpawner {
+    struct ObjCameraVerticalSpawner : ObjCameraSpawner {
         float fovy;
         float distance;
         float elevationOffsetDeg;
@@ -4330,7 +5257,7 @@ namespace app::rfl {
         static void Clean(ObjDashPanelSpawner* pInstance);
     };
 
-    struct ObjDashRollerSpawner {
+    struct ObjDashRollerSpawner : ObjDashPanelSpawner {
         enum class Visual : int8_t {
             NORMAL = 0,
             GR = 1,
@@ -6140,7 +7067,49 @@ namespace app::rfl {
         static void Clean(ObjOutOfControlVolumeSpawner* pInstance);
     };
 
-    struct ObjParticleSpawner {
+    struct ObjParticleBaseSoundParam {
+        csl::ut::VariableString name;
+        bool is3D;
+        float volume;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ObjParticleBaseSoundParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ObjParticleBaseSoundParam* pInstance);
+        static void Clean(ObjParticleBaseSoundParam* pInstance);
+    };
+
+    struct ObjParticleBaseRumbleParam {
+        csl::ut::VariableString name;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ObjParticleBaseRumbleParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ObjParticleBaseRumbleParam* pInstance);
+        static void Clean(ObjParticleBaseRumbleParam* pInstance);
+    };
+
+    struct ObjParticleBaseSpawner {
+        csl::ut::VariableString effectName;
+        float scale;
+        uint8_t colorR;
+        uint8_t colorG;
+        uint8_t colorB;
+        uint8_t colorA;
+        ObjParticleBaseSoundParam sound;
+        ObjParticleBaseRumbleParam rumble;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ObjParticleBaseSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ObjParticleBaseSpawner* pInstance);
+        static void Clean(ObjParticleBaseSpawner* pInstance);
+    };
+
+    struct ObjParticleSpawner : ObjParticleBaseSpawner {
         enum class TriggerType : int8_t {
             RANGE = 0,
             MESSAGE = 1,
@@ -6204,7 +7173,7 @@ namespace app::rfl {
         static void Clean(ObjParticleExtentSpawner* pInstance);
     };
 
-    struct ObjParticleVolumeSpawner {
+    struct ObjParticleVolumeSpawner : ObjParticleBaseSpawner {
         enum class Shape : int8_t {
             SHAPE_BOX = 0,
             SHAPE_SPHERE = 1,
@@ -6702,7 +7671,42 @@ namespace app::rfl {
         static void Clean(ObjPuzzleBarrierOpacitySpawner* pInstance);
     };
 
-    struct ObjQuickStepTriggerSpawner {
+    struct ObjQuickStepSpawner {
+        enum class LineType : int8_t {
+            LINE2_LEFT = 0,
+            LINE2_RIGHT = 1,
+            LINE3 = 2,
+            LINE5 = 3,
+        };
+
+        enum class JumpMode : int8_t {
+            WorldSpace = 0,
+            PathSpace = 1,
+            NoneJump = 2,
+        };
+
+        LineType line;
+        csl::ut::VariableString pathName;
+        float speed;
+        float speedMin;
+        float boostSpeed;
+        float boostSpeedMin;
+        float boostLvMaxSpeed;
+        float boostLvMaxSpeedMin;
+        float initialSpeed;
+        float stepWidth;
+        JumpMode jumpMode;
+        bool endByAir;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ObjQuickStepSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ObjQuickStepSpawner* pInstance);
+        static void Clean(ObjQuickStepSpawner* pInstance);
+    };
+
+    struct ObjQuickStepTriggerSpawner : ObjQuickStepSpawner {
         enum class ActionType : int8_t {
             ACT_START = 0,
             ACT_END = 1,
@@ -6719,7 +7723,7 @@ namespace app::rfl {
         static void Clean(ObjQuickStepTriggerSpawner* pInstance);
     };
 
-    struct ObjQuickStepVolumeSpawner {
+    struct ObjQuickStepVolumeSpawner : ObjQuickStepSpawner {
         VolumeTriggerSpawner volume;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -6870,7 +7874,7 @@ namespace app::rfl {
         static void Clean(ObjRingSpawner* pInstance);
     };
 
-    struct ObjSuperRingSpawner {
+    struct ObjSuperRingSpawner : ObjRingSpawner {
         enum class RotateAxis : int8_t {
             WorldAxisY = 0,
             LocalAxisY = 1,
@@ -7263,7 +8267,46 @@ namespace app::rfl {
         static void Clean(ConnectParameter* pInstance);
     };
 
-    struct PathSetPathParameter {
+    struct PathParameterCommon {
+        enum class PathType : int8_t {
+            OBJ_PATH = 0,
+            GR_PATH = 1,
+            SV_PATH = 2,
+        };
+
+        enum class GrindCapVisible : int8_t {
+            Both = 0,
+            Head = 1,
+            Tail = 2,
+            None = 3,
+        };
+
+        enum class ParamType : int8_t {
+            PARAM_NONE = 0,
+            PARAM_LINE = 1,
+            PARAM_LOOP = 2,
+            PARAM_SPIRAL = 3,
+            PARAM_SET_PATH = 4,
+            PARAM_POLYGON = 5,
+            PARAM_CIRCLE = 6,
+        };
+
+        int32_t pathUID;
+        PathType pathType;
+        GrindCapVisible capVisible;
+        float grindUnitLength;
+        ParamType paramType;
+        bool isMovable;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PathParameterCommon* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PathParameterCommon* pInstance);
+        static void Clean(PathParameterCommon* pInstance);
+    };
+
+    struct PathSetPathParameter : PathParameterCommon {
         enum class LineType : int8_t {
             LINETYPE_SNS = 0,
             LINETYPE_STRAIGHT = 1,
@@ -7294,7 +8337,7 @@ namespace app::rfl {
         static void Clean(ObjSetPathSpawner* pInstance);
     };
 
-    struct PathLoopParameter {
+    struct PathLoopParameter : PathParameterCommon {
         enum class EasingPoint : int8_t {
             BothPoint = 0,
             BeginPoint = 1,
@@ -7330,7 +8373,7 @@ namespace app::rfl {
         static void Clean(ObjSetPathLoopSpawner* pInstance);
     };
 
-    struct PathSpiralParameter {
+    struct PathSpiralParameter : PathParameterCommon {
         enum class RotDir : int8_t {
             ROT_DIR_LEFT = 0,
             ROT_DIR_RIGHT = 1,
@@ -7372,7 +8415,7 @@ namespace app::rfl {
         static void Clean(ObjSetPathSpiralSpawner* pInstance);
     };
 
-    struct PathLineParameter {
+    struct PathLineParameter : PathParameterCommon {
         float distance;
         float twistAngle;
         ConnectParameter connectParam;
@@ -7396,7 +8439,7 @@ namespace app::rfl {
         static void Clean(ObjSetPathLineSpawner* pInstance);
     };
 
-    struct PathCircleParameter {
+    struct PathCircleParameter : PathParameterCommon {
         enum class NormalType : int8_t {
             NOR_DEFAULT = 0,
             NOR_OUTSIDE = 1,
@@ -7428,7 +8471,7 @@ namespace app::rfl {
         static void Clean(ObjSetPathCircleSpawner* pInstance);
     };
 
-    struct PathPolygonParameter {
+    struct PathPolygonParameter : PathParameterCommon {
         enum class PolygonType : int8_t {
             TRIANGLE_PATH = 0,
             SQUARE_PATH = 1,
@@ -9214,7 +10257,7 @@ namespace app::rfl {
         static void Clean(ObjDropBridgeSpawner* pInstance);
     };
 
-    struct ObjDropBridgeSVSpawner {
+    struct ObjDropBridgeSVSpawner : ObjDropBridgeSpawner {
         enum class ModelType : int8_t {
             TYPE_A = 0,
             TYPE_B = 1,
@@ -9620,7 +10663,7 @@ namespace app::rfl {
         static void Clean(ObjNormalFloorSpawner* pInstance);
     };
 
-    struct ObjThroughFloorSpawner {
+    struct ObjThroughFloorSpawner : ObjNormalFloorSpawner {
         enum class Visual : int8_t {
             Floor2m = 0,
             Floor3m = 1,
@@ -10442,7 +11485,7 @@ namespace app::rfl {
         static void Clean(ObjWoodBridgeSpawner* pInstance);
     };
 
-    struct ObjWoodBridgeBreakSpawner {
+    struct ObjWoodBridgeBreakSpawner : ObjWoodBridgeSpawner {
         float shakeWaitTime;
         float shakeTime;
 
@@ -11724,7 +12767,33 @@ namespace app::rfl {
         static void Clean(EnemySpawnerSpawner* pInstance);
     };
 
-    struct ObjGFieldConcaveBoxSpawner {
+    struct GravityFieldSetupParameter {
+        int8_t prio;
+        bool defaultON;
+        bool fixed;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldSetupParameter* pInstance);
+        static void Clean(GravityFieldSetupParameter* pInstance);
+    };
+
+    struct GravityFieldConcaveBoxSetupParameter : GravityFieldSetupParameter {
+        float x;
+        float y;
+        float z;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldConcaveBoxSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldConcaveBoxSetupParameter* pInstance);
+        static void Clean(GravityFieldConcaveBoxSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldConcaveBoxSpawner : GravityFieldConcaveBoxSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11734,7 +12803,20 @@ namespace app::rfl {
         static void Clean(ObjGFieldConcaveBoxSpawner* pInstance);
     };
 
-    struct ObjGFieldConstantSpawner {
+    struct GravityFieldConstantSetupParameter : GravityFieldSetupParameter {
+        float x;
+        float y;
+        float z;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldConstantSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldConstantSetupParameter* pInstance);
+        static void Clean(GravityFieldConstantSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldConstantSpawner : GravityFieldConstantSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11744,7 +12826,29 @@ namespace app::rfl {
         static void Clean(ObjGFieldConstantSpawner* pInstance);
     };
 
-    struct ObjGFieldFaceSplineSpawner {
+    struct GravityFieldCylinderSplineSetupParameter : GravityFieldSetupParameter {
+        float radius;
+        csl::ut::VariableString pathName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldCylinderSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldCylinderSplineSetupParameter* pInstance);
+        static void Clean(GravityFieldCylinderSplineSetupParameter* pInstance);
+    };
+
+    struct GravityFieldFaceSplineSetupParameter : GravityFieldCylinderSplineSetupParameter {
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldFaceSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldFaceSplineSetupParameter* pInstance);
+        static void Clean(GravityFieldFaceSplineSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldFaceSplineSpawner : GravityFieldFaceSplineSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11754,7 +12858,25 @@ namespace app::rfl {
         static void Clean(ObjGFieldFaceSplineSpawner* pInstance);
     };
 
-    struct ObjGFieldHemisphereSpawner {
+    struct GravityFieldHemisphereSetupParameter : GravityFieldSetupParameter {
+        enum class Type : int8_t {
+            TYPE_OUTER = 0,
+            TYPE_INNER = 1,
+        };
+
+        float radius;
+        float innerRadius;
+        Type type;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldHemisphereSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldHemisphereSetupParameter* pInstance);
+        static void Clean(GravityFieldHemisphereSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldHemisphereSpawner : GravityFieldHemisphereSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11764,7 +12886,18 @@ namespace app::rfl {
         static void Clean(ObjGFieldHemisphereSpawner* pInstance);
     };
 
-    struct ObjGFieldInsideCylinderSplineSpawner {
+    struct GravityFieldInsideCylinderSplineSetupParameter : GravityFieldCylinderSplineSetupParameter {
+        float innerRadius;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldInsideCylinderSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldInsideCylinderSplineSetupParameter* pInstance);
+        static void Clean(GravityFieldInsideCylinderSplineSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldInsideCylinderSplineSpawner : GravityFieldInsideCylinderSplineSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11774,7 +12907,19 @@ namespace app::rfl {
         static void Clean(ObjGFieldInsideCylinderSplineSpawner* pInstance);
     };
 
-    struct ObjGFieldInsidePrismSplineSpawner {
+    struct GravityFieldInsidePrismSplineSetupParameter : GravityFieldCylinderSplineSetupParameter {
+        float innerRadius;
+        int8_t divide;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldInsidePrismSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldInsidePrismSplineSetupParameter* pInstance);
+        static void Clean(GravityFieldInsidePrismSplineSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldInsidePrismSplineSpawner : GravityFieldInsidePrismSplineSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11784,7 +12929,18 @@ namespace app::rfl {
         static void Clean(ObjGFieldInsidePrismSplineSpawner* pInstance);
     };
 
-    struct ObjGFieldOutsideCylinderSplineSpawner {
+    struct GravityFieldOutsideCylinderSplineSetupParameter : GravityFieldCylinderSplineSetupParameter {
+        float innerRadius;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldOutsideCylinderSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldOutsideCylinderSplineSetupParameter* pInstance);
+        static void Clean(GravityFieldOutsideCylinderSplineSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldOutsideCylinderSplineSpawner : GravityFieldOutsideCylinderSplineSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11794,7 +12950,19 @@ namespace app::rfl {
         static void Clean(ObjGFieldOutsideCylinderSplineSpawner* pInstance);
     };
 
-    struct ObjGFieldOutsidePrismSplineSpawner {
+    struct GravityFieldOutsidePrismSplineSetupParameter : GravityFieldCylinderSplineSetupParameter {
+        float innerRadius;
+        int8_t divide;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldOutsidePrismSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldOutsidePrismSplineSetupParameter* pInstance);
+        static void Clean(GravityFieldOutsidePrismSplineSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldOutsidePrismSplineSpawner : GravityFieldOutsidePrismSplineSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11804,7 +12972,19 @@ namespace app::rfl {
         static void Clean(ObjGFieldOutsidePrismSplineSpawner* pInstance);
     };
 
-    struct ObjGFieldSphereSpawner {
+    struct GravityFieldSphereSetupParameter : GravityFieldSetupParameter {
+        float radius;
+        float innerRadius;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldSphereSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldSphereSetupParameter* pInstance);
+        static void Clean(GravityFieldSphereSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldSphereSpawner : GravityFieldSphereSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11814,7 +12994,22 @@ namespace app::rfl {
         static void Clean(ObjGFieldSphereSpawner* pInstance);
     };
 
-    struct ObjGFieldSvSplineSpawner {
+    struct GravityFieldSvSplineSetupParameter : GravityFieldSetupParameter {
+        csl::ut::VariableString pathName;
+        float x;
+        float y;
+        float z;
+        float tolerance;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(GravityFieldSvSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(GravityFieldSvSplineSetupParameter* pInstance);
+        static void Clean(GravityFieldSvSplineSetupParameter* pInstance);
+    };
+
+    struct ObjGFieldSvSplineSpawner : GravityFieldSvSplineSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -11824,7 +13019,27 @@ namespace app::rfl {
         static void Clean(ObjGFieldSvSplineSpawner* pInstance);
     };
 
-    struct ObjHoleAuraTrainSpawner {
+    struct ObjHoleCommonSpawner {
+        enum class InitialState : uint8_t {
+            Close = 0,
+            OpenSmall = 1,
+            Open = 2,
+        };
+
+        int32_t no;
+        InitialState initialState;
+        InitialState afterState;
+        bool wall;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ObjHoleCommonSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ObjHoleCommonSpawner* pInstance);
+        static void Clean(ObjHoleCommonSpawner* pInstance);
+    };
+
+    struct ObjHoleAuraTrainSpawner : ObjHoleCommonSpawner {
         csl::ut::VariableString pathName;
         bool reverse;
         uint32_t cameraUuid;
@@ -11841,7 +13056,7 @@ namespace app::rfl {
         static void Clean(ObjHoleAuraTrainSpawner* pInstance);
     };
 
-    struct ObjHoleHideSpawner {
+    struct ObjHoleHideSpawner : ObjHoleCommonSpawner {
         int32_t dummy;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -11852,7 +13067,7 @@ namespace app::rfl {
         static void Clean(ObjHoleHideSpawner* pInstance);
     };
 
-    struct ObjHolePopupItemSpawner {
+    struct ObjHolePopupItemSpawner : ObjHoleCommonSpawner {
         enum class ItemKind : uint32_t {
             Ring = 0,
             SuperRing = 1,
@@ -11871,7 +13086,7 @@ namespace app::rfl {
         static void Clean(ObjHolePopupItemSpawner* pInstance);
     };
 
-    struct ObjHoleWarpSpawner {
+    struct ObjHoleWarpSpawner : ObjHoleCommonSpawner {
         enum class Interpolate : int8_t {
             Linear = 0,
             LinearAbsolute = 1,
@@ -12801,7 +14016,7 @@ namespace app::rfl {
         static void Clean(ObjStriderBulletSpawner* pInstance);
     };
 
-    struct ObjStriderGrindRailSpawner {
+    struct ObjStriderGrindRailSpawner : PathCircleParameter {
         int8_t dummy;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -14512,7 +15727,30 @@ namespace app::rfl {
         static void Clean(ObjOneShotSoundTriggerSpawner* pInstance);
     };
 
-    struct ObjPathSoundSourceSpawner {
+    struct ObjSoundSourceSpawner {
+        enum class PlayMode : int8_t {
+            PLAYMODE_LOOP = 0,
+            PLAYMODE_ONE_SHOT = 1,
+            PLAYMODE_PERIODIC = 2,
+        };
+
+        csl::ut::VariableString cueName;
+        PlayMode playMode;
+        float timeOffset;
+        float playInterval;
+        float volume;
+        float hearingRange;
+        float undampedRange;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ObjSoundSourceSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ObjSoundSourceSpawner* pInstance);
+        static void Clean(ObjSoundSourceSpawner* pInstance);
+    };
+
+    struct ObjPathSoundSourceSpawner : ObjSoundSourceSpawner {
         csl::ut::VariableString pathName;
         int32_t searchDivideNum;
 
@@ -14524,7 +15762,7 @@ namespace app::rfl {
         static void Clean(ObjPathSoundSourceSpawner* pInstance);
     };
 
-    struct ObjPointSoundSourceSpawner {
+    struct ObjPointSoundSourceSpawner : ObjSoundSourceSpawner {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -14549,7 +15787,7 @@ namespace app::rfl {
         static void Clean(ObjSoundSourcePlaneSpawner* pInstance);
     };
 
-    struct ObjSoundSourceVolumeSpawner {
+    struct ObjSoundSourceVolumeSpawner : ObjSoundSourceSpawner {
         VolumeTriggerSpawner volumeTrigger;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -14740,7 +15978,7 @@ namespace app::rfl {
         static void Clean(ObjGiantTowerSpawner* pInstance);
     };
 
-    struct ObjCameraLimitedPanSpawner {
+    struct ObjCameraLimitedPanSpawner : ObjCameraSpawner {
         enum class PositionMode : int8_t {
             POS_MODE_FIX = 0,
             POS_MODE_MAINTAIN_DISTANCE = 1,
@@ -18471,7 +19709,18 @@ namespace app::rfl {
         static void Clean(ContentParameter* pInstance);
     };
 
-    struct EnemyAttackRecord {
+    struct Record {
+        uint8_t no;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(Record* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(Record* pInstance);
+        static void Clean(Record* pInstance);
+    };
+
+    struct EnemyAttackRecord : Record {
         enum class Kind : int16_t {
             InvalidKind = -1,
             Dead_BattleJellymanLv1 = 0,
@@ -18696,7 +19945,7 @@ namespace app::rfl {
         static void Clean(EnemyAttackRecordTable* pInstance);
     };
 
-    struct EnemyDefenceRecord {
+    struct EnemyDefenceRecord : Record {
         csl::ut::VariableString name;
         float baseRate;
         float slashRate;
@@ -18732,17 +19981,6 @@ namespace app::rfl {
         static void Construct(EnemyDefenceRecordTable* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(EnemyDefenceRecordTable* pInstance);
         static void Clean(EnemyDefenceRecordTable* pInstance);
-    };
-
-    struct Record {
-        uint8_t no;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(Record* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(Record* pInstance);
-        static void Clean(Record* pInstance);
     };
 
     struct DLCMhrBarbecueTokenParam {
@@ -18849,158 +20087,6 @@ namespace app::rfl {
         static void Construct(DebrisParameter* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(DebrisParameter* pInstance);
         static void Clean(DebrisParameter* pInstance);
-    };
-
-    struct GravityFieldConcaveBoxSetupParameter {
-        float x;
-        float y;
-        float z;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldConcaveBoxSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldConcaveBoxSetupParameter* pInstance);
-        static void Clean(GravityFieldConcaveBoxSetupParameter* pInstance);
-    };
-
-    struct GravityFieldConstantSetupParameter {
-        float x;
-        float y;
-        float z;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldConstantSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldConstantSetupParameter* pInstance);
-        static void Clean(GravityFieldConstantSetupParameter* pInstance);
-    };
-
-    struct GravityFieldCylinderSplineSetupParameter {
-        float radius;
-        csl::ut::VariableString pathName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldCylinderSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldCylinderSplineSetupParameter* pInstance);
-        static void Clean(GravityFieldCylinderSplineSetupParameter* pInstance);
-    };
-
-    struct GravityFieldFaceSplineSetupParameter {
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldFaceSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldFaceSplineSetupParameter* pInstance);
-        static void Clean(GravityFieldFaceSplineSetupParameter* pInstance);
-    };
-
-    struct GravityFieldHemisphereSetupParameter {
-        enum class Type : int8_t {
-            TYPE_OUTER = 0,
-            TYPE_INNER = 1,
-        };
-
-        float radius;
-        float innerRadius;
-        Type type;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldHemisphereSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldHemisphereSetupParameter* pInstance);
-        static void Clean(GravityFieldHemisphereSetupParameter* pInstance);
-    };
-
-    struct GravityFieldInsideCylinderSplineSetupParameter {
-        float innerRadius;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldInsideCylinderSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldInsideCylinderSplineSetupParameter* pInstance);
-        static void Clean(GravityFieldInsideCylinderSplineSetupParameter* pInstance);
-    };
-
-    struct GravityFieldInsidePrismSplineSetupParameter {
-        float innerRadius;
-        int8_t divide;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldInsidePrismSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldInsidePrismSplineSetupParameter* pInstance);
-        static void Clean(GravityFieldInsidePrismSplineSetupParameter* pInstance);
-    };
-
-    struct GravityFieldOutsideCylinderSplineSetupParameter {
-        float innerRadius;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldOutsideCylinderSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldOutsideCylinderSplineSetupParameter* pInstance);
-        static void Clean(GravityFieldOutsideCylinderSplineSetupParameter* pInstance);
-    };
-
-    struct GravityFieldOutsidePrismSplineSetupParameter {
-        float innerRadius;
-        int8_t divide;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldOutsidePrismSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldOutsidePrismSplineSetupParameter* pInstance);
-        static void Clean(GravityFieldOutsidePrismSplineSetupParameter* pInstance);
-    };
-
-    struct GravityFieldSphereSetupParameter {
-        float radius;
-        float innerRadius;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldSphereSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldSphereSetupParameter* pInstance);
-        static void Clean(GravityFieldSphereSetupParameter* pInstance);
-    };
-
-    struct GravityFieldSvSplineSetupParameter {
-        csl::ut::VariableString pathName;
-        float x;
-        float y;
-        float z;
-        float tolerance;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldSvSplineSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldSvSplineSetupParameter* pInstance);
-        static void Clean(GravityFieldSvSplineSetupParameter* pInstance);
-    };
-
-    struct GravityFieldSetupParameter {
-        int8_t prio;
-        bool defaultON;
-        bool fixed;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(GravityFieldSetupParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(GravityFieldSetupParameter* pInstance);
-        static void Clean(GravityFieldSetupParameter* pInstance);
     };
 
     struct MasterTrialStageParameter {
@@ -20087,6 +21173,17 @@ namespace app::rfl {
         static void Clean(GraphicsParameters* pInstance);
     };
 
+    struct NoisePresetParameters {
+        FxCyberSpaceStartNoiseParameter presets[8];
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(NoisePresetParameters* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(NoisePresetParameters* pInstance);
+        static void Clean(NoisePresetParameters* pInstance);
+    };
+
     struct ObjFlashSwitchConfig {
         float recoveryQuickCyloopValue;
 
@@ -20165,7 +21262,7 @@ namespace app::rfl {
         static void Clean(BossDragonCollisionParamBase* pInstance);
     };
 
-    struct BossDragonHitBoxParam {
+    struct BossDragonHitBoxParam : BossDragonCollisionParamBase {
         csl::math::Vector3 damageVelocity;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -20176,7 +21273,7 @@ namespace app::rfl {
         static void Clean(BossDragonHitBoxParam* pInstance);
     };
 
-    struct BossDragonHurtBoxParam {
+    struct BossDragonHurtBoxParam : BossDragonCollisionParamBase {
         bool isEnableHoming;
         csl::ut::VariableString homingNode;
         csl::ut::VariableString homingNodeMirror;
@@ -20756,7 +21853,503 @@ namespace app::rfl {
         static void Clean(BossDragonNotifierParam* pInstance);
     };
 
-    struct BossDragonConfig {
+    struct PlayerMoveableRangeParam {
+        csl::ut::Array<uint32_t> initPositions;
+        csl::ut::VariableString heightTargetNodeName;
+        float heightMoveSpeed;
+        float bossToPlayerDistanceMin;
+        float bossToPlayerDistanceMax;
+        float offsetHeightMin;
+        float offsetHeightMax;
+        float areaDistanceMin;
+        float areaDistanceMax;
+        float playerSpawnDistance;
+        float playerRespawnDistance;
+        float playerRespawnDistance2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerMoveableRangeParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerMoveableRangeParam* pInstance);
+        static void Clean(PlayerMoveableRangeParam* pInstance);
+    };
+
+    struct BossPhaseParam {
+        bool isUse;
+        bool isUsePillar;
+        float phaseChangeHpRatio;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossPhaseParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossPhaseParam* pInstance);
+        static void Clean(BossPhaseParam* pInstance);
+    };
+
+    struct BossLockOnCameraParam {
+        enum class EaseType : int8_t {
+            ET_Sin = 0,
+            ET_Cubic = 1,
+            ET_Quadratic = 2,
+        };
+
+        float easeTime;
+        EaseType easeType;
+        csl::ut::VariableString mainLookAtNodeName;
+        csl::math::Vector3 mainLookOffsetPos;
+        csl::ut::VariableString subLookAtNodeName;
+        csl::math::Vector3 subLookOffsetPos;
+        float distance;
+        csl::math::Vector3 playerOffsetPos;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossLockOnCameraParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossLockOnCameraParam* pInstance);
+        static void Clean(BossLockOnCameraParam* pInstance);
+    };
+
+    struct BossStatusConfig {
+        uint32_t healthPoint;
+        float stunTime;
+        float maxStunPoint[3];
+        float maxStaggerPoint[5];
+        uint16_t exp;
+        PlayerMoveableRangeParam moveRangeParam;
+        PlayerMoveableRangeParam cyloopDamageMoveRangeParam;
+        BossPhaseParam phaseParams[8];
+        BossLockOnCameraParam cameraParam;
+        bool isDebugDraw;
+        uint32_t debugDrawPhaseIndex;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossStatusConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossStatusConfig* pInstance);
+        static void Clean(BossStatusConfig* pInstance);
+    };
+
+    struct BossPillarParam {
+        enum class GimmickType : int8_t {
+            GT_A = 0,
+            GT_B = 1,
+            GT_C = 2,
+            GT_D = 3,
+            GT_E = 4,
+            NUM_GIMMICK_TYPE = 5,
+        };
+
+        enum class AttackType : int8_t {
+            AT_A = 0,
+            AT_B = 1,
+            AT_C = 2,
+            AT_D = 3,
+            AT_E = 4,
+            NUM_ATTACK_TYPE = 5,
+        };
+
+        bool isUse;
+        float gimmickPhaseTime;
+        float attackPhaseTime;
+        bool isUnique;
+        GimmickType gimmickType;
+        float gimmickIntervalTime;
+        AttackType attackType;
+        float attackIntervalTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossPillarParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossPillarParam* pInstance);
+        static void Clean(BossPillarParam* pInstance);
+    };
+
+    struct BossPillarConfig {
+        enum class GimmickType : int8_t {
+            GT_A = 0,
+            GT_B = 1,
+            GT_C = 2,
+            GT_D = 3,
+            GT_E = 4,
+            NUM_GIMMICK_TYPE = 5,
+        };
+
+        enum class AttackType : int8_t {
+            AT_A = 0,
+            AT_B = 1,
+            AT_C = 2,
+            AT_D = 3,
+            AT_E = 4,
+            NUM_ATTACK_TYPE = 5,
+        };
+
+        GimmickType gimmickTypeAll;
+        float gimmickIntervalTimeAll;
+        AttackType attackTypeAll;
+        float attackIntervalTimeAll;
+        BossPillarParam pillars[32];
+        csl::ut::VariableString spawnPositionName;
+        uint32_t pillarHealthPoint;
+        uint32_t pillarBreakDamage;
+        float pillarBreakStun;
+        bool isDebugDraw;
+        uint32_t DebugDrawType;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossPillarConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossPillarConfig* pInstance);
+        static void Clean(BossPillarConfig* pInstance);
+    };
+
+    struct BossColliderStatus {
+        enum class ColliderActiveType : int8_t {
+            Always = 0,
+            OnContactActive = 1,
+            OnContactInactive = 2,
+            OnMotionActive = 3,
+            OnMotionInactive = 4,
+            Manual = 5,
+            NUM_COLLIDER_ACTIVE_TYPE = 6,
+        };
+
+        enum class ColliderProperty : int16_t {
+            CpNone = 0,
+            CpBattleUse = 1,
+            CpBattleUnuse = 2,
+            CpRestPoint = 3,
+            CpHomingTarget = 4,
+            CpPerceive = 5,
+            CpDamage = 6,
+            CpAttack = 7,
+            CpContactActive = 8,
+            CpContactInactive = 9,
+            CpMotionActive = 10,
+            CpMotionInactive = 11,
+            CpManual = 12,
+            CpUpperSide = 13,
+            CpLowerSide = 14,
+            CpFrontSide = 15,
+            CpBackSide = 16,
+            CpLeftSide = 17,
+            CpRightSide = 18,
+            CpPointA = 19,
+            CpPointB = 20,
+            CpPointC = 21,
+            CpPointD = 22,
+            CpCyloopDownUnuse = 23,
+            CpDummyDamage = 24,
+            CpCable = 25,
+            CpTackleHand = 26,
+            NUM_COLLIDER_PROPERTY = 27,
+        };
+
+        ColliderActiveType type;
+        ColliderProperty propertys[4];
+        csl::ut::VariableString text;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossColliderStatus* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossColliderStatus* pInstance);
+        static void Clean(BossColliderStatus* pInstance);
+    };
+
+    struct BossPerceiveCollisionParam {
+        enum class CollisionType : int8_t {
+            CT_SPHERE = 0,
+            CT_CAPSULE = 1,
+            CT_CYLINDER = 2,
+            CT_BOX = 3,
+            NUM_COLLISION_TYPE = 4,
+        };
+
+        bool isUse;
+        int16_t priority;
+        CollisionType type;
+        csl::ut::VariableString attachNodeName;
+        csl::ut::VariableString name;
+        BossColliderStatus status;
+        csl::math::Vector3 size;
+        csl::math::Vector3 offset;
+        csl::math::Vector3 rotation;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossPerceiveCollisionParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossPerceiveCollisionParam* pInstance);
+        static void Clean(BossPerceiveCollisionParam* pInstance);
+    };
+
+    struct BossPerceivePartsWithCollisionConfig {
+        BossPerceiveCollisionParam perceiveCollisions[64];
+        bool isDebugDraw;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossPerceivePartsWithCollisionConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossPerceivePartsWithCollisionConfig* pInstance);
+        static void Clean(BossPerceivePartsWithCollisionConfig* pInstance);
+    };
+
+    struct BossHomingPointParam {
+        BossColliderStatus status;
+        float distance;
+        float nextSearchDistance;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossHomingPointParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossHomingPointParam* pInstance);
+        static void Clean(BossHomingPointParam* pInstance);
+    };
+
+    struct BossMinionParam {
+        uint32_t num;
+        float interval;
+        float liveTime;
+        float waitTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossMinionParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossMinionParam* pInstance);
+        static void Clean(BossMinionParam* pInstance);
+    };
+
+    struct BossTrigerParam {
+        enum class Shape : int8_t {
+            SHAPE_BOX = 0,
+            SHAPE_SPHERE = 1,
+            SHAPE_CYLINDER = 2,
+            SHAPE_CAPSULE = 3,
+        };
+
+        Shape ShapeType;
+        float CollisionWidth;
+        float CollisionHeight;
+        float CollisionDepth;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossTrigerParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossTrigerParam* pInstance);
+        static void Clean(BossTrigerParam* pInstance);
+    };
+
+    struct BossStickParam {
+        float phaseTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossStickParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossStickParam* pInstance);
+        static void Clean(BossStickParam* pInstance);
+    };
+
+    struct BossDamagePointParam {
+        bool isCyloopDownUnuse;
+        csl::ut::VariableString text;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossDamagePointParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossDamagePointParam* pInstance);
+        static void Clean(BossDamagePointParam* pInstance);
+    };
+
+    struct BossDashCirclPointParam {
+        int32_t focusGeometryIndex;
+        int32_t focusTriangleIndex;
+        float sizeScale;
+        float impulseSpeed;
+        float ocTime;
+        float slowRateBoss;
+        float slowRatePlayer;
+        float slowTime;
+        float slowEaseInTime;
+        float slowEaseOutTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossDashCirclPointParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossDashCirclPointParam* pInstance);
+        static void Clean(BossDashCirclPointParam* pInstance);
+    };
+
+    struct BossMeshFrameParam {
+        enum class PointType : int8_t {
+            PT_HOMINGPOINT = 0,
+            PT_HEROSAGE = 1,
+            PT_MINIONGENERATOR = 2,
+            PT_TRIGGER = 3,
+            PT_ANCHOR = 4,
+            PT_DAMAGEPOINT = 5,
+            PT_STICK = 6,
+            PT_DAMAGEEFFECT = 7,
+            PT_DASHCIRCLE = 8,
+            NUM_POINT_TYPE = 9,
+        };
+
+        bool isUse;
+        uint32_t geometryIndex;
+        uint32_t triangleIndex;
+        PointType type;
+        BossHomingPointParam homingPoint;
+        BossMinionParam minionParam;
+        BossTrigerParam trigger;
+        BossStickParam stickParam;
+        BossDamagePointParam damagePoint;
+        BossDashCirclPointParam dashCirclPoint;
+        int32_t linkNums[5];
+        csl::math::Vector3 offsetPos;
+        csl::math::Vector3 offsetRot;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossMeshFrameParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossMeshFrameParam* pInstance);
+        static void Clean(BossMeshFrameParam* pInstance);
+    };
+
+    struct BossMeshFrameConfig {
+        BossMeshFrameParam meshShapeKeyFrames[256];
+        bool isDebugDraw;
+        bool isDebugDrawPoint;
+        bool isDebugDrawMesh;
+        bool isDebugDrawMeshIndivid;
+        float debugDrawMeshTriangleDistance;
+        uint32_t debugDrawMeshTriangleNum;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossMeshFrameConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossMeshFrameConfig* pInstance);
+        static void Clean(BossMeshFrameConfig* pInstance);
+    };
+
+    struct BossAttackCollisionParam {
+        enum class AttackType : int8_t {
+            AT_NONE = 0,
+            AT_BLOWOFF = 1,
+            AT_SLAMDOWNWARD = 2,
+            AT_KILLING = 3,
+            AT_NOTPARRY = 4,
+            AT_NOTDAMAGE = 5,
+            AT_NOTDAMAGETRIGGER = 6,
+            NUM_ATTACK_TYPE = 7,
+        };
+
+        bool isUse;
+        csl::ut::VariableString attachNodeName;
+        float damageVelocityRaito;
+        AttackType types[4];
+        BossColliderStatus status;
+        float size;
+        csl::math::Vector3 offset;
+        csl::ut::VariableString parryCounterTargetCollisionName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossAttackCollisionParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossAttackCollisionParam* pInstance);
+        static void Clean(BossAttackCollisionParam* pInstance);
+    };
+
+    struct BossAttackCollisionConfig {
+        BossAttackCollisionParam attackCollisions[64];
+        bool isDebugDraw;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossAttackCollisionConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossAttackCollisionConfig* pInstance);
+        static void Clean(BossAttackCollisionConfig* pInstance);
+    };
+
+    struct BossBattlePhaseCollisionParam {
+        bool isUse;
+        csl::ut::VariableString attachNodeName;
+        csl::ut::VariableString name;
+        float size;
+        csl::math::Vector3 offset;
+        csl::math::Vector3 rotation;
+        bool isParryActive;
+        float cyloopRadius;
+        bool onlyRigidBody;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossBattlePhaseCollisionParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossBattlePhaseCollisionParam* pInstance);
+        static void Clean(BossBattlePhaseCollisionParam* pInstance);
+    };
+
+    struct BossBattlePhaseCollisionConfig {
+        BossBattlePhaseCollisionParam battleCollisions[16];
+        bool isDebugDraw;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossBattlePhaseCollisionConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossBattlePhaseCollisionConfig* pInstance);
+        static void Clean(BossBattlePhaseCollisionConfig* pInstance);
+    };
+
+    struct BossDropRingConfig {
+        uint32_t ringNumQuickCyloopUp;
+        uint32_t ringNumQuickCyloopDown;
+        uint32_t ringNumSonicSpecial;
+        float ringSpawnDistance;
+        float ringSuckedVelocity;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossDropRingConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossDropRingConfig* pInstance);
+        static void Clean(BossDropRingConfig* pInstance);
+    };
+
+    struct BossBaseConfig {
+        BossStatusConfig status;
+        BossPillarConfig pillar;
+        BossPerceivePartsWithCollisionConfig perceivPartsWithCollision;
+        BossMeshFrameConfig meshShapeKeyFrame;
+        BossAttackCollisionConfig attackCollision;
+        BossBattlePhaseCollisionConfig battleCollision;
+        BossDropRingConfig dropRing;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(BossBaseConfig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(BossBaseConfig* pInstance);
+        static void Clean(BossBaseConfig* pInstance);
+    };
+
+    struct BossDragonConfig : BossBaseConfig {
         enum class BossDragonSequence : int8_t {
             NOP = 0,
             BITE = 1,
@@ -21002,7 +22595,7 @@ namespace app::rfl {
         static void Clean(BossGiantNotifierParam* pInstance);
     };
 
-    struct BossGiantConfig {
+    struct BossGiantConfig : BossBaseConfig {
         BossGiantBattleParam battleParam;
         BossGiantNotifierParam notifierParam;
 
@@ -21747,7 +23340,7 @@ namespace app::rfl {
         static void Clean(BossKnightNotifierParam* pInstance);
     };
 
-    struct BossKnightConfig {
+    struct BossKnightConfig : BossBaseConfig {
         KnightIdleConfig idle;
         KnightClimbConfig climb;
         KnightBattle1Config battle1;
@@ -22119,7 +23712,7 @@ namespace app::rfl {
         static void Clean(BossRifleNotifierParam* pInstance);
     };
 
-    struct BossRifleConfig {
+    struct BossRifleConfig : BossBaseConfig {
         BossRifleBattleParam battleParam;
         BossRifleNotifierParam notifierParam;
 
@@ -22916,7 +24509,7 @@ namespace app::rfl {
         static void Clean(BossRifleBeastNotifierParam* pInstance);
     };
 
-    struct BossRifleBeastConfig {
+    struct BossRifleBeastConfig : BossBaseConfig {
         BossRifleBeastBattleParam battleParam;
         BossRifleBeastCableParam cableParam;
         BossRifleBeastNotifierParam notifierParam;
@@ -22980,7 +24573,7 @@ namespace app::rfl {
         static void Clean(UIConfig* pInstance);
     };
 
-    struct BossTheEndConfig {
+    struct BossTheEndConfig : BossBaseConfig {
         LaserTargetConfig target;
         SerifConfig serifConfigs[26];
         NotifierConfig notifierConfigStart;
@@ -22993,502 +24586,6 @@ namespace app::rfl {
         static void Construct(BossTheEndConfig* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(BossTheEndConfig* pInstance);
         static void Clean(BossTheEndConfig* pInstance);
-    };
-
-    struct BossColliderStatus {
-        enum class ColliderActiveType : int8_t {
-            Always = 0,
-            OnContactActive = 1,
-            OnContactInactive = 2,
-            OnMotionActive = 3,
-            OnMotionInactive = 4,
-            Manual = 5,
-            NUM_COLLIDER_ACTIVE_TYPE = 6,
-        };
-
-        enum class ColliderProperty : int16_t {
-            CpNone = 0,
-            CpBattleUse = 1,
-            CpBattleUnuse = 2,
-            CpRestPoint = 3,
-            CpHomingTarget = 4,
-            CpPerceive = 5,
-            CpDamage = 6,
-            CpAttack = 7,
-            CpContactActive = 8,
-            CpContactInactive = 9,
-            CpMotionActive = 10,
-            CpMotionInactive = 11,
-            CpManual = 12,
-            CpUpperSide = 13,
-            CpLowerSide = 14,
-            CpFrontSide = 15,
-            CpBackSide = 16,
-            CpLeftSide = 17,
-            CpRightSide = 18,
-            CpPointA = 19,
-            CpPointB = 20,
-            CpPointC = 21,
-            CpPointD = 22,
-            CpCyloopDownUnuse = 23,
-            CpDummyDamage = 24,
-            CpCable = 25,
-            CpTackleHand = 26,
-            NUM_COLLIDER_PROPERTY = 27,
-        };
-
-        ColliderActiveType type;
-        ColliderProperty propertys[4];
-        csl::ut::VariableString text;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossColliderStatus* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossColliderStatus* pInstance);
-        static void Clean(BossColliderStatus* pInstance);
-    };
-
-    struct BossAttackCollisionParam {
-        enum class AttackType : int8_t {
-            AT_NONE = 0,
-            AT_BLOWOFF = 1,
-            AT_SLAMDOWNWARD = 2,
-            AT_KILLING = 3,
-            AT_NOTPARRY = 4,
-            AT_NOTDAMAGE = 5,
-            AT_NOTDAMAGETRIGGER = 6,
-            NUM_ATTACK_TYPE = 7,
-        };
-
-        bool isUse;
-        csl::ut::VariableString attachNodeName;
-        float damageVelocityRaito;
-        AttackType types[4];
-        BossColliderStatus status;
-        float size;
-        csl::math::Vector3 offset;
-        csl::ut::VariableString parryCounterTargetCollisionName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossAttackCollisionParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossAttackCollisionParam* pInstance);
-        static void Clean(BossAttackCollisionParam* pInstance);
-    };
-
-    struct BossAttackCollisionConfig {
-        BossAttackCollisionParam attackCollisions[64];
-        bool isDebugDraw;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossAttackCollisionConfig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossAttackCollisionConfig* pInstance);
-        static void Clean(BossAttackCollisionConfig* pInstance);
-    };
-
-    struct PlayerMoveableRangeParam {
-        csl::ut::Array<uint32_t> initPositions;
-        csl::ut::VariableString heightTargetNodeName;
-        float heightMoveSpeed;
-        float bossToPlayerDistanceMin;
-        float bossToPlayerDistanceMax;
-        float offsetHeightMin;
-        float offsetHeightMax;
-        float areaDistanceMin;
-        float areaDistanceMax;
-        float playerSpawnDistance;
-        float playerRespawnDistance;
-        float playerRespawnDistance2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerMoveableRangeParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerMoveableRangeParam* pInstance);
-        static void Clean(PlayerMoveableRangeParam* pInstance);
-    };
-
-    struct BossPhaseParam {
-        bool isUse;
-        bool isUsePillar;
-        float phaseChangeHpRatio;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossPhaseParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossPhaseParam* pInstance);
-        static void Clean(BossPhaseParam* pInstance);
-    };
-
-    struct BossLockOnCameraParam {
-        enum class EaseType : int8_t {
-            ET_Sin = 0,
-            ET_Cubic = 1,
-            ET_Quadratic = 2,
-        };
-
-        float easeTime;
-        EaseType easeType;
-        csl::ut::VariableString mainLookAtNodeName;
-        csl::math::Vector3 mainLookOffsetPos;
-        csl::ut::VariableString subLookAtNodeName;
-        csl::math::Vector3 subLookOffsetPos;
-        float distance;
-        csl::math::Vector3 playerOffsetPos;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossLockOnCameraParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossLockOnCameraParam* pInstance);
-        static void Clean(BossLockOnCameraParam* pInstance);
-    };
-
-    struct BossStatusConfig {
-        uint32_t healthPoint;
-        float stunTime;
-        float maxStunPoint[3];
-        float maxStaggerPoint[5];
-        uint16_t exp;
-        PlayerMoveableRangeParam moveRangeParam;
-        PlayerMoveableRangeParam cyloopDamageMoveRangeParam;
-        BossPhaseParam phaseParams[8];
-        BossLockOnCameraParam cameraParam;
-        bool isDebugDraw;
-        uint32_t debugDrawPhaseIndex;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossStatusConfig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossStatusConfig* pInstance);
-        static void Clean(BossStatusConfig* pInstance);
-    };
-
-    struct BossPillarParam {
-        enum class GimmickType : int8_t {
-            GT_A = 0,
-            GT_B = 1,
-            GT_C = 2,
-            GT_D = 3,
-            GT_E = 4,
-            NUM_GIMMICK_TYPE = 5,
-        };
-
-        enum class AttackType : int8_t {
-            AT_A = 0,
-            AT_B = 1,
-            AT_C = 2,
-            AT_D = 3,
-            AT_E = 4,
-            NUM_ATTACK_TYPE = 5,
-        };
-
-        bool isUse;
-        float gimmickPhaseTime;
-        float attackPhaseTime;
-        bool isUnique;
-        GimmickType gimmickType;
-        float gimmickIntervalTime;
-        AttackType attackType;
-        float attackIntervalTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossPillarParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossPillarParam* pInstance);
-        static void Clean(BossPillarParam* pInstance);
-    };
-
-    struct BossPillarConfig {
-        enum class GimmickType : int8_t {
-            GT_A = 0,
-            GT_B = 1,
-            GT_C = 2,
-            GT_D = 3,
-            GT_E = 4,
-            NUM_GIMMICK_TYPE = 5,
-        };
-
-        enum class AttackType : int8_t {
-            AT_A = 0,
-            AT_B = 1,
-            AT_C = 2,
-            AT_D = 3,
-            AT_E = 4,
-            NUM_ATTACK_TYPE = 5,
-        };
-
-        GimmickType gimmickTypeAll;
-        float gimmickIntervalTimeAll;
-        AttackType attackTypeAll;
-        float attackIntervalTimeAll;
-        BossPillarParam pillars[32];
-        csl::ut::VariableString spawnPositionName;
-        uint32_t pillarHealthPoint;
-        uint32_t pillarBreakDamage;
-        float pillarBreakStun;
-        bool isDebugDraw;
-        uint32_t DebugDrawType;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossPillarConfig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossPillarConfig* pInstance);
-        static void Clean(BossPillarConfig* pInstance);
-    };
-
-    struct BossPerceiveCollisionParam {
-        enum class CollisionType : int8_t {
-            CT_SPHERE = 0,
-            CT_CAPSULE = 1,
-            CT_CYLINDER = 2,
-            CT_BOX = 3,
-            NUM_COLLISION_TYPE = 4,
-        };
-
-        bool isUse;
-        int16_t priority;
-        CollisionType type;
-        csl::ut::VariableString attachNodeName;
-        csl::ut::VariableString name;
-        BossColliderStatus status;
-        csl::math::Vector3 size;
-        csl::math::Vector3 offset;
-        csl::math::Vector3 rotation;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossPerceiveCollisionParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossPerceiveCollisionParam* pInstance);
-        static void Clean(BossPerceiveCollisionParam* pInstance);
-    };
-
-    struct BossPerceivePartsWithCollisionConfig {
-        BossPerceiveCollisionParam perceiveCollisions[64];
-        bool isDebugDraw;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossPerceivePartsWithCollisionConfig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossPerceivePartsWithCollisionConfig* pInstance);
-        static void Clean(BossPerceivePartsWithCollisionConfig* pInstance);
-    };
-
-    struct BossHomingPointParam {
-        BossColliderStatus status;
-        float distance;
-        float nextSearchDistance;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossHomingPointParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossHomingPointParam* pInstance);
-        static void Clean(BossHomingPointParam* pInstance);
-    };
-
-    struct BossMinionParam {
-        uint32_t num;
-        float interval;
-        float liveTime;
-        float waitTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossMinionParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossMinionParam* pInstance);
-        static void Clean(BossMinionParam* pInstance);
-    };
-
-    struct BossTrigerParam {
-        enum class Shape : int8_t {
-            SHAPE_BOX = 0,
-            SHAPE_SPHERE = 1,
-            SHAPE_CYLINDER = 2,
-            SHAPE_CAPSULE = 3,
-        };
-
-        Shape ShapeType;
-        float CollisionWidth;
-        float CollisionHeight;
-        float CollisionDepth;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossTrigerParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossTrigerParam* pInstance);
-        static void Clean(BossTrigerParam* pInstance);
-    };
-
-    struct BossStickParam {
-        float phaseTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossStickParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossStickParam* pInstance);
-        static void Clean(BossStickParam* pInstance);
-    };
-
-    struct BossDamagePointParam {
-        bool isCyloopDownUnuse;
-        csl::ut::VariableString text;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossDamagePointParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossDamagePointParam* pInstance);
-        static void Clean(BossDamagePointParam* pInstance);
-    };
-
-    struct BossDashCirclPointParam {
-        int32_t focusGeometryIndex;
-        int32_t focusTriangleIndex;
-        float sizeScale;
-        float impulseSpeed;
-        float ocTime;
-        float slowRateBoss;
-        float slowRatePlayer;
-        float slowTime;
-        float slowEaseInTime;
-        float slowEaseOutTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossDashCirclPointParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossDashCirclPointParam* pInstance);
-        static void Clean(BossDashCirclPointParam* pInstance);
-    };
-
-    struct BossMeshFrameParam {
-        enum class PointType : int8_t {
-            PT_HOMINGPOINT = 0,
-            PT_HEROSAGE = 1,
-            PT_MINIONGENERATOR = 2,
-            PT_TRIGGER = 3,
-            PT_ANCHOR = 4,
-            PT_DAMAGEPOINT = 5,
-            PT_STICK = 6,
-            PT_DAMAGEEFFECT = 7,
-            PT_DASHCIRCLE = 8,
-            NUM_POINT_TYPE = 9,
-        };
-
-        bool isUse;
-        uint32_t geometryIndex;
-        uint32_t triangleIndex;
-        PointType type;
-        BossHomingPointParam homingPoint;
-        BossMinionParam minionParam;
-        BossTrigerParam trigger;
-        BossStickParam stickParam;
-        BossDamagePointParam damagePoint;
-        BossDashCirclPointParam dashCirclPoint;
-        int32_t linkNums[5];
-        csl::math::Vector3 offsetPos;
-        csl::math::Vector3 offsetRot;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossMeshFrameParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossMeshFrameParam* pInstance);
-        static void Clean(BossMeshFrameParam* pInstance);
-    };
-
-    struct BossMeshFrameConfig {
-        BossMeshFrameParam meshShapeKeyFrames[256];
-        bool isDebugDraw;
-        bool isDebugDrawPoint;
-        bool isDebugDrawMesh;
-        bool isDebugDrawMeshIndivid;
-        float debugDrawMeshTriangleDistance;
-        uint32_t debugDrawMeshTriangleNum;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossMeshFrameConfig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossMeshFrameConfig* pInstance);
-        static void Clean(BossMeshFrameConfig* pInstance);
-    };
-
-    struct BossBattlePhaseCollisionParam {
-        bool isUse;
-        csl::ut::VariableString attachNodeName;
-        csl::ut::VariableString name;
-        float size;
-        csl::math::Vector3 offset;
-        csl::math::Vector3 rotation;
-        bool isParryActive;
-        float cyloopRadius;
-        bool onlyRigidBody;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossBattlePhaseCollisionParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossBattlePhaseCollisionParam* pInstance);
-        static void Clean(BossBattlePhaseCollisionParam* pInstance);
-    };
-
-    struct BossBattlePhaseCollisionConfig {
-        BossBattlePhaseCollisionParam battleCollisions[16];
-        bool isDebugDraw;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossBattlePhaseCollisionConfig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossBattlePhaseCollisionConfig* pInstance);
-        static void Clean(BossBattlePhaseCollisionConfig* pInstance);
-    };
-
-    struct BossDropRingConfig {
-        uint32_t ringNumQuickCyloopUp;
-        uint32_t ringNumQuickCyloopDown;
-        uint32_t ringNumSonicSpecial;
-        float ringSpawnDistance;
-        float ringSuckedVelocity;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossDropRingConfig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossDropRingConfig* pInstance);
-        static void Clean(BossDropRingConfig* pInstance);
-    };
-
-    struct BossBaseConfig {
-        BossStatusConfig status;
-        BossPillarConfig pillar;
-        BossPerceivePartsWithCollisionConfig perceivPartsWithCollision;
-        BossMeshFrameConfig meshShapeKeyFrame;
-        BossAttackCollisionConfig attackCollision;
-        BossBattlePhaseCollisionConfig battleCollision;
-        BossDropRingConfig dropRing;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(BossBaseConfig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(BossBaseConfig* pInstance);
-        static void Clean(BossBaseConfig* pInstance);
     };
 
     struct BossResourceInfo {
@@ -23589,17 +24686,6 @@ namespace app::rfl {
         static void Construct(BossStatusParameterBase* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(BossStatusParameterBase* pInstance);
         static void Clean(BossStatusParameterBase* pInstance);
-    };
-
-    struct ObjCameraSpawner {
-        bool IsCameraView;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ObjCameraSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ObjCameraSpawner* pInstance);
-        static void Clean(ObjCameraSpawner* pInstance);
     };
 
     struct FSRow {
@@ -24785,48 +25871,6 @@ namespace app::rfl {
         static void Clean(MeteorShowerParameter* pInstance);
     };
 
-    struct ObjParticleBaseRumbleParam {
-        csl::ut::VariableString name;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ObjParticleBaseRumbleParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ObjParticleBaseRumbleParam* pInstance);
-        static void Clean(ObjParticleBaseRumbleParam* pInstance);
-    };
-
-    struct ObjParticleBaseSoundParam {
-        csl::ut::VariableString name;
-        bool is3D;
-        float volume;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ObjParticleBaseSoundParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ObjParticleBaseSoundParam* pInstance);
-        static void Clean(ObjParticleBaseSoundParam* pInstance);
-    };
-
-    struct ObjParticleBaseSpawner {
-        csl::ut::VariableString effectName;
-        float scale;
-        uint8_t colorR;
-        uint8_t colorG;
-        uint8_t colorB;
-        uint8_t colorA;
-        ObjParticleBaseSoundParam sound;
-        ObjParticleBaseRumbleParam rumble;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ObjParticleBaseSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ObjParticleBaseSpawner* pInstance);
-        static void Clean(ObjParticleBaseSpawner* pInstance);
-    };
-
     struct SeedParameter {
         enum class SeedType : uint8_t {
             SeedSensor = 0,
@@ -24842,41 +25886,6 @@ namespace app::rfl {
         static void Construct(SeedParameter* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(SeedParameter* pInstance);
         static void Clean(SeedParameter* pInstance);
-    };
-
-    struct ObjQuickStepSpawner {
-        enum class LineType : int8_t {
-            LINE2_LEFT = 0,
-            LINE2_RIGHT = 1,
-            LINE3 = 2,
-            LINE5 = 3,
-        };
-
-        enum class JumpMode : int8_t {
-            WorldSpace = 0,
-            PathSpace = 1,
-            NoneJump = 2,
-        };
-
-        LineType line;
-        csl::ut::VariableString pathName;
-        float speed;
-        float speedMin;
-        float boostSpeed;
-        float boostSpeedMin;
-        float boostLvMaxSpeed;
-        float boostLvMaxSpeedMin;
-        float initialSpeed;
-        float stepWidth;
-        JumpMode jumpMode;
-        bool endByAir;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ObjQuickStepSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ObjQuickStepSpawner* pInstance);
-        static void Clean(ObjQuickStepSpawner* pInstance);
     };
 
     struct ReflexesPanelCameraParam {
@@ -25986,7 +26995,19 @@ namespace app::rfl {
         static void Clean(HeliCommon* pInstance);
     };
 
-    struct HeliBullet {
+    struct HeliAttackBase {
+        float life;
+        float attackInterval;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(HeliAttackBase* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(HeliAttackBase* pInstance);
+        static void Clean(HeliAttackBase* pInstance);
+    };
+
+    struct HeliBullet : HeliAttackBase {
         float bulletSpeed;
         float gunRotateSpeed;
         uint8_t attackChainNum;
@@ -26000,7 +27021,7 @@ namespace app::rfl {
         static void Clean(HeliBullet* pInstance);
     };
 
-    struct HeliBomb {
+    struct HeliBomb : HeliAttackBase {
         float bombSpeed;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -26022,18 +27043,6 @@ namespace app::rfl {
         static void Construct(EnemyHelicopterConfig* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(EnemyHelicopterConfig* pInstance);
         static void Clean(EnemyHelicopterConfig* pInstance);
-    };
-
-    struct HeliAttackBase {
-        float life;
-        float attackInterval;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(HeliAttackBase* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(HeliAttackBase* pInstance);
-        static void Clean(HeliAttackBase* pInstance);
     };
 
     struct Movement {
@@ -27168,7 +28177,7 @@ namespace app::rfl {
         static void Clean(RecordData* pInstance);
     };
 
-    struct ObjGFieldCylinderSplineSpawner {
+    struct ObjGFieldCylinderSplineSpawner : GravityFieldCylinderSplineSetupParameter {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -27176,26 +28185,6 @@ namespace app::rfl {
         static void Construct(ObjGFieldCylinderSplineSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(ObjGFieldCylinderSplineSpawner* pInstance);
         static void Clean(ObjGFieldCylinderSplineSpawner* pInstance);
-    };
-
-    struct ObjHoleCommonSpawner {
-        enum class InitialState : uint8_t {
-            Close = 0,
-            OpenSmall = 1,
-            Open = 2,
-        };
-
-        int32_t no;
-        InitialState initialState;
-        InitialState afterState;
-        bool wall;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ObjHoleCommonSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ObjHoleCommonSpawner* pInstance);
-        static void Clean(ObjHoleCommonSpawner* pInstance);
     };
 
     struct MiniBossCommonConfig {
@@ -28308,7 +29297,36 @@ namespace app::rfl {
         static void Clean(MiniBossChargerConfig* pInstance);
     };
 
-    struct MiniBossDarumaBombParam {
+    struct MiniBossDarumaSpecialShotParamBase {
+        enum class ScatterType : int8_t {
+            RANDOM = 0,
+            HOMING = 1,
+            SPIRAL = 2,
+        };
+
+        int32_t count;
+        float intervalTime;
+        float shootPitchMin;
+        float shootPitchMax;
+        float initialSpeedMin;
+        float initialSpeedMax;
+        float maxAngle;
+        float moveRadius;
+        float maxMoveSpeed;
+        float accel;
+        float waitTime;
+        float featherLifeTime;
+        ScatterType m_scatterTypeTable[6];
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(MiniBossDarumaSpecialShotParamBase* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(MiniBossDarumaSpecialShotParamBase* pInstance);
+        static void Clean(MiniBossDarumaSpecialShotParamBase* pInstance);
+    };
+
+    struct MiniBossDarumaBombParam : MiniBossDarumaSpecialShotParamBase {
         float explosionRadius;
         float explosionEffectScale;
         float explosionTime;
@@ -28359,7 +29377,7 @@ namespace app::rfl {
         static void Clean(MiniBossDarumaShotParam* pInstance);
     };
 
-    struct MiniBossDarumaFlamePillarParam {
+    struct MiniBossDarumaFlamePillarParam : MiniBossDarumaSpecialShotParamBase {
         float burnLifeTime;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -28370,7 +29388,7 @@ namespace app::rfl {
         static void Clean(MiniBossDarumaFlamePillarParam* pInstance);
     };
 
-    struct MiniBossDarumaWaveBombParam {
+    struct MiniBossDarumaWaveBombParam : MiniBossDarumaSpecialShotParamBase {
         float burnLifeTime;
         float cycleTime;
         float cycleDistance;
@@ -28596,35 +29614,6 @@ namespace app::rfl {
         static void Construct(MiniBossDarumaConfig* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(MiniBossDarumaConfig* pInstance);
         static void Clean(MiniBossDarumaConfig* pInstance);
-    };
-
-    struct MiniBossDarumaSpecialShotParamBase {
-        enum class ScatterType : int8_t {
-            RANDOM = 0,
-            HOMING = 1,
-            SPIRAL = 2,
-        };
-
-        int32_t count;
-        float intervalTime;
-        float shootPitchMin;
-        float shootPitchMax;
-        float initialSpeedMin;
-        float initialSpeedMax;
-        float maxAngle;
-        float moveRadius;
-        float maxMoveSpeed;
-        float accel;
-        float waitTime;
-        float featherLifeTime;
-        ScatterType m_scatterTypeTable[6];
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(MiniBossDarumaSpecialShotParamBase* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(MiniBossDarumaSpecialShotParamBase* pInstance);
-        static void Clean(MiniBossDarumaSpecialShotParamBase* pInstance);
     };
 
     struct FlayerEscapeShotSequenceTable {
@@ -29623,7 +30612,7 @@ namespace app::rfl {
         static void Clean(CommonBulletParam* pInstance);
     };
 
-    struct HomingBulletParam {
+    struct HomingBulletParam : CommonBulletParam {
         float railChangeDelay;
         float turnaroundTime;
         float splinePositionDistance;
@@ -29637,7 +30626,7 @@ namespace app::rfl {
         static void Clean(HomingBulletParam* pInstance);
     };
 
-    struct ReverseHomingBulletParam {
+    struct ReverseHomingBulletParam : CommonBulletParam {
         float railChangeDelay;
         float turnaroundTime;
         float splinePositionDistance;
@@ -29651,7 +30640,7 @@ namespace app::rfl {
         static void Clean(ReverseHomingBulletParam* pInstance);
     };
 
-    struct SameBodyRailBulletParam {
+    struct SameBodyRailBulletParam : CommonBulletParam {
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -31649,7 +32638,25 @@ namespace app::rfl {
         static void Clean(QuestKodamaCollectionMoveParameter* pInstance);
     };
 
-    struct QuestKodamaCollectionSandBombParameter {
+    struct QuestKodamaCollectionBombParameter {
+        float bombSpawnTrialTime;
+        uint16_t numKodamasNeededForBombSpawnRate2;
+        uint16_t numKodamasNeededForBombSpawnRate3;
+        float bombSpawnRate1;
+        float bombSpawnRate2;
+        float bombSpawnRate3;
+        uint8_t maxAliveBombNum;
+        float bombSpawnRange;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(QuestKodamaCollectionBombParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(QuestKodamaCollectionBombParameter* pInstance);
+        static void Clean(QuestKodamaCollectionBombParameter* pInstance);
+    };
+
+    struct QuestKodamaCollectionSandBombParameter : QuestKodamaCollectionBombParameter {
         float sandStormTime;
         float noBombsTime;
         float sandStormInLerpTime;
@@ -31692,24 +32699,6 @@ namespace app::rfl {
         static void Construct(ObjKodamaQuestDesertIslandParameter* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(ObjKodamaQuestDesertIslandParameter* pInstance);
         static void Clean(ObjKodamaQuestDesertIslandParameter* pInstance);
-    };
-
-    struct QuestKodamaCollectionBombParameter {
-        float bombSpawnTrialTime;
-        uint16_t numKodamasNeededForBombSpawnRate2;
-        uint16_t numKodamasNeededForBombSpawnRate3;
-        float bombSpawnRate1;
-        float bombSpawnRate2;
-        float bombSpawnRate3;
-        uint8_t maxAliveBombNum;
-        float bombSpawnRange;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(QuestKodamaCollectionBombParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(QuestKodamaCollectionBombParameter* pInstance);
-        static void Clean(QuestKodamaCollectionBombParameter* pInstance);
     };
 
     struct ObjKodamaQuestGrassIslandParameter {
@@ -32201,29 +33190,6 @@ namespace app::rfl {
         static void Clean(HackingEnemyParameters* pInstance);
     };
 
-    struct ObjSoundSourceSpawner {
-        enum class PlayMode : int8_t {
-            PLAYMODE_LOOP = 0,
-            PLAYMODE_ONE_SHOT = 1,
-            PLAYMODE_PERIODIC = 2,
-        };
-
-        csl::ut::VariableString cueName;
-        PlayMode playMode;
-        float timeOffset;
-        float playInterval;
-        float volume;
-        float hearingRange;
-        float undampedRange;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ObjSoundSourceSpawner* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ObjSoundSourceSpawner* pInstance);
-        static void Clean(ObjSoundSourceSpawner* pInstance);
-    };
-
     struct ChaosEmeraldStorageParam {
         bool isEnable;
         int8_t useKeyNum;
@@ -32405,45 +33371,6 @@ namespace app::rfl {
         static void Clean(IslandParameter* pInstance);
     };
 
-    struct PathParameterCommon {
-        enum class PathType : int8_t {
-            OBJ_PATH = 0,
-            GR_PATH = 1,
-            SV_PATH = 2,
-        };
-
-        enum class GrindCapVisible : int8_t {
-            Both = 0,
-            Head = 1,
-            Tail = 2,
-            None = 3,
-        };
-
-        enum class ParamType : int8_t {
-            PARAM_NONE = 0,
-            PARAM_LINE = 1,
-            PARAM_LOOP = 2,
-            PARAM_SPIRAL = 3,
-            PARAM_SET_PATH = 4,
-            PARAM_POLYGON = 5,
-            PARAM_CIRCLE = 6,
-        };
-
-        int32_t pathUID;
-        PathType pathType;
-        GrindCapVisible capVisible;
-        float grindUnitLength;
-        ParamType paramType;
-        bool isMovable;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PathParameterCommon* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PathParameterCommon* pInstance);
-        static void Clean(PathParameterCommon* pInstance);
-    };
-
     struct PlayerCameraParameter {
         enum class CameraType : uint8_t {
             None = 0,
@@ -32509,7 +33436,7 @@ namespace app::rfl {
         static void Clean(PlayerCameraSetParameters* pInstance);
     };
 
-    struct EffectRecord {
+    struct EffectRecord : Record {
         csl::ut::VariableString emitterSetName[5];
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -32876,7 +33803,33 @@ namespace app::rfl {
         static void Clean(AmyParamParryDebuff* pInstance);
     };
 
-    struct CyloopTransparentLocusParameter {
+    struct CyloopSlashEffectBaseParameter {
+        int32_t m_divideCircle;
+        float m_circleRadius;
+        float m_circleWaveCycle;
+        float m_circleWaveWidth;
+        float m_circleWaveSpeed;
+        csl::math::Vector2 m_scale;
+        csl::ut::VariableString m_textureName;
+        float m_flowSpeed;
+        float m_twistCycle;
+        float m_rollCycle;
+        float m_rollPhase;
+        float m_alphaHeadDistance;
+        float m_alphaTailDistance;
+        float m_offsetCycle;
+        float m_offsetPhase;
+        float m_offsetRadius;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(CyloopSlashEffectBaseParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(CyloopSlashEffectBaseParameter* pInstance);
+        static void Clean(CyloopSlashEffectBaseParameter* pInstance);
+    };
+
+    struct CyloopTransparentLocusParameter : CyloopSlashEffectBaseParameter {
         csl::ut::Color<float> m_color0;
         csl::ut::Color<float> m_color1;
         float m_luminance;
@@ -32906,7 +33859,7 @@ namespace app::rfl {
         static void Clean(OpaqueLineUvCell* pInstance);
     };
 
-    struct CyloopOpaqueLocusParameter {
+    struct CyloopOpaqueLocusParameter : CyloopSlashEffectBaseParameter {
         csl::ut::Color<float> m_color;
         float m_alphaThreshold;
         OpaqueLineUvCell m_uvCells[2];
@@ -33046,531 +33999,6 @@ namespace app::rfl {
         static void Construct(PlayerParamCyloop* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(PlayerParamCyloop* pInstance);
         static void Clean(PlayerParamCyloop* pInstance);
-    };
-
-    struct CommonPackageAmy {
-        PlayerParamCombo combo;
-        AmyParamParryDebuff parryDebuff;
-        PlayerParamCyloop c;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(CommonPackageAmy* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(CommonPackageAmy* pInstance);
-        static void Clean(CommonPackageAmy* pInstance);
-    };
-
-    struct AmyParamPropellerJump {
-        float initialSpeed;
-        float bounceSpeed;
-        float limitSpeedMin;
-        float riseDampingStartTime;
-        float riseDampingRate;
-        float maxFallSpeed;
-        float fallGravitySize;
-        float minDuration;
-        float propellerVertSpeedThreshold;
-        bool holdTransitHover;
-        float practiceTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamPropellerJump* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamPropellerJump* pInstance);
-        static void Clean(AmyParamPropellerJump* pInstance);
-    };
-
-    struct AmyParamStomping {
-        float landAttackScale;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamStomping* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamStomping* pInstance);
-        static void Clean(AmyParamStomping* pInstance);
-    };
-
-    struct AmyParamHighJump {
-        float jumpForce;
-        float longPressTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamHighJump* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamHighJump* pInstance);
-        static void Clean(AmyParamHighJump* pInstance);
-    };
-
-    struct PlayerParamAttackCollider {
-        enum class Condition : int8_t {
-            Time = 0,
-            Animation = 1,
-        };
-
-        enum class Shape : int8_t {
-            Sphere = 0,
-            Cylinder = 1,
-            Box = 2,
-        };
-
-        Condition condition;
-        int8_t count;
-        float spanTime;
-        Shape shape;
-        csl::math::Vector3 shapeSize;
-        csl::math::Vector3 shapeOffset;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamAttackCollider* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamAttackCollider* pInstance);
-        static void Clean(PlayerParamAttackCollider* pInstance);
-    };
-
-    struct AmyParamTarotAttackSpeed {
-        float initial;
-        float min;
-        float max;
-        float minTurn;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamTarotAttackSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamTarotAttackSpeed* pInstance);
-        static void Clean(AmyParamTarotAttackSpeed* pInstance);
-    };
-
-    struct AmyParamTarotAttack {
-        PlayerParamAttackCollider hit;
-        PlayerParamAttackCollider rollingHit;
-        AmyParamTarotAttackSpeed speed;
-        AmyParamTarotAttackSpeed speedRingMax;
-        float speedEaseInTime;
-        float speedEaseOutTime;
-        float minSpeedScale;
-        float longPressTime;
-        float minRollingTime;
-        float rollingTime;
-        float stunTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamTarotAttack* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamTarotAttack* pInstance);
-        static void Clean(AmyParamTarotAttack* pInstance);
-    };
-
-    struct PlayerParamSpeedAcceleData {
-        float force;
-        float force2;
-        float damperRange;
-        float jerkMin;
-        float jerkMax;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSpeedAcceleData* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSpeedAcceleData* pInstance);
-        static void Clean(PlayerParamSpeedAcceleData* pInstance);
-    };
-
-    struct AmyParamTarotBoostSpeed {
-        float buildInitialSpeed;
-        float buildMinSpeed;
-        float buildMaxSpeed;
-        float buildAirRotationForce;
-        float initialSpeed;
-        float maxSpeed;
-        PlayerParamSpeedAcceleData accele;
-        PlayerParamSpeedAcceleData decele;
-        float baseRotateForce;
-        float minTurnSpeed;
-        float turnDeceleAngleMin;
-        float turnDeceleAngleMax;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamTarotBoostSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamTarotBoostSpeed* pInstance);
-        static void Clean(AmyParamTarotBoostSpeed* pInstance);
-    };
-
-    struct AmyParamTarotTurnCamera {
-        float minDistance;
-        float maxDistance;
-        float followTime;
-        float easeInTime;
-        float easeOutTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamTarotTurnCamera* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamTarotTurnCamera* pInstance);
-        static void Clean(AmyParamTarotTurnCamera* pInstance);
-    };
-
-    struct AmyParamTarotBoost {
-        enum class AirAccelMode : int8_t {
-            Alawys = 0,
-            None = 1,
-            Speed = 2,
-        };
-
-        float prepareTime;
-        float initialRunTime;
-        AmyParamTarotBoostSpeed speed;
-        float gravitySize;
-        float gravityBeginTime;
-        float gravityMaxTime;
-        float gravitySizeMinInAir;
-        float gravitySizeMaxInAir;
-        float maxGravityAccele;
-        float maxGravityDecele;
-        float jumpOutAngle;
-        float jumpOutSpeed;
-        bool humpJumpOut;
-        AirAccelMode airAccelMode;
-        float airAccelVertSpeedThreshold;
-        float quickTurnTime;
-        float quickTurnThresholdSpeed;
-        float quickTurnThresholdAngle;
-        float quickTurnTurnAfterSpeed;
-        bool quickTurnStopEdge;
-        float stompingLimitHeight;
-        float stompingLimitJumpOutTime;
-        AmyParamTarotTurnCamera cameraTurn;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamTarotBoost* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamTarotBoost* pInstance);
-        static void Clean(AmyParamTarotBoost* pInstance);
-    };
-
-    struct AmyParamTarotDriftCamera {
-        float fovy;
-        float zRot;
-        float distance;
-        float angleLerpFactorPerSec;
-        float azimuthOffset;
-        float elevationOffset;
-        float gravityOffset;
-        float maxAzimuthOffset;
-        float maxHorzOffset;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamTarotDriftCamera* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamTarotDriftCamera* pInstance);
-        static void Clean(AmyParamTarotDriftCamera* pInstance);
-    };
-
-    struct AmyParamTarotDrift {
-        float startAngle;
-        float endSpeed;
-        float minSpeed;
-        float minSpeedMax;
-        float maxSpeed;
-        float maxSpeedMax;
-        float accel;
-        float brake;
-        float maxSteerAngle;
-        float steerAccel;
-        float maxSteerSpeed;
-        float neutralSteerAccel;
-        float maxNeutralSteerSpeed;
-        float maxRotateSpeed;
-        bool steerFixedInput;
-        float driftDashTime;
-        AmyParamTarotDriftCamera camera;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParamTarotDrift* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParamTarotDrift* pInstance);
-        static void Clean(AmyParamTarotDrift* pInstance);
-    };
-
-    struct PlayerParamSpinBoostSpeed {
-        float initialSpeed;
-        float maxSpeed;
-        PlayerParamSpeedAcceleData accele;
-        PlayerParamSpeedAcceleData decele;
-        float baseRotateForce;
-        float minTurnSpeed;
-        float turnDeceleAngleMin;
-        float turnDeceleAngleMax;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSpinBoostSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSpinBoostSpeed* pInstance);
-        static void Clean(PlayerParamSpinBoostSpeed* pInstance);
-    };
-
-    struct PlayerParamSpeedAcceleData2 {
-        float force;
-        float damperRange;
-        float jerkMin;
-        float jerkMax;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSpeedAcceleData2* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSpeedAcceleData2* pInstance);
-        static void Clean(PlayerParamSpeedAcceleData2* pInstance);
-    };
-
-    struct PlayerParamSpinBoost {
-        enum class AirAccelMode : int8_t {
-            Alawys = 0,
-            None = 1,
-            Speed = 2,
-        };
-
-        float forceRunTime;
-        float initialRunTime;
-        PlayerParamSpinBoostSpeed speedBall;
-        PlayerParamSpinBoostSpeed speedBoost;
-        PlayerParamSpeedAcceleData2 deceleNeutralMin;
-        PlayerParamSpeedAcceleData2 deceleNeutralMax;
-        float gravitySize;
-        float gravityBeginTime;
-        float gravityMaxTime;
-        float gravitySizeMinInAir;
-        float gravitySizeMaxInAir;
-        float maxGravityAccele;
-        float maxGravityDecele;
-        float inAirTime;
-        float spinBoostEndSpeed;
-        float jumpOutAngle;
-        float jumpOutSpeed;
-        bool humpJumpOut;
-        AirAccelMode airAccelMode;
-        float airAccelVertSpeedThreshold;
-        float chargeRotateForce;
-        float chargeRotateForceMinAngle;
-        float chargeRotateForceMaxAngle;
-        csl::ut::VariableString cameraShakeName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSpinBoost* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSpinBoost* pInstance);
-        static void Clean(PlayerParamSpinBoost* pInstance);
-    };
-
-    struct ModePackageAmy {
-        AmyParamPropellerJump propellerJump;
-        AmyParamStomping stomping;
-        AmyParamHighJump highJump;
-        AmyParamTarotAttack tarotAttack;
-        AmyParamCyHammer cyHammer;
-        AmyParamAirCyHammer airCyHammer;
-        AmyParamCyHammerAppearGimmick cyHammerAppearGimmick;
-        AmyParamTarotBoost tarotBoost;
-        AmyParamTarotDrift tarotDrift;
-        AmyParamCharmAttack charmAttack;
-        PlayerParamSpinBoost spinBoost;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ModePackageAmy* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ModePackageAmy* pInstance);
-        static void Clean(ModePackageAmy* pInstance);
-    };
-
-    struct PlayerParamSpeedData {
-        float initial;
-        float min;
-        float max;
-        float minTurn;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSpeedData* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSpeedData* pInstance);
-        static void Clean(PlayerParamSpeedData* pInstance);
-    };
-
-    struct PlayerParamSpeed {
-        PlayerParamSpeedData normal;
-        PlayerParamSpeedData normal2;
-        PlayerParamSpeedData boost;
-        PlayerParamSpeedData boost2;
-        PlayerParamSpeedData boostLvMax;
-        PlayerParamSpeedData boostLvMax2;
-        float maxSpeedOver;
-        float opitonMaxSpeedLimitMin;
-        float opitonMaxSpeedLimitMax;
-        float thresholdStopSpeed;
-        float maxFallSpeed;
-        PlayerParamSpeedAcceleData accele;
-        PlayerParamSpeedAcceleData decele;
-        PlayerParamSpeedAcceleData2 deceleNeutralMin;
-        PlayerParamSpeedAcceleData2 deceleNeutralMax;
-        float acceleAuto;
-        float deceleAuto;
-        float turnDeceleAngleMin;
-        float turnDeceleAngleMax;
-        float maxGravityAccele;
-        float maxGravityDecele;
-        float deceleSquat;
-        float acceleSensitive;
-        float boostAnimSpeedInWater;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSpeed* pInstance);
-        static void Clean(PlayerParamSpeed* pInstance);
-    };
-
-    struct PlayerParamJump {
-        float preActionTime;
-        float longPressTime;
-        float addForceTime;
-        float force;
-        float addForce;
-        float forceMin;
-        float gravitySize;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamJump* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamJump* pInstance);
-        static void Clean(PlayerParamJump* pInstance);
-    };
-
-    struct PlayerParamJumpSpeed {
-        float acceleForce;
-        float deceleForce;
-        float deceleNeutralForce;
-        float deceleBackForce;
-        float limitMin;
-        float limitUpSpeed;
-        float rotationForce;
-        float rotationForceDecaySpeed;
-        float rotationForceDecayRate;
-        float rotationForceDecayMax;
-        float baseAirDragScaleMin;
-        float baseAirDragScaleMax;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamJumpSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamJumpSpeed* pInstance);
-        static void Clean(PlayerParamJumpSpeed* pInstance);
-    };
-
-    struct PlayerParamDoubleJump {
-        float initialSpeed;
-        float bounceSpeed;
-        float limitSpeedMin;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamDoubleJump* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamDoubleJump* pInstance);
-        static void Clean(PlayerParamDoubleJump* pInstance);
-    };
-
-    struct PlayerParamBoost {
-        float consumptionRate;
-        float consumptionRateSS;
-        float recoveryRate;
-        float recoveryRateSS;
-        float reigniteRatio;
-        float recoveryByRing;
-        float recoveryByAttack;
-        float blurPowers[3];
-        float blurEaseInTime;
-        float blurEaseOutTime;
-        float endSpeed;
-        float powerBoostCoolTime;
-        float infinityBoostTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamBoost* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamBoost* pInstance);
-        static void Clean(PlayerParamBoost* pInstance);
-    };
-
-    struct PlayerParamAirBoost {
-        float startHSpeed;
-        float startHSpeedMax;
-        float startVSpeed;
-        float minHSpeed;
-        float minHSpeedMax;
-        float brakeTime;
-        float minKeepTime;
-        float maxKeepTime;
-        float maxTime;
-        float gravityRate;
-        float steeringSpeed;
-        float additionalTransitTime;
-        float supersonicTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamAirBoost* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamAirBoost* pInstance);
-        static void Clean(PlayerParamAirBoost* pInstance);
-    };
-
-    struct WaterModePackage {
-        PlayerParamSpeed speed;
-        PlayerParamJump jump;
-        PlayerParamJumpSpeed jumpSpeed;
-        PlayerParamDoubleJump doubleJump;
-        PlayerParamBoost boost;
-        PlayerParamAirBoost airboost;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(WaterModePackage* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(WaterModePackage* pInstance);
-        static void Clean(WaterModePackage* pInstance);
-    };
-
-    struct AmyParameters {
-        CommonPackageAmy common;
-        ModePackageAmy forwardView;
-        WaterModePackage water;
-        ModePackageAmy cyberspaceSV;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(AmyParameters* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(AmyParameters* pInstance);
-        static void Clean(AmyParameters* pInstance);
     };
 
     struct PlayerParamOffensive {
@@ -33925,849 +34353,332 @@ namespace app::rfl {
         static void Clean(CommonPackage* pInstance);
     };
 
-    struct KnucklesParamComboPunch1 {
-        PlayerParamAttackCollider hit;
-        float motionScale;
-        float motionSpeedRate;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamComboPunch1* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamComboPunch1* pInstance);
-        static void Clean(KnucklesParamComboPunch1* pInstance);
-    };
-
-    struct KnucklesParamComboPunch2 {
-        PlayerParamAttackCollider hit;
-        float motionScale;
-        float motionSpeedRate;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamComboPunch2* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamComboPunch2* pInstance);
-        static void Clean(KnucklesParamComboPunch2* pInstance);
-    };
-
-    struct KnucklesParamComboUppercut {
-        PlayerParamAttackCollider hit;
-        float motionScale;
-        float motionSpeedRate;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamComboUppercut* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamComboUppercut* pInstance);
-        static void Clean(KnucklesParamComboUppercut* pInstance);
-    };
-
-    struct KnucklesParamParryDebuff {
-        float damageRate;
-        float effectTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamParryDebuff* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamParryDebuff* pInstance);
-        static void Clean(KnucklesParamParryDebuff* pInstance);
-    };
-
-    struct CommonPackageKnuckles {
+    struct CommonPackageAmy : CommonPackage {
         PlayerParamCombo combo;
-        KnucklesParamComboPunch1 comboPunch1;
-        KnucklesParamComboPunch2 comboPunch2;
-        KnucklesParamComboUppercut comboUppercut;
-        KnucklesParamParryDebuff parryDebuff;
+        AmyParamParryDebuff parryDebuff;
         PlayerParamCyloop c;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(CommonPackageKnuckles* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(CommonPackageKnuckles* pInstance);
-        static void Clean(CommonPackageKnuckles* pInstance);
+        static void Construct(CommonPackageAmy* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(CommonPackageAmy* pInstance);
+        static void Clean(CommonPackageAmy* pInstance);
     };
 
-    struct PlayerParamAcceleCombo {
-        PlayerParamAttackCollider hit;
-        float motionSpeedRatio;
-        float motionSpeedRatioAccele;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamAcceleCombo* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamAcceleCombo* pInstance);
-        static void Clean(PlayerParamAcceleCombo* pInstance);
-    };
-
-    struct PlayerParamAcceleComboSet {
-        PlayerParamAcceleCombo sonic;
-        PlayerParamAcceleCombo superSonic1;
-        PlayerParamAcceleCombo superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamAcceleComboSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamAcceleComboSet* pInstance);
-        static void Clean(PlayerParamAcceleComboSet* pInstance);
-    };
-
-    struct PlayerParamLoopKick {
-        float loopRadius;
-        float loopTime;
-        float loopSpeedCurveRatio;
-        float loopEndStopTime;
-        float loopEndSpeed;
-        float kickSpeed;
-        float failSafeTime;
-        csl::math::Vector3 offset;
-        csl::ut::VariableString cameraName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamLoopKick* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamLoopKick* pInstance);
-        static void Clean(PlayerParamLoopKick* pInstance);
-    };
-
-    struct PlayerParamLoopKickSet {
-        PlayerParamLoopKick sonic;
-        PlayerParamLoopKick superSonic1;
-        PlayerParamLoopKick superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamLoopKickSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamLoopKickSet* pInstance);
-        static void Clean(PlayerParamLoopKickSet* pInstance);
-    };
-
-    struct PlayerParamCrasher {
-        float startWait;
-        float distanceRatios[5];
-        float angles[5];
-        float radii[5];
-        float distanceMax;
-        float zigzagBeginOneStepTime;
-        float zigzagEndOneStepTime;
-        float crasherSpeed;
-        float failSafeTime;
-        float cameraDistance;
-        float cameraOffsetElevation;
-        float cameraOffsetAzimuth;
-        float cameraRoll;
-        csl::math::Vector3 offset;
-        csl::ut::VariableString cameraName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamCrasher* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamCrasher* pInstance);
-        static void Clean(PlayerParamCrasher* pInstance);
-    };
-
-    struct PlayerParamCrasherSet {
-        PlayerParamCrasher sonic;
-        PlayerParamCrasher superSonic1;
-        PlayerParamCrasher superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamCrasherSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamCrasherSet* pInstance);
-        static void Clean(PlayerParamCrasherSet* pInstance);
-    };
-
-    struct PlayerParamSpinSlash {
-        PlayerParamAttackCollider hit;
-        PlayerParamAttackCollider hitLast;
-        float chargeTime;
-        float homingSpeed;
-        float bounceTime;
-        float radius;
-        float slashTime;
-        int8_t numSlashs;
-        float angle;
-        float lastHitTime;
-        float slowRatio0;
-        float slowRatio1;
-        csl::math::Vector3 offset;
-        csl::ut::VariableString cameraName;
-        csl::ut::VariableString cameraNamePost;
-        csl::ut::VariableString cameraShakeName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSpinSlash* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSpinSlash* pInstance);
-        static void Clean(PlayerParamSpinSlash* pInstance);
-    };
-
-    struct PlayerParamSpinSlashSet {
-        PlayerParamSpinSlash sonic;
-        PlayerParamSpinSlash superSonic1;
-        PlayerParamSpinSlash superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSpinSlashSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSpinSlashSet* pInstance);
-        static void Clean(PlayerParamSpinSlashSet* pInstance);
-    };
-
-    struct PlayerParamChargeAttack {
-        PlayerParamAttackCollider hit;
-        PlayerParamAttackCollider hitLast;
-        float ignoreSwingingTime;
-        float riseSlowRatio;
-        float riseTime;
-        float riseDistance;
-        float preRiseDistance;
-        float postRiseDistance;
-        float lastVelocity;
-        float spiralRadius;
-        float spiralRadiusEaseInTime;
-        float spiralRadiusEaseOutTime;
-        float spiralAngularSpeed;
-        float lastHitTime;
-        csl::ut::VariableString cameraName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamChargeAttack* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamChargeAttack* pInstance);
-        static void Clean(PlayerParamChargeAttack* pInstance);
-    };
-
-    struct PlayerParamChargeAttackSet {
-        PlayerParamChargeAttack sonic;
-        PlayerParamChargeAttack superSonic1;
-        PlayerParamChargeAttack superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamChargeAttackSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamChargeAttackSet* pInstance);
-        static void Clean(PlayerParamChargeAttackSet* pInstance);
-    };
-
-    struct PlayerParamStompingAttack {
-        PlayerParamAttackCollider hit;
-        PlayerParamAttackCollider hitLast;
-        float riseTime;
-        float flipSpeed;
-        float motionTime;
-        float lastHitTime;
-        float slowRatio;
-        float minPressTime;
-        float minPressTimeHeight;
-        float maxPressTime;
-        float maxPressTimeHeight;
-        csl::math::Vector3 offset;
-        csl::math::Vector3 offsetAsura;
-        csl::ut::VariableString cameraName;
-        csl::ut::VariableString cameraNameBarrage;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamStompingAttack* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamStompingAttack* pInstance);
-        static void Clean(PlayerParamStompingAttack* pInstance);
-    };
-
-    struct PlayerParamStompingAttackSet {
-        PlayerParamStompingAttack sonic;
-        PlayerParamStompingAttack superSonic1;
-        PlayerParamStompingAttack superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamStompingAttackSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamStompingAttackSet* pInstance);
-        static void Clean(PlayerParamStompingAttackSet* pInstance);
-    };
-
-    struct PlayerParamComboFinish {
-        PlayerParamAttackCollider hit;
-        float ignoreSwingingTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamComboFinish* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamComboFinish* pInstance);
-        static void Clean(PlayerParamComboFinish* pInstance);
-    };
-
-    struct PlayerParamComboFinishSet {
-        PlayerParamComboFinish sonic;
-        PlayerParamComboFinish superSonic1;
-        PlayerParamComboFinish superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamComboFinishSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamComboFinishSet* pInstance);
-        static void Clean(PlayerParamComboFinishSet* pInstance);
-    };
-
-    struct PlayerParamSonicBoom {
-        float waitTime;
-        float spanTime;
-        float fallSpeed;
-        float autoContinueTime;
-        float speed;
-        float maxSpeed;
-        float accele;
-        float slowRatio;
-        csl::math::Vector3 offset;
-        csl::ut::VariableString cameraName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSonicBoom* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSonicBoom* pInstance);
-        static void Clean(PlayerParamSonicBoom* pInstance);
-    };
-
-    struct PlayerParamSonicBoomSet {
-        PlayerParamSonicBoom sonic;
-        PlayerParamSonicBoom superSonic1;
-        PlayerParamSonicBoom superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSonicBoomSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSonicBoomSet* pInstance);
-        static void Clean(PlayerParamSonicBoomSet* pInstance);
-    };
-
-    struct PlayerParamCrossSlash {
-        float spanTime;
-        float attackTime;
-        float moveAngle;
-        float stopTime;
-        float slowRatio;
-        float spinPhase;
-        float spinRadius;
-        float spinSpeed;
-        float spawnDelayTime[2];
-        csl::math::Vector3 spawnLocalTranslation[2];
-        csl::math::Vector3 spawnLocalAngle[2];
-        float speed;
-        float maxSpeed;
-        float accele;
-        csl::math::Vector3 offset;
-        csl::ut::VariableString cameraName;
-        csl::ut::VariableString launchCameraShakeName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamCrossSlash* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamCrossSlash* pInstance);
-        static void Clean(PlayerParamCrossSlash* pInstance);
-    };
-
-    struct PlayerParamCrossSlashSet {
-        PlayerParamCrossSlash sonic;
-        PlayerParamCrossSlash superSonic1;
-        PlayerParamCrossSlash superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamCrossSlashSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamCrossSlashSet* pInstance);
-        static void Clean(PlayerParamCrossSlashSet* pInstance);
-    };
-
-    struct PlayerParamHomingShot {
-        float appearTime;
-        float appearPhaseTime;
-        float spinRadius;
-        float spinSpeed;
-        float spinSpeedPostLaunch;
-        float chargeTime;
-        float spawnTime;
-        float launchPreWaitTime;
-        float spanTime;
-        bool launchRandomize;
-        float launchWaitTime;
-        float beginAngleX;
-        float tangent0;
-        float tangent1;
-        float spiralWaitTime;
-        float spiralAngularSpeed;
-        float spiralAngularSpeedMax;
-        float spiralAngularSpeedAccele;
-        uint8_t numShots;
-        float speed;
-        float maxSpeed;
-        float accele;
-        float whiteoutBeginTime;
-        float whiteoutFadeOutTime;
-        float whiteoutFadingTime;
-        float whiteoutFadeInTime;
-        csl::math::Vector3 offset;
-        csl::ut::VariableString cameraName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamHomingShot* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamHomingShot* pInstance);
-        static void Clean(PlayerParamHomingShot* pInstance);
-    };
-
-    struct PlayerParamHomingShotSet {
-        PlayerParamHomingShot sonic;
-        PlayerParamHomingShot superSonic1;
-        PlayerParamHomingShot superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamHomingShotSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamHomingShotSet* pInstance);
-        static void Clean(PlayerParamHomingShotSet* pInstance);
-    };
-
-    struct PlayerParamSmash {
-        PlayerParamAttackCollider hit1;
-        PlayerParamAttackCollider hit2;
-        csl::math::Vector3 offsets[16];
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSmash* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSmash* pInstance);
-        static void Clean(PlayerParamSmash* pInstance);
-    };
-
-    struct PlayerParamSmashSet {
-        PlayerParamSmash sonic;
-        PlayerParamSmash superSonic1;
-        PlayerParamSmash superSonic2;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSmashSet* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSmashSet* pInstance);
-        static void Clean(PlayerParamSmashSet* pInstance);
-    };
-
-    struct PlayerParamBehind {
-        float moveTime;
-        float moveTimeSS;
-        float tangentScale;
-        float waitTime;
-        float cameraTurnRatio;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamBehind* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamBehind* pInstance);
-        static void Clean(PlayerParamBehind* pInstance);
-    };
-
-    struct PlayerParamSuperSonicShapeAttackData {
-        enum class Part : int8_t {
-            PunchR = 0,
-            PunchL = 1,
-            KickR = 2,
-            KickL = 3,
-        };
-
-        csl::ut::VariableString name;
-        Part part;
-        csl::math::Vector3 begin;
-        csl::math::Vector3 end;
-        float scale;
-        float roll;
-        float moveTime;
-        float fadeoutTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSuperSonicShapeAttackData* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSuperSonicShapeAttackData* pInstance);
-        static void Clean(PlayerParamSuperSonicShapeAttackData* pInstance);
-    };
-
-    struct PlayerParamSuperSonic {
-        int32_t numRings;
-        float decreaseSec;
-        float inletRadius;
-        float moveSoundSpeed;
-        csl::ut::Color<float> auraColor2;
-        PlayerParamSuperSonicShapeAttackData shapeEffects[32];
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSuperSonic* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSuperSonic* pInstance);
-        static void Clean(PlayerParamSuperSonic* pInstance);
-    };
-
-    struct PlayerParamSandSki {
-        float blowDeceleForce;
-        float blowDeceleForceOnGround;
-        float blowGravityScale;
-        float blowTransitTime;
-        float blowDownTime;
-        float pylonBlowUpSize;
-        float pylonBlowSpeed;
-        csl::ut::VariableString pylonHitStop;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSandSki* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSandSki* pInstance);
-        static void Clean(PlayerParamSandSki* pInstance);
-    };
-
-    struct PlayerParamSlingshot {
-        enum class CameraShakeTiming : int8_t {
-            StartCameraInterpolation = 0,
-            EndCameraInterpolation = 1,
-        };
-
-        float timeScaleInMove;
-        float hitStartRestTime;
-        csl::math::Vector3 hitCameraOffset;
-        float hitCameraTimeEaseIn;
-        float hitCameraFovyAngle;
-        float hitTimeScaleValue;
-        float hitTimeScaleTimeEaseIn;
-        float resetCameraEaseOutTime;
-        float resetTimeScaleEaseOutTime;
-        float timeScaleKeepTime;
-        float shotEffOffset;
-        float hitEffOffset;
-        CameraShakeTiming cameraShakeTiming;
-        csl::ut::VariableString cameraShakeName;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamSlingshot* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamSlingshot* pInstance);
-        static void Clean(PlayerParamSlingshot* pInstance);
-    };
-
-    struct PlayerParamRunawayBee {
-        float meanderCycle;
-        float meanderAngle;
-        float minSpeed;
-        float maxSpeed;
-        float time;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamRunawayBee* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamRunawayBee* pInstance);
-        static void Clean(PlayerParamRunawayBee* pInstance);
-    };
-
-    struct PlayerParamRunWithKodamaParam {
-        int32_t numKodamas;
+    struct AmyParamPropellerJump {
         float initialSpeed;
-        float minSpeed;
-        float maxSpeed;
-        float jumpForce;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamRunWithKodamaParam* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamRunWithKodamaParam* pInstance);
-        static void Clean(PlayerParamRunWithKodamaParam* pInstance);
-    };
-
-    struct PlayerParamRunWithKodama {
-        int32_t maxKodamas;
-        float gravitySize;
-        PlayerParamRunWithKodamaParam params[8];
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamRunWithKodama* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamRunWithKodama* pInstance);
-        static void Clean(PlayerParamRunWithKodama* pInstance);
-    };
-
-    struct PlayerParamMine {
-        float radiusLow;
-        float radiusMedium;
-        float radiusHigh;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(PlayerParamMine* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(PlayerParamMine* pInstance);
-        static void Clean(PlayerParamMine* pInstance);
-    };
-
-    struct CommonPackageSonic {
-        PlayerParamAcceleComboSet acceleComboSet;
-        PlayerParamLoopKickSet loopKickSet;
-        PlayerParamCrasherSet crasherSet;
-        PlayerParamSpinSlashSet spinSlashSet;
-        PlayerParamChargeAttackSet chargeAtackSet;
-        PlayerParamStompingAttackSet stompingAttackSet;
-        PlayerParamComboFinishSet comboFinishSet;
-        PlayerParamSonicBoomSet sonicboomSet;
-        PlayerParamCrossSlashSet crossSlashSet;
-        PlayerParamHomingShotSet homingShotSet;
-        PlayerParamSmashSet smashSet;
-        PlayerParamBehind behind;
-        PlayerParamCombo combo;
-        PlayerParamCyloop c;
-        PlayerParamSuperSonic supersonic;
-        PlayerParamSandSki sandski;
-        PlayerParamSlingshot slingshot;
-        PlayerParamRunawayBee runawayBee;
-        PlayerParamRunWithKodama runWithKodama;
-        PlayerParamMine mine;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(CommonPackageSonic* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(CommonPackageSonic* pInstance);
-        static void Clean(CommonPackageSonic* pInstance);
-    };
-
-    struct TailsParamParryDebuff {
-        float damageRate;
-        float effectTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(TailsParamParryDebuff* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(TailsParamParryDebuff* pInstance);
-        static void Clean(TailsParamParryDebuff* pInstance);
-    };
-
-    struct CommonPackageTails {
-        PlayerParamCombo combo;
-        TailsParamParryDebuff parryDebuff;
-        PlayerParamCyloop c;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(CommonPackageTails* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(CommonPackageTails* pInstance);
-        static void Clean(CommonPackageTails* pInstance);
-    };
-
-    struct KnucklesParamCyKnuckle {
-        float findRadius;
-        uint32_t numNotifies;
-        float effectTime;
-        float effectTimeWall;
-        float rotateCycleTime;
-        float activeRadius;
-        float findDistanceStomp;
-        float findRadiusStomp;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamCyKnuckle* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamCyKnuckle* pInstance);
-        static void Clean(KnucklesParamCyKnuckle* pInstance);
-    };
-
-    struct KnucklesParamCyKnuckleAppearGimmick {
-        float appearWaitTime;
-        CyloopDropItemParameter dropItem;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamCyKnuckleAppearGimmick* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamCyKnuckleAppearGimmick* pInstance);
-        static void Clean(KnucklesParamCyKnuckleAppearGimmick* pInstance);
-    };
-
-    struct KnucklesParamCyKnuckleDig {
-        float diveScale;
-        float speed;
-        float stompingAttackScale;
-        bool alsoStomping;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamCyKnuckleDig* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamCyKnuckleDig* pInstance);
-        static void Clean(KnucklesParamCyKnuckleDig* pInstance);
-    };
-
-    struct KnucklesParamCyKnucklePopupItem {
-        float appearWaitTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamCyKnucklePopupItem* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamCyKnucklePopupItem* pInstance);
-        static void Clean(KnucklesParamCyKnucklePopupItem* pInstance);
-    };
-
-    struct KnucklesParamCyKnuckleWarp {
-        float appearWaitTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamCyKnuckleWarp* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamCyKnuckleWarp* pInstance);
-        static void Clean(KnucklesParamCyKnuckleWarp* pInstance);
-    };
-
-    struct KnucklesParamDrillBoost {
-        float prepareTime;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamDrillBoost* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamDrillBoost* pInstance);
-        static void Clean(KnucklesParamDrillBoost* pInstance);
-    };
-
-    struct KnucklesParamGlidingCamera {
-        float azimuthSensitivity;
-        float elevationOffset;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParamGlidingCamera* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamGlidingCamera* pInstance);
-        static void Clean(KnucklesParamGlidingCamera* pInstance);
-    };
-
-    struct KnucklesParamGliding {
-        float minSpeed;
-        float minSpeedRingMax;
-        float moveWaitTime;
-        float minActionTime;
-        float fallSpeed;
-        float fallAccel;
-        float maxSteerSpeed;
-        float rollSpeed;
-        float neutralRollSpeed;
-        float yawSpeed;
-        float maxRollAngle;
-        float height;
-        float startHeight;
-        KnucklesParamGlidingCamera camera;
+        float bounceSpeed;
+        float limitSpeedMin;
+        float riseDampingStartTime;
+        float riseDampingRate;
+        float maxFallSpeed;
+        float fallGravitySize;
+        float minDuration;
+        float propellerVertSpeedThreshold;
+        bool holdTransitHover;
         float practiceTime;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(KnucklesParamGliding* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamGliding* pInstance);
-        static void Clean(KnucklesParamGliding* pInstance);
+        static void Construct(AmyParamPropellerJump* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamPropellerJump* pInstance);
+        static void Clean(AmyParamPropellerJump* pInstance);
     };
 
-    struct KnucklesParamMaximumHeatKnuckle {
-        float lockonLevelUpSpanTime[4];
-        float damageTime[4];
-        float speed;
-        float chargeTime;
-        float chargeTime2;
-        float preDamageTime;
-        float postDamageTime;
-        float slowRate;
+    struct AmyParamStomping {
+        float landAttackScale;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParamStomping* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamStomping* pInstance);
+        static void Clean(AmyParamStomping* pInstance);
+    };
+
+    struct AmyParamHighJump {
+        float jumpForce;
+        float longPressTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParamHighJump* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamHighJump* pInstance);
+        static void Clean(AmyParamHighJump* pInstance);
+    };
+
+    struct PlayerParamAttackCollider {
+        enum class Condition : int8_t {
+            Time = 0,
+            Animation = 1,
+        };
+
+        enum class Shape : int8_t {
+            Sphere = 0,
+            Cylinder = 1,
+            Box = 2,
+        };
+
+        Condition condition;
+        int8_t count;
+        float spanTime;
+        Shape shape;
+        csl::math::Vector3 shapeSize;
+        csl::math::Vector3 shapeOffset;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamAttackCollider* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamAttackCollider* pInstance);
+        static void Clean(PlayerParamAttackCollider* pInstance);
+    };
+
+    struct AmyParamTarotAttackSpeed {
+        float initial;
+        float min;
+        float max;
+        float minTurn;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParamTarotAttackSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamTarotAttackSpeed* pInstance);
+        static void Clean(AmyParamTarotAttackSpeed* pInstance);
+    };
+
+    struct AmyParamTarotAttack {
         PlayerParamAttackCollider hit;
-        PlayerParamAttackCollider hit2;
-        csl::math::Vector3 hitVisualOffset;
-        csl::math::Vector3 hitEffectOffset;
-        float followSpeed;
+        PlayerParamAttackCollider rollingHit;
+        AmyParamTarotAttackSpeed speed;
+        AmyParamTarotAttackSpeed speedRingMax;
+        float speedEaseInTime;
+        float speedEaseOutTime;
+        float minSpeedScale;
+        float longPressTime;
+        float minRollingTime;
+        float rollingTime;
+        float stunTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParamTarotAttack* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamTarotAttack* pInstance);
+        static void Clean(AmyParamTarotAttack* pInstance);
+    };
+
+    struct PlayerParamSpeedAcceleData {
+        float force;
+        float force2;
+        float damperRange;
+        float jerkMin;
+        float jerkMax;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSpeedAcceleData* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSpeedAcceleData* pInstance);
+        static void Clean(PlayerParamSpeedAcceleData* pInstance);
+    };
+
+    struct AmyParamTarotBoostSpeed {
+        float buildInitialSpeed;
+        float buildMinSpeed;
+        float buildMaxSpeed;
+        float buildAirRotationForce;
+        float initialSpeed;
+        float maxSpeed;
+        PlayerParamSpeedAcceleData accele;
+        PlayerParamSpeedAcceleData decele;
+        float baseRotateForce;
+        float minTurnSpeed;
+        float turnDeceleAngleMin;
+        float turnDeceleAngleMax;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParamTarotBoostSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamTarotBoostSpeed* pInstance);
+        static void Clean(AmyParamTarotBoostSpeed* pInstance);
+    };
+
+    struct AmyParamTarotTurnCamera {
+        float minDistance;
+        float maxDistance;
         float followTime;
-        csl::ut::VariableString cameraNameMove;
-        csl::ut::VariableString cameraNameHit;
-        bool startMoveCameraFromCharge;
-        float enabledCameraHeight;
+        float easeInTime;
+        float easeOutTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParamTarotTurnCamera* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamTarotTurnCamera* pInstance);
+        static void Clean(AmyParamTarotTurnCamera* pInstance);
+    };
+
+    struct AmyParamTarotBoost {
+        enum class AirAccelMode : int8_t {
+            Alawys = 0,
+            None = 1,
+            Speed = 2,
+        };
+
+        float prepareTime;
+        float initialRunTime;
+        AmyParamTarotBoostSpeed speed;
+        float gravitySize;
+        float gravityBeginTime;
+        float gravityMaxTime;
+        float gravitySizeMinInAir;
+        float gravitySizeMaxInAir;
+        float maxGravityAccele;
+        float maxGravityDecele;
+        float jumpOutAngle;
+        float jumpOutSpeed;
+        bool humpJumpOut;
+        AirAccelMode airAccelMode;
+        float airAccelVertSpeedThreshold;
+        float quickTurnTime;
+        float quickTurnThresholdSpeed;
+        float quickTurnThresholdAngle;
+        float quickTurnTurnAfterSpeed;
+        bool quickTurnStopEdge;
+        float stompingLimitHeight;
+        float stompingLimitJumpOutTime;
+        AmyParamTarotTurnCamera cameraTurn;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParamTarotBoost* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamTarotBoost* pInstance);
+        static void Clean(AmyParamTarotBoost* pInstance);
+    };
+
+    struct AmyParamTarotDriftCamera {
+        float fovy;
+        float zRot;
+        float distance;
+        float angleLerpFactorPerSec;
+        float azimuthOffset;
+        float elevationOffset;
+        float gravityOffset;
+        float maxAzimuthOffset;
+        float maxHorzOffset;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParamTarotDriftCamera* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamTarotDriftCamera* pInstance);
+        static void Clean(AmyParamTarotDriftCamera* pInstance);
+    };
+
+    struct AmyParamTarotDrift {
+        float startAngle;
+        float endSpeed;
+        float minSpeed;
+        float minSpeedMax;
+        float maxSpeed;
+        float maxSpeedMax;
+        float accel;
+        float brake;
+        float maxSteerAngle;
+        float steerAccel;
+        float maxSteerSpeed;
+        float neutralSteerAccel;
+        float maxNeutralSteerSpeed;
+        float maxRotateSpeed;
+        bool steerFixedInput;
+        float driftDashTime;
+        AmyParamTarotDriftCamera camera;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParamTarotDrift* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParamTarotDrift* pInstance);
+        static void Clean(AmyParamTarotDrift* pInstance);
+    };
+
+    struct PlayerParamSpinBoostSpeed {
+        float initialSpeed;
+        float maxSpeed;
+        PlayerParamSpeedAcceleData accele;
+        PlayerParamSpeedAcceleData decele;
+        float baseRotateForce;
+        float minTurnSpeed;
+        float turnDeceleAngleMin;
+        float turnDeceleAngleMax;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSpinBoostSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSpinBoostSpeed* pInstance);
+        static void Clean(PlayerParamSpinBoostSpeed* pInstance);
+    };
+
+    struct PlayerParamSpeedAcceleData2 {
+        float force;
+        float damperRange;
+        float jerkMin;
+        float jerkMax;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSpeedAcceleData2* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSpeedAcceleData2* pInstance);
+        static void Clean(PlayerParamSpeedAcceleData2* pInstance);
+    };
+
+    struct PlayerParamSpinBoost {
+        enum class AirAccelMode : int8_t {
+            Alawys = 0,
+            None = 1,
+            Speed = 2,
+        };
+
+        float forceRunTime;
+        float initialRunTime;
+        PlayerParamSpinBoostSpeed speedBall;
+        PlayerParamSpinBoostSpeed speedBoost;
+        PlayerParamSpeedAcceleData2 deceleNeutralMin;
+        PlayerParamSpeedAcceleData2 deceleNeutralMax;
+        float gravitySize;
+        float gravityBeginTime;
+        float gravityMaxTime;
+        float gravitySizeMinInAir;
+        float gravitySizeMaxInAir;
+        float maxGravityAccele;
+        float maxGravityDecele;
+        float inAirTime;
+        float spinBoostEndSpeed;
+        float jumpOutAngle;
+        float jumpOutSpeed;
+        bool humpJumpOut;
+        AirAccelMode airAccelMode;
+        float airAccelVertSpeedThreshold;
+        float chargeRotateForce;
+        float chargeRotateForceMinAngle;
+        float chargeRotateForceMaxAngle;
         csl::ut::VariableString cameraShakeName;
-        csl::ut::VariableString vibrationName;
-        float shakeEndTime;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
     private:
-        static void Construct(KnucklesParamMaximumHeatKnuckle* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParamMaximumHeatKnuckle* pInstance);
-        static void Clean(KnucklesParamMaximumHeatKnuckle* pInstance);
-    };
-
-    struct ModePackageKnuckles {
-        KnucklesParamGliding gliding;
-        KnucklesParamCyKnuckle cyknuckle;
-        KnucklesParamCyKnuckleDig cyknuckleDig;
-        KnucklesParamCyKnuckleWarp cyknuckleWarp;
-        KnucklesParamCyKnucklePopupItem cyknucklePopupItem;
-        KnucklesParamCyKnuckleAppearGimmick cyknuckleAppearGimmick;
-        KnucklesParamMaximumHeatKnuckle maximumHeatKnuckle;
-        KnucklesParamDrillBoost drillBoost;
-        PlayerParamSpinBoost spinBoost;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(ModePackageKnuckles* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(ModePackageKnuckles* pInstance);
-        static void Clean(ModePackageKnuckles* pInstance);
-    };
-
-    struct KnucklesParameters {
-        CommonPackageKnuckles common;
-        ModePackageKnuckles forwardView;
-        WaterModePackage water;
-        ModePackageKnuckles cyberspaceSV;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(KnucklesParameters* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(KnucklesParameters* pInstance);
-        static void Clean(KnucklesParameters* pInstance);
+        static void Construct(PlayerParamSpinBoost* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSpinBoost* pInstance);
+        static void Clean(PlayerParamSpinBoost* pInstance);
     };
 
     struct PlayerParamCommon {
@@ -34800,6 +34711,54 @@ namespace app::rfl {
         static void Construct(PlayerParamCommon* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(PlayerParamCommon* pInstance);
         static void Clean(PlayerParamCommon* pInstance);
+    };
+
+    struct PlayerParamSpeedData {
+        float initial;
+        float min;
+        float max;
+        float minTurn;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSpeedData* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSpeedData* pInstance);
+        static void Clean(PlayerParamSpeedData* pInstance);
+    };
+
+    struct PlayerParamSpeed {
+        PlayerParamSpeedData normal;
+        PlayerParamSpeedData normal2;
+        PlayerParamSpeedData boost;
+        PlayerParamSpeedData boost2;
+        PlayerParamSpeedData boostLvMax;
+        PlayerParamSpeedData boostLvMax2;
+        float maxSpeedOver;
+        float opitonMaxSpeedLimitMin;
+        float opitonMaxSpeedLimitMax;
+        float thresholdStopSpeed;
+        float maxFallSpeed;
+        PlayerParamSpeedAcceleData accele;
+        PlayerParamSpeedAcceleData decele;
+        PlayerParamSpeedAcceleData2 deceleNeutralMin;
+        PlayerParamSpeedAcceleData2 deceleNeutralMax;
+        float acceleAuto;
+        float deceleAuto;
+        float turnDeceleAngleMin;
+        float turnDeceleAngleMax;
+        float maxGravityAccele;
+        float maxGravityDecele;
+        float deceleSquat;
+        float acceleSensitive;
+        float boostAnimSpeedInWater;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSpeed* pInstance);
+        static void Clean(PlayerParamSpeed* pInstance);
     };
 
     struct PlayerParamRotation {
@@ -34900,6 +34859,58 @@ namespace app::rfl {
         static void Construct(PlayerParamTurn* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(PlayerParamTurn* pInstance);
         static void Clean(PlayerParamTurn* pInstance);
+    };
+
+    struct PlayerParamJump {
+        float preActionTime;
+        float longPressTime;
+        float addForceTime;
+        float force;
+        float addForce;
+        float forceMin;
+        float gravitySize;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamJump* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamJump* pInstance);
+        static void Clean(PlayerParamJump* pInstance);
+    };
+
+    struct PlayerParamJumpSpeed {
+        float acceleForce;
+        float deceleForce;
+        float deceleNeutralForce;
+        float deceleBackForce;
+        float limitMin;
+        float limitUpSpeed;
+        float rotationForce;
+        float rotationForceDecaySpeed;
+        float rotationForceDecayRate;
+        float rotationForceDecayMax;
+        float baseAirDragScaleMin;
+        float baseAirDragScaleMax;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamJumpSpeed* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamJumpSpeed* pInstance);
+        static void Clean(PlayerParamJumpSpeed* pInstance);
+    };
+
+    struct PlayerParamDoubleJump {
+        float initialSpeed;
+        float bounceSpeed;
+        float limitSpeedMin;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamDoubleJump* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamDoubleJump* pInstance);
+        static void Clean(PlayerParamDoubleJump* pInstance);
     };
 
     struct PlayerParamFall {
@@ -35517,6 +35528,52 @@ namespace app::rfl {
         static void Clean(PlayerParamSlideDown* pInstance);
     };
 
+    struct PlayerParamBoost {
+        float consumptionRate;
+        float consumptionRateSS;
+        float recoveryRate;
+        float recoveryRateSS;
+        float reigniteRatio;
+        float recoveryByRing;
+        float recoveryByAttack;
+        float blurPowers[3];
+        float blurEaseInTime;
+        float blurEaseOutTime;
+        float endSpeed;
+        float powerBoostCoolTime;
+        float infinityBoostTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamBoost* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamBoost* pInstance);
+        static void Clean(PlayerParamBoost* pInstance);
+    };
+
+    struct PlayerParamAirBoost {
+        float startHSpeed;
+        float startHSpeedMax;
+        float startVSpeed;
+        float minHSpeed;
+        float minHSpeedMax;
+        float brakeTime;
+        float minKeepTime;
+        float maxKeepTime;
+        float maxTime;
+        float gravityRate;
+        float steeringSpeed;
+        float additionalTransitTime;
+        float supersonicTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamAirBoost* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamAirBoost* pInstance);
+        static void Clean(PlayerParamAirBoost* pInstance);
+    };
+
     struct PlayerParamAutorun {
         float initialSideSpeed;
         float acceleSideForce;
@@ -35692,6 +35749,902 @@ namespace app::rfl {
         static void Construct(ModePackage* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(ModePackage* pInstance);
         static void Clean(ModePackage* pInstance);
+    };
+
+    struct ModePackageAmy : ModePackage {
+        AmyParamPropellerJump propellerJump;
+        AmyParamStomping stomping;
+        AmyParamHighJump highJump;
+        AmyParamTarotAttack tarotAttack;
+        AmyParamCyHammer cyHammer;
+        AmyParamAirCyHammer airCyHammer;
+        AmyParamCyHammerAppearGimmick cyHammerAppearGimmick;
+        AmyParamTarotBoost tarotBoost;
+        AmyParamTarotDrift tarotDrift;
+        AmyParamCharmAttack charmAttack;
+        PlayerParamSpinBoost spinBoost;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ModePackageAmy* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ModePackageAmy* pInstance);
+        static void Clean(ModePackageAmy* pInstance);
+    };
+
+    struct WaterModePackage {
+        PlayerParamSpeed speed;
+        PlayerParamJump jump;
+        PlayerParamJumpSpeed jumpSpeed;
+        PlayerParamDoubleJump doubleJump;
+        PlayerParamBoost boost;
+        PlayerParamAirBoost airboost;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(WaterModePackage* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(WaterModePackage* pInstance);
+        static void Clean(WaterModePackage* pInstance);
+    };
+
+    struct AmyParameters {
+        CommonPackageAmy common;
+        ModePackageAmy forwardView;
+        WaterModePackage water;
+        ModePackageAmy cyberspaceSV;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(AmyParameters* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(AmyParameters* pInstance);
+        static void Clean(AmyParameters* pInstance);
+    };
+
+    struct KnucklesParamComboPunch1 {
+        PlayerParamAttackCollider hit;
+        float motionScale;
+        float motionSpeedRate;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamComboPunch1* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamComboPunch1* pInstance);
+        static void Clean(KnucklesParamComboPunch1* pInstance);
+    };
+
+    struct KnucklesParamComboPunch2 {
+        PlayerParamAttackCollider hit;
+        float motionScale;
+        float motionSpeedRate;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamComboPunch2* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamComboPunch2* pInstance);
+        static void Clean(KnucklesParamComboPunch2* pInstance);
+    };
+
+    struct KnucklesParamComboUppercut {
+        PlayerParamAttackCollider hit;
+        float motionScale;
+        float motionSpeedRate;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamComboUppercut* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamComboUppercut* pInstance);
+        static void Clean(KnucklesParamComboUppercut* pInstance);
+    };
+
+    struct KnucklesParamParryDebuff {
+        float damageRate;
+        float effectTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamParryDebuff* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamParryDebuff* pInstance);
+        static void Clean(KnucklesParamParryDebuff* pInstance);
+    };
+
+    struct CommonPackageKnuckles : CommonPackage {
+        PlayerParamCombo combo;
+        KnucklesParamComboPunch1 comboPunch1;
+        KnucklesParamComboPunch2 comboPunch2;
+        KnucklesParamComboUppercut comboUppercut;
+        KnucklesParamParryDebuff parryDebuff;
+        PlayerParamCyloop c;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(CommonPackageKnuckles* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(CommonPackageKnuckles* pInstance);
+        static void Clean(CommonPackageKnuckles* pInstance);
+    };
+
+    struct PlayerParamAcceleCombo {
+        PlayerParamAttackCollider hit;
+        float motionSpeedRatio;
+        float motionSpeedRatioAccele;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamAcceleCombo* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamAcceleCombo* pInstance);
+        static void Clean(PlayerParamAcceleCombo* pInstance);
+    };
+
+    struct PlayerParamAcceleComboSet {
+        PlayerParamAcceleCombo sonic;
+        PlayerParamAcceleCombo superSonic1;
+        PlayerParamAcceleCombo superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamAcceleComboSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamAcceleComboSet* pInstance);
+        static void Clean(PlayerParamAcceleComboSet* pInstance);
+    };
+
+    struct PlayerParamLoopKick {
+        float loopRadius;
+        float loopTime;
+        float loopSpeedCurveRatio;
+        float loopEndStopTime;
+        float loopEndSpeed;
+        float kickSpeed;
+        float failSafeTime;
+        csl::math::Vector3 offset;
+        csl::ut::VariableString cameraName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamLoopKick* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamLoopKick* pInstance);
+        static void Clean(PlayerParamLoopKick* pInstance);
+    };
+
+    struct PlayerParamLoopKickSet {
+        PlayerParamLoopKick sonic;
+        PlayerParamLoopKick superSonic1;
+        PlayerParamLoopKick superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamLoopKickSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamLoopKickSet* pInstance);
+        static void Clean(PlayerParamLoopKickSet* pInstance);
+    };
+
+    struct PlayerParamCrasher {
+        float startWait;
+        float distanceRatios[5];
+        float angles[5];
+        float radii[5];
+        float distanceMax;
+        float zigzagBeginOneStepTime;
+        float zigzagEndOneStepTime;
+        float crasherSpeed;
+        float failSafeTime;
+        float cameraDistance;
+        float cameraOffsetElevation;
+        float cameraOffsetAzimuth;
+        float cameraRoll;
+        csl::math::Vector3 offset;
+        csl::ut::VariableString cameraName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamCrasher* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamCrasher* pInstance);
+        static void Clean(PlayerParamCrasher* pInstance);
+    };
+
+    struct PlayerParamCrasherSet {
+        PlayerParamCrasher sonic;
+        PlayerParamCrasher superSonic1;
+        PlayerParamCrasher superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamCrasherSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamCrasherSet* pInstance);
+        static void Clean(PlayerParamCrasherSet* pInstance);
+    };
+
+    struct PlayerParamSpinSlash {
+        PlayerParamAttackCollider hit;
+        PlayerParamAttackCollider hitLast;
+        float chargeTime;
+        float homingSpeed;
+        float bounceTime;
+        float radius;
+        float slashTime;
+        int8_t numSlashs;
+        float angle;
+        float lastHitTime;
+        float slowRatio0;
+        float slowRatio1;
+        csl::math::Vector3 offset;
+        csl::ut::VariableString cameraName;
+        csl::ut::VariableString cameraNamePost;
+        csl::ut::VariableString cameraShakeName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSpinSlash* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSpinSlash* pInstance);
+        static void Clean(PlayerParamSpinSlash* pInstance);
+    };
+
+    struct PlayerParamSpinSlashSet {
+        PlayerParamSpinSlash sonic;
+        PlayerParamSpinSlash superSonic1;
+        PlayerParamSpinSlash superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSpinSlashSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSpinSlashSet* pInstance);
+        static void Clean(PlayerParamSpinSlashSet* pInstance);
+    };
+
+    struct PlayerParamChargeAttack {
+        PlayerParamAttackCollider hit;
+        PlayerParamAttackCollider hitLast;
+        float ignoreSwingingTime;
+        float riseSlowRatio;
+        float riseTime;
+        float riseDistance;
+        float preRiseDistance;
+        float postRiseDistance;
+        float lastVelocity;
+        float spiralRadius;
+        float spiralRadiusEaseInTime;
+        float spiralRadiusEaseOutTime;
+        float spiralAngularSpeed;
+        float lastHitTime;
+        csl::ut::VariableString cameraName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamChargeAttack* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamChargeAttack* pInstance);
+        static void Clean(PlayerParamChargeAttack* pInstance);
+    };
+
+    struct PlayerParamChargeAttackSet {
+        PlayerParamChargeAttack sonic;
+        PlayerParamChargeAttack superSonic1;
+        PlayerParamChargeAttack superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamChargeAttackSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamChargeAttackSet* pInstance);
+        static void Clean(PlayerParamChargeAttackSet* pInstance);
+    };
+
+    struct PlayerParamStompingAttack {
+        PlayerParamAttackCollider hit;
+        PlayerParamAttackCollider hitLast;
+        float riseTime;
+        float flipSpeed;
+        float motionTime;
+        float lastHitTime;
+        float slowRatio;
+        float minPressTime;
+        float minPressTimeHeight;
+        float maxPressTime;
+        float maxPressTimeHeight;
+        csl::math::Vector3 offset;
+        csl::math::Vector3 offsetAsura;
+        csl::ut::VariableString cameraName;
+        csl::ut::VariableString cameraNameBarrage;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamStompingAttack* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamStompingAttack* pInstance);
+        static void Clean(PlayerParamStompingAttack* pInstance);
+    };
+
+    struct PlayerParamStompingAttackSet {
+        PlayerParamStompingAttack sonic;
+        PlayerParamStompingAttack superSonic1;
+        PlayerParamStompingAttack superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamStompingAttackSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamStompingAttackSet* pInstance);
+        static void Clean(PlayerParamStompingAttackSet* pInstance);
+    };
+
+    struct PlayerParamComboFinish {
+        PlayerParamAttackCollider hit;
+        float ignoreSwingingTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamComboFinish* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamComboFinish* pInstance);
+        static void Clean(PlayerParamComboFinish* pInstance);
+    };
+
+    struct PlayerParamComboFinishSet {
+        PlayerParamComboFinish sonic;
+        PlayerParamComboFinish superSonic1;
+        PlayerParamComboFinish superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamComboFinishSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamComboFinishSet* pInstance);
+        static void Clean(PlayerParamComboFinishSet* pInstance);
+    };
+
+    struct PlayerParamSonicBoom {
+        float waitTime;
+        float spanTime;
+        float fallSpeed;
+        float autoContinueTime;
+        float speed;
+        float maxSpeed;
+        float accele;
+        float slowRatio;
+        csl::math::Vector3 offset;
+        csl::ut::VariableString cameraName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSonicBoom* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSonicBoom* pInstance);
+        static void Clean(PlayerParamSonicBoom* pInstance);
+    };
+
+    struct PlayerParamSonicBoomSet {
+        PlayerParamSonicBoom sonic;
+        PlayerParamSonicBoom superSonic1;
+        PlayerParamSonicBoom superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSonicBoomSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSonicBoomSet* pInstance);
+        static void Clean(PlayerParamSonicBoomSet* pInstance);
+    };
+
+    struct PlayerParamCrossSlash {
+        float spanTime;
+        float attackTime;
+        float moveAngle;
+        float stopTime;
+        float slowRatio;
+        float spinPhase;
+        float spinRadius;
+        float spinSpeed;
+        float spawnDelayTime[2];
+        csl::math::Vector3 spawnLocalTranslation[2];
+        csl::math::Vector3 spawnLocalAngle[2];
+        float speed;
+        float maxSpeed;
+        float accele;
+        csl::math::Vector3 offset;
+        csl::ut::VariableString cameraName;
+        csl::ut::VariableString launchCameraShakeName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamCrossSlash* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamCrossSlash* pInstance);
+        static void Clean(PlayerParamCrossSlash* pInstance);
+    };
+
+    struct PlayerParamCrossSlashSet {
+        PlayerParamCrossSlash sonic;
+        PlayerParamCrossSlash superSonic1;
+        PlayerParamCrossSlash superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamCrossSlashSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamCrossSlashSet* pInstance);
+        static void Clean(PlayerParamCrossSlashSet* pInstance);
+    };
+
+    struct PlayerParamHomingShot {
+        float appearTime;
+        float appearPhaseTime;
+        float spinRadius;
+        float spinSpeed;
+        float spinSpeedPostLaunch;
+        float chargeTime;
+        float spawnTime;
+        float launchPreWaitTime;
+        float spanTime;
+        bool launchRandomize;
+        float launchWaitTime;
+        float beginAngleX;
+        float tangent0;
+        float tangent1;
+        float spiralWaitTime;
+        float spiralAngularSpeed;
+        float spiralAngularSpeedMax;
+        float spiralAngularSpeedAccele;
+        uint8_t numShots;
+        float speed;
+        float maxSpeed;
+        float accele;
+        float whiteoutBeginTime;
+        float whiteoutFadeOutTime;
+        float whiteoutFadingTime;
+        float whiteoutFadeInTime;
+        csl::math::Vector3 offset;
+        csl::ut::VariableString cameraName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamHomingShot* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamHomingShot* pInstance);
+        static void Clean(PlayerParamHomingShot* pInstance);
+    };
+
+    struct PlayerParamHomingShotSet {
+        PlayerParamHomingShot sonic;
+        PlayerParamHomingShot superSonic1;
+        PlayerParamHomingShot superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamHomingShotSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamHomingShotSet* pInstance);
+        static void Clean(PlayerParamHomingShotSet* pInstance);
+    };
+
+    struct PlayerParamSmash {
+        PlayerParamAttackCollider hit1;
+        PlayerParamAttackCollider hit2;
+        csl::math::Vector3 offsets[16];
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSmash* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSmash* pInstance);
+        static void Clean(PlayerParamSmash* pInstance);
+    };
+
+    struct PlayerParamSmashSet {
+        PlayerParamSmash sonic;
+        PlayerParamSmash superSonic1;
+        PlayerParamSmash superSonic2;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSmashSet* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSmashSet* pInstance);
+        static void Clean(PlayerParamSmashSet* pInstance);
+    };
+
+    struct PlayerParamBehind {
+        float moveTime;
+        float moveTimeSS;
+        float tangentScale;
+        float waitTime;
+        float cameraTurnRatio;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamBehind* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamBehind* pInstance);
+        static void Clean(PlayerParamBehind* pInstance);
+    };
+
+    struct PlayerParamSuperSonicShapeAttackData {
+        enum class Part : int8_t {
+            PunchR = 0,
+            PunchL = 1,
+            KickR = 2,
+            KickL = 3,
+        };
+
+        csl::ut::VariableString name;
+        Part part;
+        csl::math::Vector3 begin;
+        csl::math::Vector3 end;
+        float scale;
+        float roll;
+        float moveTime;
+        float fadeoutTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSuperSonicShapeAttackData* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSuperSonicShapeAttackData* pInstance);
+        static void Clean(PlayerParamSuperSonicShapeAttackData* pInstance);
+    };
+
+    struct PlayerParamSuperSonic {
+        int32_t numRings;
+        float decreaseSec;
+        float inletRadius;
+        float moveSoundSpeed;
+        csl::ut::Color<float> auraColor2;
+        PlayerParamSuperSonicShapeAttackData shapeEffects[32];
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSuperSonic* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSuperSonic* pInstance);
+        static void Clean(PlayerParamSuperSonic* pInstance);
+    };
+
+    struct PlayerParamSandSki {
+        float blowDeceleForce;
+        float blowDeceleForceOnGround;
+        float blowGravityScale;
+        float blowTransitTime;
+        float blowDownTime;
+        float pylonBlowUpSize;
+        float pylonBlowSpeed;
+        csl::ut::VariableString pylonHitStop;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSandSki* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSandSki* pInstance);
+        static void Clean(PlayerParamSandSki* pInstance);
+    };
+
+    struct PlayerParamSlingshot {
+        enum class CameraShakeTiming : int8_t {
+            StartCameraInterpolation = 0,
+            EndCameraInterpolation = 1,
+        };
+
+        float timeScaleInMove;
+        float hitStartRestTime;
+        csl::math::Vector3 hitCameraOffset;
+        float hitCameraTimeEaseIn;
+        float hitCameraFovyAngle;
+        float hitTimeScaleValue;
+        float hitTimeScaleTimeEaseIn;
+        float resetCameraEaseOutTime;
+        float resetTimeScaleEaseOutTime;
+        float timeScaleKeepTime;
+        float shotEffOffset;
+        float hitEffOffset;
+        CameraShakeTiming cameraShakeTiming;
+        csl::ut::VariableString cameraShakeName;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamSlingshot* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamSlingshot* pInstance);
+        static void Clean(PlayerParamSlingshot* pInstance);
+    };
+
+    struct PlayerParamRunawayBee {
+        float meanderCycle;
+        float meanderAngle;
+        float minSpeed;
+        float maxSpeed;
+        float time;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamRunawayBee* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamRunawayBee* pInstance);
+        static void Clean(PlayerParamRunawayBee* pInstance);
+    };
+
+    struct PlayerParamRunWithKodamaParam {
+        int32_t numKodamas;
+        float initialSpeed;
+        float minSpeed;
+        float maxSpeed;
+        float jumpForce;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamRunWithKodamaParam* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamRunWithKodamaParam* pInstance);
+        static void Clean(PlayerParamRunWithKodamaParam* pInstance);
+    };
+
+    struct PlayerParamRunWithKodama {
+        int32_t maxKodamas;
+        float gravitySize;
+        PlayerParamRunWithKodamaParam params[8];
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamRunWithKodama* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamRunWithKodama* pInstance);
+        static void Clean(PlayerParamRunWithKodama* pInstance);
+    };
+
+    struct PlayerParamMine {
+        float radiusLow;
+        float radiusMedium;
+        float radiusHigh;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(PlayerParamMine* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(PlayerParamMine* pInstance);
+        static void Clean(PlayerParamMine* pInstance);
+    };
+
+    struct CommonPackageSonic : CommonPackage {
+        PlayerParamAcceleComboSet acceleComboSet;
+        PlayerParamLoopKickSet loopKickSet;
+        PlayerParamCrasherSet crasherSet;
+        PlayerParamSpinSlashSet spinSlashSet;
+        PlayerParamChargeAttackSet chargeAtackSet;
+        PlayerParamStompingAttackSet stompingAttackSet;
+        PlayerParamComboFinishSet comboFinishSet;
+        PlayerParamSonicBoomSet sonicboomSet;
+        PlayerParamCrossSlashSet crossSlashSet;
+        PlayerParamHomingShotSet homingShotSet;
+        PlayerParamSmashSet smashSet;
+        PlayerParamBehind behind;
+        PlayerParamCombo combo;
+        PlayerParamCyloop c;
+        PlayerParamSuperSonic supersonic;
+        PlayerParamSandSki sandski;
+        PlayerParamSlingshot slingshot;
+        PlayerParamRunawayBee runawayBee;
+        PlayerParamRunWithKodama runWithKodama;
+        PlayerParamMine mine;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(CommonPackageSonic* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(CommonPackageSonic* pInstance);
+        static void Clean(CommonPackageSonic* pInstance);
+    };
+
+    struct TailsParamParryDebuff {
+        float damageRate;
+        float effectTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(TailsParamParryDebuff* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(TailsParamParryDebuff* pInstance);
+        static void Clean(TailsParamParryDebuff* pInstance);
+    };
+
+    struct CommonPackageTails : CommonPackage {
+        PlayerParamCombo combo;
+        TailsParamParryDebuff parryDebuff;
+        PlayerParamCyloop c;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(CommonPackageTails* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(CommonPackageTails* pInstance);
+        static void Clean(CommonPackageTails* pInstance);
+    };
+
+    struct KnucklesParamCyKnuckle {
+        float findRadius;
+        uint32_t numNotifies;
+        float effectTime;
+        float effectTimeWall;
+        float rotateCycleTime;
+        float activeRadius;
+        float findDistanceStomp;
+        float findRadiusStomp;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamCyKnuckle* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamCyKnuckle* pInstance);
+        static void Clean(KnucklesParamCyKnuckle* pInstance);
+    };
+
+    struct KnucklesParamCyKnuckleAppearGimmick {
+        float appearWaitTime;
+        CyloopDropItemParameter dropItem;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamCyKnuckleAppearGimmick* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamCyKnuckleAppearGimmick* pInstance);
+        static void Clean(KnucklesParamCyKnuckleAppearGimmick* pInstance);
+    };
+
+    struct KnucklesParamCyKnuckleDig {
+        float diveScale;
+        float speed;
+        float stompingAttackScale;
+        bool alsoStomping;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamCyKnuckleDig* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamCyKnuckleDig* pInstance);
+        static void Clean(KnucklesParamCyKnuckleDig* pInstance);
+    };
+
+    struct KnucklesParamCyKnucklePopupItem {
+        float appearWaitTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamCyKnucklePopupItem* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamCyKnucklePopupItem* pInstance);
+        static void Clean(KnucklesParamCyKnucklePopupItem* pInstance);
+    };
+
+    struct KnucklesParamCyKnuckleWarp {
+        float appearWaitTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamCyKnuckleWarp* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamCyKnuckleWarp* pInstance);
+        static void Clean(KnucklesParamCyKnuckleWarp* pInstance);
+    };
+
+    struct KnucklesParamDrillBoost {
+        float prepareTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamDrillBoost* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamDrillBoost* pInstance);
+        static void Clean(KnucklesParamDrillBoost* pInstance);
+    };
+
+    struct KnucklesParamGlidingCamera {
+        float azimuthSensitivity;
+        float elevationOffset;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamGlidingCamera* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamGlidingCamera* pInstance);
+        static void Clean(KnucklesParamGlidingCamera* pInstance);
+    };
+
+    struct KnucklesParamGliding {
+        float minSpeed;
+        float minSpeedRingMax;
+        float moveWaitTime;
+        float minActionTime;
+        float fallSpeed;
+        float fallAccel;
+        float maxSteerSpeed;
+        float rollSpeed;
+        float neutralRollSpeed;
+        float yawSpeed;
+        float maxRollAngle;
+        float height;
+        float startHeight;
+        KnucklesParamGlidingCamera camera;
+        float practiceTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamGliding* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamGliding* pInstance);
+        static void Clean(KnucklesParamGliding* pInstance);
+    };
+
+    struct KnucklesParamMaximumHeatKnuckle {
+        float lockonLevelUpSpanTime[4];
+        float damageTime[4];
+        float speed;
+        float chargeTime;
+        float chargeTime2;
+        float preDamageTime;
+        float postDamageTime;
+        float slowRate;
+        PlayerParamAttackCollider hit;
+        PlayerParamAttackCollider hit2;
+        csl::math::Vector3 hitVisualOffset;
+        csl::math::Vector3 hitEffectOffset;
+        float followSpeed;
+        float followTime;
+        csl::ut::VariableString cameraNameMove;
+        csl::ut::VariableString cameraNameHit;
+        bool startMoveCameraFromCharge;
+        float enabledCameraHeight;
+        csl::ut::VariableString cameraShakeName;
+        csl::ut::VariableString vibrationName;
+        float shakeEndTime;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParamMaximumHeatKnuckle* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParamMaximumHeatKnuckle* pInstance);
+        static void Clean(KnucklesParamMaximumHeatKnuckle* pInstance);
+    };
+
+    struct ModePackageKnuckles : ModePackage {
+        KnucklesParamGliding gliding;
+        KnucklesParamCyKnuckle cyknuckle;
+        KnucklesParamCyKnuckleDig cyknuckleDig;
+        KnucklesParamCyKnuckleWarp cyknuckleWarp;
+        KnucklesParamCyKnucklePopupItem cyknucklePopupItem;
+        KnucklesParamCyKnuckleAppearGimmick cyknuckleAppearGimmick;
+        KnucklesParamMaximumHeatKnuckle maximumHeatKnuckle;
+        KnucklesParamDrillBoost drillBoost;
+        PlayerParamSpinBoost spinBoost;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(ModePackageKnuckles* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(ModePackageKnuckles* pInstance);
+        static void Clean(ModePackageKnuckles* pInstance);
+    };
+
+    struct KnucklesParameters {
+        CommonPackageKnuckles common;
+        ModePackageKnuckles forwardView;
+        WaterModePackage water;
+        ModePackageKnuckles cyberspaceSV;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(KnucklesParameters* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(KnucklesParameters* pInstance);
+        static void Clean(KnucklesParameters* pInstance);
     };
 
     struct PlayerParamStorm {
@@ -36086,7 +37039,7 @@ namespace app::rfl {
         static void Clean(PlayerParamCyberMode* pInstance);
     };
 
-    struct ModePackageSonic {
+    struct ModePackageSonic : ModePackage {
         PlayerParamStorm storm;
         PlayerParamCloudJump cloudJump;
         PlayerParamAquaBall aquaball;
@@ -36487,7 +37440,7 @@ namespace app::rfl {
         static void Clean(TailsParamWaveCannon* pInstance);
     };
 
-    struct ModePackageTails {
+    struct ModePackageTails : ModePackage {
         TailsParamFly tailsFly;
         TailsParamSpanner spanner;
         TailsParamCyBlaster cyBlaster;
@@ -36597,32 +37550,6 @@ namespace app::rfl {
         static void Construct(TailsParameters* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(TailsParameters* pInstance);
         static void Clean(TailsParameters* pInstance);
-    };
-
-    struct CyloopSlashEffectBaseParameter {
-        int32_t m_divideCircle;
-        float m_circleRadius;
-        float m_circleWaveCycle;
-        float m_circleWaveWidth;
-        float m_circleWaveSpeed;
-        csl::math::Vector2 m_scale;
-        csl::ut::VariableString m_textureName;
-        float m_flowSpeed;
-        float m_twistCycle;
-        float m_rollCycle;
-        float m_rollPhase;
-        float m_alphaHeadDistance;
-        float m_alphaTailDistance;
-        float m_offsetCycle;
-        float m_offsetPhase;
-        float m_offsetRadius;
-
-        static const hh::fnd::RflTypeInfo typeInfo;
-        static const hh::fnd::RflClass rflClass;
-    private:
-        static void Construct(CyloopSlashEffectBaseParameter* pInstance, csl::fnd::IAllocator* pAllocator);
-        static void Finish(CyloopSlashEffectBaseParameter* pInstance);
-        static void Clean(CyloopSlashEffectBaseParameter* pInstance);
     };
 
     struct ScriptParameter {
@@ -37057,6 +37984,22 @@ namespace app::rfl {
         static void Construct(UIFishiGuideConfig* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(UIFishiGuideConfig* pInstance);
         static void Clean(UIFishiGuideConfig* pInstance);
+    };
+
+    struct UIWireframeParameter {
+        csl::math::Vector3 camerapos;
+        float lineAlpha;
+        float noiseScale;
+        float noiseSpeed;
+        float moveWidth;
+        FxDOFParameter dofparam;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(UIWireframeParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(UIWireframeParameter* pInstance);
+        static void Clean(UIWireframeParameter* pInstance);
     };
 
     struct ChallengeID1DimParameter {

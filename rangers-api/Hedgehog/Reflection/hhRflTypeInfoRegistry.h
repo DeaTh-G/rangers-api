@@ -2,7 +2,7 @@
 
 namespace hh::fnd
 {
-	class RflTypeInfoRegistry : public RflRegistryTemplate<RflTypeInfo>, csl::fnd::SingletonPointer<RflTypeInfoRegistry>
+	class RflTypeInfoRegistry : public RflRegistryTemplate<RflTypeInfo>, csl::fnd::Singleton<RflTypeInfoRegistry>
 	{
 	public:
 		void* ConstructObject(csl::fnd::IAllocator* pAllocator, const char* pName) const

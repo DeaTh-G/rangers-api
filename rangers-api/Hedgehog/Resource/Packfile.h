@@ -3,7 +3,7 @@
 namespace hh::fnd {
     class Packfile : public ManagedResource {
         csl::ut::MoveArray<void*> unk1;
-        csl::ut::MoveArray<void*> resourceContainers;
+        csl::ut::MoveArray<StaticResourceContainer*> resourceContainers;
         csl::ut::PointerMap<ResourceTypeInfo*, int> resourceIdByClass;
         csl::ut::MoveArray<void*> unk4;
         csl::ut::VariableString unk5;
@@ -15,7 +15,13 @@ namespace hh::fnd {
         virtual void UnkFunc2(void* unkParam, uint64_t unkParam2) override;
         virtual void UnkFunc3() override;
         virtual void UnkFunc6(void* unkParam) {}
+
+        static const ResourceTypeInfo* GetTypeInfo();
         
+        csl::ut::MoveArray<StaticResourceContainer*>& GetResourceContainers() {
+            return resourceContainers;
+        }
+
         ManagedResource* GetResourceByName(const char* name, const ResourceTypeInfo* typeInfo);
         const char* GetResourceIDName(int resourceId, const ResourceTypeInfo* typeInfo);
     };
