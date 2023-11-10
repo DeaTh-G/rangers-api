@@ -15,34 +15,17 @@ namespace csl::ut
 			return reinterpret_cast<size_t>(m_pStr) & 1;
 		}
 		
-		void assign(fnd::IAllocator* pAllocator, const char* pStr)
-		{
-			if (c_str() == pStr)
-				return;
-
-			if (isFree() && m_pAllocator)
-				m_pAllocator->Free(reinterpret_cast<char*>(reinterpret_cast<size_t>(m_pStr) - 1));
-
-			m_pAllocator = pAllocator;
-			if (!pStr)
-			{
-				m_pStr = nullptr;
-				return;
-			}
-
-			size_t bufSize = strlen(pStr) + 1;
-			char* pBuffer = reinterpret_cast<char*>(m_pAllocator->Alloc(bufSize, 16));
-			for (size_t i = 0; pStr[i]; i++)
-				pBuffer[i] = pStr[i];
-
-			pBuffer[bufSize - 1] = '\0';
-			m_pStr = pBuffer + 1;
-		}
+		void assign(fnd::IAllocator* pAllocator, const char* pStr, int size);
 		
 	public:
 		VariableString(const char* pStr, csl::fnd::IAllocator* pAlloc)
 		{
-			assign(pAlloc, pStr);
+			assign(pAlloc, pStr, -1);
+		}
+
+		VariableString(const char* pStr, int size, csl::fnd::IAllocator* pAlloc)
+		{
+			assign(pAlloc, pStr, size);
 		}
 
 		VariableString(csl::fnd::IAllocator* pAlloc)
@@ -54,7 +37,8 @@ namespace csl::ut
 		
 		~VariableString()
 		{
-			assign(nullptr, nullptr);
+			m_pStr = nullptr;
+			m_pAllocator = nullptr;
 		}
 
 		csl::fnd::IAllocator* GetAllocator() const
@@ -62,14 +46,19 @@ namespace csl::ut
 			return m_pAllocator;
 		}
 		
-		void Set(const char* pStr, csl::fnd::IAllocator* pAlloc)
+		inline void Set(const char* pStr, int size, csl::fnd::IAllocator* pAlloc)
 		{
-			assign(pAlloc, pStr);
+			assign(pAlloc, pStr, size);
 		}
 
-		void Set(const char* pStr)
+		inline void Set(const char* pStr, int size)
 		{
-			Set(pStr, GetAllocator());
+			assign(GetAllocator(), pStr, size);
+		}
+
+		inline void Set(const char* pStr)
+		{
+			assign(GetAllocator(), pStr, -1);
 		}
 		
 		const char* c_str() const;

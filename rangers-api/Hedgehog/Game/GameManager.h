@@ -51,6 +51,8 @@ namespace hh::game
 		GameManagerOperationQueue(csl::fnd::IAllocator* pAllocator, GameManager* pGameManager);
 	};
 
+	class GameApplication;
+
 	class GameManager : public fnd::ReferencedObject, public fnd::ReloaderListener, private csl::ut::NonCopyable
 	{
 		GameService* CreateService(GameServiceClass* gameServiceClass, csl::fnd::IAllocator* residentAllocator);
@@ -85,34 +87,34 @@ namespace hh::game
 		static GameManager* instance;
 		static GameManager* GetInstance();
 
-		template <typename T>
-		T* GetService()
-		{
-			for (auto* pService : m_Services)
-			{
-				if (pService == nullptr)
-					continue;
+		//template <typename T>
+		//T* GetService()
+		//{
+		//	for (auto* pService : m_Services)
+		//	{
+		//		if (pService == nullptr)
+		//			continue;
 
-				if (strcmp(pService->pStaticClass->pName, T::GetServiceName()) == 0)
-					return reinterpret_cast<T*>(pService);
-			}
-		
-			return { nullptr };
-		}
+		//		if (strcmp(pService->pStaticClass->pName, T::GetServiceName()) == 0)
+		//			return reinterpret_cast<T*>(pService);
+		//	}
+		//
+		//	return { nullptr };
+		//}
 
-		GameService* GetService(const char* in_pServiceName)
-		{
-			for (auto* pService : m_Services)
-			{
-				if (pService == nullptr)
-					continue;
+		//GameService* GetService(const char* in_pServiceName)
+		//{
+		//	for (auto* pService : m_Services)
+		//	{
+		//		if (pService == nullptr)
+		//			continue;
 
-				if (strcmp(pService->pStaticClass->pName, in_pServiceName) == 0)
-					return pService;
-			}
+		//		if (strcmp(pService->pStaticClass->pName, in_pServiceName) == 0)
+		//			return pService;
+		//	}
 
-			return { nullptr };
-		}
+		//	return { nullptr };
+		//}
 
 		// template <typename T>
 		// T* GetGameObject()
@@ -128,6 +130,13 @@ namespace hh::game
 
 		// 	return { nullptr };
 		// }
+
+		GameService* GetService(GameServiceClass* gameServiceClass);
+
+		template<typename T>
+		T* GetService() {
+			return static_cast<T*>(GetService(T::GetClass()));
+		}
 
 		GameObject* GetGameObject(const char* in_pObjectName)
 		{
@@ -150,6 +159,10 @@ namespace hh::game
 
 		csl::ut::MoveArray<GameService*>& GetServices() {
 			return m_Services;
+		}
+
+		inline GameApplication* GetApplication() const {
+			return pApplication;
 		}
 
 		void RegisterService(GameService* service);

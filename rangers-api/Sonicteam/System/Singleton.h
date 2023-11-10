@@ -2,45 +2,45 @@
 
 namespace csl::fnd
 {	
-	template<typename T>
-	class SingletonPointer
-	{
-	protected:
-		static T** instance;
+	// template<typename T>
+	// class SingletonPointer
+	// {
+	// protected:
+	// 	static T** instance;
 
-	public:
-		static T** GetPointer()
-		{
-			return instance;
-		}
+	// public:
+	// 	static T** GetPointer()
+	// 	{
+	// 		return instance;
+	// 	}
 		
-		static T* GetInstance()
-		{
-			return *instance;
-		}
+	// 	static T* GetInstance()
+	// 	{
+	// 		return *instance;
+	// 	}
 
-		static T* SwapInstance(T* inst)
-		{
-			T* pOldInstance = *instance;
-			*instance = inst;
-			return pOldInstance;
-		}
+	// 	static T* SwapInstance(T* inst)
+	// 	{
+	// 		T* pOldInstance = *instance;
+	// 		*instance = inst;
+	// 		return pOldInstance;
+	// 	}
 
-		static void ReplaceInstance(T* inst)
-		{
-			if (*instance) delete *instance;
+	// 	static void ReplaceInstance(T* inst)
+	// 	{
+	// 		if (*instance) delete *instance;
 			
-			*instance = inst;
-		}
+	// 		*instance = inst;
+	// 	}
 
-		static bool IsInitialized()
-		{
-			return *instance == nullptr;
-		}
-	};
+	// 	static bool IsInitialized()
+	// 	{
+	// 		return *instance == nullptr;
+	// 	}
+	// };
 
-	template<typename T>
-	inline T** SingletonPointer<T>::instance{ nullptr };
+	// template<typename T>
+	// inline T** SingletonPointer<T>::instance{ nullptr };
 	
 	template<typename T>
 	class Singleton
@@ -50,32 +50,32 @@ namespace csl::fnd
 
 		[[nodiscard]] static T* GetInstance()
 		{
-			if constexpr (std::is_base_of<SingletonPointer<T>, T>())
-			{
-				return SingletonPointer<T>::GetInstance();
-			}
+			//if constexpr (std::is_base_of<SingletonPointer<T>, T>())
+			//{
+			//	return SingletonPointer<T>::GetInstance();
+			//}
 
 			return instance;
 		}
 
 		static void ReplaceInstance(T* inst)
 		{
-			if constexpr (std::is_base_of<SingletonPointer<T>, T>())
-			{
-				SingletonPointer<T>::ReplaceInstance(inst);
-				return;
-			}
-			
+			//if constexpr (std::is_base_of<SingletonPointer<T>, T>())
+			//{
+			//	SingletonPointer<T>::ReplaceInstance(inst);
+			//	return;
+			//}
+			//
 			if (instance) delete instance;
 			instance = inst;
 		}
 
 		static T* SwapInstance(T* inst)
 		{
-			if constexpr (std::is_base_of<SingletonPointer<T>, T>())
-			{
-				return SingletonPointer<T>::SwapInstance(inst);
-			}
+			//if constexpr (std::is_base_of<SingletonPointer<T>, T>())
+			//{
+			//	return SingletonPointer<T>::SwapInstance(inst);
+			//}
 
 			T* pInst = instance;
 			instance = inst;
@@ -84,11 +84,11 @@ namespace csl::fnd
 
 		static bool IsInitialized()
 		{
-			if constexpr (std::is_base_of<SingletonPointer<T>, T>())
-			{
-				return SingletonPointer<T>::IsInitialized();
-			}
-			
+			//if constexpr (std::is_base_of<SingletonPointer<T>, T>())
+			//{
+			//	return SingletonPointer<T>::IsInitialized();
+			//}
+			//
 			return instance != nullptr;
 		}
 	};

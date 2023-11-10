@@ -51,5 +51,11 @@ namespace hh::fnd
 		{
 			RegisterList(pInfoList);
 		}
+
+		inline const csl::ut::StringMap<const T*>& GetItems() const {
+			const csl::ut::StringMap<const RflEntity*>& items = m_Items;
+
+			return reinterpret_cast<const csl::ut::StringMap<const T*>&>(items);
+		}
 	};
 }

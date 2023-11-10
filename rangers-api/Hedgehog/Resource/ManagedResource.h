@@ -19,18 +19,22 @@ namespace hh::fnd {
         void* unk5;
         void* unk6;
         void* unk7;
+        size_t size;
         void* unk8;
-        void* unk9;
 
     public:
         ManagedResource(csl::fnd::IAllocator* pAllocator);
 
-        inline const char* GetName() {
+        inline const char* GetName() const {
             return name.c_str();
         }
 
-        inline const ResourceTypeInfo& GetClass() {
+        inline const ResourceTypeInfo& GetClass() const {
             return *resourceTypeInfo;
+        }
+
+        inline size_t GetSize() const {
+            return size;
         }
 
         virtual void UnkFunc1(void* unkParam, uint64_t unkParam2) { this->UnkFunc2(unkParam, unkParam2); }

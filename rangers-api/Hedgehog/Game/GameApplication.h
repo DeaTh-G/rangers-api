@@ -3,12 +3,17 @@
 namespace hh::game {
     class GameApplication : public fw::Application {
         fnd::Reference<GameManager> gameManager;
-        void* unk102;
+        fnd::Reference<GameUpdater> gameUpdater;
 
-        static GameApplication* instance;
     public:
+        static GameApplication* instance;
+
         GameApplication(csl::fnd::IAllocator* pAllocator, void* unkParam1);
         
+        inline GameUpdater& GetGameUpdater() const {
+            return gameUpdater;
+        }
+
         virtual void UnkFunc7();
         virtual void UnkFunc8();
         virtual uint64_t UnkFunc9();

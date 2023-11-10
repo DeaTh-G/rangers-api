@@ -13,7 +13,7 @@ namespace hh::gfnd {
         static ResTexture* Instantiate(csl::fnd::IAllocator* allocator);
         static const fnd::ResourceTypeInfo* GetTypeInfo();
 
-        hh::needle::Texture* GetTexture() { return texture; }
+        inline hh::needle::Texture* GetTexture() const { return texture; }
 
         virtual void UnkFunc2(void* unkParam, uint64_t unkParam2) override;
         virtual void UnkFunc3() override;

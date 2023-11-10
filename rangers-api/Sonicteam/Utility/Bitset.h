@@ -9,9 +9,9 @@ namespace csl::ut
 	template <typename T>
 	class Bitset
 	{
+	public:
 		T m_dummy;
 		
-	public:
 		Bitset()
 		{
 			reset();
@@ -35,17 +35,17 @@ namespace csl::ut
 
 		constexpr void reset(T bit)
 		{
-			m_dummy = T{ static_cast<std::underlying_type_t<T>>(m_dummy) & ~(1 << static_cast<std::underlying_type_t<T>>(bit)) };
+			m_dummy = T{ static_cast<std::underlying_type_t<T>>(static_cast<std::underlying_type_t<T>>(m_dummy) & ~static_cast<std::underlying_type_t<T>>(1 << static_cast<std::underlying_type_t<T>>(bit))) };
 		}
 
 		constexpr void flip(T bit)
 		{
-			m_dummy = T{ static_cast<std::underlying_type_t<T>>(m_dummy) & (1 << static_cast<std::underlying_type_t<T>>(bit)) };
+			set(bit, !test(bit));
 		}
 		
 		constexpr void set(T bit)
 		{
-			m_dummy = T{ static_cast<std::underlying_type_t<T>>(m_dummy) & (1 << static_cast<std::underlying_type_t<T>>(bit)) };
+			m_dummy = T{ static_cast<std::underlying_type_t<T>>(static_cast<std::underlying_type_t<T>>(m_dummy) | static_cast<std::underlying_type_t<T>>(1 << static_cast<std::underlying_type_t<T>>(bit)))};
 		}
 
 		void set(T bit, bool flag)

@@ -139,7 +139,7 @@ namespace csl::ut
 			if (i > this->m_length)
 				return;
 
-			this->m_pBuffer[i] = this->m_pBuffer[i + 1];
+			this->m_pBuffer[i] = std::move(this->m_pBuffer[i + 1]);
 			this->m_length--;
 		}
 

@@ -4,7 +4,7 @@
 
 namespace hh::fnd
 {
-	class RflClassNameRegistry : public RflRegistryTemplate<RflClass>, csl::fnd::Singleton<RflClassNameRegistry>
+	class RflClassNameRegistry : public RflRegistryTemplate<RflClass>, public csl::fnd::Singleton<RflClassNameRegistry>
 	{
 	};
 }
