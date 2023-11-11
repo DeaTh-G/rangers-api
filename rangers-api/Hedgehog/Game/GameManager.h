@@ -18,25 +18,39 @@ namespace hh::game
 	class alignas(8) GameStepListener
 	{
 	public:
-		virtual ~GameStepListener();
-		virtual void OnGameStep(float timestep);
-		virtual void fUnk2() {}
-		virtual void fUnk3() {}
+		virtual ~GameStepListener() = default;
+		virtual void OnGameStep(float timestep) {}
+		virtual void GSL_UnkFunc1() {}
+		virtual void GSL_UnkFunc2() {}
 	};
 	
     class alignas(8) GamePauseListener {
 	public:
-		virtual ~GamePauseListener();
-        virtual void UnkFunc1() {}
-        virtual void UnkFunc2() {}
+		virtual ~GamePauseListener() = default;
+        virtual void GPL_UnkFunc1() {}
+        virtual void GPL_UnkFunc2() {}
     };
 
 	class alignas(8) GameUpdateListener
 	{
 	public:
-		virtual ~GameUpdateListener();
-		virtual void fUnk1() {}
-		virtual void fUnk2() {}
+		virtual ~GameUpdateListener() = default;
+		virtual void GUL_UnkFunc1() {}
+		virtual void GUL_UnkFunc2() {}
+	};
+
+	class alignas(8) GameManagerListener
+	{
+	public:
+		virtual ~GameManagerListener() = default;
+		virtual void GML_UnkFunc1() {}
+		virtual void GML_UnkFunc2() {}
+		virtual void GML_UnkFunc3() {}
+		virtual void GML_UnkFunc4() {}
+		virtual void GML_UnkFunc5() {}
+		virtual void GML_UnkFunc6() {}
+		virtual void GML_UnkFunc7() {}
+		virtual void GML_UnkFunc8() {}
 	};
 
 	class GameManager;
@@ -131,7 +145,7 @@ namespace hh::game
 		// 	return { nullptr };
 		// }
 
-		GameService* GetService(GameServiceClass* gameServiceClass);
+		GameService* GetService(const GameServiceClass* gameServiceClass);
 
 		template<typename T>
 		T* GetService() {

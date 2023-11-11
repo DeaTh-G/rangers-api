@@ -65,6 +65,6 @@ namespace app::gfx {
     public:
         FxParamManager(csl::fnd::IAllocator* allocator);
 
-		static hh::game::GameServiceClass* GetClass();
+		GAMESERVICE_CLASS_DECLARATION
     };
 }

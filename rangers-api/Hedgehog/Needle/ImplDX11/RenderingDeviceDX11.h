@@ -7,7 +7,7 @@ namespace hh::needle::ImplDX11 {
     public:
         static constexpr size_t resourceId = NEEDLE_RESOURCE_RENDERING_DEVICE_DX11;
 
-        void* unk[1];
+        void* unk[2];
         DeviceObjectDX11* deviceObject;
 
         virtual void* QueryResource(size_t id) override;

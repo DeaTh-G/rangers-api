@@ -139,7 +139,11 @@ namespace csl::ut
 			if (i > this->m_length)
 				return;
 
-			this->m_pBuffer[i] = std::move(this->m_pBuffer[i + 1]);
+			T removed{ std::move(this->m_pBuffer[i]) };
+
+			for (size_t j = i + 1; j < this->m_length; j++)
+				this->m_pBuffer[j - 1] = std::move(this->m_pBuffer[j]);
+
 			this->m_length--;
 		}
 
@@ -172,7 +176,8 @@ namespace csl::ut
 			rArray.m_pAllocator = tempAllocator;
 		}
 
-		size_t find(const T& item) const
+		template<typename U>
+		size_t find(const U& item) const
 		{
 			for (size_t i = 0; i < this->m_length; i++)
 			{

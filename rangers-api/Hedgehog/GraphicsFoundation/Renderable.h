@@ -4,9 +4,8 @@ namespace hh::gfnd {
     class Renderable : public fnd::ReferencedObject {
     public:
         uint64_t unk1;
-        uint64_t unk2;
-        uint64_t unk3;
-        char unk4;
+        csl::ut::LinkListNode renderableContainerNode;
+        char preferredContainer;
         char unk4b;
         uint16_t unk5;
         const char* name;

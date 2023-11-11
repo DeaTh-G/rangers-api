@@ -2,6 +2,7 @@
 
 namespace hh::needle {
     class NeedleRefcountObject : public NeedleObject {
+        uint32_t pad;
         uint32_t refCount;
     protected:
         virtual void ReleasePostDestroyInternal();

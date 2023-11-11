@@ -1,5 +1,10 @@
 #pragma once
 
+#define GAMESERVICE_CLASS_DECLARATION private:\
+		static const hh::game::GameServiceClass* gameServiceClass;\
+	public:\
+		static const hh::game::GameServiceClass* GetClass();
+
 namespace hh::game
 {
 	class GameManager;

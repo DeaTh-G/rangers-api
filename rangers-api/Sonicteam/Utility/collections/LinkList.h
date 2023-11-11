@@ -19,7 +19,7 @@ namespace csl::ut
                 size_t m_NodeOffset{};
             };
 
-        protected:
+        public:
             size_t m_Count;
             int m_NodeOffset;
             LinkListNode* m_pEnd{ reinterpret_cast<LinkListNode*>(&m_pEnd) };

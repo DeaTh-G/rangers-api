@@ -104,6 +104,10 @@
 #include "Hedgehog/Needle/UnorderedAccessView.h"
 #include "Hedgehog/Needle/DepthStencil.h"
 #include "Hedgehog/Needle/RenderingDevice.h"
+#include "Hedgehog/Needle/PrimitiveRenderer.h"
+#include "Hedgehog/Needle/Renderable.h"
+#include "Hedgehog/Needle/RenderTexture.h"
+#include "Hedgehog/Needle/SupportFX.h"
 #include "Hedgehog/Needle/ImplDX11/NeedleResourceContainer.h"
 #include "Hedgehog/Needle/ImplDX11/TextureDX11Impl.h"
 #include "Hedgehog/Needle/ImplDX11/BufferDX11Impl.h"
@@ -113,8 +117,20 @@
 #include "Hedgehog/Needle/ImplDX11/RenderingDeviceDX11.h"
 
 #include "Hedgehog/GraphicsFoundation/ResTexture.h"
-#include "Hedgehog/GraphicsFoundation/GraphicsContext.h"
 #include "Hedgehog/GraphicsFoundation/Renderable.h"
+#include "Hedgehog/GraphicsFoundation/RenderableContainer.h"
+#include "Hedgehog/GraphicsFoundation/ViewportData.h"
+#include "Hedgehog/GraphicsFoundation/GraphicsContext.h"
+
+#include "Hedgehog/Graphics/NeedleRenderer.h"
+#include "Hedgehog/Graphics/RenderingWorld.h"
+#include "Hedgehog/Graphics/RenderingComponent.h"
+#include "Hedgehog/Graphics/Components/CriComponent.h"
+#include "Hedgehog/Graphics/Components/LightComponent.h"
+#include "Hedgehog/Graphics/Components/CaptureComponent.h"
+#include "Hedgehog/Graphics/Components/ScreenShotComponent.h"
+#include "Hedgehog/Graphics/RenderingEngine.h"
+#include "Hedgehog/Graphics/RenderingEngineNeedle.h"
 
 // Hedgehog Framework
 #include "Hedgehog/Framework/KeyEventHandler.h"
@@ -175,6 +191,8 @@
 #include "Hedgehog/Game/GameApplication.h"
 #include "Hedgehog/Game/InputManager.h"
 #include "Hedgehog/Game/InputComponent.h"
+#include "Hedgehog/Game/CameraComponent.h"
+#include "Hedgehog/Game/CameraManager.h"
 #include "Hedgehog/Game/ObjInfo.h"
 #include "Hedgehog/Game/GameObjectRegistry.h"
 #include "Hedgehog/Game/GOComponentRegistry.h"
@@ -186,6 +204,7 @@
 #include "Hedgehog/Game/GOComponents/GOCTransform.h"
 
 #include "Hedgehog/Game/DevMenu/Menu.h"
+#include "Hedgehog/Game/FreeCamera.h"
 
 #include "Hedgehog/Sound/GOCSound.h"
 

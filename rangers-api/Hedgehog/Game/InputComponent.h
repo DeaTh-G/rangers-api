@@ -53,7 +53,7 @@ namespace hh::game {
             int axisMonitorCount;
             int unkMonitorCount;
             const char* objectName;
-            bool unk7;
+            bool exclusive; // flag 1
         };
 
         InputComponent(csl::fnd::IAllocator* pAllocator, const Config& config, InputManager& inputManager);
