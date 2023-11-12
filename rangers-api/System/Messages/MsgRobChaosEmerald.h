@@ -12,7 +12,7 @@ namespace app
 
 		MsgRobChaosEmerald() : fnd::AppMessage<MsgRobChaosEmerald>(MessageID)
 		{
-			
+
 		}
 
 		MsgRobChaosEmerald(char in_emeraldType) : MsgRobChaosEmerald()
