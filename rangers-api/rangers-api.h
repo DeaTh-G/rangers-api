@@ -26,13 +26,20 @@
 #include "Hedgehog/Base/Universe/hhHandleManager.h"
 #include "Hedgehog/Base/System/hhBaseObject.h"
 #include "Hedgehog/Base/System/hhReferencedObject.h"
+#include "Hedgehog/Base/System/hhReloaderListener.h"
 
 // Hedgehog Universe Library
 #include "Hedgehog/Base/Universe/hhMessage.h"
 #include "Hedgehog/Base/Universe/hhMessenger.h"
 #include "Hedgehog/Base/Universe/hhMessageManager.h"
-
 #include "Hedgehog/Base/Universe/hhHandleManager.inl"
+#include "Hedgehog/Base/Universe/User/hhUserInfo.h"
+
+// Hedgehog Framework Library
+#include "Hedgehog/Base/Framework/KeyEventHandler.h"
+#include "Hedgehog/Base/Framework/MouseEventHandler.h"
+#include "Hedgehog/Base/Framework/Application.h"
+#include "Hedgehog/Base/Framework/FrameworkNotification.h"
 
 // System Messages
 #include "System/Messages/MsgActionCamera.h"
@@ -946,6 +953,7 @@
 #include "System/Messages/MsgWolfWakeUpEnd.h"
 
 // Hedgehog Game Library
+#include "Hedgehog/Game/GameApplication.h"
 #include "Hedgehog/Game/GameService.h"
 #include "Hedgehog/Game/GameStepListener.h"
 #include "Hedgehog/Game/GOComponent.h"
@@ -956,6 +964,13 @@
 // Hedgehog Utility Library
 #include "Hedgehog/Utility/StateBase.h"
 #include "Hedgehog/Utility/HsmBase.h"
+
+// System Game Library
+#include "System/Game/GameMode.h"
+#include "System/Game/ApplicationExtension.h"
+#include "System/Game/ApplicationSequenceExtension.h"
+
+#include "System/MyApplication.h"
 
 // Save
 #include "System/Save/SaveManagerListener.h"
