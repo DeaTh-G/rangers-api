@@ -57,7 +57,7 @@ namespace hh::game {
         };
 
         InputComponent(csl::fnd::IAllocator* pAllocator, const Config& config, InputManager& inputManager);
-        static InputComponent* Instantiate(csl::fnd::IAllocator* pAllocator, const Config& config, InputManager& inputManager);
+        static InputComponent* Create(csl::fnd::IAllocator* pAllocator, const Config& config, InputManager& inputManager);
 
         inline char GetInternalPlayerInputId() {
             return internalPlayerInputIndex;

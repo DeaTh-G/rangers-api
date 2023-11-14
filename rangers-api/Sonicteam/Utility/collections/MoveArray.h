@@ -139,6 +139,9 @@ namespace csl::ut
 			if (i > this->m_length)
 				return;
 
+			// Doing this ensures the destructor is called.
+			// Other option would be to instead return the moved object and
+			// expect the caller to destruct.
 			T removed{ std::move(this->m_pBuffer[i]) };
 
 			for (size_t j = i + 1; j < this->m_length; j++)

@@ -46,13 +46,12 @@ namespace hh::ui {
     public:
         void Initialize(const Config& config);
 
-    private:
-        static hh::game::GameServiceClass gameServiceClass;
-        static hh::game::GameService* Instantiate(csl::fnd::IAllocator* pAllocator);
-        
-    public:
-        static hh::game::GameServiceClass* GetClass();
         void RegisterTextObjectUpdater(TextObjectUpdater* textObjectUpdater);
         void UnregisterTextObjectUpdater(TextObjectUpdater* textObjectUpdater);
+        
+        virtual void OnAddedToGame() override;
+        virtual void OnRemovedFromGame() override;
+
+        GAMESERVICE_CLASS_DECLARATION(UIManager)
     };
 }

@@ -10,6 +10,10 @@ namespace hh::fw {
         static Application* instance;
         Application(csl::fnd::IAllocator* pAllocator, void* unkParam1);
 
+        inline static Application* GetInstance() {
+            return RESOLVE_STATIC_VARIABLE(instance);
+        }
+
         virtual void Startup() {}
         virtual void UnkFunc2() {}
         virtual void UnkFunc3() {}

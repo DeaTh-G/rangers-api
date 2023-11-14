@@ -16,7 +16,7 @@ namespace app_cmn::fsm {
         };
 
         GOCHsm2(csl::fnd::IAllocator* pAllocator);
-        static GOCHsm2* Instantiate(csl::fnd::IAllocator* pAllocator);
+        static GOCHsm2* Create(csl::fnd::IAllocator* pAllocator);
         void Initialize(const Config& config);
     };
 }

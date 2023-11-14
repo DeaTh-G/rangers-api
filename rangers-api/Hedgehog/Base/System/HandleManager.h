@@ -13,6 +13,6 @@ namespace hh::fnd
         void* field_68;
     public:
         HandleManager(csl::fnd::IAllocator* pAllocator, size_t size);
-        static HandleManager* Instantiate(csl::fnd::IAllocator* pAllocator, size_t size);
+        static HandleManager* Create(csl::fnd::IAllocator* pAllocator, size_t size);
     };
 }

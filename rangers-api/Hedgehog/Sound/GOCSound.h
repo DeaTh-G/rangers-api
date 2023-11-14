@@ -9,7 +9,7 @@ namespace hh::snd {
         csl::ut::MoveArray<void*> unk105;
         csl::ut::MoveArray<void*> unk106;
     
-        static GOCSound* Instantiate(csl::fnd::IAllocator* pAllocator);
+        static GOCSound* Create(csl::fnd::IAllocator* pAllocator);
     public:
         struct alignas(8) Config {
             uint32_t unk1a;

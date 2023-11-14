@@ -1,7 +1,9 @@
 #pragma once
 
-#define GAMESERVICE_CLASS_DECLARATION private:\
+#define GAMESERVICE_CLASS_DECLARATION(ClassName) private:\
 		static const hh::game::GameServiceClass* gameServiceClass;\
+		ClassName(csl::fnd::IAllocator* allocator);\
+		static ClassName* Create(csl::fnd::IAllocator* allocator);\
 	public:\
 		static const hh::game::GameServiceClass* GetClass();
 
@@ -27,5 +29,7 @@ namespace hh::game
 		csl::fnd::Mutex mutex;
 
 		virtual void* GetClassId();
+		virtual void OnAddedToGame() {}
+		virtual void OnRemovedFromGame() {}
 	};
 }

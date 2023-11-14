@@ -10,10 +10,10 @@ namespace hh::fnd {
         csl::ut::MoveArray<void*> unk6;
 
         Packfile(csl::fnd::IAllocator* pAllocator);
-        static ManagedResource* Instantiate(csl::fnd::IAllocator* pAllocator);
+        static ManagedResource* Create(csl::fnd::IAllocator* pAllocator);
     public:
-        virtual void UnkFunc2(void* unkParam, uint64_t unkParam2) override;
-        virtual void UnkFunc3() override;
+        virtual void Load(void* data, size_t size) override;
+        virtual void Unload(void* data, size_t size) override;
         virtual void UnkFunc6(void* unkParam) {}
 
         static const ResourceTypeInfo* GetTypeInfo();

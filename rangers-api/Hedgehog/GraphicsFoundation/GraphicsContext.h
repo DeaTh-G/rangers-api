@@ -18,6 +18,10 @@ namespace hh::gfnd {
         GraphicsContext(csl::fnd::IAllocator* pAllocator);
         static GraphicsContext* instance;
 
+        inline static GraphicsContext* GetInstance() {
+            return RESOLVE_STATIC_VARIABLE(instance);
+        }
+
         void AddRenderable(Renderable* renderable);
         void AddRenderableToViewport(Renderable* renderable, int viewportId);
         ViewportData& GetViewportData(int viewportId);

@@ -22,7 +22,7 @@ namespace hh::text {
 
         TextAppModule(csl::fnd::IAllocator* pAllocator);
 
-        static TextAppModule* Instantiate(csl::fnd::IAllocator*);
+        static TextAppModule* Create(csl::fnd::IAllocator*);
     public:
         static const ConverseData* Translate(const char* tag, int localeIdx);
         const ConverseData* GetTranslation(const char* tag, int localeIdx);

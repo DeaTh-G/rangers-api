@@ -5,7 +5,7 @@ namespace app {
         csl::ut::MoveArray<void*> unk201;
     public:
         MyApplication(csl::fnd::IAllocator* pAllocator, void* unkParam1);
-        static MyApplication* Instantiate(void* unkParam1, csl::fnd::IAllocator* pAllocator);
+        static MyApplication* Create(void* unkParam1, csl::fnd::IAllocator* pAllocator);
 
         virtual void UnkFunc1();
         virtual void UnkFunc2();

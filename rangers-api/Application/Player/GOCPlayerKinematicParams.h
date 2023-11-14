@@ -7,6 +7,6 @@ namespace app::player {
         void SetPosition(const csl::math::Vector4& position);
         void SetVelocity(const csl::math::Vector4& velocity);
 
-        GOCOMPONENT_CLASS_DECLARATION
+        GOCOMPONENT_CLASS_DECLARATION(GOCPlayerKinematicParams)
     };
 }

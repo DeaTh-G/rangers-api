@@ -10,13 +10,13 @@ namespace hh::gfnd {
         uint32_t nameHash;
     public:
         ResTexture(csl::fnd::IAllocator* allocator);
-        static ResTexture* Instantiate(csl::fnd::IAllocator* allocator);
+        static ResTexture* Create(csl::fnd::IAllocator* allocator);
         static const fnd::ResourceTypeInfo* GetTypeInfo();
 
         inline hh::needle::Texture* GetTexture() const { return texture; }
 
-        virtual void UnkFunc2(void* unkParam, uint64_t unkParam2) override;
-        virtual void UnkFunc3() override;
-        virtual void UnkFunc5() override;
+        virtual void Load(void* data, size_t size) override;
+        virtual void Unload(void* data, size_t size) override;
+        virtual void Reload(void* data, size_t size) override;
     };
 }

@@ -40,7 +40,7 @@ namespace SurfRide
         // bool OwnsBinaryData{};
 
         Project();
-        static Project* Instantiate(const BinaryData& binaryData, bool cloneBinaryData);
+        static Project* Create(const BinaryData& binaryData, bool cloneBinaryData);
 
         SRS_CAMERA* GetCameraData();
 

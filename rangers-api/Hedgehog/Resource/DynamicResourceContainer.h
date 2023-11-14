@@ -5,7 +5,7 @@ namespace hh::fnd {
     class DynamicResourceContainer : public ResourceContainer {
         const ResourceTypeInfo* typeInfo;
         ResourceManager* resourceManager;
-        void* unk2;
+        FilePathResolver* filePathResolver;
         csl::ut::InplaceMoveArray<void*, 1> unk3;
         csl::ut::StringMap<void*> resourcesByName;
         csl::ut::MoveArray<ManagedResource*> resources;

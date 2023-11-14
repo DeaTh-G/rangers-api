@@ -11,6 +11,7 @@ namespace hh::fnd {
         ManagedResource* (*instantiator)(csl::fnd::IAllocator* pAllocator);
     };
 
+    class StaticResourceContainer;
     class ManagedResource : public ReferencedObject, private csl::ut::NonCopyable {
         csl::ut::VariableString name;
         csl::ut::VariableString unk2;
@@ -18,7 +19,7 @@ namespace hh::fnd {
         const ResourceTypeInfo* resourceTypeInfo;
         void* unk5;
         void* unk6;
-        void* unk7;
+        void* binaryData;
         size_t size;
         void* unk8;
 
@@ -37,10 +38,12 @@ namespace hh::fnd {
             return size;
         }
 
-        virtual void UnkFunc1(void* unkParam, uint64_t unkParam2) { this->UnkFunc2(unkParam, unkParam2); }
-        virtual void UnkFunc2(void* unkParam, uint64_t unkParam2) = 0;
-        virtual void UnkFunc3() = 0;
-        virtual void UnkFunc4() {}
-        virtual void UnkFunc5() {}
+        // This is only guessed from a similar function in rio, but there this and the following function are swapped.
+        // I haven't actually seen this be overridden anywhere.
+        virtual void Load(void* data, size_t size, StaticResourceContainer* container) { this->Load(data, size); }
+        virtual void Load(void* data, size_t size) = 0;
+        virtual void Unload(void* data, size_t size) = 0;
+        virtual void Resolve(ResourceResolver* resolver) {}
+        virtual void Reload(void* data, size_t size) {}
     };
 }

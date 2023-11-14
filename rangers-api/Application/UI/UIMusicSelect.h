@@ -28,7 +28,7 @@ namespace app::ui {
         uint32_t float2;
         bool field_2FC;
     public:
-        static UIMusicSelect* Instantiate(csl::fnd::IAllocator* pAllocator);
+        static UIMusicSelect* Create(csl::fnd::IAllocator* pAllocator);
 
         virtual bool fUnk2(hh::fnd::Message& message) override;
         virtual void Initialize(hh::game::GameManager* gameManager) override;

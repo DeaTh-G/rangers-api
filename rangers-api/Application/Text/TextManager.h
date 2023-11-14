@@ -13,16 +13,15 @@ namespace app::text {
         hh::text::TagReplacer* tagReplacer;
         void* unk104;
 
+    public:
+        virtual void OnAddedToGame() override;
+        virtual void OnRemovedFromGame() override;
+
         virtual void RL_UnkFunc1(hh::fnd::ManagedResource* resource) override;
         virtual void RL_UnkFunc2(void* unkParam1) override;
         virtual void EVL_UnkFunc2(int unkParam1, int unkParam2, int& unkParam3) override;
         virtual void ARML_UnkFunc1(int unkParam1) override;
 
-    private:
-        static hh::game::GameServiceClass gameServiceClass;
-        static hh::game::GameService* Instantiate(csl::fnd::IAllocator* pAllocator);
-        
-    public:
-        static hh::game::GameServiceClass* GetClass();
+        GAMESERVICE_CLASS_DECLARATION(TextManager)
     };
 }

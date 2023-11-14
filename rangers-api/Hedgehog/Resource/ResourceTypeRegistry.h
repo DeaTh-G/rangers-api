@@ -10,7 +10,7 @@ namespace hh::fnd {
         static csl::ut::Pair<const char*, const ResourceTypeInfo*> typeInfoExtensionMap[44];
     public:
         ResourceTypeRegistry();
-        static ResourceTypeRegistry* Instantiate();
+        static ResourceTypeRegistry* Create();
         csl::ut::MoveArray<const ResourceTypeInfo*> GetTypeInfos();
         const char* GetExtensionByTypeInfo(const ResourceTypeInfo* typeInfo);
     };

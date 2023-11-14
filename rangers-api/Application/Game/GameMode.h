@@ -1,6 +1,8 @@
 #pragma once
 
 namespace app::game {
+    class GameService;
+    class GameModeExtension;
     class GameMode : public hh::fnd::Messenger {
     public:
         hh::game::GameManager* gameManager;
@@ -8,8 +10,8 @@ namespace app::game {
         uint16_t unk3;
         uint32_t unk4;
         uint64_t fsm[9]; // tinyfsm
-        csl::ut::MoveArray<void*> unk5;
-        csl::ut::MoveArray<void*> unk6;
+        csl::ut::MoveArray<GameService*> gameServices;
+        csl::ut::MoveArray<GameModeExtension*> extensions;
         void* unk7; // created in the constructor, just not bothering right now
         uint32_t unk8;
         bool unk9;

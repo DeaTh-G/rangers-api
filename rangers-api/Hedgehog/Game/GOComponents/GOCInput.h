@@ -25,7 +25,7 @@ namespace hh::game {
         };
 
         GOCInput(csl::fnd::IAllocator* pAllocator);
-        static GOCInput* Instantiate(csl::fnd::IAllocator* pAllocator);
+        static GOCInput* Create(csl::fnd::IAllocator* pAllocator);
         static GOComponentClass* GetClass();
         void Initialize(const Config& config);
 		virtual void* GetClassId();

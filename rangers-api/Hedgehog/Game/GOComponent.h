@@ -1,9 +1,10 @@
 #pragma once
 
-#define GOCOMPONENT_CLASS_DECLARATION private:\
-		static hh::game::GOComponentClass* instance;\
+#define GOCOMPONENT_CLASS_DECLARATION(ClassName) private:\
+		static const hh::game::GOComponentClass* instance;\
+		static ClassName* Create(csl::fnd::IAllocator* allocator);\
 	public:\
-		static hh::game::GOComponentClass* GetClass();
+		static const hh::game::GOComponentClass* GetClass();
 
 namespace app::player
 {
@@ -22,7 +23,7 @@ namespace hh::game
 		GOComponentClass* parent{};
 		const char* dynamicName;
 		size_t size;
-        GOComponent* (*Instantiate)(csl::fnd::IAllocator* pAllocator);
+        GOComponent* (*instantiator)(csl::fnd::IAllocator* pAllocator);
 		void* unk1;
 		void* unk2;
 	};
@@ -75,6 +76,6 @@ namespace hh::game
 		 */
 		virtual void OnGOCEvent(GOCEvent event, GameObject& ownerGameObject, void* data);
 
-		static GOComponent* Instantiate(GameObject& ownerGameObject, const GOComponentClass& componentClass);
+		static GOComponent* Create(GameObject& ownerGameObject, const GOComponentClass& componentClass);
 	};
 }

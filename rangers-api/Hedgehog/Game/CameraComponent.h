@@ -6,16 +6,14 @@ namespace hh::game {
     public:
         struct CreateInfo {
             int viewportId;
-            int unk2;
+            int priority;
             const char* name;
         };
 
-    private:
         char viewportId;
-        char unk2;
+        char priority;
         char unk3;
         CameraManager* cameraManager;
-    public:
         gfnd::ViewportData viewportData;
         csl::ut::VariableString name;
 

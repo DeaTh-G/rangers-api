@@ -20,7 +20,7 @@ namespace hh::ui {
         csl::ut::MoveArray<void*> unk113;
         uint64_t unk114;
 
-        static GOCUIComposition* Instantiate(csl::fnd::IAllocator* pAllocator);
+        static GOCUIComposition* Create(csl::fnd::IAllocator* pAllocator);
         void Unk12421(SurfRide::Project* project, csl::ut::InplaceMoveArray<const char*, 32>& sceneNames);
         int FindGlobalIndexOfGroup(UIElementGroupContainer* container, const char* name);
         void SetCurrentGroupByGlobalIndex(int index);

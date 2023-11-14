@@ -20,10 +20,13 @@ namespace hh::game {
         char activeInternalPlayerInputs; // bitmask
         int32_t unk6;
     public:
-        InputManager(csl::fnd::IAllocator* pAllocator);
-        static InputManager* Instantiate(csl::fnd::IAllocator* pAllocator);
         void RegisterInputComponent(InputComponent& inputComponent);
         void UnregisterInputComponent(InputComponent& inputComponent);
         void CreateInputMaps(hid::InputMapSettings* settings);
+
+        virtual void OnAddedToGame() override;
+        virtual void OnRemovedFromGame() override;
+
+        GAMESERVICE_CLASS_DECLARATION(InputManager)
     };
 }

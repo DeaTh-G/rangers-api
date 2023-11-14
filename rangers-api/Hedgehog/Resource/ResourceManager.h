@@ -6,18 +6,22 @@ namespace hh::fnd {
         ResourceLoader::Unk2 unk2;
         csl::ut::PointerMap<const ResourceTypeInfo*, uint32_t> resourceContainerIndexByTypeInfo;
         ResourceManagerRelatedUnk1 unk4;
-        csl::ut::MoveArray<void*> unk5;
+        csl::ut::MoveArray<void*> unk5; // probably managedResources
         csl::ut::MoveArray<void*> unk6;
         uint64_t unk7;
         uint64_t unk8;
         SimpleResourceContainer* simpleContainer;
-        csl::ut::MoveArray<void*> unk10;
+        csl::ut::MoveArray<ManagedResource*> unk10;
         csl::fnd::Mutex mutex;
 
         ManagedResource* GetResource(const char* name, const hh::fnd::ResourceTypeInfo* resourceTypeInfo);
     public:
         ResourceManager();
         void Setup();
+
+        virtual void RMRU1L_UnkFunc1(uint64_t unkParam1, uint64_t unkParam2) override;
+        virtual void RMRU1L_UnkFunc2(uint64_t unkParam1, uint64_t unkParam2) override;
+
         csl::ut::MoveArray<DynamicResourceContainer*>& GetResourceContainers() {
             return resourceContainers;
         }

@@ -8,6 +8,10 @@ namespace hh::game {
     public:
         static GameApplication* instance;
 
+        inline static GameApplication* GetInstance() {
+            return RESOLVE_STATIC_VARIABLE(instance);
+        }
+
         GameApplication(csl::fnd::IAllocator* pAllocator, void* unkParam1);
         
         inline GameUpdater& GetGameUpdater() const {

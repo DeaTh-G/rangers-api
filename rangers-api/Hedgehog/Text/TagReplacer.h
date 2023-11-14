@@ -10,7 +10,7 @@ namespace hh::text {
             csl::ut::MoveArray<void*> unk2;
         public:
             Entity(csl::fnd::IAllocator* pAllocator, const char **name);
-            static Entity* Instantiate(csl::fnd::IAllocator* pAllocator, const char **name);
+            static Entity* Create(csl::fnd::IAllocator* pAllocator, const char **name);
         };
 
     private:

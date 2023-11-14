@@ -74,9 +74,10 @@
 // Resources
 #include "Hedgehog/Resource/Uri.h"
 #include "Hedgehog/Resource/InplaceUri.h"
-#include "Hedgehog/Resource/TempInplaceUri.h"
+#include "Hedgehog/Resource/InplaceTempUri.h"
 #include "Hedgehog/Resource/ResourceNameResolver.h"
 #include "Hedgehog/Resource/FilePathResolver.h"
+#include "Hedgehog/Resource/ResourceResolver.h"
 #include "Hedgehog/Resource/ManagedResource.h"
 #include "Hedgehog/Resource/ResourceTypeRegistry.h"
 #include "Hedgehog/Resource/ResourceContainer.h"
@@ -88,6 +89,7 @@
 #include "Hedgehog/Resource/ResourceManagerRelatedUnk1.h"
 #include "Hedgehog/Resource/ResourceManager.h"
 #include "Hedgehog/Resource/FilePathResolverUtil.h"
+#include "Hedgehog/Resource/FileLoader.h"
 
 #include "Hedgehog/Needle/NeedleObject.h"
 #include "Hedgehog/Needle/NeedleRefcountObject.h"
@@ -207,6 +209,12 @@
 #include "Hedgehog/Game/FreeCamera.h"
 
 #include "Hedgehog/Sound/GOCSound.h"
+
+#include "Hedgehog/Animation/Trigger.h"
+#include "Hedgehog/Animation/AnimationState.h"
+#include "Hedgehog/Animation/GOCAnimation.h"
+#include "Hedgehog/Animation/GOCAnimationSingle.h"
+#include "Hedgehog/Animation/GOCAnimator.h"
 
 #include "SurfRide/Base.h"
 #include "SurfRide/ReferencedObject.h"
@@ -333,6 +341,10 @@
 #include "Application/Player/GOCPlayerState.h"
 #include "Application/Player/GOCPlayerParameter.h"
 #include "Application/Player/GOCPlayerKinematicParams.h"
+#include "Application/Player/ComponentCollector.h"
+#include "Application/Player/VisualLocatorManager.h"
+#include "Application/Player/PlayerVisual.h"
+#include "Application/Player/GOCPlayerVisual.h"
 #include "Application/Player/PlayerStateBase.h"
 #include "Application/Player/States.h"
 

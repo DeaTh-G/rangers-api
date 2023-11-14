@@ -23,10 +23,10 @@ namespace hh::game
         hh::fnd::RflClassMember::Value* pMemberValues;
         hh::fnd::RflClass* reflectionClass;
 	private:
-		GameObject* Instantiate(csl::fnd::IAllocator* pAllocator) const;
+		GameObject* Create(csl::fnd::IAllocator* pAllocator) const;
 	public:
 		template<typename T>
-		T* Instantiate(csl::fnd::IAllocator* pAllocator) const { return static_cast<T*>(Instantiate(pAllocator)); }
+		T* Create(csl::fnd::IAllocator* pAllocator) const { return static_cast<T*>(Create(pAllocator)); }
     };
 
 	class GameObject : public fnd::Messenger
@@ -131,13 +131,13 @@ namespace hh::game
 		// 	return GetGOC<T>();
 		// }
 
-		hh::game::GOComponent* InstantiateComponent(GOComponentClass* gocClass);
+		hh::game::GOComponent* CreateComponent(const GOComponentClass* gocClass);
 
-		GOComponent* GetComponent(GOComponentClass* componentClass);
+		GOComponent* GetComponent(const GOComponentClass* componentClass);
 	protected:
 		template<typename T>
-		T* InstantiateComponent() {
-			return static_cast<T*>(InstantiateComponent(T::GetClass()));
+		T* CreateComponent() {
+			return static_cast<T*>(CreateComponent(T::GetClass()));
 		}
 
 		hh::game::GOComponent* GetComponent(const char* in_pComponentName)

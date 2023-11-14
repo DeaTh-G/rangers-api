@@ -23,10 +23,9 @@ namespace app::player {
         };
 
         GOCPlayerHsm(csl::fnd::IAllocator* pAllocator);
-        static GOCPlayerHsm* Instantiate(csl::fnd::IAllocator* pAllocator);
         void Initialize(const Config& config);
         void SetState(uint32_t stateId, uint32_t unkParam1);
 
-        GOCOMPONENT_CLASS_DECLARATION
+        GOCOMPONENT_CLASS_DECLARATION(GOCPlayerHsm);
     };
 }

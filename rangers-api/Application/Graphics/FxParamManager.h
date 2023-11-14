@@ -63,8 +63,9 @@ namespace app::gfx {
         uint8_t unk108;
 
     public:
-        FxParamManager(csl::fnd::IAllocator* allocator);
+        virtual void OnAddedToGame() override;
+        virtual void OnRemovedFromGame() override;
 
-		GAMESERVICE_CLASS_DECLARATION
+		GAMESERVICE_CLASS_DECLARATION(FxParamManager)
     };
 }

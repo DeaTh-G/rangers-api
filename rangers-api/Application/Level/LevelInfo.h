@@ -22,5 +22,7 @@ namespace app::level {
         void* unk22;
     public:
         virtual void* GetClassId();
+
+        GAMESERVICE_CLASS_DECLARATION(LevelInfo)
     };
 }

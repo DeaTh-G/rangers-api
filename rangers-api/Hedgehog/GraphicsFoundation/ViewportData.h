@@ -27,5 +27,6 @@ namespace hh::gfnd {
         ViewportData();
         ViewportData& operator=(const ViewportData& other);
         void SetDimensions(const ViewportDimensions& other);
+        void SetPerspectiveProjectionMatrix(float fov, float aspectRatio, float nearClip, float farClip);
     };
 }

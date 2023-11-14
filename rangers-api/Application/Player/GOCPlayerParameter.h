@@ -49,24 +49,23 @@ namespace app::player {
         };
 
         GOCPlayerParameter(csl::fnd::IAllocator* allocator);
-        GOCPlayerParameter* Instantiate(csl::fnd::IAllocator* allocator);
         void Initialize(const Config& config);
 
         app::rfl::PlayerParamSpeed& GetSpeedParameters();
 
-        // template<typename T>
-        // T* GetPlayerParameter() {
-        //     return reinterpret_cast<T*>(GetPlayerParameter(T::staticClass));
-        // }
-
         template<typename T>
-        T* GetPlayerParameter(const hh::fnd::RflClass& rflClass) {
-            return reinterpret_cast<T*>(GetPlayerParameter(rflClass));
+        T* GetPlayerParameter() {
+            return reinterpret_cast<T*>(GetPlayerParameter(RESOLVE_STATIC_VARIABLE(T::staticClass)));
         }
+
+        // template<typename T>
+        // T* GetPlayerParameter(const hh::fnd::RflClass& rflClass) {
+        //     return reinterpret_cast<T*>(GetPlayerParameter(rflClass));
+        // }
 
         virtual void* GetClassId() override;
 		virtual void OnGOCEvent(hh::game::GOComponent::GOCEvent event, hh::game::GameObject& ownerGameObject, void* data) override;
 
-        GOCOMPONENT_CLASS_DECLARATION
+        GOCOMPONENT_CLASS_DECLARATION(GOCPlayerParameter)
     };
 }

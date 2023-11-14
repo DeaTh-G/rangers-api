@@ -33,6 +33,7 @@ namespace csl::ut
 			m_pAllocator = pAlloc;
 		}
 
+		VariableString(const VariableString& other);
 		VariableString(VariableString&& other);
 		
 		~VariableString()
@@ -45,6 +46,9 @@ namespace csl::ut
 		{
 			return m_pAllocator;
 		}
+		VariableString& operator=(VariableString&& other);
+
+		void SetDataUserFree(csl::fnd::IAllocator* allocator, const char* str);
 		
 		inline void Set(const char* pStr, int size, csl::fnd::IAllocator* pAlloc)
 		{
@@ -77,10 +81,7 @@ namespace csl::ut
 		//	return m_pStr;
 		//}
 
-		bool Compare(const char* pStr) const
-		{
-			return strcmp(c_str(), pStr);
-		}
+		bool Compare(const char* pStr) const;
 		
 		operator const char*() const
 		{

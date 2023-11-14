@@ -31,7 +31,7 @@ namespace hh::fnd {
             return ResReflection<void>::GetTypeInfo();
         }
 
-        virtual void UnkFunc2(void* unkParam, uint64_t unkParam2) override;
-        virtual void UnkFunc3() override;
+        virtual void Load(void* data, size_t size) override;
+        virtual void Unload(void* data, size_t size) override;
     };
 }

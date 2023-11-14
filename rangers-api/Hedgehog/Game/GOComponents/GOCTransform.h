@@ -26,7 +26,6 @@ namespace hh::game {
         };
 
         GOCTransform(csl::fnd::IAllocator* pAllocator);
-        static GOCTransform* Instantiate(csl::fnd::IAllocator* pAllocator);
 
         void Initialize(const Config& config);
         void SetInheritedFlags(Flag flags);
@@ -37,6 +36,6 @@ namespace hh::game {
         void SetParent(GOCTransform* parent);
         bool IsExistParent();
         
-        GOCOMPONENT_CLASS_DECLARATION
+        GOCOMPONENT_CLASS_DECLARATION(GOCTransform)
     };
 }

@@ -10,9 +10,9 @@ namespace hh::fnd {
 
         class Unk2 : public BaseObject {
             class Unk1 : public ReferencedObject {
-                csl::ut::MoveArray<void*> unk1;
-                csl::ut::MoveArray<void*> unk2;
-                csl::ut::PointerMap<void*, void*> unk3;
+                csl::ut::MoveArray<ManagedResource*> unk1;
+                csl::ut::MoveArray<ManagedResource*> unk2;
+                csl::ut::StringMap<ManagedResource*> unk3;
             public:
                 Unk1(csl::fnd::IAllocator* allocator);
             };
@@ -22,7 +22,7 @@ namespace hh::fnd {
             SimpleResourceContainer* simpleResourceContainer;
         public:
             Unk2(csl::fnd::IAllocator* allocator);
-            void LoadTypeInfo(const ResourceTypeInfo* typeInfo);
+            Unk1* LoadTypeInfo(const ResourceTypeInfo* typeInfo);
             void SetSimpleResourceContainer(SimpleResourceContainer* simpleResourceContainer); 
         };
 
@@ -45,11 +45,11 @@ namespace hh::fnd {
         uint16_t unk8;
 
         ResourceLoader(csl::fnd::IAllocator* allocator);
-        inline static ResourceLoader* Instantiate(csl::fnd::IAllocator* allocator) {
+        inline static ResourceLoader* Create(csl::fnd::IAllocator* allocator) {
             return new (allocator) ResourceLoader(allocator);
         }
 
         void LoadPackfile(const char* uri, uint32_t unk);
-        void LoadResource(const Uri& uri, ResourceTypeInfo resourceTypeInfo, int unk, uint32_t unk2, Unk1& unk3);
+        void LoadResource(const Uri& uri, const ResourceTypeInfo* resourceTypeInfo, int unk, uint32_t unk2, Unk1& locale);
     };
 }

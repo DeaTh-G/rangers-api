@@ -36,7 +36,7 @@ namespace hh::ui {
         csl::ut::MoveArray<SurfRideLayerHandle> layers;
         csl::ut::PointerMap<SurfRide::Layer*, SurfRideLayerHandle> layerMap;
         
-        static GOCSprite* Instantiate(csl::fnd::IAllocator* pAllocator);
+        static GOCSprite* Create(csl::fnd::IAllocator* pAllocator);
 
         LayerController* GetLayerController(SurfRide::Layer* layer, uint16_t id);
         fnd::Handle<SurfRideCastHandle> GetCastHandle(SurfRide::Cast* cast);
