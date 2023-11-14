@@ -14,8 +14,8 @@ namespace hh::fnd {
         csl::ut::MoveArray<ManagedResource*> unk10;
         csl::fnd::Mutex mutex;
 
-        ManagedResource* GetResource(const char* name, const hh::fnd::ResourceTypeInfo* resourceTypeInfo);
     public:
+        ManagedResource* GetResource(const char* name, const hh::fnd::ResourceTypeInfo* resourceTypeInfo);
         ResourceManager();
         void Setup();
 
