@@ -77,5 +77,9 @@ namespace hh::game
 		virtual void OnGOCEvent(GOCEvent event, GameObject& ownerGameObject, void* data);
 
 		static GOComponent* Create(GameObject& ownerGameObject, const GOComponentClass& componentClass);
+
+		inline GameObject* GetOwnerGameObject() {
+			return pOwnerGameObject;
+		}
 	};
 }

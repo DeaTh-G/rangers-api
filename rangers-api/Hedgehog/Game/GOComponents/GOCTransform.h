@@ -36,6 +36,10 @@ namespace hh::game {
         void SetParent(GOCTransform* parent);
         bool IsExistParent();
         
+        inline GOCTransform* GetParent() {
+            return parent;
+        }
+        
         GOCOMPONENT_CLASS_DECLARATION(GOCTransform)
     };
 }

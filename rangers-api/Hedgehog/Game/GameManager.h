@@ -79,7 +79,7 @@ namespace hh::game
 		csl::ut::MoveArray<GameService*> m_Services{ pAllocator };
 		csl::ut::PointerMap<GameServiceClass*, GameService*> m_ServicesByClass{ pAllocator };
 		csl::ut::MoveArray<void*> unk40;
-		csl::ut::MoveArray<void*> unk41; // csl::ut::MoveArray<GameManagerListener> m_ManagerListeners{ pAllocator };
+		csl::ut::MoveArray<GameManagerListener*> m_ManagerListeners{ pAllocator };
 		csl::ut::MoveArray<void*> unk42; // csl::ut::MoveArray<GameObjectListener> m_ObjectListeners{ pAllocator };
 		csl::ut::MoveArray<void*> unk43; // csl::ut::MoveArray<ComponentListener> m_ComponentListeners{ pAllocator };
 		csl::ut::MoveArray<void*> unk44;

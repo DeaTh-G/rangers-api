@@ -12,9 +12,9 @@ namespace csl::ut
 
 		inline bool isFree() const
 		{
-			return reinterpret_cast<size_t>(m_pStr) & 1;
+			return m_pStr == nullptr;
 		}
-		
+
 		void assign(fnd::IAllocator* pAllocator, const char* pStr, int size);
 		
 	public:

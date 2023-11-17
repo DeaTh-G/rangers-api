@@ -39,6 +39,14 @@ namespace hh::game {
         bool HasCamera();
 		virtual void GML_UnkFunc4() override;
 		virtual void GUL_UnkFunc2() override;
+
+        inline void SetLocked(bool value) {
+            inputComponent->SetListening(!value);
+        }
+
+        inline bool IsLocked() {
+            return !inputComponent->IsListening();
+        }
     };
 
     class FreeCameraUnk2 {
@@ -168,5 +176,8 @@ namespace hh::game {
         static DebugCameraManager* Create();
         void ActivateDebugCamera(const DebugCameraInitInfo& initInfo);
         void DeactivateDebugCamera();
+        inline FreeCamera* GetCamera() {
+            return camera;
+        }
     };
 }

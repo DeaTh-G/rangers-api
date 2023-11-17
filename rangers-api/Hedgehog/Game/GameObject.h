@@ -9,6 +9,16 @@ namespace hh::game
 	class GameManager;
 	class GameObject;
 
+	class GameObjectListener {
+	public:
+		virtual ~GameObjectListener() = default;
+		virtual void GOL_UnkFunc1() {}
+		virtual void GOL_UnkFunc2() {}
+		virtual void GOL_UnkFunc3() {}
+		virtual void GOL_UnkFunc4() {}
+		virtual void GOL_UnkFunc5() {}
+	};
+
     class GameObjectClass {
     public:
         const char *pName;
@@ -161,5 +171,8 @@ namespace hh::game
 		T* GetComponent() {
 			return static_cast<T*>(GetComponent(T::GetClass()));
 		}
+
+		void AddListener(GameObjectListener* listener);
+		void RemoveListener(GameObjectListener* listener);
 	};
 }

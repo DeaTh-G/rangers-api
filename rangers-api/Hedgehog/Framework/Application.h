@@ -1,6 +1,12 @@
 #pragma once
 
 namespace hh::fw {
+    class ApplicationListener {
+    public:
+        virtual ~ApplicationListener() = default;
+        virtual void AL_UnkFunc1();
+    };
+
     class Application : public hh::fnd::ReferencedObject, hh::fw::KeyEventHandler, hh::fw::MouseEventHandler {
     public:
         void* unkFromUnkParam1;
@@ -13,6 +19,9 @@ namespace hh::fw {
         inline static Application* GetInstance() {
             return RESOLVE_STATIC_VARIABLE(instance);
         }
+
+        void AddListener(ApplicationListener* listener);
+        void RemoveListener(ApplicationListener* listener);
 
         virtual void Startup() {}
         virtual void UnkFunc2() {}

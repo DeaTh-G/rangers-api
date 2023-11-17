@@ -25,5 +25,6 @@ namespace hh::gfnd {
         void AddRenderable(Renderable* renderable);
         void AddRenderableToViewport(Renderable* renderable, int viewportId);
         ViewportData& GetViewportData(int viewportId);
+        static ViewportData& GetViewportData(void* unkParam, int viewportId);
     };
 }

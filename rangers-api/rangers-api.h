@@ -57,6 +57,7 @@
 #include "Hedgehog/Base/Universe/hhMessenger.h"
 
 #include "Hedgehog/Utility/TempString.h"
+#include "Hedgehog/Utility/TempMoveArray.h"
 #include "Hedgehog/Utility/FSM/TinyFsm.h"
 #include "Hedgehog/Utility/FSM/StateDesc.h"
 #include "Hedgehog/Utility/FSM/State.h"
@@ -183,6 +184,9 @@
 // #include "Hedgehog/Reflection/hhVariantDataUtil.h"
 // #include "Hedgehog/Reflection/hhRflSerializeUtil.h"
 
+#include "Hedgehog/Debug/ViewerContext.h"
+#include "Hedgehog/Debug/Viewer.h"
+
 // Hedgehog Game Library
 #include "Hedgehog/Game/GameService.h"
 #include "Hedgehog/Game/GOComponent.h"
@@ -201,12 +205,22 @@
 #include "Hedgehog/Game/ObjInfoRegistry.h"
 #include "Hedgehog/Game/GameObjectSystem.h"
 #include "Hedgehog/Game/ErrorViewer.h"
+#include "Hedgehog/Game/GameViewerContext.h"
+#include "Hedgehog/Game/ObjectViewerContext.h"
+#include "Hedgehog/Game/ServiceViewerContextBase.h"
+#include "Hedgehog/Game/GameViewerBase.h"
+#include "Hedgehog/Game/MousePickingViewer.h"
 
 #include "Hedgehog/Game/GOComponents/GOCInput.h"
 #include "Hedgehog/Game/GOComponents/GOCTransform.h"
 
 #include "Hedgehog/Game/DevMenu/Menu.h"
 #include "Hedgehog/Game/FreeCamera.h"
+
+#include "Hedgehog/Physics/PhysicsWorld.h"
+#include "Hedgehog/Physics/PhysicsViewerContext.h"
+#include "Hedgehog/Physics/PhysicsViewerBase.h"
+#include "Hedgehog/Physics/PhysicsMousePickingViewer.h"
 
 #include "Hedgehog/Sound/GOCSound.h"
 

@@ -12,7 +12,7 @@ namespace hh::game {
     public:
         enum class Flags : char {
             LISTENING = 0,
-            ENABLED = 1,
+            CAPTURE_INPUTS = 1,
         };
     private:
         // enum class ActionState : uint16_t {
@@ -61,6 +61,10 @@ namespace hh::game {
 
         inline char GetInternalPlayerInputId() {
             return internalPlayerInputIndex;
+        }
+
+        inline bool IsListening() {
+            return flags.test(Flags::LISTENING);
         }
 
         void RegisterInputListener(InputListener& listener);
