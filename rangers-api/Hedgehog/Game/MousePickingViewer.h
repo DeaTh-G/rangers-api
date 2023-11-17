@@ -14,8 +14,8 @@ namespace hh::game {
         
         virtual void GVCL_UnkFunc1() override;
         virtual void GVCL_UnkFunc2() override;
-		virtual void GML_UnkFunc1() override;
-		virtual void GML_UnkFunc2() override;
+		virtual void GameObjectAddedCallback(GameManager* gameManager, GameObject* gameObject) override;
+		virtual void GameObjectRemovedCallback(GameManager* gameManager, GameObject* gameObject) override;
         virtual bool MEH_Unk2() override;
         virtual void AL_UnkFunc1() override;
     

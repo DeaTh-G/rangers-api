@@ -43,10 +43,10 @@ namespace hh::game
 	{
 	public:
 		virtual ~GameManagerListener() = default;
-		virtual void GML_UnkFunc1() {}
-		virtual void GML_UnkFunc2() {}
-		virtual void GML_UnkFunc3() {}
-		virtual void GML_UnkFunc4() {}
+		virtual void GameObjectAddedCallback(GameManager* gameManager, GameObject* gameObject) {}
+		virtual void GameObjectRemovedCallback(GameManager* gameManager, GameObject* gameObject) {}
+		virtual void GameServiceAddedCallback(GameService* gameService) {}
+		virtual void GameServiceRemovedCallback(GameService* gameService) {}
 		virtual void GML_UnkFunc5() {}
 		virtual void GML_UnkFunc6() {}
 		virtual void GML_UnkFunc7() {}
@@ -186,6 +186,7 @@ namespace hh::game
 		void UnregisterGameStepListener(GameStepListener& listener);
 		void RegisterGamePauseListener(GamePauseListener& listener);
 		void UnregisterGamePauseListener(GamePauseListener& listener);
+		void AddListener(GameManagerListener* listener);
+		void RemoveListener(GameManagerListener* listener);
 	};
 }
-

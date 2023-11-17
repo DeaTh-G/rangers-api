@@ -2,13 +2,9 @@
 
 namespace hh::game {
     class GOCTransform : public GOComponent {
-        uint64_t unk1;
-        uint64_t unk2;
+        csl::ut::LinkListNode node;
         GOCTransform* parent;
-        uint32_t unk4;
-        uint64_t unk5;
-        uint64_t unk6;
-        uint64_t unk7;
+        csl::ut::LinkList<GOCTransform> children;
     public:
         csl::math::Transform transform;
         fnd::HFrame* frame;
@@ -38,6 +34,10 @@ namespace hh::game {
         
         inline GOCTransform* GetParent() {
             return parent;
+        }
+
+        inline const csl::ut::LinkList<GOCTransform>& GetChildren() {
+            return children;
         }
         
         GOCOMPONENT_CLASS_DECLARATION(GOCTransform)

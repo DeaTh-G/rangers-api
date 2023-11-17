@@ -13,7 +13,7 @@ namespace hh::game {
 
         virtual void GVCL_UnkFunc1() override;
         virtual void GVCL_UnkFunc2() override;
-		virtual void GML_UnkFunc3() override;
-		virtual void GML_UnkFunc4() override;
+		virtual void GameServiceAddedCallback(GameService* gameService) override;
+		virtual void GameServiceRemovedCallback(GameService* gameService) override;
     };
 }

@@ -37,7 +37,7 @@ namespace hh::game {
         FreeCamera(csl::fnd::IAllocator* allocator, const CreateInfo& createInfo);
         void Initialize(csl::fnd::IAllocator* allocator);
         bool HasCamera();
-		virtual void GML_UnkFunc4() override;
+		virtual void GameServiceRemovedCallback(GameService* gameService) override;
 		virtual void GUL_UnkFunc2() override;
 
         inline void SetLocked(bool value) {
