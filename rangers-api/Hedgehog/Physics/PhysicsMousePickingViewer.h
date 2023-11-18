@@ -1,7 +1,6 @@
 #pragma once
 
 namespace hh::physics {
-
     class PhysicsMousePickingViewer
         : public PhysicsViewerBase
         , public PhysicsWorldListener
@@ -9,21 +8,26 @@ namespace hh::physics {
         , public fw::ApplicationListener
     {
     public:
-        struct Unk1 {
+        class PhysicsMouseSpringAction {
+        public:
             csl::math::Vector4 unk1;
-            csl::math::Vector4 unk2;
+            float unk2;
+            float unk3;
+            void* obj;
 
-            Unk1();
+            PhysicsMouseSpringAction();
         };
 
         game::GameApplication* gameApplication;
-        Unk1 unk201;
-        uint8_t unk202;
-        csl::ut::InplaceMoveArray<void*, 2> unk203;
+        PhysicsMouseSpringAction mouseSpringAction;
+        bool mouseDown;
+        csl::ut::InplaceMoveArray<PhysicsViewerBase*, 2> physicsViewers;
 
-        virtual int64_t UnkFunc5() override;
-        virtual void PVCL_UnkFunc1() override;
-        virtual void PVCL_UnkFunc2() override;
+        static unsigned int selectionMask;
+
+        virtual int OnLifeCycleChange(bool created) override;
+        virtual void PhysicsWorldAdded(PhysicsWorld* physicsWorld) override;
+        virtual void PhysicsWorldRemoved(PhysicsWorld* physicsWorld) override;
         virtual void PWL_UnkFunc2() override;
         virtual bool MEH_Unk1() override;
         virtual bool MEH_Unk2() override;

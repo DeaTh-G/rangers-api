@@ -81,5 +81,12 @@ namespace hh::game
 		inline GameObject* GetOwnerGameObject() {
 			return pOwnerGameObject;
 		}
+
+		GOComponent* GetComponentByClass(const GOComponentClass& componentClass) const;
+
+		template<typename T>
+		GOComponent* GetComponent() const {
+			GetComponentByClass(T::GetClass());
+		}
 	};
 }

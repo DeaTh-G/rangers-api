@@ -135,9 +135,20 @@
 #include "Hedgehog/Graphics/RenderingEngine.h"
 #include "Hedgehog/Graphics/RenderingEngineNeedle.h"
 
+#include "Hedgehog/Font/ResBitmapFont.h"
+#include "Hedgehog/Font/TextListener.h"
+#include "Hedgehog/Font/FontContainer.h"
+
 // Hedgehog Framework
 #include "Hedgehog/Framework/KeyEventHandler.h"
 #include "Hedgehog/Framework/MouseEventHandler.h"
+#include "Hedgehog/Framework/EventStack.h"
+#include "Hedgehog/Framework/Window.h"
+#include "Hedgehog/Framework/WindowD3D11.h"
+#include "Hedgehog/Framework/FrameworkEnvironment.h"
+#include "Hedgehog/Framework/BaseFramework.h"
+#include "Hedgehog/Framework/FrameworkWin32.h"
+#include "Hedgehog/Framework/Framework.h"
 #include "Hedgehog/Framework/AppModule.h"
 #include "Hedgehog/Framework/Application.h"
 
@@ -145,8 +156,6 @@
 #include "Hedgehog/HID/InputDevice.h"
 #include "Hedgehog/HID/InputDeviceFactory.h"
 #include "Hedgehog/HID/ActiveDeviceManager.h"
-#include "Hedgehog/HID/DeviceManager.h"
-#include "Hedgehog/HID/DeviceManagerWin32.h"
 #include "Hedgehog/HID/InputMap.h"
 
 #include "Hedgehog/HID/InputDevices/Keyboard.h"
@@ -160,7 +169,8 @@
 #include "Hedgehog/HID/InputDevices/Vibration.h"
 #include "Hedgehog/HID/InputDevices/VibrationWin32.h"
 
-#include "Hedgehog/HID/ActiveDeviceManager.h"
+#include "Hedgehog/HID/DeviceManager.h"
+#include "Hedgehog/HID/DeviceManagerWin32.h"
 
 // // // System Messages
 // // #include "System/Messages/MsgRobChaosEmerald.h"
@@ -186,6 +196,8 @@
 
 #include "Hedgehog/Debug/ViewerContext.h"
 #include "Hedgehog/Debug/Viewer.h"
+#include "Hedgehog/Debug/ViewerContextManager.h"
+#include "Hedgehog/Debug/ViewerManager.h"
 
 // Hedgehog Game Library
 #include "Hedgehog/Game/GameService.h"
@@ -217,10 +229,15 @@
 #include "Hedgehog/Game/DevMenu/Menu.h"
 #include "Hedgehog/Game/FreeCamera.h"
 
+#include "Hedgehog/Physics/ShapeHolder.h"
+#include "Hedgehog/Physics/EventQueue.h"
 #include "Hedgehog/Physics/PhysicsWorld.h"
+#include "Hedgehog/Physics/PhysicsWorldBullet.h"
+#include "Hedgehog/Physics/GOCCollider.h"
 #include "Hedgehog/Physics/PhysicsViewerContext.h"
 #include "Hedgehog/Physics/PhysicsViewerBase.h"
 #include "Hedgehog/Physics/PhysicsMousePickingViewer.h"
+#include "Hedgehog/Physics/PhysicsPickedObjectViewer.h"
 
 #include "Hedgehog/Sound/GOCSound.h"
 
@@ -243,9 +260,6 @@
 #include "SurfRide/ImageCast.h"
 #include "SurfRide/ReferenceCast.h"
 
-#include "Hedgehog/Font/ResBitmapFont.h"
-#include "Hedgehog/Font/TextListener.h"
-#include "Hedgehog/Font/FontContainer.h"
 #include "Hedgehog/Text/ConverseTextListener.h"
 #include "Hedgehog/Text/ConverseData.h"
 #include "Hedgehog/Text/ConverseDataCollection.h"

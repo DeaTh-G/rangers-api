@@ -8,4 +8,6 @@ namespace hh::font {
         virtual void FCL_UnkFunc2() {}
         virtual void FCL_UnkFunc3() {}
     };
+
+    class FontContainer;
 }

@@ -9,12 +9,12 @@ namespace hh::fw {
 
     class Application : public hh::fnd::ReferencedObject, hh::fw::KeyEventHandler, hh::fw::MouseEventHandler {
     public:
-        void* unkFromUnkParam1;
+        FrameworkEnvironment* frameworkEnvironment;
         csl::ut::MoveArray<void*> unk2;
         csl::ut::MoveArray<void*> unk3;
 
         static Application* instance;
-        Application(csl::fnd::IAllocator* pAllocator, void* unkParam1);
+        Application(csl::fnd::IAllocator* pAllocator, FrameworkEnvironment* frameworkEnvironment);
 
         inline static Application* GetInstance() {
             return RESOLVE_STATIC_VARIABLE(instance);
@@ -22,6 +22,8 @@ namespace hh::fw {
 
         void AddListener(ApplicationListener* listener);
         void RemoveListener(ApplicationListener* listener);
+        void AddMouseEventHandler(MouseEventHandler* handler, uint32_t unkParam1);
+        void RemoveMouseEventHandler(MouseEventHandler* handler);
 
         virtual void Startup() {}
         virtual void UnkFunc2() {}

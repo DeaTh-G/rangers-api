@@ -4,8 +4,8 @@ namespace app {
     class MyApplication : public hh::game::GameApplication {
         csl::ut::MoveArray<void*> unk201;
     public:
-        MyApplication(csl::fnd::IAllocator* pAllocator, void* unkParam1);
-        static MyApplication* Create(void* unkParam1, csl::fnd::IAllocator* pAllocator);
+        MyApplication(csl::fnd::IAllocator* pAllocator, hh::fw::FrameworkEnvironment* frameworkEnvironment);
+        static MyApplication* Create(hh::fw::FrameworkEnvironment* frameworkEnvironment, csl::fnd::IAllocator* pAllocator);
 
         virtual void UnkFunc1();
         virtual void UnkFunc2();

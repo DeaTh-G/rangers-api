@@ -1,11 +1,23 @@
 #pragma once
 
 namespace hh::physics {
+    class PickedObjectInfo {
+    public:
+        game::GOComponent* collider;
+        csl::math::Vector4 unk2;
+        csl::math::Vector4 unk3;
+        uint32_t unk4;
+        int unk5;
+        bool unk6;
+        
+        PickedObjectInfo();
+    };
+
     class PhysicsViewerContextListener {
     public:
         virtual ~PhysicsViewerContextListener() = default;
-        virtual void PVCL_UnkFunc1() {}
-        virtual void PVCL_UnkFunc2() {}
+        virtual void PhysicsWorldAdded(PhysicsWorld* physicsWorld) {}
+        virtual void PhysicsWorldRemoved(PhysicsWorld* physicsWorld) {}
         virtual void PVCL_UnkFunc3() {}
     };
 
@@ -14,19 +26,19 @@ namespace hh::physics {
         , public PhysicsWorldListener
     {
     public:
-        csl::ut::MoveArray<void*> unk201{ GetAllocator() };
-        csl::ut::MoveArray<void*> unk202{ GetAllocator() };
-        uint64_t unk203;
-        csl::math::Vector4 unk204;
-        csl::math::Vector4 unk205;
-        uint32_t unk206;
-        int unk207;
-        uint8_t unk208;
+        csl::ut::MoveArray<PhysicsViewerContextListener*> listeners{ GetAllocator() };
+        csl::ut::MoveArray<PhysicsWorld*> worlds{ GetAllocator() };
+        PickedObjectInfo pickedObject;
         void* unk209; // object specific to this viewer that's created in the constructor
         csl::ut::VariableString unk210[32];
         uint64_t unk211;
     
+        virtual uint64_t UnkFunc4() override;
+        virtual uint64_t UnkFunc5() override;
         virtual void PWL_UnkFunc2() override;
+
+        void AddListener(PhysicsViewerContextListener* listener);
+        void RemoveListener(PhysicsViewerContextListener* listener);
 
         VIEWER_CONTEXT_CLASS_DECLARATION(PhysicsViewerContext)
     };

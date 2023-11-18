@@ -1,7 +1,7 @@
 #pragma once
 
 #define VIEWER_CONTEXT_CLASS_DECLARATION(ClassName) private:\
-		static const hh::dbg::ViewerContextClass* instance;\
+		static const hh::dbg::ViewerContextClass viewerContextClass;\
         ClassName(csl::fnd::IAllocator* allocator);\
 		static ClassName* Create(csl::fnd::IAllocator* allocator);\
 	public:\
@@ -20,16 +20,20 @@ namespace hh::dbg {
         const ViewerContextClass* viewerContextClass;
     public:
         ViewerContext(csl::fnd::IAllocator* allocator);
-
-        inline static ViewerContext* Create(csl::fnd::IAllocator* allocator, const ViewerContextClass* viewerContextClass) {
-            ViewerContext* ret = viewerContextClass->instantiator(allocator);
-            ret->viewerContextClass = viewerContextClass;
-            return ret;
+        
+        static ViewerContext* Create(csl::fnd::IAllocator* allocator, const ViewerContextClass* viewerContextClass) {
+            ViewerContext* ctx = viewerContextClass->instantiator(allocator);
+            ctx->viewerContextClass = viewerContextClass;
+            return ctx;
         }
 
         template<typename T>
         static T* Create(csl::fnd::IAllocator* allocator) {
             return static_cast<T*>(Create(allocator, T::GetClass()));
         }
+
+        virtual uint64_t Initialize(const csl::ut::MoveArray<fnd::Reference<ViewerContext>>& viewerContexts) {}
+        virtual uint64_t OnCreated() {}
+        virtual uint64_t OnDestroyed() {}
     };
 }

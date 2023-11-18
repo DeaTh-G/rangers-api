@@ -12,7 +12,7 @@ namespace hh::game {
             return RESOLVE_STATIC_VARIABLE(instance);
         }
 
-        GameApplication(csl::fnd::IAllocator* pAllocator, void* unkParam1);
+        GameApplication(csl::fnd::IAllocator* pAllocator, fw::FrameworkEnvironment* frameworkEnvironment);
         
         inline GameUpdater& GetGameUpdater() const {
             return gameUpdater;

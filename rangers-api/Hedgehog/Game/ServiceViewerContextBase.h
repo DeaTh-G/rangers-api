@@ -6,11 +6,16 @@ namespace hh::game {
         , public GameViewerContextListener
         , public GameManagerListener
     {
-        uint64_t unk101;
+        fnd::Reference<GameViewerContext> gameViewerContext;
         const GameServiceClass* gameServiceClass;
     public:
         ServiceViewerContextBase(csl::fnd::IAllocator* allocator, const GameServiceClass* gameServiceClass);
 
+        virtual uint64_t Initialize(const csl::ut::MoveArray<fnd::Reference<ViewerContext>>& viewerContexts) override;
+        virtual uint64_t OnCreated() override;
+        virtual uint64_t OnDestroyed() override;
+        virtual uint64_t UnkFunc4() {}
+        virtual uint64_t UnkFunc5() {}
         virtual void GVCL_UnkFunc1() override;
         virtual void GVCL_UnkFunc2() override;
 		virtual void GameServiceAddedCallback(GameService* gameService) override;

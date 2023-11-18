@@ -3,24 +3,25 @@
 #define VIEWER_CLASS_DECLARATION(ClassName) private:\
         ClassName(csl::fnd::IAllocator* allocator);\
 	public:\
-		static const hh::dbg::ViewerClass* instance;\
+		static const hh::dbg::ViewerClass viewerClass;\
 		static ClassName* Create(csl::fnd::IAllocator* allocator);
 
 namespace hh::dbg {
+    class ViewerManager;
     class Viewer : public fnd::ReferencedObject {
+    public:
         bool unk1;
         uint64_t unk2;
-        uint64_t unk3;
+        const char* name;
         uint32_t unk4;
-        void* someDebuggerThing;
-    public:
+        ViewerManager* viewerManager;
         Viewer(csl::fnd::IAllocator* allocator);
 
-        virtual int64_t UnkFunc1();
+        virtual void* GetFamilyID();
         virtual int64_t UnkFunc2() {}
         virtual int64_t UnkFunc3() {}
         virtual int64_t UnkFunc4() {}
-        virtual int64_t UnkFunc5();
+        virtual int OnLifeCycleChange(bool created);
 
         ViewerContext* GetViewerContext(ViewerContextClass* viewerContextClass);
 
@@ -30,7 +31,7 @@ namespace hh::dbg {
         }
     };
     
-    class ViewerClass {
+    struct ViewerClass {
         const char* name;
         Viewer* (*instantiator)(csl::fnd::IAllocator* allocator);
     };

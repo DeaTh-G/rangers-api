@@ -13,6 +13,7 @@ namespace hh::game {
         uint64_t unk103;
         csl::ut::MoveArray<void*> listeners{ GetAllocator() };
     
+        virtual uint64_t Initialize(const csl::ut::MoveArray<fnd::Reference<ViewerContext>>& viewerContexts) override;
         virtual void GVCL_UnkFunc1() override;
         virtual void GVCL_UnkFunc2() override;
 		virtual void GameObjectRemovedCallback(GameManager* gameManager, GameObject* gameObject) override;

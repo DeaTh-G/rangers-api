@@ -6,8 +6,8 @@ namespace hh::hid {
         csl::ut::MoveArray<void*> unk2;
         csl::ut::MoveArray<void*> unk3;
         uint32_t unk4; // 8 nibbles with initial values going from 0 to 7
-        InputDevice* unk5;
-        InputDevice* unk6;
+        Keyboard* keyboard;
+        Mouse* mouse;
         uint64_t unk7;
         ActiveDeviceManager* activeDeviceManager;
         InputDeviceFactory inputDeviceFactory;
