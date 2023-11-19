@@ -16,6 +16,7 @@ namespace app::game {
         uint32_t unk8;
         bool unk9;
 
+        void SetState(unsigned int stateId);
 		virtual void* GetClassId() override;
         virtual bool UnkFunc4() { return true; }
         virtual bool UnkFunc5() {}

@@ -31,6 +31,7 @@ namespace hh::fnd {
         class Listener {
         public:
             virtual ~Listener();
+            virtual void HFrameUpdatedCallback(const HFrame* frame, bool unkParam);
         };
 
         enum class Flag : uint32_t {

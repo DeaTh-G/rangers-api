@@ -28,6 +28,10 @@ namespace app::player {
         };
 
         GOCPlayerVisual(csl::fnd::IAllocator* allocator);
+		virtual void* GetClassId() override;
+		virtual void Update() override;
+		virtual void GetDebugInfoMaybe() override;
+		virtual void OnGOCEvent(GOCEvent event, hh::game::GameObject& ownerGameObject, void* data) override;
 
         void Initialize(const Config& config);
 

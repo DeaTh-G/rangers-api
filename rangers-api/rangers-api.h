@@ -24,6 +24,7 @@
 #include "Sonicteam/Utility/collections/InPlaceMoveArray.h"
 #include "Sonicteam/Utility/collections/PointerMap.h"
 #include "Sonicteam/Utility/collections/StringMap.h"
+#include "Sonicteam/Utility/Hash.h"
 #include "Sonicteam/Utility/BasicString.h"
 #include "Sonicteam/Utility/Bitset.h"
 #include "Sonicteam/Utility/Color.h"
@@ -222,12 +223,20 @@
 #include "Hedgehog/Game/ServiceViewerContextBase.h"
 #include "Hedgehog/Game/GameViewerBase.h"
 #include "Hedgehog/Game/MousePickingViewer.h"
+#include "Hedgehog/Game/ResObjectWorld.h"
+#include "Hedgehog/Game/ObjectWorldChunkLayer.h"
+#include "Hedgehog/Game/ObjectWorldChunk.h"
+#include "Hedgehog/Game/ObjectWorldExtension.h"
+#include "Hedgehog/Game/ObjectWorld.h"
 
 #include "Hedgehog/Game/GOComponents/GOCInput.h"
 #include "Hedgehog/Game/GOComponents/GOCTransform.h"
 
 #include "Hedgehog/Game/DevMenu/Menu.h"
 #include "Hedgehog/Game/FreeCamera.h"
+
+#include "Hedgehog/Graphics/GOCVisual.h"
+#include "Hedgehog/Graphics/GOCVisualTransformed.h"
 
 #include "Hedgehog/Physics/ShapeHolder.h"
 #include "Hedgehog/Physics/EventQueue.h"
@@ -242,10 +251,13 @@
 #include "Hedgehog/Sound/GOCSound.h"
 
 #include "Hedgehog/Animation/Trigger.h"
-#include "Hedgehog/Animation/AnimationState.h"
+#include "Hedgehog/Animation/AnimationStateMachine.h"
 #include "Hedgehog/Animation/GOCAnimation.h"
 #include "Hedgehog/Animation/GOCAnimationSingle.h"
 #include "Hedgehog/Animation/GOCAnimator.h"
+#include "Hedgehog/Animation/ResAnimator.h"
+#include "Hedgehog/Animation/AsmResourceManager.h"
+#include "Hedgehog/Animation/AnimationManager.h"
 
 #include "SurfRide/Base.h"
 #include "SurfRide/ReferencedObject.h"
@@ -296,6 +308,8 @@
 #include "Hedgehog/UI/UIListener.h"
 #include "Hedgehog/UI/UIManager.h"
 
+#include "Hedgehog/User/UserInfoEvent.h"
+
 // #include "System/Player/PlayerInformation.h"
 // #include "System/Player/Blackboard.h"
 // #include "System/Player/BlackboardBattle.h"
@@ -341,11 +355,14 @@
 #include "Application/Resource/AppResourceManager.h"
 
 #include "Application/Save/SaveDataAccessor.h"
-#include "Application/Save/SaveManagerListener.h"
+#include "Application/Save/SaveManager.h"
 #include "Application/Save/Accessors/OptionData.h"
 
 
 #include "Application/Level/LevelInfo.h"
+#include "Application/Level/ResLevel.h"
+#include "Application/Level/ResMasterLevel.h"
+#include "Application/Level/LevelManager.h"
 
 #include "Application/Sound/CustomSound.h"
 
@@ -358,6 +375,8 @@
 #include "Application/Game/GameCondition.h"
 #include "Application/Game/GameMode.h"
 #include "Application/Game/GameModeStage.h"
+#include "Application/Game/ApplicationExtension.h"
+#include "Application/Game/ApplicationSequenceExtension.h"
 
 #include "Application/Game/MenuSelect.h"
 #include "Application/Graphics/FxParamManager.h"

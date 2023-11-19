@@ -23,6 +23,7 @@ namespace hh::physics {
         bool mouseDown;
         csl::ut::InplaceMoveArray<PhysicsViewerBase*, 2> physicsViewers;
 
+        static float rayLength;
         static unsigned int selectionMask;
 
         virtual int OnLifeCycleChange(bool created) override;

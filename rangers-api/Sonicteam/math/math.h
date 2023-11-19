@@ -380,3 +380,13 @@ namespace csl::math
 	inline const Vector3* Vector3::Zero = &Constants::Vector3Zero;
 	inline const Quaternion Quaternion::Identity = Constants::QuaternionIdentity;
 }
+
+namespace csl::geom {
+	class Aabb
+	{
+	public:
+		math::Vector3 m_Min{};
+		math::Vector3 m_Max{};
+		static Aabb Transform(const math::Matrix34& matrix, const Aabb& aabb);
+	};
+}

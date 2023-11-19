@@ -31,6 +31,12 @@ namespace hh::ui {
             uint32_t unk3;
         };
 
+		virtual void* GetClassId() override;
+		virtual void Update() override;
+		virtual void GetDebugInfoMaybe() override;
+		virtual bool ProcessMessage(fnd::Message& msg) override;
+		virtual void OnGOCEvent(GOCEvent event, game::GameObject& ownerGameObject, void* data) override;
+
         static game::GOComponentClass* GetClass();
         void Initialize(const Config& config);
         void SetProject(SurfRide::Project* project);

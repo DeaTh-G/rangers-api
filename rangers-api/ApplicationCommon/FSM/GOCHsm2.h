@@ -16,6 +16,11 @@ namespace app_cmn::fsm {
         };
 
         GOCHsm2(csl::fnd::IAllocator* pAllocator);
+		virtual void* GetClassId() override;
+		virtual void Update() override;
+		virtual void GetDebugInfoMaybe() override;
+		virtual bool ProcessMessage(hh::fnd::Message& msg) override;
+		virtual void OnGOCEvent(GOCEvent event, hh::game::GameObject& ownerGameObject, void* data) override;
         static GOCHsm2* Create(csl::fnd::IAllocator* pAllocator);
         void Initialize(const Config& config);
     };

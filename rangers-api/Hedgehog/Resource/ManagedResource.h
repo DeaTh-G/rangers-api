@@ -1,5 +1,12 @@
 #pragma once
 
+#define MANAGED_RESOURCE_CLASS_DECLARATION(ClassName) private:\
+		static const hh::fnd::ResourceTypeInfo* typeInfo;\
+		ClassName(csl::fnd::IAllocator* allocator);\
+		static ClassName* Create(csl::fnd::IAllocator* allocator);\
+	public:\
+		static const hh::fnd::ResourceTypeInfo* GetTypeInfo();
+
 namespace hh::fnd {
     class ManagedResource;
 
