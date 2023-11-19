@@ -17,5 +17,5 @@ namespace hh::game
 	};
 	
 	template<typename TValue>
-	class ObjectMap : public HashMap<ObjectId, TValue, ObjectMapOperation> {};
+	class ObjectMap : public csl::ut::HashMap<ObjectId, TValue, ObjectMapOperation> {};
 }

@@ -224,6 +224,7 @@
 #include "Hedgehog/Game/GameViewerBase.h"
 #include "Hedgehog/Game/MousePickingViewer.h"
 #include "Hedgehog/Game/ResObjectWorld.h"
+#include "Hedgehog/Game/ObjectMap.h"
 #include "Hedgehog/Game/ObjectWorldChunkLayer.h"
 #include "Hedgehog/Game/ObjectWorldChunk.h"
 #include "Hedgehog/Game/ObjectWorldExtension.h"
