@@ -67,6 +67,8 @@ namespace hh::game
 
 	class GameApplication;
 
+	struct WorldObjectCInfo;
+
 	class GameManager : public fnd::ReferencedObject, public fnd::ReloaderListener, private csl::ut::NonCopyable
 	{
 		GameService* CreateService(GameServiceClass* gameServiceClass, csl::fnd::IAllocator* residentAllocator);
@@ -180,8 +182,8 @@ namespace hh::game
 		}
 
 		void RegisterService(GameService* service);
-		void RegisterObject(GameObject* object, void* transform, GameObject* parent, void* probablyObjInfoOrSomething);
-		void RegisterNamedObject(GameObject* object, const char* name, bool copyName, void* transform, GameObject* parent);
+		void RegisterObject(GameObject* object, fnd::WorldPosition* transform, GameObject* parent, const WorldObjectCInfo& cInfo);
+		void RegisterNamedObject(GameObject* object, const char* name, bool copyName, fnd::WorldPosition* transform, GameObject* parent);
 		void RegisterGameStepListener(GameStepListener& listener);
 		void UnregisterGameStepListener(GameStepListener& listener);
 		void RegisterGamePauseListener(GamePauseListener& listener);

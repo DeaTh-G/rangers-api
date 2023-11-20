@@ -213,6 +213,31 @@ namespace csl::math
 		}
 	};
 
+	class Position : public Eigen::Vector3f
+	{
+	public:
+		static const Position* Zero;
+		
+		Position() : Eigen::Vector3f()
+		{
+
+		}
+		
+		Position(float x, float y, float z) : Eigen::Vector3f(x, y, z)
+		{
+			
+		}
+		
+		Position(const Eigen::Vector3f& vec) : Eigen::Vector3f(vec.x(), vec.y(), vec.z())
+		{
+			
+		}
+
+		float GetX() const { return x(); }
+		float GetY() const { return y(); }
+		float GetZ() const { return z(); }
+	};
+
 	class Segment3
 	{
 	public:

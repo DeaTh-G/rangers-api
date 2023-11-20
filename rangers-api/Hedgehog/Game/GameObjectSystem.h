@@ -10,11 +10,11 @@ namespace hh::game {
 
         csl::fnd::IAllocator* pHeapAllocator;
         fnd::ThreadSafeTlsfHeapAllocator heapAllocator;
-        GameObjectRegistry* pGameObjectRegistry;
-        GOComponentRegistry* pGOComponentRegistry;
+    public:
+        GameObjectRegistry* gameObjectRegistry;
+        GOComponentRegistry* goComponentRegistry;
 
         static fnd::HandleManager* handleManager;
-    public:
         GameObjectSystem(csl::fnd::IAllocator* pAllocator);
 
         // Fully inlined in Frontiers

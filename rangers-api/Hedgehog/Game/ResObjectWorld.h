@@ -14,24 +14,29 @@ namespace hh::game {
         }
     };
 
-    struct ObjectExtensionData {
+    struct ComponentData {
         uint64_t unk1;
         const char* type;
         uint64_t size;
         void* data;
     };
 
+    struct ObjectTransformData {
+        csl::math::Position position;
+        csl::math::Position rotation;
+    };
+
     struct ObjectData {
         uint32_t unk1;
         uint32_t unk2;
-        const char* type;
+        const char* gameObjectClass;
         const char* name;
         ObjectId id;
         ObjectId parentID;
-        fnd::WorldPosition worldPosition;
-        fnd::WorldPosition worldPositionOffset;
-        csl::ut::MoveArray<ObjectExtensionData*> extensionParameters;
-        void* parameters;
+        ObjectTransformData transform;
+        ObjectTransformData localTransform;
+        csl::ut::MoveArray<ComponentData*> componentData;
+        void* objInfo;
     };
 
     struct ObjectWorldData {
@@ -42,10 +47,10 @@ namespace hh::game {
     };
 
     class ResObjectWorld : public fnd::ManagedResource {
-        ObjectWorldData* binaryData;
     public:
+        ObjectWorldData* binaryData;
         virtual void Load(void* data, size_t size);
-        csl::ut::MoveArray<ObjectData*>& GetObjects() const;
+        const csl::ut::MoveArray<ObjectData*>& GetObjects() const;
 
         MANAGED_RESOURCE_CLASS_DECLARATION(ResObjectWorld)
     };

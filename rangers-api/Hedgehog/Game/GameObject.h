@@ -30,15 +30,18 @@ namespace hh::game
         uint64_t unk16;
         uint64_t unk17;
         uint32_t memberValueCount;
-        hh::fnd::RflClassMember::Value* pMemberValues;
-        hh::fnd::RflClass* reflectionClass;
+        const hh::fnd::RflClassMember::Value* attributes;
+        const hh::fnd::RflClass* rflClass;
 	private:
 		GameObject* Create(csl::fnd::IAllocator* pAllocator) const;
 	public:
 		template<typename T>
 		T* Create(csl::fnd::IAllocator* pAllocator) const { return static_cast<T*>(Create(pAllocator)); }
+		const fnd::RflClassMember::Value* GetAttribute(const char* name) const;
+		// const fnd::RflClassMember::Value* GetAttributeValue(const char* name) const;
     };
 
+	class WorldObjectStatus;
 	class GameObject : public fnd::Messenger
 	{
 		class Unk1 {
@@ -61,7 +64,7 @@ namespace hh::game
 		};
 
 		enum class StatusFlags : char {
-			DONT_PROCESS_MESSAGES = 0,
+			KILLED,
 		};
 
 		csl::ut::Bitset<StatusFlags> statusFlags;
@@ -89,7 +92,7 @@ namespace hh::game
 		csl::ut::MoveArray<GOComponent*> m_AudibleComponents;
 		csl::ut::MoveArray<void*> unk66;
 		Unk1 unk67;
-		void* unk68;
+		WorldObjectStatus* status;
 		GameObjectClass* pClass;
 		Unk2 unk70;
 		Unk2 unk71;
@@ -174,5 +177,7 @@ namespace hh::game
 
 		void AddListener(GameObjectListener* listener);
 		void RemoveListener(GameObjectListener* listener);
+
+		void Kill();
 	};
 }
