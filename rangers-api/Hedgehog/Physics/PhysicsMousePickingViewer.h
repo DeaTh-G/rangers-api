@@ -10,7 +10,7 @@ namespace hh::physics {
     public:
         class PhysicsMouseSpringAction {
         public:
-            csl::math::Vector4 unk1;
+            csl::math::Vector3 unk1;
             float unk2;
             float unk3;
             void* obj;

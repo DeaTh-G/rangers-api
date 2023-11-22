@@ -66,7 +66,7 @@ namespace hh::fnd
 		Type m_Type{};
 		Type m_SubType{};
 		uint32_t m_ArrayLength{};
-		Bitset<uint32_t> m_Flags{};
+		uint32_t m_Flags{};
 		uint32_t m_Offset{};
 		const RflCustomAttributes* m_pAttributes{};
 
@@ -153,7 +153,7 @@ namespace hh::fnd
 		DEFINE_METADATA_FULL(TYPE_FLAGS, "flags", -1, -1),
 		DEFINE_METADATA_WITH_NAME(TYPE_CSTRING, "cstring", char*),
 		DEFINE_METADATA_WITH_NAME(TYPE_STRING, "string", csl::ut::VariableString),
-		DEFINE_METADATA_WITH_NAME(TYPE_OBJECT_ID, "csetobjectid", uint32_t),
+		DEFINE_METADATA_WITH_NAME(TYPE_OBJECT_ID, "csetobjectid", hh::game::ObjectId),
 		DEFINE_METADATA_FULL(TYPE_POSITION, "position", 0xC, 4),
 		DEFINE_METADATA_WITH_NAME(TYPE_COLOR_BYTE, "color8", csl::ut::Color<uint8_t>),
 		DEFINE_METADATA_WITH_NAME(TYPE_COLOR_FLOAT, "colorf", csl::ut::Color<float>),

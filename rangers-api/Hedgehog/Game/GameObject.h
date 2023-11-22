@@ -65,6 +65,7 @@ namespace hh::game
 
 		enum class StatusFlags : char {
 			KILLED,
+			EDITOR = 2,
 		};
 
 		csl::ut::Bitset<StatusFlags> statusFlags;
@@ -177,7 +178,11 @@ namespace hh::game
 
 		void AddListener(GameObjectListener* listener);
 		void RemoveListener(GameObjectListener* listener);
+		void SetEditorStatus(bool status);
 
 		void Kill();
+		inline WorldObjectStatus* GetWorldObjectStatus() const {
+			return status;
+		}
 	};
 }

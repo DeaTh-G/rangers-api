@@ -18,10 +18,7 @@ namespace csl::ut
 		void assign(fnd::IAllocator* pAllocator, const char* pStr, int size);
 		
 	public:
-		VariableString(const char* pStr, csl::fnd::IAllocator* pAlloc)
-		{
-			assign(pAlloc, pStr, -1);
-		}
+		VariableString(const char* pStr, csl::fnd::IAllocator* pAlloc);
 
 		VariableString(const char* pStr, int size, csl::fnd::IAllocator* pAlloc)
 		{

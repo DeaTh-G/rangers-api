@@ -4,6 +4,8 @@ namespace hh::game {
     class ObjectWorldListener {
     public:
         virtual ~ObjectWorldListener() = default;
+        virtual void WorldChunkAddedCallback(ObjectWorldChunk* chunk) {}
+        virtual void WorldChunkRemovedCallback(ObjectWorldChunk* chunk) {}
     };
 
     class ObjectWorld : public GameService, public GameStepListener {
@@ -11,7 +13,7 @@ namespace hh::game {
         csl::ut::MoveArray<ObjectWorldListener*> listeners;
         csl::ut::MoveArray<ObjectWorldExtension*> extensions;
         uint64_t unk104;
-        uint8_t unk105;
+        uint8_t unk105; //flags? 0 = LEVEL_STARTED, 1 = EDITOR_STARTED
 
     public:
 		virtual void* GetClassId() override;

@@ -190,5 +190,8 @@ namespace hh::game
 		void UnregisterGamePauseListener(GamePauseListener& listener);
 		void AddListener(GameManagerListener* listener);
 		void RemoveListener(GameManagerListener* listener);
+		void ReloadInputSettings(bool unkParam1);
+		void ShutdownPendingObjects();
+		void ClearAllGameObjects();
 	};
 }

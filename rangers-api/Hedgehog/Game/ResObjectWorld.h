@@ -1,19 +1,6 @@
 #pragma once
 
 namespace hh::game {
-    struct alignas(16) ObjectId {
-        uint8_t objectId;
-        uint8_t groupId;
-
-        inline bool operator==(const ObjectId& other) const {
-            return objectId == other.objectId && groupId == other.groupId;
-        }
-
-        inline bool operator!=(const ObjectId& other) const {
-            return !operator==(other);
-        }
-    };
-
     struct ComponentData {
         uint64_t unk1;
         const char* type;
@@ -30,13 +17,33 @@ namespace hh::game {
         uint32_t unk1;
         uint32_t unk2;
         const char* gameObjectClass;
-        const char* name;
+        csl::ut::VariableString name;
         ObjectId id;
         ObjectId parentID;
         ObjectTransformData transform;
         ObjectTransformData localTransform;
         csl::ut::MoveArray<ComponentData*> componentData;
         void* objInfo;
+
+        ObjectData(csl::fnd::IAllocator* allocator, const GameObjectClass* gameObjectClass, const char* name, ObjectData* parent, const ObjectTransformData& localTransform)
+            : name{ name, allocator }
+            , gameObjectClass{ gameObjectClass->pName }
+            , localTransform { localTransform }
+            , componentData{ allocator } {
+            std::mt19937_64 mt;
+            id.groupId = mt();
+            id.objectId = mt();
+            
+            if (parent) {
+                parentID = parent->id;
+                // transform = Eigen::
+            } else {
+                parentID = { 0, 0 };
+                transform = localTransform;
+            }
+
+            objInfo = hh::fnd::RflTypeInfoRegistry::GetInstance()->ConstructObject(allocator, gameObjectClass->rflClass->GetName());
+        }
     };
 
     struct ObjectWorldData {
@@ -51,6 +58,13 @@ namespace hh::game {
         ObjectWorldData* binaryData;
         virtual void Load(void* data, size_t size);
         const csl::ut::MoveArray<ObjectData*>& GetObjects() const;
+
+        inline void AddObject(ObjectData* objData) {
+            if (binaryData->objects.get_allocator() == nullptr)
+                binaryData->objects.change_allocator(GetAllocator());
+
+            binaryData->objects.push_back(objData);
+        }
 
         MANAGED_RESOURCE_CLASS_DECLARATION(ResObjectWorld)
     };

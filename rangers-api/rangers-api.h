@@ -175,6 +175,7 @@
 
 // // // System Messages
 // // #include "System/Messages/MsgRobChaosEmerald.h"
+#include "Hedgehog/Game/ObjectId.h"
 
 // Hedgehog Reflection Library
 #include "Hedgehog/Reflection/ResReflection.h"
@@ -225,6 +226,7 @@
 #include "Hedgehog/Game/MousePickingViewer.h"
 #include "Hedgehog/Game/ResObjectWorld.h"
 #include "Hedgehog/Game/ObjectMap.h"
+#include "Hedgehog/Game/ObjectDataAccessor.h"
 #include "Hedgehog/Game/WorldObjectStatus.h"
 #include "Hedgehog/Game/ObjectWorldChunkLayer.h"
 #include "Hedgehog/Game/ObjectWorldChunk.h"
