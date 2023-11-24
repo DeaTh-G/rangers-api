@@ -4,8 +4,8 @@ namespace hh::physics {
     class PickedObjectInfo {
     public:
         game::GOComponent* collider;
-        csl::math::Vector4 unk2;
-        csl::math::Vector4 unk3;
+        csl::math::Vector3 unk2;
+        csl::math::Vector3 unk3;
         uint32_t unk4;
         int unk5;
         bool unk6;

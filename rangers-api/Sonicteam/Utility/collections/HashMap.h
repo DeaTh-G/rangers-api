@@ -70,6 +70,7 @@ namespace csl::ut
 					if (pElem->m_Hash != INVALID_KEY)
 					{
 						Insert(pElem->m_Key, pElem->m_Value);
+						pElem->m_Value.~TValue();
 					}
 				}
 
@@ -176,6 +177,10 @@ namespace csl::ut
 			for (size_t i = 0; i < GetCapacity(); ++i)
 			{
 				auto& element = m_pElements[i];
+				
+				if (element.m_Hash != INVALID_KEY)
+					element.m_Value.~TValue();
+
 				element.m_Hash = INVALID_KEY;
 			}
 		}
@@ -221,7 +226,7 @@ namespace csl::ut
 				}
 			}
 
-			pElem->m_Value = value;
+			new (&pElem->m_Value) TValue(value);
 
 			return { this, idx };
 		}
@@ -279,6 +284,8 @@ namespace csl::ut
 			Elem* pElem = &m_pElements[result.m_CurIdx];
 			pElem->m_Hash = INVALID_KEY;
 			m_Length--;
+
+			pElem->m_Value.~TValue();
 		}
 
 		void Erase(const iterator& iter)
@@ -289,6 +296,8 @@ namespace csl::ut
 			Elem* pElem = &m_pElements[iter.m_CurIdx];
 			pElem->m_Hash = INVALID_KEY;
 			m_Length--;
+
+			pElem->m_Value.~TValue();
 		}
 	};
 }

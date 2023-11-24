@@ -228,8 +228,8 @@
 #include "Hedgehog/Game/ObjectMap.h"
 #include "Hedgehog/Game/ObjectDataAccessor.h"
 #include "Hedgehog/Game/WorldObjectStatus.h"
-#include "Hedgehog/Game/ObjectWorldChunkLayer.h"
 #include "Hedgehog/Game/ObjectWorldChunk.h"
+#include "Hedgehog/Game/ObjectWorldChunkLayer.h"
 #include "Hedgehog/Game/ObjectWorldExtension.h"
 #include "Hedgehog/Game/ObjectWorld.h"
 
@@ -363,6 +363,7 @@
 #include "Application/Save/Accessors/OptionData.h"
 
 
+#include "Application/Level/PlayerInformation.h"
 #include "Application/Level/LevelInfo.h"
 #include "Application/Level/ResLevel.h"
 #include "Application/Level/ResMasterLevel.h"

@@ -2,7 +2,7 @@
 
 namespace app::level {
     class LevelInfo : public hh::game::GameService, public save::SaveManagerListener {
-        void* unk5;
+        void* stageData;
         void* unk6;
         char unk7;
         void* unk8;
@@ -12,7 +12,7 @@ namespace app::level {
         void* unk12;
         void* unk13;
         void* unk14;
-        void* unk15;
+        PlayerInformation* playerInformation;
         uint32_t unk16;
         void* unk17;
         void* unk18;
@@ -25,6 +25,10 @@ namespace app::level {
 		virtual void OnAddedToGame();
 		virtual void OnRemovedFromGame();
         virtual void SML_UnkFunc1();
+
+        inline void* GetStageData() {
+            return stageData;
+        }
 
         GAMESERVICE_CLASS_DECLARATION(LevelInfo)
     };

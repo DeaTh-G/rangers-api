@@ -18,6 +18,7 @@ namespace hh::game {
     bool GetStatusExtrinsic(const GameObjectClass* gameObjectClass, int* type);
 
     class ObjectWorld;
+    class ObjectWorldChunkLayer;
     class ObjectWorldChunk : public fnd::ReferencedObject, public GameManagerListener {
         enum class Flag : uint8_t {
             EDITOR,
@@ -39,6 +40,7 @@ namespace hh::game {
         csl::ut::MoveArray<void*> unk11;
     public:
         ObjectWorldChunk(csl::fnd::IAllocator* allocator, GameManager* gameManager);
+		virtual void GameObjectRemovedCallback(GameManager* gameManager, GameObject* gameObject);
         void AddLayer(ObjectWorldChunkLayer* layer);
         void RemoveLayer(ObjectWorldChunkLayer* layer);
         void RemoveLayerAll();
@@ -47,7 +49,8 @@ namespace hh::game {
 
         ObjectWorldChunkLayer* GetLayerByName(const char* name) const;
 
-        void AddWorldObjectStatus(ObjectData& objectData, bool enabled, int spawnPriority);
+        void AddWorldObjectStatus(ObjectData* objectData, bool enabled, int spawnPriority);
+        void RemoveWorldObjectStatus(ObjectData* objectData);
 
         void AddListener(ObjectWorldChunkListener* listener);
         void RemoveListener(ObjectWorldChunkListener* listener);
@@ -55,7 +58,9 @@ namespace hh::game {
         void DespawnByIndex(int index);
         ObjectDataAccessor GetObjectDataByObjectId(ObjectId id) const;
         ObjectDataAccessor GetObjectDataByName(const char* name) const;
+        GameObject* Spawn(const ObjectData* objectData);
         GameObject* SpawnByObjectId(ObjectId id);
+        GameObject* SpawnByObjectId(ObjectId id, ObjectAttribute filter);
         GameObject* SpawnByIndex(int index, ObjectAttribute filter);
         GameObject* SpawnByAttribute(ObjectAttribute filter);
 
@@ -82,6 +87,12 @@ namespace hh::game {
             for (int i = 0; i < objects.size(); i++) {
                 DespawnByIndex(i);
             }
+        }
+
+        inline void Despawn(ObjectData* objData) {
+            int idx = GetObjectIndexById(objData->id);
+
+            DespawnByIndex(idx);
         }
         
         inline void Restart(bool force) {

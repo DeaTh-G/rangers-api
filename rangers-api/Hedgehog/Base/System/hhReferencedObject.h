@@ -9,13 +9,19 @@ namespace hh::fnd
 		Reference() {
 		}
 
+		Reference(Reference& other) {
+			*this = other;
+		}
+
 		Reference(Reference&& other) {
 			this->ptr = other.ptr;
 			other.ptr = nullptr;
 		}
 
 		Reference(T* rawPtr) {
-			rawPtr->Acquire();
+			if (rawPtr != nullptr)
+				rawPtr->Acquire();
+
 			ptr = rawPtr;
 		}
 
