@@ -138,6 +138,18 @@ namespace app::rfl {
         static void Clean(Agent* pInstance);
     };
 
+    struct DetailMesh {
+        float sampleDistance;
+        float sampleMaxError;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(DetailMesh* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(DetailMesh* pInstance);
+        static void Clean(DetailMesh* pInstance);
+    };
+
     struct OffMeshLinkElement {
         enum class OffMeshLinkDirection : uint8_t {
             OffMeshLinkUnidirectional = 0,
@@ -160,6 +172,17 @@ namespace app::rfl {
         static void Clean(OffMeshLinkElement* pInstance);
     };
 
+    struct OffMeshLinkParameter {
+        csl::ut::MoveArray<OffMeshLinkElement> elements;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(OffMeshLinkParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(OffMeshLinkParameter* pInstance);
+        static void Clean(OffMeshLinkParameter* pInstance);
+    };
+
     struct Filtering {
         bool lowHangingObstacles;
         bool ledgeSpans;
@@ -173,6 +196,72 @@ namespace app::rfl {
         static void Clean(Filtering* pInstance);
     };
 
+    struct World {
+        csl::math::Vector3 aabbMin;
+        csl::math::Vector3 aabbMax;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(World* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(World* pInstance);
+        static void Clean(World* pInstance);
+    };
+
+    struct Rasterization {
+        float voxelSize;
+        float voxelHeight;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(Rasterization* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(Rasterization* pInstance);
+        static void Clean(Rasterization* pInstance);
+    };
+
+    struct Region {
+        int32_t minArea;
+        int32_t mergeArea;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(Region* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(Region* pInstance);
+        static void Clean(Region* pInstance);
+    };
+
+    struct Partitioning {
+        enum class Partition : uint8_t {
+            Watershed = 0,
+            Monotone = 1,
+            Layers = 2,
+        };
+
+        Partition type;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(Partitioning* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(Partitioning* pInstance);
+        static void Clean(Partitioning* pInstance);
+    };
+
+    struct Polygonization {
+        float edgeMaxLength;
+        float maxSimplificationError;
+        int32_t vertsPerPoly;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(Polygonization* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(Polygonization* pInstance);
+        static void Clean(Polygonization* pInstance);
+    };
+
     struct Tiling {
         float size;
         int32_t maxTiles;
@@ -184,6 +273,25 @@ namespace app::rfl {
         static void Construct(Tiling* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(Tiling* pInstance);
         static void Clean(Tiling* pInstance);
+    };
+
+    struct NavMeshParameter {
+        World world;
+        Rasterization rasterization;
+        Agent agent;
+        Region region;
+        Partitioning partitioning;
+        Filtering filtering;
+        Polygonization polygonization;
+        DetailMesh detailMesh;
+        Tiling tiling;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(NavMeshParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(NavMeshParameter* pInstance);
+        static void Clean(NavMeshParameter* pInstance);
     };
 
     struct StatsDataValue {
@@ -207,7 +315,7 @@ namespace app::rfl {
     };
 
     struct StatsDataContainer {
-        csl::ut::Array<StatsDataValue> data;
+        csl::ut::MoveArray<StatsDataValue> data;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -510,6 +618,19 @@ namespace app::rfl {
         static void Construct(FxAtmosphereParameter* pInstance, csl::fnd::IAllocator* pAllocator);
         static void Finish(FxAtmosphereParameter* pInstance);
         static void Clean(FxAtmosphereParameter* pInstance);
+    };
+
+    struct FxCloudShadowParameter {
+        bool enableShadow;
+        int32_t shadowCoverage;
+        float shadowValueMin;
+
+        static const hh::fnd::RflTypeInfo typeInfo;
+        static const hh::fnd::RflClass rflClass;
+    private:
+        static void Construct(FxCloudShadowParameter* pInstance, csl::fnd::IAllocator* pAllocator);
+        static void Finish(FxCloudShadowParameter* pInstance);
+        static void Clean(FxCloudShadowParameter* pInstance);
     };
 
     struct FxDensityDebugParameter {
@@ -2886,7 +3007,7 @@ namespace app::rfl {
         };
 
         Type action;
-        csl::ut::Array<uint32_t> objectIds;
+        csl::ut::MoveArray<hh::game::ObjectId> objectIds;
         float delayTime;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -2963,7 +3084,7 @@ namespace app::rfl {
         csl::ut::VariableString bossPathName;
         csl::ut::VariableString playerPathName;
         bool eventDriven;
-        csl::ut::Array<uint32_t> releaseMapPos;
+        csl::ut::MoveArray<hh::game::ObjectId> releaseMapPos;
         BossDragonChasePathInfo chasePathInfos[16];
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -2976,9 +3097,9 @@ namespace app::rfl {
 
     struct BossGiantSpawner {
         csl::ut::VariableString guidePathName;
-        csl::ut::Array<uint32_t> objectIds;
-        csl::ut::Array<uint32_t> ringSupplyPos;
-        csl::ut::Array<uint32_t> releaseMapPos;
+        csl::ut::MoveArray<hh::game::ObjectId> objectIds;
+        csl::ut::MoveArray<hh::game::ObjectId> ringSupplyPos;
+        csl::ut::MoveArray<hh::game::ObjectId> releaseMapPos;
         bool isEvent;
         bool isDebugMotionTest;
 
@@ -3022,12 +3143,12 @@ namespace app::rfl {
 
     struct BossKnightSpawner {
         csl::ut::VariableString pathNameClimb;
-        uint32_t locatorClimb;
+        hh::game::ObjectId locatorClimb;
         KnightGrindTrapInfo traps[16];
         csl::ut::VariableString pathNameBattle2;
-        uint32_t locatorBattle2Start;
-        csl::ut::Array<uint32_t> locatorBattle2CyFloatWarp;
-        csl::ut::Array<uint32_t> releaseMapPos;
+        hh::game::ObjectId locatorBattle2Start;
+        csl::ut::MoveArray<hh::game::ObjectId> locatorBattle2CyFloatWarp;
+        csl::ut::MoveArray<hh::game::ObjectId> releaseMapPos;
         bool slamBySwitch;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -3040,14 +3161,14 @@ namespace app::rfl {
 
     struct BossRifleSpawner {
         csl::ut::VariableString guidePathName;
-        csl::ut::Array<uint32_t> objectIds;
-        csl::ut::Array<uint32_t> ringSupplyPos;
-        csl::ut::Array<uint32_t> releaseMapPos;
-        csl::ut::Array<uint32_t> normalModeBitWaveIds;
-        csl::ut::Array<uint32_t> alwaysBitWaveIds;
+        csl::ut::MoveArray<hh::game::ObjectId> objectIds;
+        csl::ut::MoveArray<hh::game::ObjectId> ringSupplyPos;
+        csl::ut::MoveArray<hh::game::ObjectId> releaseMapPos;
+        csl::ut::MoveArray<hh::game::ObjectId> normalModeBitWaveIds;
+        csl::ut::MoveArray<hh::game::ObjectId> alwaysBitWaveIds;
         bool isEvent;
         bool isDebugMotionTest;
-        uint32_t beastId;
+        hh::game::ObjectId beastId;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -3059,8 +3180,8 @@ namespace app::rfl {
 
     struct BossRifleBeastSpawner {
         csl::ut::VariableString guidePathName;
-        uint32_t barrier;
-        csl::ut::Array<uint32_t> releaseMapPos;
+        hh::game::ObjectId barrier;
+        csl::ut::MoveArray<hh::game::ObjectId> releaseMapPos;
         bool isEvent;
         bool isDebugMotionTest;
 
@@ -3074,8 +3195,8 @@ namespace app::rfl {
 
     struct ObjBarrierSpawner {
         float size;
-        csl::ut::Array<uint32_t> friendsList;
-        uint32_t boss;
+        csl::ut::MoveArray<hh::game::ObjectId> friendsList;
+        hh::game::ObjectId boss;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -3113,7 +3234,7 @@ namespace app::rfl {
         float modelScale;
         float blockColliderRadius;
         float HitColliderRadius;
-        csl::ut::Array<uint32_t> target;
+        csl::ut::MoveArray<hh::game::ObjectId> target;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -3146,7 +3267,7 @@ namespace app::rfl {
     };
 
     struct BossRingSupplyBaseSpawner {
-        csl::ut::Array<uint32_t> children;
+        csl::ut::MoveArray<hh::game::ObjectId> children;
         bool isUpdateTransform;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -3253,7 +3374,7 @@ namespace app::rfl {
     };
 
     struct ObjCameraClassicChangeParamVolumeSpawner {
-        uint32_t target;
+        hh::game::ObjectId target;
         int32_t priority;
         float viewFieldBottom;
         VolumeTriggerSpawner volume;
@@ -3268,8 +3389,8 @@ namespace app::rfl {
 
     struct ObjCameraClassicLimitSpawner : ObjCameraSpawner {
         csl::ut::VariableString pathName;
-        uint32_t limitPointA;
-        uint32_t limitPointB;
+        hh::game::ObjectId limitPointA;
+        hh::game::ObjectId limitPointB;
         float fovy;
         float distance;
         float screenUpLimit;
@@ -3374,7 +3495,7 @@ namespace app::rfl {
         float ZRot;
         TargetType targetType;
         csl::math::Vector3 TargetPosition;
-        uint32_t targetID;
+        hh::game::ObjectId targetID;
         float targetDistance;
         csl::math::Vector3 offsetFromObject;
 
@@ -3720,7 +3841,7 @@ namespace app::rfl {
     };
 
     struct ObjCameraSubVolumeSpawner {
-        uint32_t target;
+        hh::game::ObjectId target;
         VolumeTriggerSpawner volume;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -3787,7 +3908,7 @@ namespace app::rfl {
             ACTION_ONCE = 1,
         };
 
-        uint32_t target;
+        hh::game::ObjectId target;
         uint32_t priority;
         bool useHighPriority;
         float easeTimeEnter;
@@ -3815,7 +3936,7 @@ namespace app::rfl {
             INTERPOLATE_ABSOLUTE_STABLE = 3,
         };
 
-        uint32_t target;
+        hh::game::ObjectId target;
         uint32_t priority;
         bool useHighPriority;
         float easeTimeEnter;
@@ -3834,7 +3955,7 @@ namespace app::rfl {
     };
 
     struct ObjDefaultCameraSettingSpawner {
-        uint32_t cameraObjectID;
+        hh::game::ObjectId cameraObjectID;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -3964,7 +4085,7 @@ namespace app::rfl {
         int32_t no;
         CorrectModelType modelType;
         csl::math::Vector3 modelOffset;
-        uint32_t locator;
+        hh::game::ObjectId locator;
         ModelType correctModelOrder[5];
         PuzzleSize maxPossiblePuzzleSize;
         uint8_t totalNumBlocksAvailable;
@@ -3975,7 +4096,7 @@ namespace app::rfl {
         float effectScaleOnRewind;
         float effectSpeedOnRewind;
         CorrectShape correctShape;
-        csl::ut::Array<uint32_t> blockList;
+        csl::ut::MoveArray<hh::game::ObjectId> blockList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -4073,8 +4194,8 @@ namespace app::rfl {
 
         ModelType modelType;
         uint8_t shapeID;
-        uint32_t cameraUUIDForAscendingBlock;
-        uint32_t cameraUUIDForDescendingBlock;
+        hh::game::ObjectId cameraUUIDForAscendingBlock;
+        hh::game::ObjectId cameraUUIDForDescendingBlock;
         float cameraSwitchDistance;
         float warpEffectScale;
         float numCellsFromOrigBaseToTop;
@@ -4094,7 +4215,7 @@ namespace app::rfl {
 
     struct ObjActionChainSpawner {
         int32_t no;
-        uint32_t cameraUUID;
+        hh::game::ObjectId cameraUUID;
         float cameraEaseIn;
         float cameraEaseOut;
         float clearWaitTime;
@@ -4174,7 +4295,7 @@ namespace app::rfl {
         bool isPressDead;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -4239,7 +4360,7 @@ namespace app::rfl {
         bool isPressDead;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -4254,11 +4375,11 @@ namespace app::rfl {
 
     struct ObjAirOneWayPanelManagerSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> panelList;
-        uint32_t firstStartPanel;
+        csl::ut::MoveArray<hh::game::ObjectId> panelList;
+        hh::game::ObjectId firstStartPanel;
         bool useTimer;
         float time;
-        uint32_t camActivator;
+        hh::game::ObjectId camActivator;
         float startWaitTime;
         float playerDistance;
 
@@ -4322,7 +4443,7 @@ namespace app::rfl {
         bool isPressDead;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -4510,8 +4631,8 @@ namespace app::rfl {
         int32_t no;
         float limitTime;
         int32_t boundingTotalNum;
-        uint32_t batterBox;
-        uint32_t pitchingMachine;
+        hh::game::ObjectId batterBox;
+        hh::game::ObjectId pitchingMachine;
         GimmickCameraOptionalParam cameraParam;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -4528,7 +4649,7 @@ namespace app::rfl {
         float coolDownRandom;
         float shootVelocity;
         float lifeTime;
-        uint32_t batterBox;
+        hh::game::ObjectId batterBox;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -4739,7 +4860,7 @@ namespace app::rfl {
 
     struct ObjBossBitManagerSpawner {
         bool use;
-        csl::ut::Array<uint32_t> bitIds;
+        csl::ut::MoveArray<hh::game::ObjectId> bitIds;
         csl::ut::VariableString waveName;
         bool turnToTarget;
 
@@ -4853,7 +4974,7 @@ namespace app::rfl {
         InterpolateType interpolateTypeOn;
         InterpolateType interpolateTypeOff;
         bool useReturnCamera;
-        uint32_t returnCameraTarget;
+        hh::game::ObjectId returnCameraTarget;
         float returnCameraHeight;
         float returnCameraInterpolateRatio;
 
@@ -4911,7 +5032,7 @@ namespace app::rfl {
             NumQuestTypes = 7,
         };
 
-        uint32_t target;
+        hh::game::ObjectId target;
         ActivateType type;
         uint32_t priority;
         bool useHighPriority;
@@ -5129,9 +5250,9 @@ namespace app::rfl {
         };
 
         Visual visual;
-        csl::ut::Array<uint32_t> objAmyList;
-        csl::ut::Array<uint32_t> objKnucklesList;
-        csl::ut::Array<uint32_t> objTailsList;
+        csl::ut::MoveArray<hh::game::ObjectId> objAmyList;
+        csl::ut::MoveArray<hh::game::ObjectId> objKnucklesList;
+        csl::ut::MoveArray<hh::game::ObjectId> objTailsList;
         HoleDirection holeDirection;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -5144,8 +5265,8 @@ namespace app::rfl {
 
     struct ObjCyloopTraceManagerSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> volumeList;
-        uint32_t samplePoint;
+        csl::ut::MoveArray<hh::game::ObjectId> volumeList;
+        hh::game::ObjectId samplePoint;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -5188,7 +5309,7 @@ namespace app::rfl {
     };
 
     struct DamegeVolumeTarget {
-        csl::ut::Array<uint32_t> objects;
+        csl::ut::MoveArray<hh::game::ObjectId> objects;
         int32_t damagePoint;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -5299,7 +5420,7 @@ namespace app::rfl {
 
         MoveType moveType;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         csl::math::Vector3 twoPointOffset;
         PatrolType patrolType;
         TimeType timeType;
@@ -5542,7 +5663,7 @@ namespace app::rfl {
         float camInterpolateTimeOnStart;
         float camInterpolateTimeOnFinish;
         bool setCameraLookAt;
-        uint32_t cameraLookAtTarget;
+        hh::game::ObjectId cameraLookAtTarget;
         csl::math::Vector3 cameraLookAt;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -5564,7 +5685,7 @@ namespace app::rfl {
         bool isSkipDisable;
         bool isFrozen;
         EventCameraParam camera;
-        uint32_t playerTrans;
+        hh::game::ObjectId playerTrans;
         bool limitFps30;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -5581,7 +5702,7 @@ namespace app::rfl {
             CONDITION_OR = 1,
         };
 
-        csl::ut::Array<uint32_t> targetList;
+        csl::ut::MoveArray<hh::game::ObjectId> targetList;
         ConditionType condition;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -5629,7 +5750,7 @@ namespace app::rfl {
 
         int32_t no;
         csl::ut::VariableString puzzleID;
-        csl::ut::Array<uint32_t> TargetList;
+        csl::ut::MoveArray<hh::game::ObjectId> TargetList;
         TriggerType Trigger;
         ConditionType Condition;
         Time TimesType;
@@ -5724,7 +5845,7 @@ namespace app::rfl {
     };
 
     struct ObjFallReturnVolumeSpawner {
-        uint32_t returnPoint;
+        hh::game::ObjectId returnPoint;
         VolumeTriggerSpawner volume;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -5767,7 +5888,7 @@ namespace app::rfl {
 
     struct ObjFireworkCactusSpawner {
         int32_t no;
-        uint32_t cactusManager;
+        hh::game::ObjectId cactusManager;
         bool respawnableByMeteorShower;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -5789,7 +5910,7 @@ namespace app::rfl {
         float time;
         CameraType cameraType;
         csl::math::Vector3 cameraPos;
-        uint32_t cameraLocator;
+        hh::game::ObjectId cameraLocator;
         GimmickCameraOptionalParam cameraParam;
         int32_t dropRingNum[5];
         float dropRingHeight;
@@ -5826,7 +5947,7 @@ namespace app::rfl {
     struct ObjFishingPortalSpawner {
         int32_t no;
         int32_t spotId;
-        uint32_t fastTravelLocator;
+        hh::game::ObjectId fastTravelLocator;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -5883,7 +6004,7 @@ namespace app::rfl {
         float driveTime;
         float widthLimit;
         float depthLimit;
-        uint32_t cameraActivator;
+        hh::game::ObjectId cameraActivator;
         ActionNotification actions[3];
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -6044,7 +6165,7 @@ namespace app::rfl {
         ObjGiantCannonSpawner_Camera aimCamera;
         ObjGiantCannonSpawner_Camera shootCamera;
         float loadingTriggerRadius;
-        uint32_t loadingPlayerPosition;
+        hh::game::ObjectId loadingPlayerPosition;
         float loadingWaitTime;
         float turretRotateSpeed;
         float barrelRotateSpeed;
@@ -6061,9 +6182,9 @@ namespace app::rfl {
 
     struct ObjGiantDrainPlugSpawner {
         float eventWaitTime;
-        csl::ut::Array<uint32_t> eventHiddenList;
-        uint32_t afterEventPosition;
-        uint32_t afterEventLookAt;
+        csl::ut::MoveArray<hh::game::ObjectId> eventHiddenList;
+        hh::game::ObjectId afterEventPosition;
+        hh::game::ObjectId afterEventLookAt;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -6095,9 +6216,9 @@ namespace app::rfl {
         int32_t no;
         bool eventDriven;
         csl::ut::VariableString puzzleID;
-        csl::ut::Array<uint32_t> childInfo;
-        csl::ut::Array<uint32_t> childLogic;
-        csl::ut::Array<uint32_t> childEvent;
+        csl::ut::MoveArray<hh::game::ObjectId> childInfo;
+        csl::ut::MoveArray<hh::game::ObjectId> childLogic;
+        csl::ut::MoveArray<hh::game::ObjectId> childEvent;
         csl::ut::VariableString luaName;
         bool isHideMapIcon;
         bool isPuzzle;
@@ -6228,7 +6349,7 @@ namespace app::rfl {
         csl::ut::VariableString pathName;
         SetType setType;
         int8_t num;
-        csl::ut::Array<uint32_t> setNodeList;
+        csl::ut::MoveArray<hh::game::ObjectId> setNodeList;
         bool isLimitedTime;
         uint32_t startHour;
         uint32_t startMin;
@@ -6263,7 +6384,7 @@ namespace app::rfl {
         float frontLimit;
         float backLimit;
         bool enableDepth;
-        uint32_t targetManager;
+        hh::game::ObjectId targetManager;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -6279,7 +6400,7 @@ namespace app::rfl {
         float frontLimit;
         float backLimit;
         bool enableDepth;
-        uint32_t targetManager;
+        hh::game::ObjectId targetManager;
         float pitchRotate;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -6519,7 +6640,7 @@ namespace app::rfl {
         bool isPressDead;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -6700,11 +6821,11 @@ namespace app::rfl {
         csl::ut::VariableString pathName;
         SetType setType;
         int8_t num;
-        csl::ut::Array<uint32_t> setNodeList;
-        uint32_t linkObj;
+        csl::ut::MoveArray<hh::game::ObjectId> setNodeList;
+        hh::game::ObjectId linkObj;
         float colSize;
         bool isRespawn;
-        csl::ut::Array<uint32_t> respawnLTGates;
+        csl::ut::MoveArray<hh::game::ObjectId> respawnLTGates;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -6724,7 +6845,7 @@ namespace app::rfl {
         csl::ut::VariableString pathName;
         SetType setType;
         int8_t num;
-        csl::ut::Array<uint32_t> setNodeList;
+        csl::ut::MoveArray<hh::game::ObjectId> setNodeList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -6849,7 +6970,7 @@ namespace app::rfl {
 
         int32_t no;
         csl::ut::VariableString labelName;
-        uint32_t target;
+        hh::game::ObjectId target;
         uint32_t priority;
         bool useHighPriority;
         float easeTimeEnter;
@@ -7002,8 +7123,8 @@ namespace app::rfl {
     struct OneWayPanelStart {
         bool eventDriven;
         bool keepLightOnFail;
-        csl::ut::Array<uint32_t> panelIds;
-        csl::ut::Array<uint32_t> actionIds;
+        csl::ut::MoveArray<hh::game::ObjectId> panelIds;
+        csl::ut::MoveArray<hh::game::ObjectId> actionIds;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -7027,12 +7148,12 @@ namespace app::rfl {
 
     struct ObjOneWayPanelManagerSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> panelList;
-        uint32_t firstStartPanel;
-        csl::ut::Array<uint32_t> dummyList;
+        csl::ut::MoveArray<hh::game::ObjectId> panelList;
+        hh::game::ObjectId firstStartPanel;
+        csl::ut::MoveArray<hh::game::ObjectId> dummyList;
         bool useTimer;
         float time;
-        uint32_t camActivator;
+        hh::game::ObjectId camActivator;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -7296,7 +7417,7 @@ namespace app::rfl {
         ViewType StageType;
         PassPlaneTriggerSpawner passPlane;
         RestartType restartType;
-        uint32_t camera;
+        hh::game::ObjectId camera;
         float cameraLimit;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -7326,7 +7447,7 @@ namespace app::rfl {
         bool eventDriven;
         csl::ut::VariableString stageCode;
         int32_t portalBitActivateCount;
-        uint32_t fastTravelLocator;
+        hh::game::ObjectId fastTravelLocator;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -7573,7 +7694,7 @@ namespace app::rfl {
         };
 
         uint32_t pathID;
-        csl::ut::Array<uint32_t> nodeList;
+        csl::ut::MoveArray<hh::game::ObjectId> nodeList;
         float startPosition1D;
         float endPosition1D;
         float minSpeed;
@@ -7641,10 +7762,10 @@ namespace app::rfl {
         bool isEnableCollision;
         bool isEnableCeil;
         bool useSubCameraAppear;
-        uint32_t cameraAppear;
+        hh::game::ObjectId cameraAppear;
         float appearWaitTime;
         bool useSubCameraDisappear;
-        uint32_t cameraDisappear;
+        hh::game::ObjectId cameraDisappear;
         float disappearWaitTime;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -7658,9 +7779,9 @@ namespace app::rfl {
     struct ObjPuzzleBarrierOpacitySpawner {
         int32_t no;
         uint8_t numSides;
-        csl::ut::Array<uint32_t> includeObj;
+        csl::ut::MoveArray<hh::game::ObjectId> includeObj;
         bool useSubCameraDisappear;
-        uint32_t cameraDisappear;
+        hh::game::ObjectId cameraDisappear;
         float disappearWaitTime;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -7793,8 +7914,8 @@ namespace app::rfl {
 
     struct ObjReflexesPanelManagerSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> panelIds;
-        uint32_t panelSwitchId;
+        csl::ut::MoveArray<hh::game::ObjectId> panelIds;
+        hh::game::ObjectId panelSwitchId;
         float timeLimit;
         uint32_t requestNum;
         float createPanelMinTime;
@@ -7814,7 +7935,7 @@ namespace app::rfl {
     struct ObjReleaseMapSpawner {
         int32_t no;
         int32_t gimmickInfoNo;
-        uint32_t cameraUUID;
+        hh::game::ObjectId cameraUUID;
         float scanCameraEaseIn;
         float scanCameraEaseOut;
         float mapSensorDistance;
@@ -7991,9 +8112,9 @@ namespace app::rfl {
         int32_t randomClearCount;
         int32_t randomRoundMin;
         int32_t randomRoundMax;
-        csl::ut::Array<uint32_t> targetList;
+        csl::ut::MoveArray<hh::game::ObjectId> targetList;
         bool isUseEyeSightTarget;
-        csl::ut::Array<uint32_t> eyeSightTargetList;
+        csl::ut::MoveArray<hh::game::ObjectId> eyeSightTargetList;
         GimmickCameraOptionalParam cameraParam;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -8020,9 +8141,9 @@ namespace app::rfl {
         bool isLock;
         RotatePositionType collectType;
         float angularVelocity;
-        csl::ut::Array<uint32_t> rotateList;
-        uint32_t rotatablemanager;
-        uint32_t tombStatue;
+        csl::ut::MoveArray<hh::game::ObjectId> rotateList;
+        hh::game::ObjectId rotatablemanager;
+        hh::game::ObjectId tombStatue;
         csl::math::Vector3 cameraOffset;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -8116,7 +8237,7 @@ namespace app::rfl {
         bool useTimer;
         float activateTime;
         float startWaitTime;
-        uint32_t cameraActivator;
+        hh::game::ObjectId cameraActivator;
         bool fixPlayerPos;
         float foremostSpeed;
         float backmostSpeed;
@@ -8312,7 +8433,7 @@ namespace app::rfl {
             LINETYPE_STRAIGHT = 1,
         };
 
-        csl::ut::Array<uint32_t> nodeList;
+        csl::ut::MoveArray<hh::game::ObjectId> nodeList;
         bool isLoopPath;
         LineType startLineType;
         float divideLength;
@@ -8518,7 +8639,7 @@ namespace app::rfl {
 
         int32_t pathUID;
         PathType pathType;
-        csl::ut::Array<uint32_t> pathList;
+        csl::ut::MoveArray<hh::game::ObjectId> pathList;
         bool isLoopPath;
         float divideLength;
         bool isMovable;
@@ -8537,7 +8658,7 @@ namespace app::rfl {
         float createRadiusMax;
         float createHeight;
         float createVelocity;
-        uint32_t switchId;
+        hh::game::ObjectId switchId;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -8564,7 +8685,7 @@ namespace app::rfl {
         float moveHeight;
         float moveSpeed;
         bool initOpen;
-        csl::ut::Array<uint32_t> moveLinkList;
+        csl::ut::MoveArray<hh::game::ObjectId> moveLinkList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -9165,13 +9286,13 @@ namespace app::rfl {
 
     struct ObjTimeBallManagerSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> goals;
-        uint32_t ball;
-        uint32_t ballGenerator;
+        csl::ut::MoveArray<hh::game::ObjectId> goals;
+        hh::game::ObjectId ball;
+        hh::game::ObjectId ballGenerator;
         float time;
         float maxDistance;
         bool isUseStartCamera;
-        uint32_t startCamera;
+        hh::game::ObjectId startCamera;
         float startWaitTime;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -9232,7 +9353,7 @@ namespace app::rfl {
 
     struct ObjTimerPanelSpawner {
         int32_t no;
-        uint32_t linkObj;
+        hh::game::ObjectId linkObj;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -9269,7 +9390,7 @@ namespace app::rfl {
         csl::ut::VariableString pathName;
         SetType setType;
         int8_t num;
-        csl::ut::Array<uint32_t> setNodeList;
+        csl::ut::MoveArray<hh::game::ObjectId> setNodeList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -9283,7 +9404,7 @@ namespace app::rfl {
         int32_t no;
         float activateTime;
         bool isUseStartCamera;
-        uint32_t startCamera;
+        hh::game::ObjectId startCamera;
         float startWaitTime;
         bool isFristSEPlay;
         bool individualTimer;
@@ -9320,8 +9441,8 @@ namespace app::rfl {
     };
 
     struct ObjTombStoneManagerSpawner {
-        csl::ut::Array<uint32_t> rotateList;
-        uint32_t cameraActivator;
+        csl::ut::MoveArray<hh::game::ObjectId> rotateList;
+        hh::game::ObjectId cameraActivator;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -9344,7 +9465,7 @@ namespace app::rfl {
 
     struct ObjTraceStoneBuilderSpawner {
         csl::math::Vector3 size;
-        uint32_t controlBoard;
+        hh::game::ObjectId controlBoard;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -9355,7 +9476,7 @@ namespace app::rfl {
     };
 
     struct ObjTraceStoneBuildSwitchSpawner {
-        csl::ut::Array<uint32_t> relatedObj;
+        csl::ut::MoveArray<hh::game::ObjectId> relatedObj;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -9367,8 +9488,8 @@ namespace app::rfl {
 
     struct ObjTraceStoneControlBoardSpawner {
         int8_t recordNum;
-        uint32_t boardSwitch;
-        csl::ut::Array<uint32_t> anchors;
+        hh::game::ObjectId boardSwitch;
+        csl::ut::MoveArray<hh::game::ObjectId> anchors;
         uint32_t developInput;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -9507,8 +9628,8 @@ namespace app::rfl {
 
     struct ObjUnmovedTombStoneSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> targetList;
-        uint32_t tombStatue;
+        csl::ut::MoveArray<hh::game::ObjectId> targetList;
+        hh::game::ObjectId tombStatue;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -9520,8 +9641,8 @@ namespace app::rfl {
 
     struct ObjWarpObjVolumeSpawner {
         VolumeTriggerSpawner volume;
-        uint32_t target;
-        uint32_t transformLocator;
+        hh::game::ObjectId target;
+        hh::game::ObjectId transformLocator;
         bool is_use_disp;
         bool is_disp;
 
@@ -9539,7 +9660,7 @@ namespace app::rfl {
             CONTINUANCE = 1,
         };
 
-        uint32_t warpPoint;
+        hh::game::ObjectId warpPoint;
         StatusType status;
         PassPlaneTriggerSpawner passPlane;
 
@@ -9698,7 +9819,7 @@ namespace app::rfl {
         };
 
         ModelType type;
-        uint32_t target;
+        hh::game::ObjectId target;
         float range;
         float jumpHeight;
         float jumpTime;
@@ -9825,7 +9946,7 @@ namespace app::rfl {
         bool isReverse;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -9880,7 +10001,7 @@ namespace app::rfl {
 
         ModelType modelType;
         TargetType targetType;
-        uint32_t target;
+        hh::game::ObjectId target;
         csl::math::Vector3 targetPos;
         float speed;
         float velocityRatio;
@@ -9951,7 +10072,7 @@ namespace app::rfl {
         bool isReverse;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -10009,7 +10130,7 @@ namespace app::rfl {
         bool isReverse;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -10650,7 +10771,7 @@ namespace app::rfl {
         bool isPressDead;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -10753,7 +10874,7 @@ namespace app::rfl {
     };
 
     struct ObjPipeCapSpawner {
-        uint32_t springId;
+        hh::game::ObjectId springId;
         csl::ut::VariableString pathName;
         bool isRideOnOnly;
         float pipeMoveVelocity;
@@ -11161,7 +11282,7 @@ namespace app::rfl {
     };
 
     struct SwingReelPath {
-        uint32_t targetObj;
+        hh::game::ObjectId targetObj;
         csl::math::Vector3 targetOffset;
         float outStrength;
         float inStrength;
@@ -11562,7 +11683,7 @@ namespace app::rfl {
     struct EnemyAquaballSpawner {
         int32_t no;
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool respawnableByMeteorShower;
         bool isSonicSet;
         csl::ut::VariableString movePathName;
@@ -11657,7 +11778,7 @@ namespace app::rfl {
         int32_t no;
         uint32_t level;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool respawnableByMeteorShower;
         EnemyPracticeNotifierConfig practiceNotifierConfig;
 
@@ -11699,7 +11820,7 @@ namespace app::rfl {
     struct EnemyBommerSpawner {
         int32_t no;
         int32_t level;
-        uint32_t territoryId;
+        hh::game::ObjectId territoryId;
         bool respawnableByMeteorShower;
         bool appearEffectEnabled;
         SonicSetParam sonicSetParam;
@@ -11716,7 +11837,7 @@ namespace app::rfl {
     struct EnemyBubbleSpawner {
         int32_t no;
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool isSonicSet;
         float eyesightDistance;
         bool respawnableByMeteorShower;
@@ -11733,7 +11854,7 @@ namespace app::rfl {
     struct EnemyDefenderSpawner {
         int32_t no;
         int32_t level;
-        uint32_t territoryId;
+        hh::game::ObjectId territoryId;
         bool isSonicSet;
         float guardDistance;
         float boomerangDistance;
@@ -11947,7 +12068,7 @@ namespace app::rfl {
 
         ReviveType reviveType;
         float time;
-        uint32_t locatorId;
+        hh::game::ObjectId locatorId;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -12210,7 +12331,7 @@ namespace app::rfl {
         float distance;
         float tolerance;
         Mode mode;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool disableChangeMode;
         bool enableEffect;
         bool isEgg;
@@ -12236,9 +12357,9 @@ namespace app::rfl {
     struct EnemyJumperSpawner {
         int32_t no;
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
-        csl::ut::Array<uint32_t> subs;
-        csl::ut::Array<uint32_t> onTarget;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> subs;
+        csl::ut::MoveArray<hh::game::ObjectId> onTarget;
         float subsLifeTime;
         bool isSonicSet;
         float eyesightDistance;
@@ -12256,7 +12377,7 @@ namespace app::rfl {
 
     struct EnemyJumperSubSpawner {
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool main;
         bool air;
         csl::math::Vector3 shotDirection;
@@ -12403,8 +12524,8 @@ namespace app::rfl {
     struct EnemyRobberSpawner {
         int32_t no;
         int32_t level;
-        csl::ut::Array<uint32_t> territories;
-        uint32_t emeraldDropObjID;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
+        hh::game::ObjectId emeraldDropObjID;
         EnemyRobberMovePaths movePaths;
         float searchDistanceOffset;
         bool respawnableByMeteorShower;
@@ -12423,7 +12544,7 @@ namespace app::rfl {
         int32_t level;
         float distance;
         float tolerance;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         float searchDistanceOffset;
         float battleDistanceOffset;
         bool isParrySlowDisabled;
@@ -12616,7 +12737,7 @@ namespace app::rfl {
         int32_t level;
         float distance;
         float tolerance;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         ParachuteShotConfig parachute;
         bool respawnableByMeteorShower;
         SonicSetConfig sonicset;
@@ -12636,9 +12757,9 @@ namespace app::rfl {
         uint32_t level;
         float distance;
         float tolerance;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         float searchDistanceOffset;
-        uint32_t managerId;
+        hh::game::ObjectId managerId;
         bool respawnableByMeteorShower;
         EnemyPracticeNotifierConfig practiceNotifierConfig;
         bool isTrial;
@@ -12752,7 +12873,7 @@ namespace app::rfl {
         RotateType rotateType;
         BasePoint basePoint;
         bool onGround;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool disableChangeMode;
         bool useTerritory;
         bool isDeadRangeOut;
@@ -13042,11 +13163,11 @@ namespace app::rfl {
     struct ObjHoleAuraTrainSpawner : ObjHoleCommonSpawner {
         csl::ut::VariableString pathName;
         bool reverse;
-        uint32_t cameraUuid;
+        hh::game::ObjectId cameraUuid;
         float cameraEaseInTime;
         float cameraEaseOutTime;
         float speed;
-        uint32_t exitHole;
+        hh::game::ObjectId exitHole;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -13096,8 +13217,8 @@ namespace app::rfl {
             FixTarget = 5,
         };
 
-        uint32_t exitHole;
-        uint32_t camera;
+        hh::game::ObjectId exitHole;
+        hh::game::ObjectId camera;
         float easeInTime;
         Interpolate interpolateIn;
         float easeOutTime;
@@ -13154,7 +13275,7 @@ namespace app::rfl {
         bool isPressDead;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -13210,7 +13331,7 @@ namespace app::rfl {
         bool isPressDead;
         csl::math::Vector3 moveVector;
         csl::ut::VariableString pathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float waitTime;
         float phase;
         float speed;
@@ -13252,16 +13373,16 @@ namespace app::rfl {
 
     struct MiniBossAshuraSpawner {
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
-        csl::ut::Array<uint32_t> deadPoints;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> deadPoints;
         bool isWaitSpawn;
         bool isTutorial;
         bool useTerritory;
         bool respawnableByMeteorShower;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
-        csl::ut::Array<uint32_t> portalBitsLegL;
-        csl::ut::Array<uint32_t> portalBitsLegR;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBitsLegL;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBitsLegR;
         float searchDistanceOffset;
         int32_t no;
         EnemyPracticeNotifierConfig practiceNotifierConfig;
@@ -13276,7 +13397,7 @@ namespace app::rfl {
 
     struct MiniBossBladeSpawner {
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool isWaitSpawn;
         bool isTutorial;
         bool useNonBattleRange;
@@ -13284,7 +13405,7 @@ namespace app::rfl {
         float nonBattleRange;
         bool useTerritory;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         int32_t no;
         EnemyPracticeNotifierConfig practiceNotifierConfig;
         bool enableAttackOutsideArea;
@@ -13349,7 +13470,7 @@ namespace app::rfl {
     };
 
     struct ObjCGGBaseSpawner {
-        csl::ut::Array<uint32_t> children;
+        csl::ut::MoveArray<hh::game::ObjectId> children;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -13423,7 +13544,7 @@ namespace app::rfl {
 
     struct ObjCGGResetBindSpawner {
         TimerTrigger trigger;
-        csl::ut::Array<uint32_t> nextObjects;
+        csl::ut::MoveArray<hh::game::ObjectId> nextObjects;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -13461,12 +13582,12 @@ namespace app::rfl {
 
     struct MiniBossChargerSpawner {
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool isWaitSpawn;
         bool useTerritory;
         bool respawnableByMeteorShower;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         int32_t no;
         int32_t cggLayerId;
         EnemyPracticeNotifierConfig practiceNotifierConfig;
@@ -13495,14 +13616,14 @@ namespace app::rfl {
         Mode mode;
         uint32_t bodyCount;
         int8_t ringPositions[4];
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool isWaitSpawn;
         bool isTutorial;
         bool isAppear;
         bool useTerritory;
         bool respawnableByMeteorShower;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         int32_t no;
         float stompWaitTimeFirst;
         float stompWaitTime;
@@ -13527,7 +13648,7 @@ namespace app::rfl {
         bool enable;
         float start;
         float end;
-        uint32_t cameraActivator;
+        hh::game::ObjectId cameraActivator;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -13542,7 +13663,7 @@ namespace app::rfl {
         bool isWaitSpawn;
         bool isTutorial;
         bool respawnableByMeteorShower;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         csl::ut::VariableString pathName;
         FlyerPathLoopInfo loopInfo[5];
         int32_t no;
@@ -13605,8 +13726,8 @@ namespace app::rfl {
         Attribute attribute;
         float start;
         float end;
-        csl::ut::Array<uint32_t> pylons;
-        csl::ut::Array<uint32_t> missiles;
+        csl::ut::MoveArray<hh::game::ObjectId> pylons;
+        csl::ut::MoveArray<hh::game::ObjectId> missiles;
         float avoidObjCalMargePylonOffset;
         float avoidObjCalMargeMissileOffset;
 
@@ -13669,7 +13790,7 @@ namespace app::rfl {
         ActivateCondition condition;
         float start;
         float end;
-        uint32_t cameraActivator;
+        hh::game::ObjectId cameraActivator;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -13682,20 +13803,20 @@ namespace app::rfl {
     struct MiniBossSkierSpawner {
         int32_t no;
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool useTerritory;
         ObjTerritorySpawner territoryInfo;
         bool isWaitSpawn;
         bool isTutorial;
         bool respawnableByMeteorShower;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         csl::ut::VariableString pathName;
         float pathPNTInterpolateSpeed;
         SkierPathAttributeInfo pathInfo[20];
         SkierSkiActionParam pathAction[20];
         SkierCameraInfo cameraInfo[40];
         EnemyPracticeNotifierConfig practiceNotifierConfig;
-        csl::ut::Array<uint32_t> prohibitedArea;
+        csl::ut::MoveArray<hh::game::ObjectId> prohibitedArea;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -13707,7 +13828,7 @@ namespace app::rfl {
 
     struct ObjDivingAuraTrainRoot {
         csl::ut::VariableString pathName;
-        uint32_t cameraUuid;
+        hh::game::ObjectId cameraUuid;
         float cameraEaseInTime;
         float cameraEaseOutTime;
 
@@ -13728,7 +13849,7 @@ namespace app::rfl {
         SetType setType;
         float value;
         int32_t startNum;
-        csl::ut::Array<uint32_t> cameraColliderUuids;
+        csl::ut::MoveArray<hh::game::ObjectId> cameraColliderUuids;
         ObjDivingAuraTrainRoot root;
         float speed;
         csl::math::Vector3 collisionScale;
@@ -13965,14 +14086,14 @@ namespace app::rfl {
 
     struct MiniBossSpiderSpawner {
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool isWaitSpawn;
         bool isTutorial;
         bool useTerritory;
         bool respawnableByMeteorShower;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
-        uint32_t locatorDiving;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
+        hh::game::ObjectId locatorDiving;
         uint8_t shieldHpNormal;
         float divingBeginHeightNormal;
         csl::ut::VariableString divingSetNameNormal;
@@ -14006,7 +14127,7 @@ namespace app::rfl {
     };
 
     struct ObjStriderBulletSpawner {
-        uint32_t connectToPole;
+        hh::game::ObjectId connectToPole;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -14040,13 +14161,13 @@ namespace app::rfl {
 
     struct MiniBossStriderSpawner {
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool isWaitSpawn;
         bool isTutorial;
         bool useTerritory;
         bool respawnableByMeteorShower;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         int32_t no;
         EnemyPracticeNotifierConfig practiceNotifierConfig;
 
@@ -14064,7 +14185,7 @@ namespace app::rfl {
             Back = 1,
         };
 
-        uint32_t connectToPole;
+        hh::game::ObjectId connectToPole;
         NormalDirection normalDirection;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -14101,9 +14222,9 @@ namespace app::rfl {
         bool isTutorial;
         bool respawnableByMeteorShower;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         int32_t no;
-        csl::ut::Array<uint32_t> poles;
+        csl::ut::MoveArray<hh::game::ObjectId> poles;
         bool onlyHeightField;
         EnemyPracticeNotifierConfig practiceNotifierConfig;
 
@@ -14117,17 +14238,17 @@ namespace app::rfl {
 
     struct MiniBossTrackerSpawner {
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
-        csl::ut::Array<uint32_t> bases;
-        csl::ut::Array<uint32_t> attackTargets;
-        csl::ut::Array<uint32_t> attackTargets2;
-        csl::ut::Array<uint32_t> attackTargets3;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> bases;
+        csl::ut::MoveArray<hh::game::ObjectId> attackTargets;
+        csl::ut::MoveArray<hh::game::ObjectId> attackTargets2;
+        csl::ut::MoveArray<hh::game::ObjectId> attackTargets3;
         bool isWaitSpawn;
         bool isTutorial;
         bool useTerritory;
         bool respawnableByMeteorShower;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         int32_t no;
         EnemyPracticeNotifierConfig practiceNotifierConfig;
         bool enable3rdParameter;
@@ -14160,7 +14281,7 @@ namespace app::rfl {
     };
 
     struct MiniBossTrackerBaseSpawner {
-        csl::ut::Array<uint32_t> gimmicks;
+        csl::ut::MoveArray<hh::game::ObjectId> gimmicks;
         float returnRadius;
         float visibleDistance;
 
@@ -14174,13 +14295,13 @@ namespace app::rfl {
 
     struct MiniBossTyrantSpawner {
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool isWaitSpawn;
         bool isTutorial;
         bool useTerritory;
         bool respawnableByMeteorShower;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         int32_t no;
         EnemyPracticeNotifierConfig practiceNotifierConfig;
         bool isCutUpper;
@@ -14362,7 +14483,7 @@ namespace app::rfl {
 
     struct WarshipLocatorInfo {
         csl::ut::VariableString attackPathName;
-        csl::ut::Array<uint32_t> locaterList;
+        csl::ut::MoveArray<hh::game::ObjectId> locaterList;
         float changeStateDistance;
         float stopAttackDistance;
         csl::ut::VariableString grindPathNames[4];
@@ -14378,7 +14499,7 @@ namespace app::rfl {
     struct WarshipCameraParam {
         float start;
         float end;
-        uint32_t cameraActivator;
+        hh::game::ObjectId cameraActivator;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -14403,18 +14524,18 @@ namespace app::rfl {
 
     struct MiniBossWarshipSpawner {
         uint32_t level;
-        csl::ut::Array<uint32_t> territories;
+        csl::ut::MoveArray<hh::game::ObjectId> territories;
         bool isWaitSpawn;
         bool isTutorial;
         bool useTerritory;
         bool respawnableByMeteorShower;
         ObjTerritorySpawner territoryInfo;
-        csl::ut::Array<uint32_t> portalBits;
+        csl::ut::MoveArray<hh::game::ObjectId> portalBits;
         csl::ut::VariableString wanderPathName;
         WarshipLocatorInfo locatorInfo[3];
         int32_t eacapePathNo;
-        csl::ut::Array<uint32_t> winWarpList;
-        csl::ut::Array<uint32_t> eventLocatorList;
+        csl::ut::MoveArray<hh::game::ObjectId> winWarpList;
+        csl::ut::MoveArray<hh::game::ObjectId> eventLocatorList;
         WarshipCameraParam cameraParam[20];
         WarshipPathSectionInfo rotateInfo[20];
         WarshipPathSectionInfo wanderPathInfo;
@@ -14503,12 +14624,12 @@ namespace app::rfl {
 
     struct ObjFishingSequenceSpawner {
         int32_t spotId;
-        uint32_t sonicObj;
-        uint32_t bigObj;
-        uint32_t talkCamera;
-        uint32_t fishingCamera;
-        uint32_t castCamera;
-        uint32_t fishingSonicPos;
+        hh::game::ObjectId sonicObj;
+        hh::game::ObjectId bigObj;
+        hh::game::ObjectId talkCamera;
+        hh::game::ObjectId fishingCamera;
+        hh::game::ObjectId castCamera;
+        hh::game::ObjectId fishingSonicPos;
         csl::math::Vector3 fishSwimCenter;
         float fishSwimRadius;
         float buoyCameraTransitTime;
@@ -14518,9 +14639,9 @@ namespace app::rfl {
         float fishingCameraTransitTime;
         csl::math::Vector3 cyberNoiseEffectPos;
         csl::math::Vector3 cyberNoiseEffectRot;
-        uint32_t barbecueSonicObj;
-        uint32_t barbecueMachineObj;
-        uint32_t barbecueCamera;
+        hh::game::ObjectId barbecueSonicObj;
+        hh::game::ObjectId barbecueMachineObj;
+        hh::game::ObjectId barbecueCamera;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -14575,7 +14696,7 @@ namespace app::rfl {
         csl::ut::VariableString eventName;
         bool isEndKill;
         bool useDefaultPath;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
         bool isUseSequenceItem;
         int32_t requiredSequenceItem;
         csl::ut::VariableString lackLuaName;
@@ -14619,7 +14740,7 @@ namespace app::rfl {
         csl::ut::VariableString eventName;
         bool isEndKill;
         bool useDefaultPath;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
         CharacterType useCharacterType;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -14675,7 +14796,7 @@ namespace app::rfl {
         csl::ut::VariableString eventName;
         bool isEndKill;
         bool useDefaultPath;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
         bool isUseSequenceItem;
         int32_t requiredSequenceItem;
         csl::ut::VariableString lackLuaName;
@@ -14739,7 +14860,7 @@ namespace app::rfl {
 
     struct ObjKodamaElderSpawner {
         int32_t no;
-        uint32_t fastTravelLocator;
+        hh::game::ObjectId fastTravelLocator;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -14768,7 +14889,7 @@ namespace app::rfl {
 
     struct ObjKodamaHermitSpawner {
         int32_t no;
-        uint32_t fastTravelLocator;
+        hh::game::ObjectId fastTravelLocator;
         csl::ut::VariableString eventNamePower;
         csl::ut::VariableString eventNameGuard;
         csl::ut::VariableString eventNamePowerAndGuard;
@@ -14836,10 +14957,10 @@ namespace app::rfl {
         int32_t no;
         TrialType trialType;
         StateType stateType;
-        uint32_t trialEndObj;
+        hh::game::ObjectId trialEndObj;
         csl::ut::VariableString eventName;
         bool useDefaultPath;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
         bool guideCircleEnabled;
         csl::math::Vector3 guideCircleOffset;
 
@@ -14861,7 +14982,7 @@ namespace app::rfl {
         int32_t no;
         csl::ut::VariableString eventName;
         bool useDefaultPath;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
         bool guideCircleEnabled;
         csl::math::Vector3 guideCircleOffset;
         KingStateType stateType;
@@ -14947,7 +15068,7 @@ namespace app::rfl {
         int32_t no;
         float cyloopSignDistance;
         float cyloopSignTolerance;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -15087,7 +15208,7 @@ namespace app::rfl {
         csl::ut::VariableString eventName;
         bool isEndKill;
         bool useDefaultPath;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
         CharacterType useCharacterType;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -15142,7 +15263,7 @@ namespace app::rfl {
         csl::ut::VariableString eventName;
         bool isEndKill;
         bool useDefaultPath;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
         bool isUseSequenceItem;
         int32_t requiredSequenceItem;
         csl::ut::VariableString inputEventName;
@@ -15199,7 +15320,7 @@ namespace app::rfl {
         csl::ut::VariableString eventName;
         bool isEndKill;
         bool useDefaultPath;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
         bool isUseSequenceItem;
         int32_t requiredSequenceItem;
         csl::ut::VariableString lackLuaName;
@@ -15372,7 +15493,7 @@ namespace app::rfl {
     };
 
     struct ObjResultViewCameraStoreSpawner {
-        uint32_t camera;
+        hh::game::ObjectId camera;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -15444,8 +15565,8 @@ namespace app::rfl {
     };
 
     struct ObjHomingLaserTargetManagerSpawner {
-        csl::ut::Array<uint32_t> enemyIds;
-        uint32_t bossId;
+        csl::ut::MoveArray<hh::game::ObjectId> enemyIds;
+        hh::game::ObjectId bossId;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -15485,7 +15606,7 @@ namespace app::rfl {
 
     struct ObjShootingEnemyManagerSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> enemyIds;
+        csl::ut::MoveArray<hh::game::ObjectId> enemyIds;
         csl::ut::VariableString luaName;
         ChangeWaveCondition changeWaveCondition;
         bool startScriptAfterSerif;
@@ -15520,7 +15641,7 @@ namespace app::rfl {
 
     struct ObjShootingEnemyWaveManagerSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> enemyManagerIds;
+        csl::ut::MoveArray<hh::game::ObjectId> enemyManagerIds;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -15852,7 +15973,7 @@ namespace app::rfl {
 
     struct ObjAncientBridgeSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -15888,7 +16009,7 @@ namespace app::rfl {
 
     struct ObjGiantBridgeSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -15899,11 +16020,11 @@ namespace app::rfl {
     };
 
     struct ObjGiantIncidentSpawner {
-        uint32_t startPos;
-        uint32_t endPos;
-        uint32_t endLookAt;
-        uint32_t giant;
-        csl::ut::Array<uint32_t> rocks;
+        hh::game::ObjectId startPos;
+        hh::game::ObjectId endPos;
+        hh::game::ObjectId endLookAt;
+        hh::game::ObjectId giant;
+        csl::ut::MoveArray<hh::game::ObjectId> rocks;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -15968,7 +16089,7 @@ namespace app::rfl {
 
     struct ObjGiantTowerSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16002,7 +16123,7 @@ namespace app::rfl {
 
     struct ObjStatueSmallSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> targetList;
+        csl::ut::MoveArray<hh::game::ObjectId> targetList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16014,7 +16135,7 @@ namespace app::rfl {
 
     struct ObjWaterfallBreakSpawner {
         int32_t no;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
         float collisionWidth;
         float collisionHeight;
         float collisionDepth;
@@ -16072,7 +16193,7 @@ namespace app::rfl {
 
     struct ObjDragonAreaSubVolumeSpawner {
         VolumeTriggerSpawner volume;
-        uint32_t target;
+        hh::game::ObjectId target;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16085,7 +16206,7 @@ namespace app::rfl {
     struct ObjDragonAreaVolumeSpawner {
         VolumeTriggerSpawner volume;
         float closeRadius;
-        uint32_t dragon;
+        hh::game::ObjectId dragon;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16118,8 +16239,8 @@ namespace app::rfl {
     };
 
     struct ObjDragonIncidentSpawner_EventFirstParam {
-        uint32_t position;
-        uint32_t lookAt;
+        hh::game::ObjectId position;
+        hh::game::ObjectId lookAt;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16130,8 +16251,8 @@ namespace app::rfl {
     };
 
     struct ObjDragonIncidentSpawner_EventEndParam {
-        uint32_t position;
-        uint32_t lookAt;
+        hh::game::ObjectId position;
+        hh::game::ObjectId lookAt;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16142,8 +16263,8 @@ namespace app::rfl {
     };
 
     struct ObjDragonIncidentSpawner_EventRetryParam {
-        uint32_t position;
-        uint32_t lookAt;
+        hh::game::ObjectId position;
+        hh::game::ObjectId lookAt;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16191,7 +16312,7 @@ namespace app::rfl {
         float width;
         ObjDragonIncidentSpawner_AutorunCameraParam cameraIntro;
         ObjDragonIncidentSpawner_AutorunCameraParam cameraMain;
-        csl::ut::Array<uint32_t> cameraCollision;
+        csl::ut::MoveArray<hh::game::ObjectId> cameraCollision;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16236,7 +16357,7 @@ namespace app::rfl {
     };
 
     struct ObjDragonIncidentSpawner {
-        uint32_t dragon;
+        hh::game::ObjectId dragon;
         ObjDragonIncidentSpawner_EventFirstParam eventFirst;
         ObjDragonIncidentSpawner_EventEndParam eventEnd;
         ObjDragonIncidentSpawner_EventRetryParam eventRetry;
@@ -16252,7 +16373,7 @@ namespace app::rfl {
     };
 
     struct ObjDragonIncidentCameraTriggerSpawner {
-        uint32_t dragonIncident;
+        hh::game::ObjectId dragonIncident;
         PassPlaneTriggerSpawner passPlane;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -16264,7 +16385,7 @@ namespace app::rfl {
     };
 
     struct ObjDragonIncidentDragonSpawner {
-        uint32_t incident;
+        hh::game::ObjectId incident;
         float height;
         float distance;
 
@@ -16299,7 +16420,7 @@ namespace app::rfl {
     };
 
     struct ObjDragonIncidentMissileTriggerSpawner {
-        uint32_t dragonIncident;
+        hh::game::ObjectId dragonIncident;
         csl::math::Vector3 firstOffset;
         csl::math::Vector3 secondOffset;
         csl::math::Vector3 finishOffset;
@@ -16437,7 +16558,7 @@ namespace app::rfl {
 
     struct ObjLandSlideSpawner {
         int32_t dummy;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16479,7 +16600,7 @@ namespace app::rfl {
         int32_t no;
         float distance;
         VolumeTriggerSpawner volume;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16527,7 +16648,7 @@ namespace app::rfl {
         };
 
         ModelType type;
-        csl::ut::Array<uint32_t> hiddenList;
+        csl::ut::MoveArray<hh::game::ObjectId> hiddenList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16650,9 +16771,9 @@ namespace app::rfl {
         int32_t countRedRing;
         uint32_t impluseCountFluctuation;
         float fluctuationAngle;
-        csl::ut::Array<uint32_t> childs;
-        csl::ut::Array<uint32_t> childsAfterClearing;
-        csl::ut::Array<uint32_t> redRingNodeList;
+        csl::ut::MoveArray<hh::game::ObjectId> childs;
+        csl::ut::MoveArray<hh::game::ObjectId> childsAfterClearing;
+        csl::ut::MoveArray<hh::game::ObjectId> redRingNodeList;
         ObjEruptionControlDeviceManagerredRingNodeUse redRingUsePattern[9];
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -16687,9 +16808,9 @@ namespace app::rfl {
     };
 
     struct ObjKnightIncidentSpawner_FvParam {
-        uint32_t startPosition;
+        hh::game::ObjectId startPosition;
         csl::ut::VariableString fvShieldPathName;
-        uint32_t camera;
+        hh::game::ObjectId camera;
         float shieldSpeed;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -16701,8 +16822,8 @@ namespace app::rfl {
     };
 
     struct ObjKnightIncidentSpawner_EventFirstParam {
-        uint32_t position;
-        uint32_t lookAt;
+        hh::game::ObjectId position;
+        hh::game::ObjectId lookAt;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16713,8 +16834,8 @@ namespace app::rfl {
     };
 
     struct ObjKnightIncidentSpawner_EventEndParam {
-        uint32_t position;
-        uint32_t lookAt;
+        hh::game::ObjectId position;
+        hh::game::ObjectId lookAt;
         float endDistance;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -16726,8 +16847,8 @@ namespace app::rfl {
     };
 
     struct ObjKnightIncidentSpawner_EventRetryParam {
-        uint32_t position;
-        uint32_t lookAt;
+        hh::game::ObjectId position;
+        hh::game::ObjectId lookAt;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16738,7 +16859,7 @@ namespace app::rfl {
     };
 
     struct ObjKnightIncidentSpawner_FlyerParam {
-        uint32_t flyer;
+        hh::game::ObjectId flyer;
         csl::ut::VariableString pathName;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -16803,7 +16924,7 @@ namespace app::rfl {
         bool enable;
         float start;
         float end;
-        uint32_t cameraActivator;
+        hh::game::ObjectId cameraActivator;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -16985,7 +17106,7 @@ namespace app::rfl {
     };
 
     struct ObjKnightIncidentShieldTriggerSpawner {
-        uint32_t knightIncident;
+        hh::game::ObjectId knightIncident;
         uint32_t preset;
         PassPlaneTriggerSpawner passPlane;
 
@@ -17056,7 +17177,7 @@ namespace app::rfl {
         csl::ut::VariableString pathName;
         SetType setType;
         int8_t num;
-        csl::ut::Array<uint32_t> setNodeList;
+        csl::ut::MoveArray<hh::game::ObjectId> setNodeList;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -17216,7 +17337,7 @@ namespace app::rfl {
 
     struct ObjAuraTrainTestRoot {
         csl::ut::VariableString pathName;
-        uint32_t cameraUuid;
+        hh::game::ObjectId cameraUuid;
         float cameraEaseInTime;
         float cameraEaseOutTime;
 
@@ -17316,8 +17437,8 @@ namespace app::rfl {
     };
 
     struct ObjMultiFocusCameraTestSpawner {
-        uint32_t farLookAt;
-        uint32_t nearLookAt;
+        hh::game::ObjectId farLookAt;
+        hh::game::ObjectId nearLookAt;
         csl::math::Vector3 farOffset;
         csl::math::Vector3 nearOffset;
         float distance;
@@ -17965,7 +18086,7 @@ namespace app::rfl {
     };
 
     struct ObjDependParentTestSpawner {
-        csl::ut::Array<uint32_t> childs;
+        csl::ut::MoveArray<hh::game::ObjectId> childs;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -18382,7 +18503,7 @@ namespace app::rfl {
     };
 
     struct ObjMessageTestSpawner {
-        uint32_t receiver;
+        hh::game::ObjectId receiver;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -18510,8 +18631,8 @@ namespace app::rfl {
         };
 
         NaviPathData naviPathDatas[16];
-        uint32_t startPointObj;
-        uint32_t endPointObj;
+        hh::game::ObjectId startPointObj;
+        hh::game::ObjectId endPointObj;
         PointType pointType;
 
         static const hh::fnd::RflTypeInfo typeInfo;
@@ -19045,7 +19166,7 @@ namespace app::rfl {
     };
 
     struct ObjSlingshotTestSpawner {
-        csl::ut::Array<uint32_t> routePoints;
+        csl::ut::MoveArray<hh::game::ObjectId> routePoints;
         float speed;
         VolumeTriggerSpawner volume;
 
@@ -19406,7 +19527,7 @@ namespace app::rfl {
     struct ObjWarpMonitorTestSpawner {
         int32_t no;
         bool eventDriven;
-        uint32_t warpObject;
+        hh::game::ObjectId warpObject;
         csl::math::Vector3 warpOffset;
         csl::math::Vector3 lockonOffset;
         csl::math::Vector3 reboundDir;
@@ -20332,7 +20453,7 @@ namespace app::rfl {
 
     struct BakeCameraParameter {
         csl::ut::VariableString name;
-        csl::ut::Array<BakeCameraParameter> data;
+        csl::ut::MoveArray<BakeCameraParameter> data;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -21854,7 +21975,7 @@ namespace app::rfl {
     };
 
     struct PlayerMoveableRangeParam {
-        csl::ut::Array<uint32_t> initPositions;
+        csl::ut::MoveArray<hh::game::ObjectId> initPositions;
         csl::ut::VariableString heightTargetNodeName;
         float heightMoveSpeed;
         float bossToPlayerDistanceMin;
@@ -28117,7 +28238,7 @@ namespace app::rfl {
 
     struct NodeData {
         csl::ut::VariableString name;
-        csl::ut::Array<NodeInfoInAnim> nodeInfos;
+        csl::ut::MoveArray<NodeInfoInAnim> nodeInfos;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -28141,7 +28262,7 @@ namespace app::rfl {
     };
 
     struct DeltaMotionData {
-        csl::ut::Array<DeltaMotionInfoInAnim> deltaInfos;
+        csl::ut::MoveArray<DeltaMotionInfoInAnim> deltaInfos;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -28153,8 +28274,8 @@ namespace app::rfl {
 
     struct AnimData {
         csl::ut::VariableString name;
-        csl::ut::Array<EventData> eventDatas;
-        csl::ut::Array<NodeData> nodeDatas;
+        csl::ut::MoveArray<EventData> eventDatas;
+        csl::ut::MoveArray<NodeData> nodeDatas;
         DeltaMotionData deltaMotionData;
         float maxTime;
 
@@ -28167,7 +28288,7 @@ namespace app::rfl {
     };
 
     struct RecordData {
-        csl::ut::Array<AnimData> animDatas;
+        csl::ut::MoveArray<AnimData> animDatas;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -38082,7 +38203,7 @@ namespace app::rfl {
         int32_t misses;
         int32_t retry;
         int32_t restart;
-        csl::ut::Array<PlayLog> logs;
+        csl::ut::MoveArray<PlayLog> logs;
 
         static const hh::fnd::RflTypeInfo typeInfo;
         static const hh::fnd::RflClass rflClass;
@@ -38095,7 +38216,7 @@ namespace app::rfl {
     struct PlayStats {
         csl::ut::VariableString username;
         csl::ut::VariableString time;
-        csl::ut::Array<PlayStatsSummary> summaries;
+        csl::ut::MoveArray<PlayStatsSummary> summaries;
         PlayStatsData playLog;
 
         static const hh::fnd::RflTypeInfo typeInfo;

@@ -5,7 +5,7 @@ namespace hh::anim {
         AnimationStateMachine* animationStateMachine;
         uint64_t unk202;
         uint32_t unk203;
-        char unk204a;
+        char flags;
         char unk204b;
         uint64_t unk205;
     
@@ -22,7 +22,7 @@ namespace hh::anim {
         virtual void* GetClassId() override;
 		virtual void GetDebugInfoMaybe() override;
 		virtual void OnGOCEvent(GOCEvent event, game::GameObject& ownerGameObject, void* data) override;
-        virtual bool UnkFunc1() override;
+        virtual bool UnkFunc1(csl::math::Transform& transform) override;
         virtual void UnkFunc2() override;
         virtual void UnkFunc3() override;
         virtual uint64_t UnkFunc4() override;
