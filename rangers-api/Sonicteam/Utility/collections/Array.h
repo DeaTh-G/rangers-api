@@ -21,6 +21,8 @@ namespace csl::ut
 		}
 		
 	public:
+		Array() : m_capacity{ csl::ut::SIGN_BIT } {}
+
 		[[nodiscard]] T* begin() const { return get(0); }
 
 		[[nodiscard]] T* end() const { return get(this->m_length); }

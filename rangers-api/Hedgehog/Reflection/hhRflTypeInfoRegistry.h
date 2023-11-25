@@ -16,6 +16,15 @@ namespace hh::fnd
 			return pInstance;
 		}
 
+		void ConstructObject(csl::fnd::IAllocator* pAllocator, void* placement, const char* pName) const
+		{
+			auto* pTypeInfo = GetByName(pName);
+			if (!pTypeInfo)
+				return;
+
+			pTypeInfo->ConstructObject(placement, pAllocator);
+		}
+
 		void FinishLoadedObject(void* pInstance, const char* pName) const
 		{
 			auto* pTypeInfo = GetByName(pName);

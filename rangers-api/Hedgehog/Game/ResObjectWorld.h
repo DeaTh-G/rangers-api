@@ -31,15 +31,12 @@ namespace hh::game {
         csl::ut::MoveArray<ComponentData*> componentData;
         void* objInfo;
 
-        ObjectData(csl::fnd::IAllocator* allocator, const GameObjectClass* gameObjectClass, const char* name, ObjectData* parent, const ObjectTransformData& localTransform)
+        ObjectData(csl::fnd::IAllocator* allocator, const GameObjectClass* gameObjectClass, ObjectId id, const char* name, ObjectData* parent, const ObjectTransformData& localTransform)
             : name{ name, allocator }
             , gameObjectClass{ gameObjectClass->pName }
             , localTransform { localTransform }
-            , componentData{ allocator } {
-            std::mt19937_64 mt;
-            id.groupId = mt();
-            id.objectId = mt();
-            
+            , componentData{ allocator }
+            , id{ id } {
             if (parent) {
                 parentID = parent->id;
                 // transform = Eigen::

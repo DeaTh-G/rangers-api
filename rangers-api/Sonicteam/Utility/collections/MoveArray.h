@@ -8,7 +8,7 @@ namespace csl::ut
 	protected:
 		fnd::IAllocator* m_pAllocator{};
 
-		bool isInplace()
+		bool isUninitialized()
 		{
 			return this->m_capacity & csl::ut::SIGN_BIT;
 		}
@@ -21,7 +21,7 @@ namespace csl::ut
 				return;
 			}
 
-			if (isInplace() || !this->m_pBuffer)
+			if (isUninitialized() || !this->m_pBuffer)
 			{
 				m_pAllocator = new_allocator;
 				return;
@@ -39,7 +39,7 @@ namespace csl::ut
 			memcpy(new_buffer, this->m_pBuffer, sizeof(T) * this->m_length);
 
 			// Free our old m_pBuffer
-			if (m_pAllocator && !isInplace())
+			if (m_pAllocator && !isUninitialized())
 			{
 				m_pAllocator->Free(this->m_pBuffer);
 			}
@@ -63,7 +63,7 @@ namespace csl::ut
 			}
 
 			// Free our old m_pBuffer
-			if (!isInplace())
+			if (!isUninitialized())
 			{
 				m_pAllocator->Free(this->m_pBuffer);
 			}
@@ -79,7 +79,7 @@ namespace csl::ut
 
 		}
 
-		MoveArray(fnd::IAllocator* in_pAllocator) : m_pAllocator(in_pAllocator)
+		MoveArray(fnd::IAllocator* in_pAllocator) : Array<T>{}, m_pAllocator(in_pAllocator)
 		{
 
 		}
@@ -95,7 +95,7 @@ namespace csl::ut
 				this->m_pBuffer[i].~T();
 			}
 
-			if (m_pAllocator && !isInplace())
+			if (m_pAllocator && !isUninitialized())
 				m_pAllocator->Free(this->m_pBuffer);
 		}
 
@@ -140,7 +140,7 @@ namespace csl::ut
 
 		void remove(size_t i)
 		{
-			if (i > this->m_length)
+			if (i >= this->m_length)
 				return;
 
 			this->m_pBuffer[i].~T();
