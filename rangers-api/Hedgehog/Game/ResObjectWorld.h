@@ -14,6 +14,14 @@ namespace hh::game {
     struct ObjectTransformData {
         csl::math::Position position;
         csl::math::Position rotation;
+
+        bool operator==(const ObjectTransformData& other) {
+            return position == other.position && rotation == other.rotation;
+        }
+
+        bool operator!=(const ObjectTransformData& other) {
+            return !operator==(other);
+        }
     };
 
     struct ObjectData {

@@ -20,8 +20,8 @@ namespace hh::game
 	public:
 		virtual ~GameStepListener() = default;
 		virtual void OnGameStep(float timestep) {}
-		virtual void GSL_UnkFunc1() {}
-		virtual void GSL_UnkFunc2() {}
+		virtual void Step(const fnd::SUpdateInfo& updateInfo) {}
+		virtual void Update(const fnd::SUpdateInfo& updateInfo) {}
 	};
 	
     class alignas(8) GamePauseListener {
@@ -86,9 +86,9 @@ namespace hh::game
 		csl::ut::MoveArray<void*> unk43; // csl::ut::MoveArray<ComponentListener> m_ComponentListeners{ pAllocator };
 		csl::ut::MoveArray<void*> unk44;
 		csl::ut::MoveArray<void*> unk45;
-		csl::ut::MoveArray<GamePauseListener> m_PauseListeners{ pAllocator };
-		csl::ut::MoveArray<GameStepListener> m_StepListeners{ pAllocator };
-		csl::ut::MoveArray<void*> unk48;
+		csl::ut::MoveArray<GamePauseListener*> m_PauseListeners{ pAllocator };
+		csl::ut::MoveArray<GameStepListener*> m_StepListeners{ pAllocator };
+		csl::ut::MoveArray<GameUpdateListener*> m_UpdateListeners{ pAllocator };
 		csl::ut::MoveArray<void*> unk49;
 		void* unk50;
 		uint32_t unk51;

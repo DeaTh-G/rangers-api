@@ -35,6 +35,7 @@
 #include "Sonicteam/System/Singleton.h"
 #include "Sonicteam/System/Mutex.h"
 #include "Sonicteam/System/HeapBase.h"
+#include "Sonicteam/System/FreeListHeapBase.h"
 #include "Sonicteam/System/TlsfHeap.h"
 #include "Sonicteam/System/Delegate.h"
 
@@ -42,7 +43,7 @@
 #include "Hedgehog/System/SingletonInitNode.h"
 
 // Hedgehog Library
-#include "Hedgehog/Base/System/Allocators.h"
+#include "Hedgehog/Base/System/MemoryRouter.h"
 #include "Hedgehog/Base/System/hhBaseObject.h"
 #include "Hedgehog/Base/System/hhReferencedObject.h"
 #include "Hedgehog/Base/System/RefByHandleObject.h"
@@ -52,6 +53,7 @@
 #include "Hedgehog/Base/System/hhHandle.h"
 #include "Hedgehog/Base/System/HandleManager.h"
 #include "Hedgehog/Base/System/ReloaderListener.h"
+#include "Hedgehog/Base/System/SUpdateInfo.h"
 
 // Hedgehog Universe Library
 #include "Hedgehog/Base/Universe/hhMessage.h"
@@ -67,6 +69,7 @@
 #include "Hedgehog/Base/Type/hhBaseTypes.h"
 #include "Hedgehog/Base/Type/WorldPosition.h"
 #include "Hedgehog/Base/Type/LogData.h"
+#include "Hedgehog/Base/Type/Triangle.h"
 
 #include "Hedgehog/Cri/CriSystem.h"
 
@@ -93,10 +96,14 @@
 #include "Hedgehog/Resource/FilePathResolverUtil.h"
 #include "Hedgehog/Resource/FileLoader.h"
 
+#include "Hedgehog/Rsdx/rsdx_noncopyable.h"
+#include "Hedgehog/Needle/Types.h"
 #include "Hedgehog/Needle/NeedleObject.h"
 #include "Hedgehog/Needle/NeedleRefcountObject.h"
 #include "Hedgehog/Needle/NeedleRefcountResource.h"
 #include "Hedgehog/Needle/TNeedleRefcountResource.h"
+#include "Hedgehog/Needle/TNeedleRefcountUniqueObjectBase.h"
+#include "Hedgehog/Needle/MirageResource.h"
 #include "Hedgehog/Needle/SurfaceBase.h"
 #include "Hedgehog/Needle/Texture.h"
 #include "Hedgehog/Needle/Buffer.h"
@@ -107,6 +114,11 @@
 #include "Hedgehog/Needle/RenderTarget.h"
 #include "Hedgehog/Needle/UnorderedAccessView.h"
 #include "Hedgehog/Needle/DepthStencil.h"
+#include "Hedgehog/Needle/MaterialResource.h"
+#include "Hedgehog/Needle/MeshResource.h"
+#include "Hedgehog/Needle/Model.h"
+#include "Hedgehog/Needle/ModelInstance.h"
+#include "Hedgehog/Needle/PBRModelInstance.h"
 #include "Hedgehog/Needle/RenderingDevice.h"
 #include "Hedgehog/Needle/PrimitiveRenderer.h"
 #include "Hedgehog/Needle/Renderable.h"
@@ -135,12 +147,14 @@
 #include "Hedgehog/Graphics/Components/ScreenShotComponent.h"
 #include "Hedgehog/Graphics/RenderingEngine.h"
 #include "Hedgehog/Graphics/RenderingEngineNeedle.h"
+#include "Hedgehog/Graphics/RenderManager.h"
 
 #include "Hedgehog/Font/ResBitmapFont.h"
 #include "Hedgehog/Font/TextListener.h"
 #include "Hedgehog/Font/FontContainer.h"
 
 // Hedgehog Framework
+#include "Hedgehog/Framework/LocalHeap.h"
 #include "Hedgehog/Framework/KeyEventHandler.h"
 #include "Hedgehog/Framework/MouseEventHandler.h"
 #include "Hedgehog/Framework/EventStack.h"
@@ -239,9 +253,12 @@
 #include "Hedgehog/Game/DevMenu/Menu.h"
 #include "Hedgehog/Game/FreeCamera.h"
 
+#include "Hedgehog/Graphics/ResMaterial.h"
 #include "Hedgehog/Graphics/GOCVisual.h"
 #include "Hedgehog/Graphics/GOCVisualTransformed.h"
 #include "Hedgehog/Graphics/GOCVisualModel.h"
+#include "Hedgehog/Graphics/GOCVisualDebugDraw.h"
+#include "Hedgehog/Graphics/VisualManager.h"
 
 #include "Hedgehog/Physics/ShapeHolder.h"
 #include "Hedgehog/Physics/EventQueue.h"
@@ -256,12 +273,13 @@
 #include "Hedgehog/Sound/GOCSound.h"
 
 #include "Hedgehog/Animation/Trigger.h"
+#include "Hedgehog/Animation/SkeletalMeshBinding.h"
+#include "Hedgehog/Animation/ResAnimator.h"
+#include "Hedgehog/Animation/AsmResourceManager.h"
 #include "Hedgehog/Animation/AnimationStateMachine.h"
 #include "Hedgehog/Animation/GOCAnimation.h"
 #include "Hedgehog/Animation/GOCAnimationSingle.h"
 #include "Hedgehog/Animation/GOCAnimator.h"
-#include "Hedgehog/Animation/ResAnimator.h"
-#include "Hedgehog/Animation/AsmResourceManager.h"
 #include "Hedgehog/Animation/AnimationManager.h"
 
 #include "SurfRide/Base.h"

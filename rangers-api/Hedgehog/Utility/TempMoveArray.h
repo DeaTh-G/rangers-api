@@ -5,6 +5,6 @@ namespace hh::ut {
 	class TempMoveArray : public csl::ut::MoveArray<T>
 	{
 	public:
-		inline TempMoveArray() : csl::ut::MoveArray<T>{ fnd::GetTempAllocator(fnd::GetAllocatorSystem()) } {}
+		inline TempMoveArray() : csl::ut::MoveArray<T>{ fnd::MemoryRouter::GetTempAllocator() } {}
 	};
 }

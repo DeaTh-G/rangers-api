@@ -6,7 +6,7 @@ namespace hh::anim {
         uint64_t flags;
         AnimationManager* animationManager;
         uint64_t unk102;
-        uint64_t unk103;
+        gfx::GOCVisualModel* visualModel;
         uint64_t unk104;
         uint64_t unk105;
         uint64_t unk106;

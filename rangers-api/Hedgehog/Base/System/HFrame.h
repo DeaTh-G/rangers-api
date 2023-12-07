@@ -30,7 +30,7 @@ namespace hh::fnd {
     public:
         class Listener {
         public:
-            virtual ~Listener();
+            virtual ~Listener() = default;
             virtual void HFrameUpdatedCallback(const HFrame* frame, bool unkParam);
         };
 

@@ -33,10 +33,14 @@ namespace csl::ut
 			}
 
 			// Make a new m_pBuffer
-			void* new_buffer = new_allocator->Alloc(this->capacity() * sizeof(T), 16);
+			T* new_buffer = static_cast<T*>(new_allocator->Alloc(this->capacity() * sizeof(T), 16));
 
 			// Copy buffers
-			memcpy(new_buffer, this->m_pBuffer, sizeof(T) * this->m_length);
+			// memcpy(new_buffer, this->m_pBuffer, sizeof(T) * this->m_length);
+			for (size_t i = 0; i < this->m_length; i++) {
+				new (&new_buffer[i]) T(std::move(this->m_pBuffer[i]));
+				this->m_pBuffer[i].~T();
+			}
 
 			// Free our old m_pBuffer
 			if (m_pAllocator && !isUninitialized())
@@ -45,7 +49,7 @@ namespace csl::ut
 			}
 
 			m_pAllocator = new_allocator;
-			this->m_pBuffer = static_cast<T*>(new_buffer);
+			this->m_pBuffer = new_buffer;
 		}
 
 		void reserve(size_t len)
@@ -55,11 +59,15 @@ namespace csl::ut
 				return;
 
 			// Allocate a new m_pBuffer with the appropriate reserved storage
-			void* new_buffer = m_pAllocator->Alloc(sizeof(T) * len, 16);
+			T* new_buffer = static_cast<T*>(m_pAllocator->Alloc(sizeof(T) * len, 16));
 
 			if (this->m_pBuffer)
 			{
-				memcpy(new_buffer, this->m_pBuffer, sizeof(T) * this->m_length);
+				//memcpy(new_buffer, this->m_pBuffer, sizeof(T) * this->m_length);
+				for (size_t i = 0; i < this->m_length; i++) {
+					new (&new_buffer[i]) T(std::move(this->m_pBuffer[i]));
+					this->m_pBuffer[i].~T();
+				}
 			}
 
 			// Free our old m_pBuffer
@@ -70,13 +78,28 @@ namespace csl::ut
 
 			// Assign our new m_pBuffer and set the new m_capacity
 			this->m_capacity = len;
-			this->m_pBuffer = static_cast<T*>(new_buffer);
+			this->m_pBuffer = new_buffer;
 		}
 
 	public:
 		MoveArray()
 		{
 
+		}
+
+		MoveArray(const MoveArray<T>& other) : MoveArray<T>{ other.m_capacity, other.m_pAllocator } {
+			for (T& x : other) {
+				this->push_back(x);
+			}
+		}
+
+		MoveArray(MoveArray<T>&& other) : MoveArray<T>{ other.m_pAllocator } {
+			this->m_pBuffer = other.m_pBuffer;
+			this->m_length = other.m_length;
+			this->m_capacity = other.m_capacity;
+			other.m_pBuffer = nullptr;
+			other.m_length = 0;
+			other.m_capacity = csl::ut::SIGN_BIT;
 		}
 
 		MoveArray(fnd::IAllocator* in_pAllocator) : Array<T>{}, m_pAllocator(in_pAllocator)
@@ -106,36 +129,36 @@ namespace csl::ut
 
 		void push_back(const T& item)
 		{
-			this->m_length++;
-			if (this->m_length > this->capacity())
+			if (this->m_length + 1 > this->capacity())
 			{
-				reserve(this->m_length * 2);
+				reserve((this->m_length + 1) * 2);
 			}
 
-			this->m_pBuffer[this->m_length - 1] = item;
+			this->m_length++;
+			new (&this->m_pBuffer[this->m_length - 1]) T(item);
 		}
 
 		void push_back(T&& item)
 		{
-			this->m_length++;
-			if (this->m_length > this->capacity())
+			if (this->m_length + 1 > this->capacity())
 			{
-				reserve(this->m_length * 2);
+				reserve((this->m_length + 1) * 2);
 			}
 
-			this->m_pBuffer[this->m_length - 1] = std::move(item);
+			this->m_length++;
+			new (&this->m_pBuffer[this->m_length - 1]) T(std::move(item));
 		}
 
 		void push_back_unchecked(const T& item)
 		{
 			this->m_length++;
-			this->m_pBuffer[this->m_length - 1] = item;
+			new (&this->m_pBuffer[this->m_length - 1]) T(item);
 		}
 
 		void push_back_unchecked(T&& item)
 		{
 			this->m_length++;
-			this->m_pBuffer[this->m_length - 1] = std::move(item);
+			new (&this->m_pBuffer[this->m_length - 1]) T(std::move(item));
 		}
 
 		void remove(size_t i)
@@ -158,8 +181,12 @@ namespace csl::ut
 
 		void clear()
 		{
-			if (!empty())
+			if (!empty()) {
+				for (size_t i = 0; i < this->m_length; i++) {
+					this->m_pBuffer[i].~T();
+				}
 				this->m_length = 0;
+			}
 		}
 
 		void swap(MoveArray& rArray)

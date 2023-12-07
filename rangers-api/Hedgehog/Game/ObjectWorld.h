@@ -19,7 +19,7 @@ namespace hh::game {
 		virtual void* GetClassId() override;
 		virtual void OnAddedToGame() override;
 		virtual void OnRemovedFromGame() override;
-		virtual void GSL_UnkFunc2() override;
+		virtual void Update(const fnd::SUpdateInfo& updateInfo) override;
 
         csl::ut::MoveArray<ObjectWorldChunk*>& GetWorldChunks() const;
         void AddWorldChunk(ObjectWorldChunk* chunk);

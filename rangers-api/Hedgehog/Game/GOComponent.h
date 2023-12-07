@@ -31,8 +31,9 @@ namespace hh::game
 	class GOComponent : public fnd::RefByHandleObject
 	{
 	public:
-		enum class GOCEventMask : uint32_t {
-			WANT_MESSAGE_768_EVENT = 0x200,
+		enum class GOCEventMask : uint16_t {
+			WANT_DEACTIVATE_EVENT = 2,
+			WANT_UPDATE_SET_EDITOR = 0x200,
 		};
 
 		enum class GOCEvent {
@@ -54,6 +55,7 @@ namespace hh::game
 		int32_t unk45;
 		GameObject* pOwnerGameObject{};
 		csl::ut::Bitset<GOCEventMask> gocEventMask;
+		uint16_t unk47;
 		char flags38; // seen 0, 1, 2
 		uint16_t unk49;
 		char unk50;
@@ -63,18 +65,19 @@ namespace hh::game
 		Unk1 unknown43[3];
 
 		GOComponent(csl::fnd::IAllocator* pAllocator);
+		virtual ~GOComponent();
 
 		virtual void* GetClassId();
-		virtual void Update();
+		virtual void Update() {}
 		virtual void GetDebugInfoMaybe();
-		virtual bool ProcessMessage(fnd::Message& msg);
-		virtual bool fUnk5();
-		virtual void LoadReflection(const fnd::RflClass& rflClass);
+		virtual bool ProcessMessage(fnd::Message& msg) { return false; }
+		virtual bool fUnk5() { return false; }
+		virtual void LoadReflection(const fnd::RflClass& rflClass) {}
 
 		/*
 		 * When event is OBJECT_LAYER_CHANGED, data contains previous layer id.
 		 */
-		virtual void OnGOCEvent(GOCEvent event, GameObject& ownerGameObject, void* data);
+		virtual void OnGOCEvent(GOCEvent event, GameObject& ownerGameObject, void* data) {}
 
 		static GOComponent* Create(GameObject& ownerGameObject, const GOComponentClass& componentClass);
 

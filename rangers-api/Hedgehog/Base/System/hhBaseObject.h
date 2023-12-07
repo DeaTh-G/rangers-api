@@ -15,16 +15,31 @@ namespace hh::fnd
 			return pAllocator;
 		}
 
+		static void* operator new(size_t count, void* ptr) {
+			return ptr;
+		}
+
+		static void operator delete( void* ptr, void* place ) noexcept {
+		}
+
 		static void* operator new(size_t count, csl::fnd::IAllocator* pAllocator) {
 			return pAllocator->Alloc(count, 8);
 		}
 
-		static void operator delete(void* ptr, size_t size) noexcept {
-			static_cast<BaseObject*>(ptr)->pAllocator->Free(ptr);
-		}
-
 		static void operator delete(void* ptr, csl::fnd::IAllocator* pAllocator) noexcept {
 			pAllocator->Free(ptr);
+		}
+
+		static void* operator new(size_t count, std::align_val_t al, csl::fnd::IAllocator* pAllocator) {
+			return pAllocator->Alloc(count, static_cast<size_t>(al));
+		}
+
+		static void operator delete(void* ptr, std::align_val_t al, csl::fnd::IAllocator* pAllocator) noexcept {
+			pAllocator->Free(ptr);
+		}
+
+		static void operator delete(void* ptr, size_t size) noexcept {
+			static_cast<BaseObject*>(ptr)->pAllocator->Free(ptr);
 		}
 	};
 }

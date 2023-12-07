@@ -14,12 +14,15 @@ namespace csl::fnd {
 
         void* bufferBegin;
         void* bufferEnd;
-        uint64_t unk101;
+    public:
+        uint32_t liveAllocations;
+        uint32_t totalAllocations;
         uint64_t unk102;
         uint64_t unk103;
-        uint32_t unk104;
+        uint32_t blockCount;
         uint64_t block;
         bool initialized;
+        TlsfHeapBase(const char* name);
     };
 
     template<typename TLock>

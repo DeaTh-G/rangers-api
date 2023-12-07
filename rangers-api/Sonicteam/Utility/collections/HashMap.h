@@ -87,9 +87,29 @@ namespace csl::ut
 		}
 		
 	public:
-		HashMap(fnd::IAllocator* pAllocator)
+		HashMap(fnd::IAllocator* pAllocator) : m_Capacity{ csl::ut::SIGN_BIT }
 		{
 			m_pAllocator = pAllocator;
+		}
+
+		HashMap(const HashMap& other) : HashMap{ other.m_pAllocator }
+		{
+			if (!(other.m_Capacity & csl::ut::SIGN_BIT)) {
+				reserve(other.m_Capacity);
+
+				for (auto i = other.begin(); i != other.end(); i++)
+					Insert(other.GetKey(i), other.GetValue(i));
+			}
+		}
+
+		HashMap(HashMap&& other) : HashMap{ other.m_pAllocator }
+		{
+			m_pElements = other.m_pElements;
+			m_Length = other.m_Length;
+			m_Capacity = other.m_Capacity;
+			other.m_pElements = nullptr;
+			other.m_Length = 0;
+			other.m_Capacity = csl::ut::SIGN_BIT;
 		}
 
 		void reserve(size_t capacity)
@@ -99,6 +119,16 @@ namespace csl::ut
 
 		~HashMap()
 		{
+			if (!(m_Capacity & csl::ut::SIGN_BIT))
+			{
+				for (size_t i = 0; i < GetCapacity(); i++)
+				{
+					const Elem& pElem = m_pElements[i];
+					if (pElem.m_Hash != INVALID_KEY)
+						pElem.m_Value.~TValue();
+				}
+			}
+
 			ReleaseMemory();
 			m_Length = 0;
 			m_Capacity = 0;

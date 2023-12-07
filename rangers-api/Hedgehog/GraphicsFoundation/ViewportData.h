@@ -16,7 +16,7 @@ namespace hh::gfnd {
         ViewportDimensions viewportDimensions;
         csl::math::Matrix44 projMatrix;
         uint32_t unk5;
-        csl::math::Vector4 unk6;
+        csl::math::Vector3 unk6;
         float fov;
         float aspectRatio;
         float nearClip;

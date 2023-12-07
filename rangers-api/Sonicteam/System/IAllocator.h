@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef EXPORTING_TYPES
+#include <new>
+#endif
+
 namespace csl::fnd
 {
 	class IAllocator
@@ -16,7 +20,15 @@ inline void* operator new(size_t count, csl::fnd::IAllocator* pAllocator) {
 	return pAllocator->Alloc(count, 8);
 }
 
+inline void* operator new(size_t count, std::align_val_t al, csl::fnd::IAllocator* pAllocator) {
+	return pAllocator->Alloc(count, static_cast<size_t>(al));
+}
+
 inline void operator delete(void* ptr, csl::fnd::IAllocator* pAllocator) noexcept {
+	pAllocator->Free(ptr);
+}
+
+inline void operator delete(void* ptr, std::align_val_t al, csl::fnd::IAllocator* pAllocator) noexcept {
 	pAllocator->Free(ptr);
 }
 

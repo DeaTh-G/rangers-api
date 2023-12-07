@@ -33,15 +33,6 @@ namespace hh::game {
             Unk1(csl::fnd::IAllocator* allocator);
         };
 
-        struct Unk2 {
-            float deltaTime;
-            uint32_t currentFrame;
-            uint16_t unk2;
-            uint32_t unk3;
-        public:
-            Unk2();
-        };
-    
     // private:
         csl::ut::Bitset<Flags> flags;
         uint32_t layersActiveDuringNormalOperation;
@@ -55,7 +46,7 @@ namespace hh::game {
         uint64_t unk6b;
         uint64_t unk6c;
         Unk1 unk7;
-        Unk2 unk8[32];
+        fnd::SUpdateInfo updateInfos[32];
         csl::ut::MoveArray<void*> unk9;
         uint32_t unk10;
     

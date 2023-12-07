@@ -11,7 +11,7 @@ namespace hh::anim {
         csl::ut::InplaceMoveArray<csl::math::Matrix44, 4> unk1;
         uint8_t unk2;
         uint64_t unk3;
-        uint64_t unk4;
+        fnd::Reference<AsmResourceManager> asmResourceManager;
         uint64_t unk4b;
         csl::ut::InplaceMoveArray<csl::math::Transform, 1> unk5;
         csl::ut::InplaceMoveArray<void*, 1> unk6;

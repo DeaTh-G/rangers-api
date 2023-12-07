@@ -14,7 +14,7 @@ namespace hh::fnd
 		}
 
 		Reference(Reference&& other) {
-			this->ptr = other.ptr;
+			ptr = other.ptr;
 			other.ptr = nullptr;
 		}
 
@@ -50,8 +50,13 @@ namespace hh::fnd
 		}
 
 		inline Reference<T>& operator=(Reference<T>&& other) {
-			this->ptr = other.ptr;
+			T* old = ptr;
+
+			ptr = other.ptr;
 			other.ptr = nullptr;
+
+			if (old != nullptr)
+				old->Free();
 
 			return *this;
 		}

@@ -3,7 +3,7 @@
 namespace hh::anim {
     class GOCAnimator : public GOCAnimationSingle, public TriggerListener, public AnimationStateListener {
         AnimationStateMachine* animationStateMachine;
-        uint64_t unk202;
+        AsmResourceManager* asmResourceManager;
         uint32_t unk203;
         char flags;
         char unk204b;

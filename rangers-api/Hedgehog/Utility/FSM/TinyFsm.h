@@ -184,7 +184,7 @@ namespace hh::ut {
 		{
 			if constexpr (hierarchical)
 			{
-				csl::ut::InplaceMoveArray<State_t, 5> stateStack{ hh::fnd::GetTempAllocator(hh::fnd::GetAllocatorSystem()) };
+				csl::ut::InplaceMoveArray<State_t, 5> stateStack{ hh::fnd::MemoryRouter::GetTempAllocator() };
 				State_t state = m_Cur;
 
 				while (state != State_t::CreateUnhandled())
@@ -250,8 +250,8 @@ namespace hh::ut {
 				}
                 else
                 {
-					csl::ut::InplaceMoveArray<State_t, 5> oldStates{ hh::fnd::GetTempAllocator(hh::fnd::GetAllocatorSystem()) };
-					csl::ut::InplaceMoveArray<State_t, 5> newStates{ hh::fnd::GetTempAllocator(hh::fnd::GetAllocatorSystem()) };
+					csl::ut::InplaceMoveArray<State_t, 5> oldStates{ hh::fnd::MemoryRouter::GetTempAllocator() };
+					csl::ut::InplaceMoveArray<State_t, 5> newStates{ hh::fnd::MemoryRouter::GetTempAllocator() };
 					State_t oldState = m_Cur;
 					State_t newState = in_state;
 
