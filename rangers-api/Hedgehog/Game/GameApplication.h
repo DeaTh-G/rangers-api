@@ -18,9 +18,7 @@ namespace hh::game {
             return gameUpdater;
         }
 
-        virtual void UnkFunc7();
-        virtual void UnkFunc8();
-        virtual uint64_t UnkFunc9();
+        virtual uint64_t UnkFunc9() override;
         virtual void UnkFunc10() {}
     };
 }

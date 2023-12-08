@@ -10,11 +10,11 @@ namespace app {
         void AddExtension(game::ApplicationExtension* extension);
         void RemoveExtension(game::ApplicationExtension* extension);
 
-        virtual void UnkFunc1();
-        virtual void UnkFunc2();
-        virtual void UnkFunc4();
-        virtual void UnkFunc5();
-        virtual uint64_t UnkFunc9();
+        virtual void Startup() override;
+        virtual void UnkFunc2() override;
+        virtual void UnkFunc4() override;
+        virtual void UnkFunc5() override;
+        virtual uint64_t UnkFunc9() override;
 
         inline game::ApplicationExtension* GetExtension(const char* name) {
             for (auto* extension : extensions) {
