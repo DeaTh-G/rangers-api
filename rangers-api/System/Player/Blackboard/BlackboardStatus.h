@@ -30,20 +30,26 @@ namespace app::player
 			eStateFlags_IsWallClimbIdle = 0x1C,
 			eStateFlags_IsBoarding = 0x1E,
 			eStateFlags_IsSpringJump = 0x21,
-			// eStateFlags_IsPhantomRush = 0x26 // Removed in the Final Horizon Update
+			eStateFlags_IsSpinDash = 0x22
 		};
 		
 		enum ECombatFlags
 		{
 			eCombatFlags_IsPerfectParry = 0x10,
-			eCombatFlags_IsCycloneKick = 0x2A,
-			eCombatFlags_IsSonicBoom = 0x2D,
-			eCombatFlags_IsWildRush = 0x2E,
-			eCombatFlags_IsLoopKick = 0x2F,
-			eCombatFlags_IsSpinSlash = 0x30,
-			eCombatFlags_IsStompAttack = 0x31,
-			eCombatFlags_IsHomingShot = 0x33,
-			eCombatFlags_IsCrossSlash = 0x34
+			eCombatFlags_IsAirTrick = 0x1A,
+			eCombatFlags_IsGrandSlam = 0x22,
+			eCombatFlags_IsQuickCyloop = 0x28,
+			eCombatFlags_IsPhantomRush = 0x2A,
+			eCombatFlags_IsCycloneKick = 0x2B,
+			eCombatFlags_IsRecoverySmash = 0x2C,
+			eCombatFlags_IsSonicBoom = 0x2E,
+			eCombatFlags_IsWildRush = 0x2F,
+			eCombatFlags_IsLoopKick = 0x30,
+			eCombatFlags_IsSpinSlash = 0x31,
+			eCombatFlags_IsStompAttack = 0x32,
+			eCombatFlags_IsHomingShot = 0x34,
+			eCombatFlags_IsCrossSlash = 0x35,
+			eCombatFlags_IsAutoCombo = 0x39
 		};
 
 		enum EWorldFlags
